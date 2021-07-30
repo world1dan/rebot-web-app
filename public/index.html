@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ReBot React</title>
+    <link rel="stylesheet" href="../dist/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/lib/fontawesome/all.min.css">
+</head>
+
+<body>
+    <div class="app" id="rebot"></div>
+    <div class="app" id="marks"></div>
+    <div class="app active" id="week"></div>
+
+    
+    <div class="bottom-nav">
+        <span onclick="UI.change_tab(rebot, this)" active="false"><i class="fas fa-book"></i></span>
+        <span onclick="UI.change_tab(marks, this)" active="false"><i class="fas fa-graduation-cap"></i></span>
+        <span onclick="UI.change_tab(week, this)" active="true"><i class="fas fa-calendar-alt"></i></span>
+    </div>
+
+    <div id="statusBarBg"></div>
+
+    <script src="../dist/bundle.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+.SubjectRow {
+    display: flex;
+    width: 100%;
+    gap: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    div {
+        height: 38px;
+        background-color: var(--background3);
+        box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 38px;
+        overflow: auto;
+        cursor: pointer;
+        &.subj,
+        .time {
+            width: 90px;
+            flex-shrink: 0;
+        }
+        &.tool {
+            width: 38px;
+            flex-shrink: 0;
+            @keyframes toolClick {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(0.8);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            &:hover {
+                animation: toolClick 1s;
+            }
+        }
+        &.fr {
+            flex-grow: 1;
+        }
+        &.homework input {
+            background: none;
+            font-size: 13px;
+            font-weight: bold;
+            outline: none;
+            color: var(--text);
+        }
+        &::-webkit-scrollbar {
+            height: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--background);
+            border-radius: 10px;
+        }
+    }
+    input {
+        cursor: pointer;
+        user-select: all;
+        -webkit-user-select: auto;
+        background-color: var(--background2);
+        border: none;
+        text-align: center;
+    }
+    &:last-child div:first-of-type {
+        border-radius: 5px 5px 5px 9px;
+    }
+    &:last-child div:last-of-type {
+        border-radius: 5px 5px 9px 5px;
+    }
+    &:not(.row.now) div:first-of-type {
+        color: #fff;
+    }
+}
