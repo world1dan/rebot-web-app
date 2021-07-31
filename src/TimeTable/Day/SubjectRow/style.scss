@@ -11,7 +11,8 @@
         border-radius: 5px;
         text-align: center;
         line-height: 38px;
-        overflow: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
         cursor: pointer;
         &.subj,
         .time {
@@ -61,6 +62,8 @@
         background-color: var(--background2);
         border: none;
         text-align: center;
+        width: 100%;
+        min-width: 40px;
     }
     &:last-child div:first-of-type {
         border-radius: 5px 5px 5px 9px;

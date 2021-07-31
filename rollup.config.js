@@ -26,13 +26,13 @@ export default {
         commonjs(),
         scss({
             output: 'dist/style.css',
-            outputStyle: 'compressed'
+            //: 'compressed'
         }),
         serve({
             open: true,
             verbose: true,
             contentBase: ["", "public"],
-            host: "0.0.0.0",
+            host: "localhost",
             port: 3000,
         }),
         livereload({ watch: "dist" }),

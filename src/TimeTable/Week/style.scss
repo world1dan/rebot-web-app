@@ -1,0 +1,36 @@
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, Minmax(340px, 1fr));
+    gap: 10px;
+    max-width: 1380px;
+    margin: 0 auto;
+}
+
+.offline-alert {
+    display: grid;
+    background-color: var(--danger);
+    min-height: 58px;
+    max-width: 540px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 14px;
+    color: #fff;
+    grid-template-columns: 1fr 34px;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 24px;
+
+    h4 {
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0;
+    }
+    p {
+        margin-top: 8px;
+        font-size: 12px;
+        line-height: 12px;
+        word-wrap: break-word;
+    }
+}

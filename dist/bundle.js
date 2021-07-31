@@ -18313,8 +18313,18 @@
 	  constructor(props) {
 	    super(props);
 	    this.state = {
-	      timetable: false
+	      timetable: false,
+	      isOffline: false
 	    };
+
+	    this.updateNetworkStatus = () => {
+	      this.setState({
+	        isOffline: !navigator.onLine
+	      });
+	    };
+
+	    window.addEventListener('online', this.updateNetworkStatus);
+	    window.addEventListener('offline', this.updateNetworkStatus);
 	  }
 
 	  componentDidMount() {
@@ -18339,9 +18349,15 @@
 	        }));
 	      }
 
-	      return /*#__PURE__*/React.createElement("div", {
-	        className: "auto-grid-340"
-	      }, days);
+	      return /*#__PURE__*/React.createElement("div", null, this.state.isOffline && /*#__PURE__*/React.createElement("div", {
+	        className: "offline-alert"
+	      }, /*#__PURE__*/React.createElement("div", {
+	        className: "text"
+	      }, /*#__PURE__*/React.createElement("h4", null, "\u0418\u043D\u0442\u0435\u0440\u043D\u0435\u0442 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D"), /*#__PURE__*/React.createElement("p", null, "\u0414\u0430\u043D\u043D\u044B\u0435 \u0431\u0443\u0434\u0443\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u044B \u043F\u0440\u0438 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0438")), /*#__PURE__*/React.createElement("i", {
+	        className: "fas fa-exclamation-triangle"
+	      })), /*#__PURE__*/React.createElement("div", {
+	        className: "week-grid"
+	      }, days));
 	    } else {
 	      return "";
 	    }

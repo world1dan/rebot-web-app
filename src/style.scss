@@ -93,7 +93,14 @@ body {
     padding: 0;
 }
 
+.p10 {
+    padding: 10px;
+    padding-bottom: 200px;
+}
 
+.center {
+    margin: 0 auto;
+}
 
 .UIBlock {
     background-color: var(--background2);
@@ -133,14 +140,7 @@ body {
 }
 
 
-.auto-grid-340 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, Minmax(340px, 1fr));
-    gap: 10px;
-    max-width: 1380px;
-    margin: 0 auto;
-    padding: 10px;
-}
+
 
 #statusBarBg {
     width: 100vw;
@@ -193,26 +193,12 @@ body {
     @media screen and (orientation: portrait) and (min-width: 780px) {
         z-index: 10;
     }
-    @media (orientation: landscape) {
-        border-left: 1px solid var(--borders);
-        border-top: 0;
-        top: 0;
-        bottom: 0;
-        left: auto;
-        width: 50px;
-        flex-direction: column;
-        height: 100vh;
-        transform: translate3d(0, 0, 0);
-        span {
-            width: 100%;
-        }
-    }
 }
 
 @media (orientation: landscape) {
     body {
-        padding-right: 52px !important;
-        padding-left: env(safe-area-inset-left, 10px);
+        padding-right: env(safe-area-inset-left);
+        padding-left: env(safe-area-inset-left);
     }
 }
 
@@ -245,11 +231,6 @@ body {
 }
 
 .app {
-    background-color: var(--background);
-    overflow-y: scroll;
-    max-height: 100vh;
-    height: 100vh;
-    box-sizing: border-box;
     display: none;
 }
 
@@ -259,4 +240,28 @@ body {
     display: block;
     animation: scaleup2 0.18s;
     animation-fill-mode: both;
+}
+
+.center-auto {
+    padding: 10px;
+    padding-top: calc(env(safe-area-inset-top, 10px) + 10px);
+    padding-bottom: 120px;
+    margin: 0 auto;
+}
+
+.mw600 {
+    max-width: 600px;
+}
+
+@media (max-width: 360px) {
+    .table {
+        border-radius: 0 !important;
+    }
+    .week-grid {
+        grid-template-columns: repeat(auto-fit, Minmax(290px, 1fr)) !important;
+    }
+    .center-auto {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
