@@ -9697,7 +9697,7 @@
 	  return Array.prototype.concat.apply([], arguments);
 	}
 
-	function ra(a) {
+	function ra$1(a) {
 	  var b = a.length;
 
 	  if (0 < b) {
@@ -9725,7 +9725,7 @@
 	  return -1 != a.indexOf(b);
 	}
 
-	function ua(a, b) {
+	function ua$1(a, b) {
 	  return a < b ? -1 : a > b ? 1 : 0;
 	}
 
@@ -9840,7 +9840,7 @@
 	        e = /(\d*)(\D*)(.*)/.exec(e) || ["", "", "", ""];
 	        f = /(\d*)(\D*)(.*)/.exec(f) || ["", "", "", ""];
 	        if (0 == e[0].length && 0 == f[0].length) break;
-	        a = ua(0 == e[1].length ? 0 : parseInt(e[1], 10), 0 == f[1].length ? 0 : parseInt(f[1], 10)) || ua(0 == e[2].length, 0 == f[2].length) || ua(e[2], f[2]);
+	        a = ua$1(0 == e[1].length ? 0 : parseInt(e[1], 10), 0 == f[1].length ? 0 : parseInt(f[1], 10)) || ua$1(0 == e[2].length, 0 == f[2].length) || ua$1(e[2], f[2]);
 	        e = e[3];
 	        f = f[3];
 	      } while (0 == a);
@@ -11219,7 +11219,7 @@
 
 	function mc(a, b, c) {
 	  dd(a, b);
-	  0 < c.length && (a.i = null, a.g.set(W$1(a, b), ra(c)), a.h += c.length);
+	  0 < c.length && (a.i = null, a.g.set(W$1(a, b), ra$1(c)), a.h += c.length);
 	}
 
 	k.toString = function () {
@@ -11350,7 +11350,7 @@
 	    return b;
 	  }
 
-	  return ra(a.i);
+	  return ra$1(a.i);
 	}
 
 	function kd() {}
@@ -12164,7 +12164,7 @@
 	  a.I = -1;
 
 	  if (a.j) {
-	    if (0 != jd(a.i).length || 0 != a.l.length) a.i.i.length = 0, ra(a.l), a.l.length = 0;
+	    if (0 != jd(a.i).length || 0 != a.l.length) a.i.i.length = 0, ra$1(a.l), a.l.length = 0;
 	    a.j.ua();
 	  }
 	}
@@ -17909,7 +17909,24 @@
 	 * classes.
 	 */class ea{constructor(t,e,n){this.databaseId=t,this.ignoreUndefinedProperties=e,this.R=n||Ur(t);}/** Creates a new top-level parse context. */qc(t,e,n,s=!1){return new ta({Nc:t,methodName:e,Uc:n,path:et.emptyPath(),$c:!1,Bc:s},this.databaseId,this.R,this.ignoreUndefinedProperties);}}function na(t){const e=t._freezeSettings(),n=Ur(t._databaseId);return new ea(t._databaseId,!!e.ignoreUndefinedProperties,n);}/** Parse document data from a set() call. */function sa(t,e,n,s,i,r={}){const o=t.qc(r.merge||r.mergeFields?2/* MergeSet */:0/* Set */,e,n,i);ma("Data must be an object, but it was:",o,s);const c=wa(s,o);let u,a;if(r.merge)u=new nt(o.fieldMask),a=o.fieldTransforms;else if(r.mergeFields){const t=[];for(const s of r.mergeFields){const i=ga(e,s,n);if(!o.contains(i))throw new C(D.INVALID_ARGUMENT,`Field '${i}' is specified in your field mask but missing from your input data.`);Ta(t,i)||t.push(i);}u=new nt(t),a=o.fieldTransforms.filter(t=>u.covers(t.field));}else u=null,a=o.fieldTransforms;return new Yu(new St(c),u,a);}class ia extends zu{_toFieldTransform(t){if(2/* MergeSet */!==t.Nc)throw 1/* Update */===t.Nc?t.Lc(`${this._methodName}() can only appear at the top level of your update data`):t.Lc(`${this._methodName}() cannot be used with set() unless you pass {merge:true}`);// No transform to add for a delete, but we need to add it to our
 	// fieldMask so it gets deleted.
-	return t.fieldMask.push(t.path),null;}isEqual(t){return t instanceof ia;}}/** Parse update data from an update() call. */function ha(t,e,n,s){const i=t.qc(1/* Update */,e,n);ma("Data must be an object, but it was:",i,s);const r=[],o=St.empty();J(s,(t,s)=>{const c=pa(e,t,n);// For Compat types, we have to "extract" the underlying types before
+	return t.fieldMask.push(t.path),null;}isEqual(t){return t instanceof ia;}}/**
+	 * Creates a child context for parsing SerializableFieldValues.
+	 *
+	 * This is different than calling `ParseContext.contextWith` because it keeps
+	 * the fieldTransforms and fieldMask separate.
+	 *
+	 * The created context has its `dataSource` set to `UserDataSource.Argument`.
+	 * Although these values are used with writes, any elements in these FieldValues
+	 * are not considered writes since they cannot contain any FieldValue sentinels,
+	 * etc.
+	 *
+	 * @param fieldValue - The sentinel FieldValue for which to create a child
+	 *     context.
+	 * @param context - The parent context.
+	 * @param arrayElement - Whether or not the FieldValue has an array.
+	 */function ra(t,e,n){return new ta({Nc:3/* Argument */,Uc:e.settings.Uc,methodName:t._methodName,$c:n},e.databaseId,e.R,e.ignoreUndefinedProperties);}class ca extends zu{constructor(t,e){super(t),this.Kc=e;}_toFieldTransform(t){const e=ra(this,t,/*array=*/!0),n=this.Kc.map(t=>da(t,e)),s=new Pe(n);return new Ne(t.path,s);}isEqual(t){// TODO(mrschmidt): Implement isEquals
+	return this===t;}}class ua extends zu{constructor(t,e){super(t),this.Kc=e;}_toFieldTransform(t){const e=ra(this,t,/*array=*/!0),n=this.Kc.map(t=>da(t,e)),s=new ve(n);return new Ne(t.path,s);}isEqual(t){// TODO(mrschmidt): Implement isEquals
+	return this===t;}}/** Parse update data from an update() call. */function ha(t,e,n,s){const i=t.qc(1/* Update */,e,n);ma("Data must be an object, but it was:",i,s);const r=[],o=St.empty();J(s,(t,s)=>{const c=pa(e,t,n);// For Compat types, we have to "extract" the underlying types before
 	// performing validation.
 	s=getModularInstance(s);const u=i.Fc(c);if(s instanceof ia)// Add it to the field mask, but don't add anything to updateData.
 	r.push(c);else {const t=da(s,u);null!=t&&(r.push(c),o.set(c,t));}});const c=new nt(r);return new Xu(o,c,i.fieldTransforms);}/** Parse update data from a list of field/value arguments. */function la(t,e,n,s,i,r){const o=t.qc(1/* Update */,e,n),c=[ga(e,s,n)],u=[i];if(r.length%2!=0)throw new C(D.INVALID_ARGUMENT,`Function ${e}() needs to be called with an even number of arguments that alternate between field names and values.`);for(let t=0;t<r.length;t+=2)c.push(ga(e,r[t])),u.push(r[t+1]);const a=[],h=St.empty();// We iterate in reverse order to pick the last value for a field if the
@@ -18227,6 +18244,31 @@
 	 * Converts a ViewSnapshot that contains the single document specified by `ref`
 	 * to a DocumentSnapshot.
 	 */function mh(t,e,n){const s=n.docs.get(e._key),i=new sh(t);return new ba(t,i,e._key,s,new Pa(n.hasPendingWrites,n.fromCache),e.converter);}/**
+	 * Returns a special value that can be used with {@link @firebase/firestore/lite#(setDoc:1)} or {@link
+	 * @firebase/firestore/lite#(updateDoc:1)} that tells the server to union the given elements with any array
+	 * value that already exists on the server. Each specified element that doesn't
+	 * already exist in the array will be added to the end. If the field being
+	 * modified is not already an array it will be overwritten with an array
+	 * containing exactly the specified elements.
+	 *
+	 * @param elements - The elements to union into the array.
+	 * @returns The `FieldValue` sentinel for use in a call to `setDoc()` or
+	 * `updateDoc()`.
+	 */function Th(...t){// NOTE: We don't actually parse the data until it's used in set() or
+	// update() since we'd need the Firestore instance to do this.
+	return new ca("arrayUnion",t);}/**
+	 * Returns a special value that can be used with {@link (setDoc:1)} or {@link
+	 * updateDoc:1} that tells the server to remove the given elements from any
+	 * array value that already exists on the server. All instances of each element
+	 * specified will be removed from the array. If the field being modified is not
+	 * already an array it will be overwritten with an empty array.
+	 *
+	 * @param elements - The elements to remove from the array.
+	 * @returns The `FieldValue` sentinel for use in a call to `setDoc()` or
+	 * `updateDoc()`
+	 */function Ih(...t){// NOTE: We don't actually parse the data until it's used in set() or
+	// update() since we'd need the Firestore instance to do this.
+	return new ua("arrayRemove",t);}/**
 	 * Cloud Firestore
 	 *
 	 * @packageDocumentation
@@ -18309,6 +18351,28 @@
 
 	}
 
+	function Notes(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "UIBlock"
+	  }, /*#__PURE__*/React.createElement("h1", null, "\u0417\u0430\u043C\u0435\u0442\u043A\u0438"));
+	}
+
+	function HomeScreen(props) {
+	  const [timetable, setTimetable] = react.exports.useState(false);
+	  react.exports.useEffect(() => {
+	    dh(props.timetableRef, doc => {
+	      setTimetable(doc.data());
+	    });
+	  }, [props.timetableRef]);
+	  let day_num = new Date().getDay();
+	  if (day_num == 0 || day_num == 6) day_num = 1;
+	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Notes, null), timetable && /*#__PURE__*/React.createElement(Day, {
+	    day_num: day_num,
+	    day_data: timetable[day_num],
+	    manifest: props.manifest
+	  }));
+	}
+
 	class Week extends react.exports.PureComponent {
 	  constructor(props) {
 	    super(props);
@@ -18361,6 +18425,156 @@
 	    } else {
 	      return "";
 	    }
+	  }
+
+	}
+
+	class ReBotManager {
+	  constructor(manifest, workspace) {
+	    this.workspace = workspace;
+	    this.manifest = manifest;
+	    this.box_container = document.querySelector('#boxes');
+	    this.viewbox_template = document.querySelector('.template #viewbox');
+	    this.status_title = document.querySelector('#current-subj');
+	    this.search = document.querySelector('.search input');
+	    dh(this.workspace, doc => {
+	      if (!doc.metadata.hasPendingWrites) {
+	        const data = doc.data();
+
+	        if (data && data.nums) {
+	          this.open(data.subj, data.nums);
+	        }
+	      }
+	    });
+	    document.querySelectorAll("#rebot header button").forEach(el => {
+	      el.onclick = () => {
+	        window.UI.getInput((id, nums) => {
+	          this.open(id, nums);
+	        }, el.id);
+	      };
+	    });
+	    this.search.addEventListener("keydown", event => {
+	      if (event.key == "Enter") {
+	        window.open("https://www.google.com/search?q=" + this.search.value, '_blank');
+	        this.search.value = "";
+	      }
+	    });
+	  }
+
+	  open(id, num) {
+	    let nums;
+
+	    if (num == undefined) {
+	      nums = prompt('Введи номер или номера через запятую:');
+
+	      if (nums) {
+	        nums = nums.split(',');
+	      } else return;
+
+	      for (num of nums) {
+	        ah(this.workspace, {
+	          "subj": id,
+	          "nums": Th(parseInt(num))
+	        }, {
+	          merge: true
+	        });
+	      }
+	    } else {
+	      nums = num;
+	    }
+
+	    const subj = this.manifest[id];
+	    this.status_title.textContent = subj.title;
+
+	    for (let num of nums) {
+	      if (!num) {
+	        continue;
+	      }
+
+	      if (this.box_container.querySelector(`.viewbox[num='${num}']`)) return;
+	      let box = this.viewbox_template.cloneNode(true);
+
+	      if (subj.section == false) {
+	        box.querySelector("#view").src = subj.url.replace('?', num);
+
+	        if (subj.full_img == false) {
+	          box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
+	          box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
+	        }
+	      } else {
+	        box.querySelector("#prew").remove();
+	        box.querySelector("#next").remove();
+	        box.querySelector("#alt-re").remove();
+	        box.querySelector("#view").src = subj.url.replace('*', num).replace('?', 1);
+	        let i = 2;
+	        let img;
+
+	        while (i < 12) {
+	          img = box.querySelector("#view").cloneNode(true);
+
+	          img.onerror = function a() {
+	            this.remove();
+	          };
+
+	          img.src = subj.url.replace('*', num).replace('?', i);
+	          box.querySelector(".viewbox-content").append(img);
+	          i++;
+	        }
+	      }
+
+	      this.box_container.prepend(box);
+	      box.querySelector(".num").textContent = num;
+	      box.setAttribute("num", num);
+	      box.setAttribute("subj_id", id);
+	    }
+	  }
+
+	  change_num(btn, delta) {
+	    const box = btn.parentNode.parentNode;
+	    let subj = this.manifest[box.getAttribute("subj_id")];
+	    let num = parseInt(box.getAttribute('num')) + delta;
+	    box.querySelector("#view").src = subj.url.replace('?', num);
+
+	    if (subj.full_img == false) {
+	      box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
+	      box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
+	    }
+
+	    box.setAttribute('num', num);
+	    box.querySelector(".num").textContent = num;
+	  }
+
+	  remove(box) {
+	    const num = parseInt(box.getAttribute('num'));
+	    box.remove();
+
+	    if (!this.box_container.hasChildNodes()) {
+	      this.status_title.textContent = "ReBot";
+	      ah(this.workspace, {
+	        "nums": null,
+	        "subj": null
+	      }, {
+	        merge: true
+	      });
+	    } else {
+	      ah(this.workspace, {
+	        "nums": Ih(num)
+	      }, {
+	        merge: true
+	      });
+	    }
+	  }
+
+	  open_alt(box) {
+	    let num = box.getAttribute('num');
+	    let url = this.manifest[box.getAttribute('subj_id')].alt_url.replace("?", num);
+
+	    if (url == '') {
+	      alert('Для этого предмета нет другого решебника');
+	      return;
+	    }
+
+	    window.open(url, '_self');
 	  }
 
 	}
@@ -18478,6 +18692,86 @@
 
 	}
 
+	class SettingsManager {
+	  constructor(settings) {
+	    this.settings = settings;
+	    dh(settings, doc => {
+	      if (doc.data() == undefined) {
+	        ah(this.settings, {
+	          "inversion_set": true,
+	          "stealth_set": false,
+	          "theme": "dark"
+	        });
+	      }
+
+	      if (!doc.metadata.hasPendingWrites) {
+	        let config = doc.data();
+
+	        for (let i in doc.data()) {
+	          localStorage[i] = config[i];
+	        }
+
+	        this.load();
+	      }
+	    });
+	  }
+
+	  load() {
+	    if (localStorage.stealth_set == "true") {
+	      document.querySelector('#stealth_set').checked = true;
+	      document.querySelectorAll(".stealth").forEach(el => {
+	        el.style.display = "none";
+	      });
+	      document.querySelectorAll(".subject-block").forEach(el => {
+	        el.style.gridTemplateColumns = "88px 1fr";
+	      });
+	    }
+
+	    if (localStorage.inversion_set == "true") {
+	      document.querySelector('#inversion_set').checked = true;
+	      document.documentElement.style.setProperty('--inv', 0.87);
+	    } else {
+	      document.documentElement.style.setProperty('--inv', 0);
+	      document.querySelector('#inversion_set').checked = false;
+	    }
+
+	    if (localStorage.theme) {
+	      document.documentElement.setAttribute("theme", localStorage.theme);
+	    }
+	  }
+
+	  set(checkbox) {
+	    localStorage.setItem(checkbox.id, checkbox.checked);
+	    ah(this.settings, {
+	      [checkbox.id]: checkbox.checked
+	    }, {
+	      merge: true
+	    });
+
+	    if (checkbox.id == "stealth_set") {
+	      if (checkbox.checked) {
+	        window.UI.alert("Стелс мод включен)");
+	      } else {
+	        location.reload();
+	      }
+	    }
+
+	    this.load();
+	  }
+
+	  set_theme(theme) {
+	    document.documentElement.setAttribute("theme", theme);
+	    window.UI.alert("Тема изменена");
+	    ah(this.settings, {
+	      "theme": theme
+	    }, {
+	      merge: true
+	    });
+	    localStorage.setItem("theme", theme);
+	  }
+
+	}
+
 	const firebaseConfig = {
 	  apiKey: "AIzaSyAkNpqlq9hU_cDu1_4wQIBNNc9OJd4LT1g",
 	  authDomain: "rebot-f643e.firebaseapp.com",
@@ -18506,6 +18800,12 @@
 	    manifest: manifest,
 	    marksRef: user.marks
 	  });
+	  const homescreen = /*#__PURE__*/React.createElement(HomeScreen, {
+	    manifest: manifest,
+	    timetableRef: Iu(firestore, "weeks", "1")
+	  });
+	  window.ReBot = new ReBotManager(manifest, user.workspace);
+	  ReactDOM.render(homescreen, document.getElementById('homescreen'));
 	  ReactDOM.render(week, document.getElementById('week'));
 	  ReactDOM.render(marks, document.getElementById('marks'));
 	});
@@ -18604,6 +18904,7 @@
 	  "workspace": Iu(firestore, id, "workspace"),
 	  "marks": Iu(firestore, id, "marks")
 	};
+	globalThis.Settings = new SettingsManager(user.settings);
 
 }());
 //# sourceMappingURL=bundle.js.map

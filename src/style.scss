@@ -86,6 +86,15 @@ input {
     user-select: all;
 }
 
+button {
+    color: var(--text);
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    font-weight: bold;
+}
+
 body {
     background-color: var(--background);
     margin: 0;
@@ -93,6 +102,9 @@ body {
     padding: 0;
 }
 
+.template {
+    display: none;
+}
 .p10 {
     padding: 10px;
     padding-bottom: 200px;
@@ -109,6 +121,7 @@ body {
     padding: 7px;
     position: relative;
     color: var(--text);
+    margin-bottom: 10px;
 
     h1 {
         font-size: 26px;
@@ -263,5 +276,57 @@ body {
     .center-auto {
         padding-left: 0;
         padding-right: 0;
+    }
+}
+
+
+
+
+
+
+.alert {
+    border: 2px solid var(--borders);
+    text-align: center;
+    line-height: 42px;
+    position: fixed;
+    bottom: -60px;
+    color: var(--text);
+    background-color: var(--backgroundTR2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 10px;
+    padding: 5px 20px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    font-size: 15px;
+    font-weight: 800;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+}
+
+@keyframes alert {
+    from {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-150px) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes alert-down {
+    from {
+        transform: translateY(-150px) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
     }
 }

@@ -1,0 +1,213 @@
+
+header {
+    #bel {
+        background-color: #5E5CE6
+    }
+    #rus {
+        background-color: #1C8E58
+    }
+    #phis {
+        background-color: #0A84FF
+    }
+    #him {
+        background-color: #FF2D55
+    }
+    #alg {
+        background-color: #0295a2
+    }
+    #geom {
+        background-color: #FF9F0A
+    }
+    #brainly {
+        background-color: #181616
+    }
+    #math {
+        background-color: #bf0c34
+    }
+    #eng {
+        background-color: #181818
+    }
+}
+
+
+/*****************************************/
+
+#rebot header {
+    background-color: var(--background2);
+    padding: 10px;
+    border-bottom: 1px solid var(--borders);
+}
+
+@media screen and (min-width: 600px) {
+    #rebot header {
+        border: 1px solid var(--borders);
+        border-radius: 0 0 9px 9px;
+        padding: 8px;
+    }
+}
+
+#rebot header .wraper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 320px) {
+    #rebot header .wraper {
+        grid-template-columns: repeat(auto-fit, Minmax(120px, 1fr));
+    }
+}
+
+#rebot header {
+    button {
+        margin: 2px;
+        font-size: 16px;
+        height: 40px;
+        border-radius: 9px;
+        color: #fff;
+    }
+    .search {
+        width: 90%;
+        border: 0.7px solid var(--borders);
+        display: grid;
+        grid-template-columns: 20px 1fr;
+        align-items: center;
+        margin: 0 auto;
+        margin-bottom: 8px;
+        background-color: var(--background3);
+        height: 40px;
+        border-radius: 9px;
+        color: var(--text);
+        padding: 4px 8px;
+        gap: 5px;
+        input {
+            color: var(--text);
+            background: none;
+            outline: none;
+            border: none;
+            height: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            -webkit-user-select: all;
+            user-select: all;
+            cursor: pointer;
+            display: none;
+            &.active {
+                display: block;
+            }
+        }
+        @keyframes search-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.6)
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes search-out {
+            0% {
+                opacity: 1;
+                transform: scale(1)
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.6)
+            }
+        }
+        img {
+            display: none;
+            &.active {
+                display: block;
+                animation: search-in 0.2s cubic-bezier(.95, .4, .27, .99);
+            }
+            &.rebot {
+                margin-left: 4px;
+            }
+        }
+    }
+}
+
+
+.tool-bar {
+    background-color: var(--background2);
+    border: 1px solid var(--borders);
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 12px auto;
+    height: 42px;
+    font-weight: bold;
+    border-radius: 9px;
+    line-height: 40px;
+    color: var(--text);
+    #current-subj {
+        flex-grow: 1;
+        text-align: center;
+    }
+}
+
+
+
+.viewbox {
+    position: relative;
+    animation: scaleup 0.4s cubic-bezier(.95, .4, .27, .99);
+    margin-bottom: 24px;
+    background-color: var(--background2);
+    box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+    border-radius: 0;
+}
+
+@media (min-width: 600px) {
+    .viewbox {
+        border-radius: 9px;
+    }
+    .viewbox img:last-of-type {
+        border-radius: 0 0 9px 9px;
+    }
+}
+
+.viewbox-tools {
+    display: flex;
+    height: 50px;
+    gap: 6px;
+    padding: 7px;
+    box-sizing: border-box;
+    .center .num {
+        background-color: #5E5CE6;
+        color: #fff;
+        line-height: 36px;
+        font-weight: bold;
+        border-radius: 7px;
+        padding: 0 20px;
+    }
+}
+
+.viewbox button {
+    background-color: var(--background3);
+    box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+    padding: 0 15px;
+    border-radius: 7px;
+    font-size: 12px;
+    height: 100%;
+}
+
+.center {
+    gap: 5px;
+    display: flex;
+    flex-grow: 1;
+    max-width: 270px;
+    margin: 0 auto;
+    button {
+        width: 100%;
+    }
+}
+
+.viewbox-content img {
+    filter: Invert(var(--inv));
+    transition-duration: 0.2s;
+}
+
+.viewbox-content img[src="/static/files/404.png"] {
+    filter: none;
+}

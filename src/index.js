@@ -1,4 +1,4 @@
-import React, { useState, PureComponent } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { initializeApp } from "firebase/app";
@@ -8,16 +8,15 @@ import {
     CACHE_SIZE_UNLIMITED,
     enableIndexedDbPersistence,
     doc,
-    setDoc,
-    updateDoc,
     onSnapshot,
-    arrayUnion,
-    arrayRemove
 } from "firebase/firestore";
 
 
-import Week from './TimeTable/Week';
-import Marks from './Marks';
+import HomeScreen from './Components/HomeScreen';
+import Week from './Components/TimeTable/Week';
+import ReBotManager from './Components/Rebot';
+import Marks from './Components/Marks';
+import SettingsManager from './Components/Settings';
 
 import './style.scss';
 
@@ -57,11 +56,14 @@ onSnapshot(doc(firestore, "appConfig", "subjects"), (snapshot) => {
 
     const week = <Week manifest={manifest} timetableRef={doc(firestore, "weeks", "1")}/>
     const marks = <Marks manifest={manifest} marksRef={user.marks}/>
+    const homescreen = <HomeScreen manifest={manifest} timetableRef={doc(firestore, "weeks", "1")}/>
 
+    window.ReBot = new ReBotManager(manifest, user.workspace)
+
+    ReactDOM.render(homescreen, document.getElementById('homescreen'));
     ReactDOM.render(week, document.getElementById('week'));
     ReactDOM.render(marks, document.getElementById('marks'));
 });
-
 
 
 
@@ -187,3 +189,5 @@ const user = {
     "workspace": doc(firestore, id, "workspace"),
     "marks": doc(firestore, id, "marks")
 };
+
+globalThis.Settings = new SettingsManager(user.settings);
