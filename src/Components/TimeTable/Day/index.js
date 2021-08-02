@@ -16,7 +16,7 @@ const day_titles = {
 
 
 
-export default class Day extends Component {
+export default class Day extends PureComponent {
     
     render() {
         let rows = [];

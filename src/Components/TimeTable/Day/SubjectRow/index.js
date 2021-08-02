@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo } from 'react';
 
 import './style.scss';
 
@@ -42,4 +42,4 @@ function SubjectRow(props) {
     
 }
 
-export default SubjectRow;
+export default memo(SubjectRow);

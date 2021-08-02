@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { onSnapshot, setDoc } from "firebase/firestore";
+import { onSnapshot } from "firebase/firestore";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import Day from '../Day';
 import './style.scss';
+import { Switch } from 'react-router-dom';
 
 
 export default function Week(props) {
@@ -12,11 +13,11 @@ export default function Week(props) {
     const [ timetable, setTimetable ] = useState(false);
     const [ isOffline, setOffline ] = useState(!navigator.onLine);
     const [ week, setWeek ] = useState(2);
-    const [inProp, setInProp] = useState(false);
 
-
-    window.addEventListener('online',  () => setOffline(true));
-    window.addEventListener('offline', () => setOffline(true));
+    useEffect(() => {
+        window.addEventListener('online',  () => setOffline(true));
+        window.addEventListener('offline', () => setOffline(true));
+    }, []);
 
     useEffect(() => {
         onSnapshot(props.timetableRef, (doc) => {
@@ -24,14 +25,10 @@ export default function Week(props) {
         });
     }, [props.timetableRef]);
 
-
     useEffect(() => {
         setTimetable(timetableFull[week])
     }, [week, timetableFull]);
     
-
-
-
 
     if (timetable) {
         const days = [];
@@ -41,17 +38,30 @@ export default function Week(props) {
             days.push(<Day key={day} pathToDay={week + "." + day} timetableRef={props.timetableRef} day_num={day} day_data={timetable[day]} manifest={props.manifest}/>);
         }
 
+        const title = week==1 ? "Прошлая неделя" : week==2 ? "Эта неделя" : "Следующая неделя";
+
+
         return (
             <div>
                 <div className="UIBlock weekChanger">
-                    { week > 1 &&
+                    { week > 1 
+                        ?
                         <button onClick={() => setWeek(week - 1)}>
                             <i className="fas fa-chevron-left fa-2x"></i>
                         </button>
+                        : 
+                        <button className="unactive">
+                                <i className="fas fa-chevron-left fa-2x"></i>
+                        </button>
                     }
-                    <span>{week}</span>
-                    { week < 3 &&
+                    <span>{title}</span>
+                    { week < 3 
+                        ?
                         <button onClick={() => setWeek(week + 1)}>
+                            <i className="fas fa-chevron-right fa-2x"></i>
+                        </button>
+                        :
+                        <button className="unactive">
                             <i className="fas fa-chevron-right fa-2x"></i>
                         </button>
                     }

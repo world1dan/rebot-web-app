@@ -18314,6 +18314,8 @@
 	  })));
 	}
 
+	var SubjectRow$1 = /*#__PURE__*/react.exports.memo(SubjectRow);
+
 	const day_titles = {
 	  1: "Понедельник",
 	  2: "Вторник",
@@ -18323,13 +18325,13 @@
 	  6: "Суббота",
 	  7: "Воскресенье"
 	};
-	class Day extends react.exports.Component {
+	class Day extends react.exports.PureComponent {
 	  render() {
 	    let rows = [];
 	    let subj;
 
 	    for (subj in this.props.day_data) {
-	      rows.push( /*#__PURE__*/React.createElement(SubjectRow, {
+	      rows.push( /*#__PURE__*/React.createElement(SubjectRow$1, {
 	        key: subj,
 	        timetableRef: this.props.timetableRef,
 	        path: this.props.pathToDay + "." + subj,
@@ -20769,9 +20771,10 @@
 	  const [timetable, setTimetable] = react.exports.useState(false);
 	  const [isOffline, setOffline] = react.exports.useState(!navigator.onLine);
 	  const [week, setWeek] = react.exports.useState(2);
-	  react.exports.useState(false);
-	  window.addEventListener('online', () => setOffline(true));
-	  window.addEventListener('offline', () => setOffline(true));
+	  react.exports.useEffect(() => {
+	    window.addEventListener('online', () => setOffline(true));
+	    window.addEventListener('offline', () => setOffline(true));
+	  }, []);
 	  react.exports.useEffect(() => {
 	    dh(props.timetableRef, doc => {
 	      setTimetableFull(doc.data());
@@ -20796,14 +20799,23 @@
 	      }));
 	    }
 
+	    const title = week == 1 ? "Прошлая неделя" : week == 2 ? "Эта неделя" : "Следующая неделя";
 	    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
 	      className: "UIBlock weekChanger"
-	    }, week > 1 && /*#__PURE__*/React.createElement("button", {
+	    }, week > 1 ? /*#__PURE__*/React.createElement("button", {
 	      onClick: () => setWeek(week - 1)
 	    }, /*#__PURE__*/React.createElement("i", {
 	      className: "fas fa-chevron-left fa-2x"
-	    })), /*#__PURE__*/React.createElement("span", null, week), week < 3 && /*#__PURE__*/React.createElement("button", {
+	    })) : /*#__PURE__*/React.createElement("button", {
+	      className: "unactive"
+	    }, /*#__PURE__*/React.createElement("i", {
+	      className: "fas fa-chevron-left fa-2x"
+	    })), /*#__PURE__*/React.createElement("span", null, title), week < 3 ? /*#__PURE__*/React.createElement("button", {
 	      onClick: () => setWeek(week + 1)
+	    }, /*#__PURE__*/React.createElement("i", {
+	      className: "fas fa-chevron-right fa-2x"
+	    })) : /*#__PURE__*/React.createElement("button", {
+	      className: "unactive"
 	    }, /*#__PURE__*/React.createElement("i", {
 	      className: "fas fa-chevron-right fa-2x"
 	    }))), isOffline && /*#__PURE__*/React.createElement("div", {
