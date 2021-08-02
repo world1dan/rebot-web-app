@@ -317,6 +317,86 @@ body {
     opacity: 0;
   }
 }
+.window {
+  touch-action: none;
+  background-color: var(--background);
+  color: var(--text);
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  top: 0;
+  z-index: 3;
+  transition: transform 0.4s cubic-bezier(0.51, 0.16, 0.55, 0.9);
+  will-change: transform;
+}
+.window[max=true] {
+  max-width: min(720px, 50vw);
+}
+.window[max=false] {
+  max-width: 420px;
+}
+@media screen and (orientation: portrait) and (max-width: 780px) {
+  .window[max=true] {
+    max-width: 100%;
+  }
+}
+.window[side=right] {
+  right: min(-420px, -100vw);
+  border-left: 1px var(--borders) solid;
+}
+.window[side=left] {
+  left: -780px;
+  border-right: 1px var(--borders) solid;
+}
+.window[side=bottom] {
+  top: auto !important;
+  bottom: -460px !important;
+  right: 0;
+  height: 460px;
+  border-radius: 12px 12px 0 0px;
+  border-top: 1px var(--borders) solid;
+  border-left: 1px var(--borders) solid;
+  border-right: 1px var(--borders) solid;
+}
+.window.active {
+  transition: transform 0.45s;
+}
+.window.active[side=right] {
+  transform: translateX(min(-420px, -100vw));
+}
+.window.active[side=left] {
+  transform: translateX(780px);
+}
+.window.active[side=bottom] {
+  transform: translateY(-460px);
+}
+.window .close {
+  margin-top: env(safe-area-inset-top);
+  background-color: var(--background2);
+  color: var(--text4);
+  border-radius: 7px;
+  position: absolute;
+  top: 10px;
+  font-size: 20px;
+  width: 67px;
+  height: 34px;
+  z-index: 999;
+}
+.window[side=right] .close {
+  left: 10px;
+}
+.window[side=left] .close {
+  right: 10px;
+}
+.window[side=bottom] .close {
+  top: 10px;
+  right: 10px;
+}
+.window .title {
+  margin-top: 70px;
+  font-size: 30px;
+}
+
 header #bel {
   background-color: #5E5CE6;
 }
@@ -752,6 +832,13 @@ header #eng {
   margin: 0 auto;
 }
 
+.tools {
+  border-radius: 9px;
+}
+.tools button {
+  font-size: 18px;
+}
+
 .offline-alert {
   display: grid;
   background-color: var(--danger);
@@ -778,6 +865,32 @@ header #eng {
   font-size: 12px;
   line-height: 12px;
   word-wrap: break-word;
+}
+
+.weekChanger {
+  height: 52px;
+  max-width: 540px;
+  margin: 0 auto;
+  margin-bottom: 12px;
+  border-radius: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.weekChanger span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.week-grid-enter {
+  transform: scale(0.97);
+  opacity: 0.5;
+}
+
+.week-grid-enter-active {
+  transform: scale(1);
+  opacity: 1;
+  transition: all 0.3s;
 }
 
 .day {
@@ -846,84 +959,4 @@ header #eng {
 }
 .SubjectRow:not(.row.now) div:first-of-type {
   color: #fff;
-}
-
-.window {
-  touch-action: none;
-  background-color: var(--background);
-  color: var(--text);
-  position: fixed;
-  width: 100vw;
-  bottom: 0;
-  top: 0;
-  z-index: 3;
-  transition: transform 0.4s cubic-bezier(0.51, 0.16, 0.55, 0.9);
-  will-change: transform;
-}
-.window[max=true] {
-  max-width: min(720px, 50vw);
-}
-.window[max=false] {
-  max-width: 420px;
-}
-@media screen and (orientation: portrait) and (max-width: 780px) {
-  .window[max=true] {
-    max-width: 100%;
-  }
-}
-.window[side=right] {
-  right: min(-420px, -100vw);
-  border-left: 1px var(--borders) solid;
-}
-.window[side=left] {
-  left: -780px;
-  border-right: 1px var(--borders) solid;
-}
-.window[side=bottom] {
-  top: auto !important;
-  bottom: -460px !important;
-  right: 0;
-  height: 460px;
-  border-radius: 12px 12px 0 0px;
-  border-top: 1px var(--borders) solid;
-  border-left: 1px var(--borders) solid;
-  border-right: 1px var(--borders) solid;
-}
-.window.active {
-  transition: transform 0.45s;
-}
-.window.active[side=right] {
-  transform: translateX(min(-420px, -100vw));
-}
-.window.active[side=left] {
-  transform: translateX(780px);
-}
-.window.active[side=bottom] {
-  transform: translateY(-460px);
-}
-.window .close {
-  margin-top: env(safe-area-inset-top);
-  background-color: var(--background2);
-  color: var(--text4);
-  border-radius: 7px;
-  position: absolute;
-  top: 10px;
-  font-size: 20px;
-  width: 67px;
-  height: 34px;
-  z-index: 999;
-}
-.window[side=right] .close {
-  left: 10px;
-}
-.window[side=left] .close {
-  right: 10px;
-}
-.window[side=bottom] .close {
-  top: 10px;
-  right: 10px;
-}
-.window .title {
-  margin-top: 70px;
-  font-size: 30px;
 }

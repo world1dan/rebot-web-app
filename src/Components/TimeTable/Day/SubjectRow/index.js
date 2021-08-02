@@ -1,41 +1,39 @@
-import React, { memo, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import './style.scss';
 
-import { doc, updateDoc } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 
-function arePropsEqual(prevProps, nextProps) {
-    return JSON.stringify(prevProps) === JSON.stringify(nextProps);
-}
 
 function SubjectRow(props) {
     const hwInput = useRef(null);
 
+    useEffect(() => {
+        hwInput.current.value = props.lesson_data.hw;
+    }, [props.lesson_data.hw])
+
     const title = props.manifest[props.lesson_data.id].title;
-    const hw = props.lesson_data.hw;
 
     const style = {
         backgroundColor: props.manifest[props.lesson_data.id].color
     }
-
 
     function handleSubmit(event) {
         event.preventDefault();
 
         hwInput.current.blur();
 
-        updateDoc(doc(window.firestore, "weeks", "1"), {
+        updateDoc(props.timetableRef, {
             [props.path + ".hw"]: hwInput.current.value
         });
-    }
-
+    }  
 
     return (
         <div className="SubjectRow">
             <div className="subj" style={style}>{title}</div>
             <div className="homework fr">
                 <form onSubmit={handleSubmit} style={{display: "inline-block"}}>
-                    <input type="number" defaultValue={hw} ref={hwInput}/>
+                    <input type="number"    ref={hwInput}/>
                 </form>
             </div>
             <div className="tool stealth"><i className="fas fa-book"></i></div>
@@ -44,4 +42,4 @@ function SubjectRow(props) {
     
 }
 
-export default memo(SubjectRow, arePropsEqual);
+export default SubjectRow;

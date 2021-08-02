@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "workspace.code-workspace": true,
+    ".eslintrc.json": true,
+    ".vscode": true
+  }
+}

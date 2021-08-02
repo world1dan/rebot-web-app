@@ -54,15 +54,15 @@ enableIndexedDbPersistence(firestore, { forceOwnership: true })
 onSnapshot(doc(firestore, "appConfig", "subjects"), (snapshot) => {
     const manifest = snapshot.data();
 
-    const week = <Week manifest={manifest} timetableRef={doc(firestore, "weeks", "1")}/>
-    const marks = <Marks manifest={manifest} marksRef={user.marks}/>
-    const homescreen = <HomeScreen manifest={manifest} timetableRef={doc(firestore, "weeks", "1")}/>
+    const week = <Week manifest={manifest} timetableRef={doc(firestore, "timeTables", "9D")}/>
+    //const marks = <Marks manifest={manifest} marksRef={user.marks}/>
+    //const homescreen = <HomeScreen manifest={manifest} timetableRef={doc(firestore, "weeks", "1")}/>
 
     window.ReBot = new ReBotManager(manifest, user.workspace)
 
-    ReactDOM.render(homescreen, document.getElementById('homescreen'));
+   // ReactDOM.render(homescreen, document.getElementById('homescreen'));
     ReactDOM.render(week, document.getElementById('week'));
-    ReactDOM.render(marks, document.getElementById('marks'));
+    //ReactDOM.render(marks, document.getElementById('marks'));
 });
 
 

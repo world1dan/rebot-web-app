@@ -16,14 +16,14 @@ const day_titles = {
 
 
 
-export default class Day extends PureComponent {
+export default class Day extends Component {
     
     render() {
         let rows = [];
         let subj;
-
+        
         for (subj in this.props.day_data) {
-            rows.push(<SubjectRow key={subj} path={this.props.day_num + '.' + subj} manifest={this.props.manifest} lesson_data={this.props.day_data[subj]}/>);
+            rows.push(<SubjectRow key={subj} timetableRef={this.props.timetableRef} path={this.props.pathToDay + "." + subj} manifest={this.props.manifest} lesson_data={this.props.day_data[subj]}/>);
         }
 
         return (
