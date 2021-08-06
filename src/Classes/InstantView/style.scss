@@ -1,0 +1,13 @@
+.instant-view {
+    touch-action: none;
+    .content {
+        overflow-y: scroll;
+        max-height: 100vh;
+        background-color: #fff;
+        filter: Invert(var(--inv));
+        transition: filter 0.6s;
+        padding-top: 40px;
+        padding-bottom: 150px;
+        padding-left: env(safe-area-inset-left);
+    }
+}

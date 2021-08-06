@@ -100,6 +100,33 @@ body {
     margin: 0;
     box-sizing: border-box;
     padding: 0;
+    overflow: hidden;
+    touch-action: none;
+}
+
+.min-right {
+    padding-left: Min(720px, 50vw);
+
+    .bottom-nav {
+        padding-left: Min(720px, 50vw);
+    }
+}
+
+.min-left {
+    padding-right: Min(720px, 50vw);
+
+    .bottom-nav {
+        padding-right: Min(720px, 50vw);
+    }
+}
+
+.noscroll {
+    overflow: hidden;
+    touch-action: none;
+}
+
+::-webkit-scrollbar {
+    width: 0;
 }
 
 .template {
@@ -203,9 +230,6 @@ body {
             transition: transform 0.2s;
         }
     }
-    @media screen and (orientation: portrait) and (min-width: 780px) {
-        z-index: 10;
-    }
 }
 
 @media (orientation: landscape) {
@@ -245,6 +269,10 @@ body {
 
 .app {
     display: none;
+    overflow: auto;
+    max-height: 100vh;
+    height: 100vh;
+    
 }
 
 
@@ -410,5 +438,81 @@ body {
     .title {
         margin-top: 70px;
         font-size: 30px;
+    }
+}
+
+
+
+#lockscreen {
+    will-change: transform;
+    display: none;
+    &.unactive {
+        transform: translateY(-100vh);
+        transition: transform 0.4s;
+    }
+    &.active {
+        display: grid;
+    }
+    #indicator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        margin-top: 60px;
+        .char {
+            border-radius: 50%;
+            background-color: var(--text4);
+            width: 14px;
+            height: 14px;
+            &.active {
+                background-color: var(--text);
+            }
+        }
+    }
+    #invalid-alert {
+        margin-top: 8px;
+        color: red;
+        text-align: center;
+        padding: 10px;
+        font-weight: bold;
+        font-size: 18px;
+        visibility: hidden;
+        &.active {
+            visibility: visible;
+        }
+    }
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    background-color: var(--backgroundTR2);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    grid-template-rows: 100px 60px 1fr;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    justify-content: center;
+    align-items: center;
+    #icon svg {
+        display: block;
+        margin-top: 200px;
+        margin: 0 auto;
+        color: #fff;
+    }
+    #numpad {
+        width: 300px;
+        height: 400px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 11px;
+    }
+    #numpad button {
+        border-radius: 50%;
+        font-size: 26px;
+        font-weight: bold;
+        background-color: var(--background3);
+    }
+    #numpad button.hiden {
+        visibility: hidden;
     }
 }

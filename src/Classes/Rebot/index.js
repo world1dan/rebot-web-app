@@ -1,4 +1,3 @@
-
 import {
     setDoc,
     onSnapshot,
@@ -6,19 +5,19 @@ import {
     arrayRemove
 } from "firebase/firestore";
 
+import { database } from "../../Context";
 import './style.scss';
 
 export default class ReBotManager {
 
-    constructor(manifest, workspace) {
-        this.workspace = workspace;
+    constructor(manifest) {
         this.manifest = manifest;
         this.box_container = document.querySelector('#boxes');
         this.viewbox_template = document.querySelector('.template #viewbox');
         this.status_title = document.querySelector('#current-subj');
         this.search = document.querySelector('.search input');
 
-        onSnapshot(this.workspace, (doc) => {
+        onSnapshot(database.workspace, (doc) => {
             if (!doc.metadata.hasPendingWrites) {
                 const data = doc.data();
 
@@ -53,7 +52,7 @@ export default class ReBotManager {
             } else return;
 
             for (num of nums) {
-                setDoc(this.workspace, {
+                setDoc(database.workspace, {
                     "subj": id,
                     "nums": arrayUnion(parseInt(num))
                 }, { merge: true });
@@ -136,12 +135,12 @@ export default class ReBotManager {
 
         if (!(this.box_container.hasChildNodes())) {
             this.status_title.textContent = "ReBot";
-            setDoc(this.workspace, {
+            setDoc(database.workspace, {
                 "nums": null,
                 "subj": null
             }, { merge: true });
         } else {
-            setDoc(this.workspace, {
+            setDoc(database.workspace, {
                 "nums": arrayRemove(num)
             }, { merge: true });
         }

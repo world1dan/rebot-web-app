@@ -1,48 +1,33 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect, useState } from 'react';
 import { onSnapshot } from "firebase/firestore";
 import SubjectRow from "./SubjectRow"
+import { database } from '../../Context';
 
 
-export default class Marks extends PureComponent {
+export default function Marks() {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            marks: false
-        }
-    }
+    const [marks, setMarks] = useState({});
 
-    componentDidMount() {
-        onSnapshot(this.props.marksRef, (snapshot) => {
-            this.setState({
-                marks: Object.fromEntries(Object.entries(snapshot.data()).sort())
-            })
+    useEffect(() => {
+        onSnapshot(database.marks, (snapshot) => {
+            setMarks(Object.fromEntries(Object.entries(snapshot.data()).sort()));
         })
+    }, []);
 
-    }
 
+        let subj;
+        let rows = [];
 
-    render() {
-        if (this.state.marks) {
-
-            let subj;
-            let rows = [];
-
-            for (subj in this.state.marks) {
-                rows.push(<SubjectRow key={subj} subj_id={subj} path={this.props.marksRef} manifest={this.props.manifest} marks={this.state.marks[subj]}/>);
-            }
-    
-            return (
-                <div className="UIBlock">
-                    <h1>Оценки</h1>
-                    <div className="content">
-                        { rows }
-                    </div>
-                </div>
-            )
-
-        } else {
-            return ""
+        for (subj in marks) {
+            rows.push(<SubjectRow key={subj} subj_id={subj} marks={marks[subj]}/>);
         }
-    }
+
+        return (
+            <div className="UIBlock">
+                <h1>Оценки</h1>
+                <div className="content">
+                    { rows }
+                </div>
+            </div>
+        )
 }

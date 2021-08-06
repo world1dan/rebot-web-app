@@ -1,4 +1,4 @@
-import React, { PureComponent, Component, memo } from 'react';
+import React from 'react';
 
 import SubjectRow from './SubjectRow';
 import './style.scss';
@@ -16,25 +16,33 @@ const day_titles = {
 
 
 
-export default class Day extends PureComponent {
-    
-    render() {
-        let rows = [];
-        let subj;
-        
-        for (subj in this.props.day_data) {
-            rows.push(<SubjectRow key={subj} timetableRef={this.props.timetableRef} path={this.props.pathToDay + "." + subj} manifest={this.props.manifest} lesson_data={this.props.day_data[subj]}/>);
+export default function Day(props) {
+    const day_data = props.day_data;
+    let rows = [];
+    let subj;
+
+    for (subj in props.day_data) {
+        rows.push(<SubjectRow key={subj} path={props.pathToDay + "." + subj} lesson_data={day_data[subj]}/>);
+    }
+
+    function openInstant() {
+        const toOpen = [];
+
+        for (let subj in day_data) {
+            day_data[subj].hw && toOpen.push(day_data[subj])
         }
 
-        return (
-            
-            <div className="UIBlock">
-                <h1>{ day_titles[this.props.day_num] }</h1>
-                <div className="content">
-                    { rows }
-                </div>
-            </div>
-        );
+        toOpen && window.InstantView.open(toOpen);
     }
+    return ( 
+        <div className="UIBlock">
+            <h1>{ day_titles[props.day_num] }</h1>
+            <button className="table-btn open-all stealth" onClick={openInstant}><i className="fas fa-book fa-lg"></i></button>
+            <button className="table-btn share"><i className="fas fa-share fa-lg"></i></button>
+            <div className="content">
+                { rows }
+            </div>
+        </div>
+    )
 
 }

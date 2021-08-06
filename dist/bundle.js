@@ -8150,6 +8150,52 @@
 
 	var PATTERN = /\{\$([^}]+)}/g;
 	/**
+	 * Deep equal two objects. Support Arrays and Objects.
+	 */
+
+
+	function deepEqual(a, b) {
+	  if (a === b) {
+	    return true;
+	  }
+
+	  var aKeys = Object.keys(a);
+	  var bKeys = Object.keys(b);
+
+	  for (var _i = 0, aKeys_1 = aKeys; _i < aKeys_1.length; _i++) {
+	    var k = aKeys_1[_i];
+
+	    if (!bKeys.includes(k)) {
+	      return false;
+	    }
+
+	    var aProp = a[k];
+	    var bProp = b[k];
+
+	    if (isObject(aProp) && isObject(bProp)) {
+	      if (!deepEqual(aProp, bProp)) {
+	        return false;
+	      }
+	    } else if (aProp !== bProp) {
+	      return false;
+	    }
+	  }
+
+	  for (var _a = 0, bKeys_1 = bKeys; _a < bKeys_1.length; _a++) {
+	    var k = bKeys_1[_a];
+
+	    if (!aKeys.includes(k)) {
+	      return false;
+	    }
+	  }
+
+	  return true;
+	}
+
+	function isObject(thing) {
+	  return thing !== null && typeof thing === 'object';
+	}
+	/**
 	 * @license
 	 * Copyright 2021 Google LLC
 	 *
@@ -9033,7 +9079,7 @@
 	}
 
 	const name$o = "@firebase/app-exp";
-	const version$1 = "0.0.900-exp.6ef484a04";
+	const version$1 = "0.0.900-exp.8b4d7550f";
 	/**
 	 * @license
 	 * Copyright 2019 Google LLC
@@ -9076,7 +9122,7 @@
 	const name$2 = "@firebase/firestore";
 	const name$1 = "@firebase/firestore-compat";
 	const name$p = "firebase-exp";
-	const version$2 = "9.0.0-beta.7";
+	const version$2 = "9.0.0-beta.8";
 	/**
 	 * @license
 	 * Copyright 2019 Google LLC
@@ -9241,7 +9287,7 @@
 	  ]: "Illegal App name: '{$appName}",
 	  ["duplicate-app"
 	  /* DUPLICATE_APP */
-	  ]: "Firebase App named '{$appName}' already exists",
+	  ]: "Firebase App named '{$appName}' already exists with different options or config",
 	  ["app-deleted"
 	  /* APP_DELETED */
 	  ]: "Firebase App named '{$appName}' already deleted",
@@ -9274,6 +9320,7 @@
 	  constructor(options, config, container) {
 	    this._isDeleted = false;
 	    this._options = Object.assign({}, options);
+	    this._config = Object.assign({}, config);
 	    this._name = config.name;
 	    this._automaticDataCollectionEnabled = config.automaticDataCollectionEnabled;
 	    this._container = container;
@@ -9300,6 +9347,11 @@
 	  get options() {
 	    this.checkDestroyed();
 	    return this._options;
+	  }
+
+	  get config() {
+	    this.checkDestroyed();
+	    return this._config;
 	  }
 
 	  get container() {
@@ -9378,12 +9430,19 @@
 	    });
 	  }
 
-	  if (_apps.has(name)) {
-	    throw ERROR_FACTORY.create("duplicate-app"
-	    /* DUPLICATE_APP */
-	    , {
-	      appName: name
-	    });
+	  const existingApp = _apps.get(name);
+
+	  if (existingApp) {
+	    // return the existing app if options and config deep equal the ones in the existing app.
+	    if (deepEqual(options, existingApp.options) && deepEqual(config, existingApp.config)) {
+	      return existingApp;
+	    } else {
+	      throw ERROR_FACTORY.create("duplicate-app"
+	      /* DUPLICATE_APP */
+	      , {
+	        appName: name
+	      });
+	    }
 	  }
 
 	  const container = new ComponentContainer(name);
@@ -9397,6 +9456,50 @@
 	  _apps.set(name, newApp);
 
 	  return newApp;
+	}
+	/**
+	 * Retrieves a FirebaseApp instance.
+	 *
+	 * When called with no arguments, the default app is returned. When an app name
+	 * is provided, the app corresponding to that name is returned.
+	 *
+	 * An exception is thrown if the app being retrieved has not yet been
+	 * initialized.
+	 *
+	 * @example
+	 * ```javascript
+	 * // Return the default app
+	 * const app = getApp();
+	 * ```
+	 *
+	 * @example
+	 * ```javascript
+	 * // Return a named app
+	 * const otherApp = getApp("otherApp");
+	 * ```
+	 *
+	 * @param name - Optional name of the app to return. If no name is
+	 *   provided, the default is `"[DEFAULT]"`.
+	 *
+	 * @returns The app corresponding to the provided app name.
+	 *   If no app name is provided, the default app is returned.
+	 *
+	 * @public
+	 */
+
+
+	function getApp(name = DEFAULT_ENTRY_NAME) {
+	  const app = _apps.get(name);
+
+	  if (!app) {
+	    throw ERROR_FACTORY.create("no-app"
+	    /* NO_APP */
+	    , {
+	      appName: name
+	    });
+	  }
+
+	  return app;
 	}
 	/**
 	 * Registers a library's name and version for platform logging purposes.
@@ -9485,27 +9588,6 @@
 
 
 	registerCoreComponents();
-
-	var name = "firebase-exp";
-	var version = "9.0.0-beta.7";
-	/**
-	 * @license
-	 * Copyright 2020 Google LLC
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 *   http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 */
-
-	registerVersion(name, version, 'app');
 
 	/*! *****************************************************************************
 	Copyright (c) Microsoft Corporation.
@@ -11276,7 +11358,7 @@
 
 	var hd = 10;
 
-	function id$1(a) {
+	function id(a) {
 	  return a.h ? !0 : a.g ? a.g.size >= a.j : !1;
 	}
 
@@ -11906,7 +11988,7 @@
 	}
 
 	function Hc(a) {
-	  id$1(a.i) || a.m || (a.m = !0, zb(a.Ha, a), a.C = 0);
+	  id(a.i) || a.m || (a.m = !0, zb(a.Ha, a), a.C = 0);
 	}
 
 	function Nd(a, b) {
@@ -11970,7 +12052,7 @@
 	      this.ja ? (R(c, "$req", b), R(c, "SID", "null"), e.$ = !0, ic$1(e, c, null)) : ic$1(e, c, b);
 	      this.G = 2;
 	    }
-	  } else 3 == this.G && (a ? Qd(this, a) : 0 == this.l.length || id$1(this.i) || Qd(this));
+	  } else 3 == this.G && (a ? Qd(this, a) : 0 == this.l.length || id(this.i) || Qd(this));
 	};
 
 	function Qd(a, b) {
@@ -12417,7 +12499,7 @@
 	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	 * See the License for the specific language governing permissions and
 	 * limitations under the License.
-	 */let V="8.7.1";/**
+	 */let V="8.8.1";/**
 	 * @license
 	 * Copyright 2018 Google LLC
 	 *
@@ -17427,7 +17509,9 @@
 	 * The Cloud Firestore service interface.
 	 *
 	 * Do not call this constructor directly. Instead, use {@link getFirestore}.
-	 */class _u{/** @hideconstructor */constructor(t,e){this.type="firestore-lite",this._persistenceKey="(lite)",this._settings=new wu({}),this._settingsFrozen=!1,t instanceof tu?(this._databaseId=t,this._credentials=new su()):(this._app=t,this._databaseId=function(t){if(!Object.prototype.hasOwnProperty.apply(t.options,["projectId"]))throw new C(D.INVALID_ARGUMENT,'"projectId" not provided in firebase.initializeApp.');return new tu(t.options.projectId);}/**
+	 */class _u{/** @hideconstructor */constructor(t,e){/**
+	         * Whether it's a Firestore or Firestore Lite instance.
+	         */this.type="firestore-lite",this._persistenceKey="(lite)",this._settings=new wu({}),this._settingsFrozen=!1,t instanceof tu?(this._databaseId=t,this._credentials=new su()):(this._app=t,this._databaseId=function(t){if(!Object.prototype.hasOwnProperty.apply(t.options,["projectId"]))throw new C(D.INVALID_ARGUMENT,'"projectId" not provided in firebase.initializeApp.');return new tu(t.options.projectId);}/**
 	 * Modify this instance to communicate with the Cloud Firestore emulator.
 	 *
 	 * Note: This must be called before this instance has been used to do any
@@ -17619,37 +17703,22 @@
 	 *
 	 * The API is compatible with `Promise<LoadBundleTaskProgress>`.
 	 */(t,["next","error","complete"]);}/**
-	 * @license
-	 * Copyright 2020 Google LLC
-	 *
-	 * Licensed under the Apache License, Version 2.0 (the "License");
-	 * you may not use this file except in compliance with the License.
-	 * You may obtain a copy of the License at
-	 *
-	 *   http://www.apache.org/licenses/LICENSE-2.0
-	 *
-	 * Unless required by applicable law or agreed to in writing, software
-	 * distributed under the License is distributed on an "AS IS" BASIS,
-	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	 * See the License for the specific language governing permissions and
-	 * limitations under the License.
-	 */ /** DOMException error code constants. */const Vu=-1;/**
 	 * The Cloud Firestore service interface.
 	 *
 	 * Do not call this constructor directly. Instead, use {@link getFirestore}.
-	 */class Su extends _u{/** @hideconstructor */constructor(t,e){super(t,e),this.type="firestore",this._queue=new Pu(),this._persistenceKey="name"in t?t.name:"[DEFAULT]";}_terminate(){return this._firestoreClient||// The client must be initialized to ensure that all subsequent API
+	 */class Su extends _u{/** @hideconstructor */constructor(t,e){super(t,e),/**
+	         * Whether it's a Firestore or Firestore Lite instance.
+	         */this.type="firestore",this._queue=new Pu(),this._persistenceKey="name"in t?t.name:"[DEFAULT]";}_terminate(){return this._firestoreClient||// The client must be initialized to ensure that all subsequent API
 	// usage throws an exception.
 	xu(this),this._firestoreClient.terminate();}}/**
-	 * Initializes a new instance of Cloud Firestore with the provided settings.
-	 * Can only be called before any other function, including
-	 * {@link getFirestore}. If the custom settings are empty, this function is
-	 * equivalent to calling {@link getFirestore}.
+	 * Returns the existing instance of Firestore that is associated with the
+	 * provided {@link @firebase/app#FirebaseApp}. If no instance exists, initializes a new
+	 * instance with default settings.
 	 *
-	 * @param app - The {@link @firebase/app#FirebaseApp} with which the `Firestore` instance will
-	 * be associated.
-	 * @param settings - A settings object to configure the `Firestore` instance.
-	 * @returns A newly initialized `Firestore` instance.
-	 */function Du(e,n){const s=_getProvider(e,"firestore-exp");if(s.isInitialized())throw new C(D.FAILED_PRECONDITION,"Firestore can only be initialized once per app.");if(void 0!==n.cacheSizeBytes&&-1!==n.cacheSizeBytes&&n.cacheSizeBytes<1048576)throw new C(D.INVALID_ARGUMENT,"cacheSizeBytes must be at least 1048576");return s.initialize({options:n});}/**
+	 * @param app - The {@link @firebase/app#FirebaseApp} instance that the returned Firestore
+	 * instance is associated with.
+	 * @returns The `Firestore` instance of the provided app.
+	 */function Cu(n=getApp()){return _getProvider(n,"firestore-exp").getImmediate();}/**
 	 * @internal
 	 */function Nu(t){return t._firestoreClient||xu(t),t._firestoreClient.verifyNotTerminated(),t._firestoreClient;}function xu(t){var e;const n=t._freezeSettings(),s=function(t,e,n,s){return new Zc(t,e,n,s.host,s.ssl,s.experimentalForceLongPolling,s.experimentalAutoDetectLongPolling,s.useFetchStreams);}(t._databaseId,(null===(e=t._app)||void 0===e?void 0:e.options.appId)||"",t._persistenceKey,n);t._firestoreClient=new xc(t._credentials,t._queue,s);}/**
 	 * Attempts to enable persistent storage, if possible.
@@ -18272,24 +18341,80 @@
 	 * Cloud Firestore
 	 *
 	 * @packageDocumentation
-	 */var Ph;!function(t){V=t;}(SDK_VERSION),_registerComponent(new Component("firestore-exp",(t,{options:e})=>{const n=t.getProvider("app-exp").getImmediate(),s=new Su(n,t.getProvider("auth-internal"));return e=Object.assign({useFetchStreams:!1},e),s._setSettings(e),s;},"PUBLIC"/* PUBLIC */)),registerVersion("@firebase/firestore","0.0.900-exp.6ef484a04",Ph);
+	 */var Ph;!function(t){V=t;}(SDK_VERSION),_registerComponent(new Component("firestore-exp",(t,{options:e})=>{const n=t.getProvider("app-exp").getImmediate(),s=new Su(n,t.getProvider("auth-internal"));return e=Object.assign({useFetchStreams:!0},e),s._setSettings(e),s;},"PUBLIC"/* PUBLIC */)),registerVersion("@firebase/firestore","0.0.900-exp.8b4d7550f",Ph);
 
-	function SubjectRow(props) {
+	var name = "firebase-exp";
+	var version = "9.0.0-beta.8";
+	/**
+	 * @license
+	 * Copyright 2020 Google LLC
+	 *
+	 * Licensed under the Apache License, Version 2.0 (the "License");
+	 * you may not use this file except in compliance with the License.
+	 * You may obtain a copy of the License at
+	 *
+	 *   http://www.apache.org/licenses/LICENSE-2.0
+	 *
+	 * Unless required by applicable law or agreed to in writing, software
+	 * distributed under the License is distributed on an "AS IS" BASIS,
+	 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	 * See the License for the specific language governing permissions and
+	 * limitations under the License.
+	 */
+
+	registerVersion(name, version, 'app');
+
+	initializeApp({
+	  apiKey: "AIzaSyAkNpqlq9hU_cDu1_4wQIBNNc9OJd4LT1g",
+	  authDomain: "rebot-f643e.firebaseapp.com",
+	  projectId: "rebot-f643e",
+	  storageBucket: "rebot-f643e.appspot.com",
+	  messagingSenderId: "329205426356",
+	  appId: "1:329205426356:web:d8c730df77b0d7b9890fe1"
+	});
+	const firestore = Cu();
+	ku(firestore, {
+	  forceOwnership: true
+	}).catch(err => {
+	  console.log(err.code);
+	});
+	const database = {
+	  manifest: Iu(firestore, "appConfig", "subjects"),
+	  timetable: Iu(firestore, "timeTables", "9D"),
+	  settings: Iu(firestore, "1046049249", "config"),
+	  workspace: Iu(firestore, "1046049249", "workspace"),
+	  marks: Iu(firestore, "1046049249", "marks"),
+	  firestore
+	};
+	const manifestContext = /*#__PURE__*/react.exports.createContext(null);
+
+	function SubjectRow$1(props) {
+	  const manifest = react.exports.useContext(manifestContext);
 	  const hwInput = react.exports.useRef(null);
 	  react.exports.useEffect(() => {
 	    hwInput.current.value = props.lesson_data.hw;
 	  }, [props.lesson_data.hw]);
-	  const title = props.manifest[props.lesson_data.id].title;
+	  const title = manifest ? manifest[props.lesson_data.id].title : /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-circle-notch fa-spin"
+	  });
 	  const style = {
-	    backgroundColor: props.manifest[props.lesson_data.id].color
+	    backgroundColor: manifest ? manifest[props.lesson_data.id].color : "var(--background3)"
 	  };
 
 	  function handleSubmit(event) {
 	    event.preventDefault();
 	    hwInput.current.blur();
-	    hh(props.timetableRef, {
+	    hh(database.timetable, {
 	      [props.path + ".hw"]: hwInput.current.value
 	    });
+	  }
+
+	  function openInstant() {
+	    const toOpen = [{
+	      id: props.lesson_data.id,
+	      hw: props.lesson_data.hw
+	    }];
+	    window.InstantView.open(toOpen);
 	  }
 
 	  return /*#__PURE__*/React.createElement("div", {
@@ -18305,16 +18430,17 @@
 	      display: "inline-block"
 	    }
 	  }, /*#__PURE__*/React.createElement("input", {
-	    type: "number",
+	    type: "text",
 	    ref: hwInput
 	  }))), /*#__PURE__*/React.createElement("div", {
-	    className: "tool stealth"
+	    className: "tool stealth",
+	    onClick: openInstant
 	  }, /*#__PURE__*/React.createElement("i", {
 	    className: "fas fa-book"
 	  })));
 	}
 
-	var SubjectRow$1 = /*#__PURE__*/react.exports.memo(SubjectRow);
+	var SubjectRow$2 = /*#__PURE__*/react.exports.memo(SubjectRow$1);
 
 	const day_titles = {
 	  1: "Понедельник",
@@ -18325,28 +18451,43 @@
 	  6: "Суббота",
 	  7: "Воскресенье"
 	};
-	class Day extends react.exports.PureComponent {
-	  render() {
-	    let rows = [];
-	    let subj;
+	function Day(props) {
+	  const day_data = props.day_data;
+	  let rows = [];
+	  let subj;
 
-	    for (subj in this.props.day_data) {
-	      rows.push( /*#__PURE__*/React.createElement(SubjectRow$1, {
-	        key: subj,
-	        timetableRef: this.props.timetableRef,
-	        path: this.props.pathToDay + "." + subj,
-	        manifest: this.props.manifest,
-	        lesson_data: this.props.day_data[subj]
-	      }));
-	    }
-
-	    return /*#__PURE__*/React.createElement("div", {
-	      className: "UIBlock"
-	    }, /*#__PURE__*/React.createElement("h1", null, day_titles[this.props.day_num]), /*#__PURE__*/React.createElement("div", {
-	      className: "content"
-	    }, rows));
+	  for (subj in props.day_data) {
+	    rows.push( /*#__PURE__*/React.createElement(SubjectRow$2, {
+	      key: subj,
+	      path: props.pathToDay + "." + subj,
+	      lesson_data: day_data[subj]
+	    }));
 	  }
 
+	  function openInstant() {
+	    const toOpen = [];
+
+	    for (let subj in day_data) {
+	      day_data[subj].hw && toOpen.push(day_data[subj]);
+	    }
+
+	    toOpen && window.InstantView.open(toOpen);
+	  }
+
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "UIBlock"
+	  }, /*#__PURE__*/React.createElement("h1", null, day_titles[props.day_num]), /*#__PURE__*/React.createElement("button", {
+	    className: "table-btn open-all stealth",
+	    onClick: openInstant
+	  }, /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-book fa-lg"
+	  })), /*#__PURE__*/React.createElement("button", {
+	    className: "table-btn share"
+	  }, /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-share fa-lg"
+	  })), /*#__PURE__*/React.createElement("div", {
+	    className: "content"
+	  }, rows));
 	}
 
 	function _extends() {
@@ -20766,7 +20907,7 @@
 	} ;
 	TransitionGroup.defaultProps = defaultProps;
 
-	function Week(props) {
+	function Week() {
 	  const [timetableFull, setTimetableFull] = react.exports.useState(false);
 	  const [timetable, setTimetable] = react.exports.useState(false);
 	  const [isOffline, setOffline] = react.exports.useState(!navigator.onLine);
@@ -20776,10 +20917,10 @@
 	    window.addEventListener('offline', () => setOffline(true));
 	  }, []);
 	  react.exports.useEffect(() => {
-	    dh(props.timetableRef, doc => {
+	    dh(database.timetable, doc => {
 	      setTimetableFull(doc.data());
 	    });
-	  }, [props.timetableRef]);
+	  }, []);
 	  react.exports.useEffect(() => {
 	    setTimetable(timetableFull[week]);
 	  }, [week, timetableFull]);
@@ -20792,10 +20933,8 @@
 	      days.push( /*#__PURE__*/React.createElement(Day, {
 	        key: day,
 	        pathToDay: week + "." + day,
-	        timetableRef: props.timetableRef,
 	        day_num: day,
-	        day_data: timetable[day],
-	        manifest: props.manifest
+	        day_data: timetable[day]
 	      }));
 	    }
 
@@ -20825,7 +20964,7 @@
 	    }, /*#__PURE__*/React.createElement("h4", null, "\u0418\u043D\u0442\u0435\u0440\u043D\u0435\u0442 \u043D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u0435\u043D"), /*#__PURE__*/React.createElement("p", null, "\u0414\u0430\u043D\u043D\u044B\u0435 \u0431\u0443\u0434\u0443\u0442 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u044B \u043F\u0440\u0438 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0438")), /*#__PURE__*/React.createElement("i", {
 	      className: "fas fa-exclamation-triangle"
 	    })), /*#__PURE__*/React.createElement(TransitionGroup, {
-	      exit: true
+	      exit: false
 	    }, /*#__PURE__*/React.createElement(CSSTransition, {
 	      key: week,
 	      timeout: 300,
@@ -20844,154 +20983,102 @@
 	  }
 	}
 
-	class ReBotManager {
-	  constructor(manifest, workspace) {
-	    this.workspace = workspace;
-	    this.manifest = manifest;
-	    this.box_container = document.querySelector('#boxes');
-	    this.viewbox_template = document.querySelector('.template #viewbox');
-	    this.status_title = document.querySelector('#current-subj');
-	    this.search = document.querySelector('.search input');
-	    dh(this.workspace, doc => {
-	      if (!doc.metadata.hasPendingWrites) {
-	        const data = doc.data();
+	var SubjectRow = /*#__PURE__*/react.exports.memo(function SubjectRow(props) {
+	  const manifest = react.exports.useContext(manifestContext);
+	  const marksInput = react.exports.useRef(null);
+	  const marks = props.marks;
+	  const title = manifest ? manifest[props.subj_id].title : /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-circle-notch fa-spin"
+	  });
+	  const style = {
+	    backgroundColor: manifest ? manifest[props.subj_id].color : "var(--background3)"
+	  };
+	  let sum = 0;
+	  let length = 0;
+	  const marks_list = marks.split(",");
+	  marks_list.map(mark => {
+	    let int = parseInt(mark);
+	    if (!int) return;
+	    sum += int;
+	    length++;
+	  });
+	  let average = sum / length;
 
-	        if (data && data.nums) {
-	          this.open(data.subj, data.nums);
-	        }
-	      }
+	  if (!isNaN(average)) {
+	    average = Number(average.toFixed(1));
+	  } else {
+	    average = null;
+	  }
+
+	  function addMark() {
+	    const input = marksInput.current;
+	    input.focus();
+
+	    if (input.value.trim().slice(-1) != "," && input.value != "") {
+	      input.value += ", ";
+	    }
+	  }
+
+	  function handleSubmit(event) {
+	    event.preventDefault();
+	    marksInput.current.blur();
+	    ah(database.marks, {
+	      [props.subj_id]: marksInput.current.value
+	    }, {
+	      merge: true
 	    });
-	    document.querySelectorAll("#rebot header button").forEach(el => {
-	      el.onclick = () => {
-	        window.UI.getInput((id, nums) => {
-	          this.open(id, nums);
-	        }, el.id);
-	      };
+	  }
+
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "SubjectRow"
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "subj",
+	    style: style
+	  }, title), /*#__PURE__*/React.createElement("div", {
+	    className: "homework fr"
+	  }, /*#__PURE__*/React.createElement("form", {
+	    onSubmit: handleSubmit,
+	    style: {
+	      display: "inline-block"
+	    }
+	  }, /*#__PURE__*/React.createElement("input", {
+	    type: "text",
+	    defaultValue: marks,
+	    ref: marksInput,
+	    onBlur: handleSubmit
+	  }))), average && /*#__PURE__*/React.createElement("div", {
+	    className: "tool"
+	  }, average), /*#__PURE__*/React.createElement("div", {
+	    className: "tool",
+	    onClick: addMark
+	  }, /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-plus"
+	  })));
+	});
+
+	function Marks() {
+	  const [marks, setMarks] = react.exports.useState({});
+	  react.exports.useEffect(() => {
+	    dh(database.marks, snapshot => {
+	      setMarks(Object.fromEntries(Object.entries(snapshot.data()).sort()));
 	    });
-	    this.search.addEventListener("keydown", event => {
-	      if (event.key == "Enter") {
-	        window.open("https://www.google.com/search?q=" + this.search.value, '_blank');
-	        this.search.value = "";
-	      }
-	    });
+	  }, []);
+	  let subj;
+	  let rows = [];
+
+	  for (subj in marks) {
+	    rows.push( /*#__PURE__*/React.createElement(SubjectRow, {
+	      key: subj,
+	      subj_id: subj,
+	      marks: marks[subj]
+	    }));
 	  }
 
-	  open(id, num) {
-	    let nums;
-
-	    if (num == undefined) {
-	      nums = prompt('Введи номер или номера через запятую:');
-
-	      if (nums) {
-	        nums = nums.split(',');
-	      } else return;
-
-	      for (num of nums) {
-	        ah(this.workspace, {
-	          "subj": id,
-	          "nums": Th(parseInt(num))
-	        }, {
-	          merge: true
-	        });
-	      }
-	    } else {
-	      nums = num;
-	    }
-
-	    const subj = this.manifest[id];
-	    this.status_title.textContent = subj.title;
-
-	    for (let num of nums) {
-	      if (!num) {
-	        continue;
-	      }
-
-	      if (this.box_container.querySelector(`.viewbox[num='${num}']`)) return;
-	      let box = this.viewbox_template.cloneNode(true);
-
-	      if (subj.section == false) {
-	        box.querySelector("#view").src = subj.url.replace('?', num);
-
-	        if (subj.full_img == false) {
-	          box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
-	          box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
-	        }
-	      } else {
-	        box.querySelector("#prew").remove();
-	        box.querySelector("#next").remove();
-	        box.querySelector("#alt-re").remove();
-	        box.querySelector("#view").src = subj.url.replace('*', num).replace('?', 1);
-	        let i = 2;
-	        let img;
-
-	        while (i < 12) {
-	          img = box.querySelector("#view").cloneNode(true);
-
-	          img.onerror = function a() {
-	            this.remove();
-	          };
-
-	          img.src = subj.url.replace('*', num).replace('?', i);
-	          box.querySelector(".viewbox-content").append(img);
-	          i++;
-	        }
-	      }
-
-	      this.box_container.prepend(box);
-	      box.querySelector(".num").textContent = num;
-	      box.setAttribute("num", num);
-	      box.setAttribute("subj_id", id);
-	    }
-	  }
-
-	  change_num(btn, delta) {
-	    const box = btn.parentNode.parentNode;
-	    let subj = this.manifest[box.getAttribute("subj_id")];
-	    let num = parseInt(box.getAttribute('num')) + delta;
-	    box.querySelector("#view").src = subj.url.replace('?', num);
-
-	    if (subj.full_img == false) {
-	      box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
-	      box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
-	    }
-
-	    box.setAttribute('num', num);
-	    box.querySelector(".num").textContent = num;
-	  }
-
-	  remove(box) {
-	    const num = parseInt(box.getAttribute('num'));
-	    box.remove();
-
-	    if (!this.box_container.hasChildNodes()) {
-	      this.status_title.textContent = "ReBot";
-	      ah(this.workspace, {
-	        "nums": null,
-	        "subj": null
-	      }, {
-	        merge: true
-	      });
-	    } else {
-	      ah(this.workspace, {
-	        "nums": Ih(num)
-	      }, {
-	        merge: true
-	      });
-	    }
-	  }
-
-	  open_alt(box) {
-	    let num = box.getAttribute('num');
-	    let url = this.manifest[box.getAttribute('subj_id')].alt_url.replace("?", num);
-
-	    if (url == '') {
-	      alert('Для этого предмета нет другого решебника');
-	      return;
-	    }
-
-	    window.open(url, '_self');
-	  }
-
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "UIBlock"
+	  }, /*#__PURE__*/React.createElement("h1", null, "\u041E\u0446\u0435\u043D\u043A\u0438"), /*#__PURE__*/React.createElement("div", {
+	    className: "content"
+	  }, rows));
 	}
 
 	class SettingsManager {
@@ -21074,36 +21161,154 @@
 
 	}
 
-	const firebaseConfig = {
-	  apiKey: "AIzaSyAkNpqlq9hU_cDu1_4wQIBNNc9OJd4LT1g",
-	  authDomain: "rebot-f643e.firebaseapp.com",
-	  projectId: "rebot-f643e",
-	  storageBucket: "rebot-f643e.appspot.com",
-	  messagingSenderId: "329205426356",
-	  appId: "1:329205426356:web:d8c730df77b0d7b9890fe1"
-	};
-	const firebaseApp = initializeApp(firebaseConfig);
-	const firestore = Du(firebaseApp, {
-	  cacheSizeBytes: Vu
-	});
-	window.firestore = firestore;
-	ku(firestore, {
-	  forceOwnership: true
-	}).catch(err => {
-	  console.log(err.code);
-	});
-	dh(Iu(firestore, "appConfig", "subjects"), snapshot => {
-	  const manifest = snapshot.data();
-	  const week = /*#__PURE__*/React.createElement(Week, {
-	    manifest: manifest,
-	    timetableRef: Iu(firestore, "timeTables", "9D")
-	  }); //const marks = <Marks manifest={manifest} marksRef={user.marks}/>
-	  //const homescreen = <HomeScreen manifest={manifest} timetableRef={doc(firestore, "weeks", "1")}/>
+	class ReBotManager {
+	  constructor(manifest) {
+	    this.manifest = manifest;
+	    this.box_container = document.querySelector('#boxes');
+	    this.viewbox_template = document.querySelector('.template #viewbox');
+	    this.status_title = document.querySelector('#current-subj');
+	    this.search = document.querySelector('.search input');
+	    dh(database.workspace, doc => {
+	      if (!doc.metadata.hasPendingWrites) {
+	        const data = doc.data();
 
-	  window.ReBot = new ReBotManager(manifest, user.workspace); // ReactDOM.render(homescreen, document.getElementById('homescreen'));
+	        if (data && data.nums) {
+	          this.open(data.subj, data.nums);
+	        }
+	      }
+	    });
+	    document.querySelectorAll("#rebot header button").forEach(el => {
+	      el.onclick = () => {
+	        window.UI.getInput((id, nums) => {
+	          this.open(id, nums);
+	        }, el.id);
+	      };
+	    });
+	    this.search.addEventListener("keydown", event => {
+	      if (event.key == "Enter") {
+	        window.open("https://www.google.com/search?q=" + this.search.value, '_blank');
+	        this.search.value = "";
+	      }
+	    });
+	  }
 
-	  ReactDOM.render(week, document.getElementById('week')); //ReactDOM.render(marks, document.getElementById('marks'));
-	});
+	  open(id, num) {
+	    let nums;
+
+	    if (num == undefined) {
+	      nums = prompt('Введи номер или номера через запятую:');
+
+	      if (nums) {
+	        nums = nums.split(',');
+	      } else return;
+
+	      for (num of nums) {
+	        ah(database.workspace, {
+	          "subj": id,
+	          "nums": Th(parseInt(num))
+	        }, {
+	          merge: true
+	        });
+	      }
+	    } else {
+	      nums = num;
+	    }
+
+	    const subj = this.manifest[id];
+	    this.status_title.textContent = subj.title;
+
+	    for (let num of nums) {
+	      if (!num) {
+	        continue;
+	      }
+
+	      if (this.box_container.querySelector(`.viewbox[num='${num}']`)) return;
+	      let box = this.viewbox_template.cloneNode(true);
+
+	      if (subj.section == false) {
+	        box.querySelector("#view").src = subj.url.replace('?', num);
+
+	        if (subj.full_img == false) {
+	          box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
+	          box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
+	        }
+	      } else {
+	        box.querySelector("#prew").remove();
+	        box.querySelector("#next").remove();
+	        box.querySelector("#alt-re").remove();
+	        box.querySelector("#view").src = subj.url.replace('*', num).replace('?', 1);
+	        let i = 2;
+	        let img;
+
+	        while (i < 12) {
+	          img = box.querySelector("#view").cloneNode(true);
+
+	          img.onerror = function a() {
+	            this.remove();
+	          };
+
+	          img.src = subj.url.replace('*', num).replace('?', i);
+	          box.querySelector(".viewbox-content").append(img);
+	          i++;
+	        }
+	      }
+
+	      this.box_container.prepend(box);
+	      box.querySelector(".num").textContent = num;
+	      box.setAttribute("num", num);
+	      box.setAttribute("subj_id", id);
+	    }
+	  }
+
+	  change_num(btn, delta) {
+	    const box = btn.parentNode.parentNode;
+	    let subj = this.manifest[box.getAttribute("subj_id")];
+	    let num = parseInt(box.getAttribute('num')) + delta;
+	    box.querySelector("#view").src = subj.url.replace('?', num);
+
+	    if (subj.full_img == false) {
+	      box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
+	      box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
+	    }
+
+	    box.setAttribute('num', num);
+	    box.querySelector(".num").textContent = num;
+	  }
+
+	  remove(box) {
+	    const num = parseInt(box.getAttribute('num'));
+	    box.remove();
+
+	    if (!this.box_container.hasChildNodes()) {
+	      this.status_title.textContent = "ReBot";
+	      ah(database.workspace, {
+	        "nums": null,
+	        "subj": null
+	      }, {
+	        merge: true
+	      });
+	    } else {
+	      ah(database.workspace, {
+	        "nums": Ih(num)
+	      }, {
+	        merge: true
+	      });
+	    }
+	  }
+
+	  open_alt(box) {
+	    let num = box.getAttribute('num');
+	    let url = this.manifest[box.getAttribute('subj_id')].alt_url.replace("?", num);
+
+	    if (url == '') {
+	      alert('Для этого предмета нет другого решебника');
+	      return;
+	    }
+
+	    window.open(url, '_self');
+	  }
+
+	}
 
 	class UI {
 	  static alert(text) {
@@ -21183,23 +21388,426 @@
 
 	}
 
+	class SecurityManager {
+	  constructor() {
+	    this.lockscreen = document.querySelector("#lockscreen");
+	    this.indicator = this.lockscreen.querySelector("#indicator");
+	    this.lockscreen.querySelectorAll("#numpad button").forEach(btn => {
+	      btn.addEventListener("click", this.addCodeNum);
+	    });
+	  }
+
+	  addCodeNum(event) {
+	    const lockscreen = document.querySelector("#lockscreen");
+	    const indicator = lockscreen.querySelector("#indicator");
+	    const unactiveDots = indicator.querySelectorAll(".char:not(.active)");
+
+	    if (unactiveDots) {
+	      let password = lockscreen.getAttribute("data-password");
+	      password += event.target.textContent;
+	      lockscreen.setAttribute("data-password", password);
+	      unactiveDots[0].classList.add("active");
+	    }
+
+	    if (unactiveDots.length == 1) {
+	      const password = lockscreen.getAttribute("data-password");
+
+	      if (localStorage.lockCode == password) {
+	        lockscreen.classList.add("unactive");
+	      } else {
+	        lockscreen.setAttribute("data-password", "");
+	      }
+	    }
+	  }
+
+	  changeLockCode(form) {
+	    const oldCodeInput = form.querySelector("input#oldCode");
+	    const newCodeInput = form.querySelector("input#newCode");
+	    const oldCode = localStorage.lockCode;
+
+	    if (oldCode) {
+	      if (oldCodeInput.value != oldCode) {
+	        UI.alert("Неверный код");
+	        oldCodeInput.value = "";
+	        return;
+	      }
+	    }
+
+	    const newCode = newCodeInput.value.replace(/\D/g, '');
+
+	    if (newCode.length == 4) {
+	      localStorage.lockCode = newCode;
+	      UI.alert("Код установлен");
+	      UI.slide(window.securitySettings);
+	      oldCodeInput.value = "";
+	      newCodeInput.value = "";
+	    } else if (newCode.length == 0) {
+	      localStorage.lockCode = "";
+	      UI.alert("Код отключен");
+	      UI.slide(window.securitySettings);
+	      oldCodeInput.value = "";
+	      newCodeInput.value = "";
+	    } else {
+	      UI.alert("Код должен состоять из 4 цифр");
+	    }
+	  }
+
+	}
+
+	var LockScreen = new SecurityManager();
+
+	/*!
+	 * swiped-events.js - v@version@
+	 * Pure JavaScript swipe events
+	 * https://github.com/john-doherty/swiped-events
+	 * @inspiration https://stackoverflow.com/questions/16348031/disable-scrolling-when-touch-moving-certain-element
+	 * @author John Doherty <www.johndoherty.info>
+	 * @license MIT
+	 */
+	(function (window, document) {
+
+	  if (typeof window.CustomEvent !== 'function') {
+	    window.CustomEvent = function (event, params) {
+	      params = params || {
+	        bubbles: false,
+	        cancelable: false,
+	        detail: undefined
+	      };
+	      var evt = document.createEvent('CustomEvent');
+	      evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+	      return evt;
+	    };
+
+	    window.CustomEvent.prototype = window.Event.prototype;
+	  }
+
+	  document.addEventListener('touchstart', handleTouchStart, false);
+	  document.addEventListener('touchmove', handleTouchMove, false);
+	  document.addEventListener('touchend', handleTouchEnd, false);
+	  var xDown = null;
+	  var yDown = null;
+	  var xDiff = null;
+	  var yDiff = null;
+	  var timeDown = null;
+	  var startEl = null;
+	  /**
+	   * Fires swiped event if swipe detected on touchend
+	   * @param {object} e - browser event object
+	   * @returns {void}
+	   */
+
+	  function handleTouchEnd(e) {
+	    // if the user released on a different target, cancel!
+	    if (startEl !== e.target) return;
+	    var swipeThreshold = parseInt(getNearestAttribute(startEl, 'data-swipe-threshold', '20'), 10); // default 20px
+
+	    var swipeTimeout = parseInt(getNearestAttribute(startEl, 'data-swipe-timeout', '500'), 10); // default 500ms
+
+	    var timeDiff = Date.now() - timeDown;
+	    var eventType = '';
+	    var changedTouches = e.changedTouches || e.touches || [];
+
+	    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+	      // most significant
+	      if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
+	        if (xDiff > 0) {
+	          eventType = 'swiped-left';
+	        } else {
+	          eventType = 'swiped-right';
+	        }
+	      }
+	    } else if (Math.abs(yDiff) > swipeThreshold && timeDiff < swipeTimeout) {
+	      if (yDiff > 0) {
+	        eventType = 'swiped-up';
+	      } else {
+	        eventType = 'swiped-down';
+	      }
+	    }
+
+	    if (eventType !== '') {
+	      var eventData = {
+	        dir: eventType.replace(/swiped-/, ''),
+	        xStart: parseInt(xDown, 10),
+	        xEnd: parseInt((changedTouches[0] || {}).clientX || -1, 10),
+	        yStart: parseInt(yDown, 10),
+	        yEnd: parseInt((changedTouches[0] || {}).clientY || -1, 10)
+	      }; // fire `swiped` event event on the element that started the swipe
+
+	      startEl.dispatchEvent(new CustomEvent('swiped', {
+	        bubbles: true,
+	        cancelable: true,
+	        detail: eventData
+	      })); // fire `swiped-dir` event on the element that started the swipe
+
+	      startEl.dispatchEvent(new CustomEvent(eventType, {
+	        bubbles: true,
+	        cancelable: true,
+	        detail: eventData
+	      }));
+	    } // reset values
+
+
+	    xDown = null;
+	    yDown = null;
+	    timeDown = null;
+	  }
+	  /**
+	   * Records current location on touchstart event
+	   * @param {object} e - browser event object
+	   * @returns {void}
+	   */
+
+
+	  function handleTouchStart(e) {
+	    // if the element has data-swipe-ignore="true" we stop listening for swipe events
+	    if (e.target.getAttribute('data-swipe-ignore') === 'true') return;
+	    startEl = e.target;
+	    timeDown = Date.now();
+	    xDown = e.touches[0].clientX;
+	    yDown = e.touches[0].clientY;
+	    xDiff = 0;
+	    yDiff = 0;
+	  }
+	  /**
+	   * Records location diff in px on touchmove event
+	   * @param {object} e - browser event object
+	   * @returns {void}
+	   */
+
+
+	  function handleTouchMove(e) {
+	    if (!xDown || !yDown) return;
+	    var xUp = e.touches[0].clientX;
+	    var yUp = e.touches[0].clientY;
+	    xDiff = xDown - xUp;
+	    yDiff = yDown - yUp;
+	  }
+	  /**
+	   * Gets attribute off HTML element or nearest parent
+	   * @param {object} el - HTML element to retrieve attribute from
+	   * @param {string} attributeName - name of the attribute
+	   * @param {any} defaultValue - default value to return if no match found
+	   * @returns {any} attribute value or defaultValue
+	   */
+
+
+	  function getNearestAttribute(el, attributeName, defaultValue) {
+	    // walk up the dom tree looking for data-action and data-trigger
+	    while (el && el !== document.documentElement) {
+	      var attributeValue = el.getAttribute(attributeName);
+
+	      if (attributeValue) {
+	        return attributeValue;
+	      }
+
+	      el = el.parentNode;
+	    }
+
+	    return defaultValue;
+	  }
+	})(window, document);
+
+	class InstantView {
+	  constructor(manifest) {
+	    this.manifest = manifest;
+	    this.window1 = document.querySelector("#inst1");
+	    this.window2 = document.querySelector("#inst2");
+	    this.window1.addEventListener('swiped-left', e => {
+	      this.close(e.target.closest(".instant-view"));
+	    });
+	    this.window2.addEventListener('swiped-right', e => {
+	      this.close(e.target.closest(".instant-view"));
+	    });
+	    this.window1.addEventListener('swiped-right', e => {
+	      this.switch(e.target.closest(".instant-view"));
+	    });
+	    this.window2.addEventListener('swiped-left', e => {
+	      this.switch(e.target.closest(".instant-view"));
+	    });
+	  }
+
+	  open(toOpen, content) {
+	    let win;
+
+	    if (this.window1.classList.contains("active")) {
+	      win = this.window2;
+	      document.querySelectorAll(".app").forEach(el => {
+	        el.classList.add("noscroll");
+	      });
+	      window.instRight = true;
+	      window.instLeft = true;
+	    } else {
+	      if (window.orientation == 90 || window.screen.width >= 800) {
+	        document.querySelector("body").classList.add("min-right");
+	      } else {
+	        document.querySelectorAll(".app").forEach(el => {
+	          el.classList.add("noscroll");
+	        });
+	      }
+
+	      win = this.window1;
+	      window.instLeft = true;
+
+	      if (this.window2.classList.contains("active")) {
+	        window.instRight = true;
+	      }
+	    }
+
+	    if (content) {
+	      win.querySelector(".content").innerHTML = content;
+	      win.classList.add("active");
+	      return;
+	    } else {
+	      win.querySelector(".content").innerHTML = "";
+	    }
+
+	    const viewbox = win.querySelector(".content");
+
+	    for (let el of toOpen) {
+	      const subj = this.manifest[el.id];
+	      const nums = el.hw.split(",");
+
+	      for (let num of nums) {
+	        num = num.replace(/\D/g, "");
+
+	        if (subj.section == false) {
+	          let img1 = document.createElement("img");
+	          img1.src = subj.url.replace('?', num);
+
+	          img1.onerror = ev => {
+	            ev.target.remove();
+	          };
+
+	          img1.style.width = "100%";
+	          viewbox.append(img1);
+
+	          if (subj.full_img == false) {
+	            let img2,
+	                img3 = viewbox.querySelector("img").cloneNode(true);
+	            img2.src = subj.url.replace('?', num + "_2");
+	            img3.src = subj.url.replace('?', num + "_3");
+	            viewbox.append(img2, img3);
+	          }
+	        } else {
+	          let i = 1;
+	          let img;
+
+	          while (i < 11) {
+	            img = document.createElement("img");
+	            img.src = subj.url.replace('*', num).replace('?', i);
+	            img.style.width = "100%";
+
+	            img.onerror = ev => {
+	              ev.target.remove();
+	            };
+
+	            viewbox.append(img);
+	            i++;
+	          }
+	        }
+	      }
+	    }
+
+	    win.classList.add("active");
+	  }
+
+	  switch(win) {
+	    if (window.instLeft && window.instRight || window.orientation == 0 && window.screen.width <= 800) {
+	      return;
+	    }
+
+	    let content = win.querySelector(".content").innerHTML;
+	    this.open(null, content);
+	    this.close(win);
+	  }
+
+	  close(win) {
+	    win.classList.remove("active");
+	    win.addEventListener("transitionend", () => {
+	      if (!win.classList.contains("active")) {
+	        let content = win.querySelector(".content");
+	        content.innerHTML = "";
+	        content.scrollTop = 0;
+	      }
+	    }, {
+	      once: true
+	    });
+
+	    if (win.getAttribute("side") == "left") {
+	      window.instLeft = false;
+	    } else {
+	      window.instRight = false;
+	    }
+
+	    let ActiveLeft = window.instLeft;
+	    let ActiveRight = window.instRight;
+	    let body = document.body.classList;
+
+	    if (!(ActiveLeft || ActiveRight)) {
+	      body.remove("min-left", "min-right");
+	    } else if (ActiveRight && !ActiveLeft) {
+	      body.remove("min-right");
+	      body.add("min-left");
+	    } else {
+	      body.remove("min-left");
+	      body.add("min-right");
+	    }
+
+	    document.querySelectorAll(".app").forEach(el => {
+	      el.classList.remove("noscroll");
+	    });
+	  }
+
+	}
+
 	window.UI = UI;
-	const userData = {
-	  "id": 1046049249,
-	  "first_name": "Даник",
-	  "username": "world1dan",
-	  "photo_url": "https://t.me/i/userpic/320/-wjS6LMe-1tZv-m0sojDlCBc1O5kGM5yQZdJPDAaTCY.jpg",
-	  "auth_date": 1626863014,
-	  "hash": "00bbd3863ce078e160bd57b31287c7959dfff66af0a00d6357b2446fbbcaa052"
-	};
-	const id = userData.id.toString();
-	const user = {
-	  "id": userData.id,
-	  "settings": Iu(firestore, id, "config"),
-	  "workspace": Iu(firestore, id, "workspace"),
-	  "marks": Iu(firestore, id, "marks")
-	};
-	globalThis.Settings = new SettingsManager(user.settings);
+	window.Security = LockScreen;
+
+	function App() {
+	  const [manifest, setManifest] = react.exports.useState(null);
+	  react.exports.useEffect(() => {
+	    if (manifest) {
+	      window.ReBot = new ReBotManager(manifest);
+	      window.InstantView = new InstantView(manifest);
+	    }
+	  }, [manifest]);
+	  react.exports.useEffect(() => {
+	    const fetchData = async cachedManifest => {
+	      const response = await fetch("static/subjects.json");
+	      const data = await response.json();
+
+	      if (cachedManifest) {
+	        if (cachedManifest.version < data.version) {
+	          localStorage.setItem("manifest", JSON.stringify(data));
+	          setManifest(data.manifest);
+	          console.log("Manifest was updated");
+	        }
+	      } else {
+	        setManifest(data.manifest);
+	        localStorage.setItem("manifest", JSON.stringify(data));
+	      }
+	    };
+
+	    const oldManifestStr = localStorage.manifest;
+
+	    if (oldManifestStr) {
+	      const cachedManifest = JSON.parse(oldManifestStr);
+	      setManifest(cachedManifest.manifest);
+	      fetchData(cachedManifest);
+	    } else {
+	      fetchData();
+	    }
+	  }, []);
+	  let components;
+	  components = /*#__PURE__*/React.createElement(manifestContext.Provider, {
+	    value: manifest
+	  }, [/*#__PURE__*/reactDom.exports.createPortal( /*#__PURE__*/React.createElement(Week, null), document.getElementById('week')), /*#__PURE__*/reactDom.exports.createPortal( /*#__PURE__*/React.createElement(Marks, null), document.getElementById('marks'))]);
+	  return components;
+	} // const homescreen = <HomeScreen manifest={manifest} timetableRef={doc(firestore, "weeks", "1")}/>
+
+
+	ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('root'));
+	globalThis.Settings = new SettingsManager(database.settings);
 
 }());
 //# sourceMappingURL=bundle.js.map

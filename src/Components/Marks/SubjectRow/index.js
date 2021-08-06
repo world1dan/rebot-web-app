@@ -1,15 +1,19 @@
-import React, { useRef, memo } from 'react';
+import React, { useRef, useContext, memo } from 'react';
 import { setDoc } from "firebase/firestore";
+
+import { database, manifestContext } from '../../../Context';
 
 
 export default memo(function SubjectRow(props) {
+    const manifest = useContext(manifestContext);
     const marksInput = useRef(null);
 
-    const title = props.manifest[props.subj_id].title;
     const marks = props.marks;
 
+    const title = manifest ? manifest[props.subj_id].title :  <i className="fas fa-circle-notch fa-spin"></i>;
+
     const style = {
-        backgroundColor: props.manifest[props.subj_id].color
+        backgroundColor: manifest ? manifest[props.subj_id].color : "var(--background3)"
     }
 
     let sum = 0;
@@ -48,7 +52,7 @@ export default memo(function SubjectRow(props) {
 
         marksInput.current.blur();
 
-        setDoc(props.path, {
+        setDoc(database.marks, {
             [props.subj_id]: marksInput.current.value
         }, { merge: true });
     }

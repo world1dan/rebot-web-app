@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { onSnapshot } from "firebase/firestore";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+import { database } from '../../../Context';
 import Day from '../Day';
 import './style.scss';
-import { Switch } from 'react-router-dom';
 
 
-export default function Week(props) {
-
+export default function Week() {
     const [ timetableFull, setTimetableFull ] = useState(false);
     const [ timetable, setTimetable ] = useState(false);
     const [ isOffline, setOffline ] = useState(!navigator.onLine);
@@ -20,10 +19,10 @@ export default function Week(props) {
     }, []);
 
     useEffect(() => {
-        onSnapshot(props.timetableRef, (doc) => {
+        onSnapshot(database.timetable, (doc) => {
             setTimetableFull(doc.data());
         });
-    }, [props.timetableRef]);
+    }, []);
 
     useEffect(() => {
         setTimetable(timetableFull[week])
@@ -35,7 +34,7 @@ export default function Week(props) {
         let day;
         
         for (day in timetable) {
-            days.push(<Day key={day} pathToDay={week + "." + day} timetableRef={props.timetableRef} day_num={day} day_data={timetable[day]} manifest={props.manifest}/>);
+            days.push(<Day key={day} pathToDay={week + "." + day} day_num={day} day_data={timetable[day]}/>);
         }
 
         const title = week==1 ? "Прошлая неделя" : week==2 ? "Эта неделя" : "Следующая неделя";
@@ -76,7 +75,7 @@ export default function Week(props) {
                         <i className="fas fa-exclamation-triangle"></i>
                     </div>
                 }
-                <TransitionGroup exit={true}>
+                <TransitionGroup exit={false}>
                     <CSSTransition key={week} timeout={300} classNames="week-grid">
                         <div className="week-grid">
                             { days }
