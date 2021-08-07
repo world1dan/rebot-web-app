@@ -1,5 +1,3 @@
-
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function () {
 	'use strict';
 
@@ -18387,6 +18385,7 @@
 	  firestore
 	};
 	const manifestContext = /*#__PURE__*/react.exports.createContext(null);
+	const timetableContext = /*#__PURE__*/react.exports.createContext(null);
 
 	function SubjectRow$1(props) {
 	  const manifest = react.exports.useContext(manifestContext);
@@ -18488,6 +18487,28 @@
 	  })), /*#__PURE__*/React.createElement("div", {
 	    className: "content"
 	  }, rows));
+	}
+
+	function Notes(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "UIBlock"
+	  }, /*#__PURE__*/React.createElement("h1", null, "\u0417\u0430\u043C\u0435\u0442\u043A\u0438"));
+	}
+
+	function Now(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "UIBlock"
+	  }, /*#__PURE__*/React.createElement("h1", null, "\u0421\u0435\u0439\u0447\u0430\u0441"));
+	}
+
+	function HomeScreen(props) {
+	  const timetable = react.exports.useContext(timetableContext);
+	  let day_num = new Date().getDay();
+	  if (day_num == 0 || day_num == 6) day_num = 1;
+	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Now, null), /*#__PURE__*/React.createElement(Notes, null), timetable && /*#__PURE__*/React.createElement(Day, {
+	    day_num: day_num,
+	    day_data: timetable[2][day_num]
+	  }));
 	}
 
 	function _extends() {
@@ -20908,24 +20929,16 @@
 	TransitionGroup.defaultProps = defaultProps;
 
 	function Week() {
-	  const [timetableFull, setTimetableFull] = react.exports.useState(false);
-	  const [timetable, setTimetable] = react.exports.useState(false);
 	  const [isOffline, setOffline] = react.exports.useState(!navigator.onLine);
 	  const [week, setWeek] = react.exports.useState(2);
+	  const fullTimetable = react.exports.useContext(timetableContext);
 	  react.exports.useEffect(() => {
 	    window.addEventListener('online', () => setOffline(true));
 	    window.addEventListener('offline', () => setOffline(true));
 	  }, []);
-	  react.exports.useEffect(() => {
-	    dh(database.timetable, doc => {
-	      setTimetableFull(doc.data());
-	    });
-	  }, []);
-	  react.exports.useEffect(() => {
-	    setTimetable(timetableFull[week]);
-	  }, [week, timetableFull]);
 
-	  if (timetable) {
+	  if (fullTimetable) {
+	    const timetable = fullTimetable[week];
 	    const days = [];
 	    let day;
 
@@ -21765,6 +21778,7 @@
 
 	function App() {
 	  const [manifest, setManifest] = react.exports.useState(null);
+	  const [timetable, setTimetable] = react.exports.useState(null);
 	  react.exports.useEffect(() => {
 	    if (manifest) {
 	      window.ReBot = new ReBotManager(manifest);
@@ -21772,6 +21786,10 @@
 	    }
 	  }, [manifest]);
 	  react.exports.useEffect(() => {
+	    dh(database.timetable, doc => {
+	      setTimetable(doc.data());
+	    });
+
 	    const fetchData = async cachedManifest => {
 	      const response = await fetch("static/subjects.json");
 	      const data = await response.json();
@@ -21801,7 +21819,9 @@
 	  let components;
 	  components = /*#__PURE__*/React.createElement(manifestContext.Provider, {
 	    value: manifest
-	  }, [/*#__PURE__*/reactDom.exports.createPortal( /*#__PURE__*/React.createElement(Week, null), document.getElementById('week')), /*#__PURE__*/reactDom.exports.createPortal( /*#__PURE__*/React.createElement(Marks, null), document.getElementById('marks'))]);
+	  }, /*#__PURE__*/React.createElement(timetableContext.Provider, {
+	    value: timetable
+	  }, [/*#__PURE__*/reactDom.exports.createPortal( /*#__PURE__*/React.createElement(HomeScreen, null), document.getElementById('homescreen')), /*#__PURE__*/reactDom.exports.createPortal( /*#__PURE__*/React.createElement(Week, null), document.getElementById('week')), /*#__PURE__*/reactDom.exports.createPortal( /*#__PURE__*/React.createElement(Marks, null), document.getElementById('marks'))]));
 	  return components;
 	} // const homescreen = <HomeScreen manifest={manifest} timetableRef={doc(firestore, "weeks", "1")}/>
 

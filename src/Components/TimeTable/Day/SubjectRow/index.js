@@ -10,6 +10,7 @@ function SubjectRow(props) {
     const manifest = useContext(manifestContext);
     const hwInput = useRef(null);
 
+    
     useEffect(() => {
         hwInput.current.value = props.lesson_data.hw;
     }, [props.lesson_data.hw])
@@ -19,6 +20,8 @@ function SubjectRow(props) {
     const style = {
         backgroundColor: manifest ? manifest[props.lesson_data.id].color : "var(--background3)"
     }
+    
+  
     
 
 

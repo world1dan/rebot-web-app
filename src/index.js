@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM, { createPortal } from 'react-dom';
 
+import { onSnapshot } from "firebase/firestore";
+
 import HomeScreen from './Components/HomeScreen';
 import Week from './Components/TimeTable/Week';
 
@@ -16,7 +18,7 @@ import InstantView from './Classes/InstantView';
 window.UI = UI;
 window.Security = LockScreen;
 
-import { database, manifestContext } from './Context';
+import { database, manifestContext, timetableContext } from './Context';
 
 import './style.scss';
 
@@ -24,6 +26,7 @@ import './style.scss';
 
 function App() {
     const [manifest, setManifest] = useState(null);
+    const [timetable, setTimetable] = useState(null);
 
     useEffect(() => {
         if (manifest) {
@@ -33,6 +36,10 @@ function App() {
     }, [manifest]);
     
     useEffect(() => {
+
+        onSnapshot(database.timetable, (doc) => {
+            setTimetable(doc.data());
+        })
 
         const fetchData = async(cachedManifest) => {
             const response = await fetch("static/subjects.json");
@@ -59,16 +66,20 @@ function App() {
         } else {
             fetchData();
         }
-
-
     }, []);
 
     let components;
 
 
     components =
+        
         <manifestContext.Provider value={manifest}>
-        { [createPortal(
+        <timetableContext.Provider value={timetable}>
+        {[createPortal(
+                <HomeScreen/>,
+            document.getElementById('homescreen')
+        ),
+        createPortal(
                 <Week/>,
             document.getElementById('week')
         ),
@@ -77,6 +88,7 @@ function App() {
             document.getElementById('marks')
         ) ]
         }
+        </timetableContext.Provider>
         </manifestContext.Provider>
 
     return components

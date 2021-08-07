@@ -1,35 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { database } from '../../../Context';
+import { database, timetableContext } from '../../../Context';
 import Day from '../Day';
 import './style.scss';
 
-
 export default function Week() {
-    const [ timetableFull, setTimetableFull ] = useState(false);
-    const [ timetable, setTimetable ] = useState(false);
     const [ isOffline, setOffline ] = useState(!navigator.onLine);
     const [ week, setWeek ] = useState(2);
+    const fullTimetable = useContext(timetableContext);
+   
 
     useEffect(() => {
         window.addEventListener('online',  () => setOffline(true));
         window.addEventListener('offline', () => setOffline(true));
     }, []);
-
-    useEffect(() => {
-        onSnapshot(database.timetable, (doc) => {
-            setTimetableFull(doc.data());
-        });
-    }, []);
-
-    useEffect(() => {
-        setTimetable(timetableFull[week])
-    }, [week, timetableFull]);
     
 
-    if (timetable) {
+    if (fullTimetable) {
+       const timetable = fullTimetable[week];
         const days = [];
         let day;
         

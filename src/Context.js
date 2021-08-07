@@ -30,3 +30,4 @@ export const database = {
 }
 
 export const manifestContext = createContext(null);
+export const timetableContext = createContext(null);
