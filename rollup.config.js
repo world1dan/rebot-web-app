@@ -1,6 +1,6 @@
 import serve from "rollup-plugin-serve";
-import livereload from "rollup-plugin-livereload";
-import babel from '@rollup/plugin-babel';
+//import livereload from "rollup-plugin-livereload";
+import {babel} from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
@@ -11,19 +11,19 @@ export default {
     output: {
         file: "dist/bundle.js",
         format: "iife",
-        sourcemap: true,
+        sourcemap: false,
     },
     plugins: [
-        nodeResolve({
-            extensions: [".js"],
-        }),
+        nodeResolve(),
         replace({
             'process.env.NODE_ENV': JSON.stringify('development')
         }),
         babel({
             presets: ["@babel/preset-react"],
+            exclude: 'node_modules/**',
+            babelHelpers: 'bundled'
         }),
-        commonjs(),
+        commonjs({ sourceMap: false }),
         scss({
             output: 'dist/style.css',
             //: 'compressed'
@@ -32,9 +32,8 @@ export default {
             open: true,
             verbose: true,
             contentBase: ["dist", "public"],
-            host: "0.0.0.0",
-            port: 3000,
-        }),
-        livereload({ watch: "dist" }),
+            host: "localhost",
+            port: 3001,
+        })
     ]
 };

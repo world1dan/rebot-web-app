@@ -18505,10 +18505,13 @@
 	  const timetable = react.exports.useContext(timetableContext);
 	  let day_num = new Date().getDay();
 	  if (day_num == 0 || day_num == 6) day_num = 1;
-	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Now, null), /*#__PURE__*/React.createElement(Notes, null), timetable && /*#__PURE__*/React.createElement(Day, {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "adaptive"
+	  }, /*#__PURE__*/React.createElement(Now, null), timetable && /*#__PURE__*/React.createElement(Day, {
+	    className: "day",
 	    day_num: day_num,
 	    day_data: timetable[2][day_num]
-	  }));
+	  }), /*#__PURE__*/React.createElement(Notes, null));
 	}
 
 	function _extends() {
@@ -21830,4 +21833,3 @@
 	globalThis.Settings = new SettingsManager(database.settings);
 
 }());
-//# sourceMappingURL=bundle.js.map

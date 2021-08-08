@@ -18,10 +18,10 @@ export default function HomeScreen(props) {
     if (day_num == 0 || day_num == 6) day_num = 1;
 
     return (
-        <>
+        <div className="adaptive">
         <Now/>
+        { timetable && <Day className="day" day_num={day_num} day_data={timetable[2][day_num]}/> }
         <Notes/>
-        { timetable && <Day day_num={day_num} day_data={timetable[2][day_num]}/> }
-        </>
+        </div>
     )
 }
