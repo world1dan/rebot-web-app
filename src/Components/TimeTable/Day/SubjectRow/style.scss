@@ -11,8 +11,6 @@
         border-radius: 5px;
         text-align: center;
         line-height: 38px;
-        overflow-x: auto;
-        overflow-y: hidden;
         cursor: pointer;
         &.subj,
         .time {
@@ -26,12 +24,13 @@
         &.fr {
             flex-grow: 1;
         }
-        &.homework input {
+        &.homework form, &.homework input {
             background: none;
             font-size: 13px;
             font-weight: bold;
             outline: none;
             color: var(--text);
+            width: 100%;
         }
         &::-webkit-scrollbar {
             height: 6px;

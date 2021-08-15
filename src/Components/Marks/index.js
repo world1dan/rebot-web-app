@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { onSnapshot } from "firebase/firestore";
 import SubjectRow from "./SubjectRow"
-import { database } from '../../Context';
+import { database, manifestContext } from '../../Context';
 
 
 export default function Marks() {
 
     const [marks, setMarks] = useState({});
+    const manifest = useContext(manifestContext);
 
     useEffect(() => {
         onSnapshot(database.marks, (snapshot) => {
-            setMarks(Object.fromEntries(Object.entries(snapshot.data()).sort()));
+            if (snapshot.data()) {
+                setMarks(Object.fromEntries(Object.entries(snapshot.data()).sort()));
+            }
         })
     }, []);
 
@@ -18,7 +21,7 @@ export default function Marks() {
         let subj;
         let rows = [];
 
-        for (subj in marks) {
+        for (subj in manifest) {
             rows.push(<SubjectRow key={subj} subj_id={subj} marks={marks[subj]}/>);
         }
 

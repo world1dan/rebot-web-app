@@ -4,6 +4,10 @@
     gap: 10px;
     max-width: 1380px;
     margin: 0 auto;
+
+    @media (min-width: 1000px) {
+        grid-template-columns: repeat(auto-fit, Minmax(400px, 1fr));
+    }
 }
 
 .tools {
@@ -44,13 +48,37 @@
     }
 }
 
-
-.weekChanger {
-    height: 52px;
+#week-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     max-width: 540px;
     margin: 0 auto;
     margin-bottom: 12px;
     border-radius: 9px;
+    height: 52px;
+    gap: 7px;
+    
+
+
+    .settings-btn {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        font-size: 24px;
+        border-radius: 9px;
+    }
+
+}
+
+
+.weekChanger {
+    border-radius: 9px;
+    height: 100%;
+    flex-grow: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,6 +91,9 @@
         font-weight: bold;
     }
 
+    button {
+        width: 50px;
+    }
     button.unactive {  
         color: var(--text3);
     }

@@ -4,7 +4,6 @@
     ".eslintrc.json": true,
     ".vscode": true,
     "firestore-debug.log": true,
-    "firebase.json": true,
     "firebase-debug.log": true,
     "ui-debug.log": true
   }

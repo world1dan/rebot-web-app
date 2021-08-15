@@ -1,17 +1,17 @@
-import serve from "rollup-plugin-serve";
 import babel from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import strip from '@rollup/plugin-strip';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import scss from 'rollup-plugin-scss';
 import { terser } from "rollup-plugin-terser";
 import copy from 'rollup-plugin-copy';
 
-export default {
+export default [{
     input: "src/index.js",
     output: {
         file: "build/bundle.js",
-        format: "es",
+        format: "iife",
         sourcemap: false,
     },
     plugins: [
@@ -20,9 +20,7 @@ export default {
         }),
         copy({
             targets: [
-                { src: 'public/static/*', dest: 'build/static' },
-                { src: 'public/index.html', dest: 'build/' },
-                //{ src: 'src/sw.js', dest: 'dist/' }
+                { src: 'public/*', dest: 'build/' },
             ]
         }),
         nodeResolve({
@@ -30,26 +28,55 @@ export default {
         }),
         babel({
             presets: ["@babel/preset-react"],
+            plugins: ["transform-remove-console"]
         }),
-        commonjs(),
+        commonjs({ sourceMap: false }),
+        scss({
+            output: 'build/style.css',
+            outputStyle: 'compressed'
+        }),
         terser({
             compress: {
                 ecma: 2021
             },
             format: {
                 comments: false
-            }
+            },
+            mangle: true
+        }),
+        strip({
+            labels: ['unittest']
+        })
+    ]
+},
+
+{
+    input: "src/auth.js",
+    output: {
+        file: "build/auth.js",
+        format: "iife",
+        sourcemap: false,
+    },
+    plugins: [
+        nodeResolve(),
+        replace({
+            'process.env.NODE_ENV': JSON.stringify('development')
+        }),
+        commonjs({ sourceMap: false }),
+        terser({
+            compress: {
+                ecma: 2021
+            },
+            format: {
+                comments: false
+            },
+            mangle: true
         }),
         scss({
-            output: 'dist/style.css',
+            output: 'build/auth.css',
             outputStyle: 'compressed'
         }),
-        serve({
-            open: true,
-            verbose: true,
-            contentBase: ["", "build"],
-            host: "localhost",
-            port: 3000,
-        }),
-    ]
-};
+    ],
+}
+
+];

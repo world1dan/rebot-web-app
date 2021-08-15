@@ -19,23 +19,27 @@ export default memo(function SubjectRow(props) {
     let sum = 0;
     let length = 0;
 
-    const marks_list = marks.split(",");
+    let average = null;
 
-    marks_list.map((mark) => {
-        let int = parseInt(mark);
+    if (marks) {
+        const marks_list = marks.split(",");
 
-        if (!int) return;
-
-        sum += int;
-        length++;
-    })
-
-    let average = sum / length;
-
-    if (!isNaN(average)) {
-        average = Number(average.toFixed(1));
-    } else {
-        average = null;
+        marks_list.map((mark) => {
+            let int = parseInt(mark);
+    
+            if (!int) return;
+    
+            sum += int;
+            length++;
+        })
+    
+        average = sum / length;
+    
+        if (!isNaN(average)) {
+            average = Number(average.toFixed(1));
+        } else {
+            average = null;
+        }
     }
 
     function addMark() {
@@ -67,7 +71,7 @@ export default memo(function SubjectRow(props) {
                     <input type="text" defaultValue={marks} ref={marksInput} onBlur={handleSubmit}/>
                 </form>
             </div>
-            { average && <div className="tool">{average}</div> }
+            { marks && average && <div className="tool">{average}</div> }
             <div className="tool" onClick={addMark}><i className="fas fa-plus"></i></div>
         </div>
     );

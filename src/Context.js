@@ -1,7 +1,9 @@
 import { createContext } from 'react';
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, enableIndexedDbPersistence, doc } from "firebase/firestore";
+import { getFirestore, enableIndexedDbPersistence, doc, collection } from "firebase/firestore";
+import { getRemoteConfig } from "firebase/remote-config";
+
 
 
 export const firebaseApp = initializeApp({
@@ -13,21 +15,41 @@ export const firebaseApp = initializeApp({
     appId: "1:329205426356:web:d8c730df77b0d7b9890fe1"
 });
 
-const firestore = getFirestore();
+export const firestore = getFirestore();
+export const remoteConfig = getRemoteConfig()
+
+
+remoteConfig.settings.minimumFetchIntervalMillis = 110000;
+
+
+
 
 enableIndexedDbPersistence(firestore, { forceOwnership: true })
 .catch((err) => {
         console.log(err.code);
     });
 
+const user = JSON.parse(localStorage.getItem("user"));
+
+if (!user) {
+    window.location = "./auth.html";
+}
+
+//const userCollection = collection(firestore, `users/${user.id}/`);
+
+const id = `${user.id}`;
+
+
 export const database = {
-    manifest: doc(firestore, "appConfig", "subjects"),
     timetable: doc(firestore, "timeTables", "9D"),
-    settings: doc(firestore, "1046049249", "config"),
-    workspace: doc(firestore, "1046049249", "workspace"),
-    marks: doc(firestore, "1046049249", "marks"),
+    settings: doc(firestore, "users", id, "userStorage", "config"),
+    workspace: doc(firestore, "users", id, "userStorage", "workspace"),
+    marks: doc(firestore, "users", id, "userStorage", "marks"),
+    notes: collection(firestore, "users", id, "notes"),
     firestore
 }
+
+
 
 export const manifestContext = createContext(null);
 export const timetableContext = createContext(null);

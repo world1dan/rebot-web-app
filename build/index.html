@@ -3,17 +3,18 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ReBot React</title>
+    <meta name="viewport" content="width=device-width, height=device-height, user-scalable=0, viewport-fit=cover">
+    <title>ReBot</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="static/lib/fontawesome/all.min.css">
     <link type="preload" href="static/lib/fontawesome/fa-brands-400.woff2">
     <link type="preload" href="static/lib/fontawesome/fa-regular-400.woff2">
     <link type="preload" href="static/lib/fontawesome/fa-solid-900.woff2">
     <link rel="manifest" href="static/manifest.json">
-    <link rel="apple-touch-icon" href="static/assets/apple-icon-180.png">
+    <link rel="apple-touch-icon" href="static/icons/apple-icon-180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0F0F0F">
 </head>
 
 <body>
@@ -25,18 +26,13 @@
 
     <div id="root"></div>
 
-    <div class="app center-auto" id="homescreen"></div>
-    <div class="app center-auto mw600" id="marks"></div>
-    <div class="app center-auto active" id="week"></div>
-
-    <div class="app mw600 stealth" id="rebot">
-        <div class="container-center">
+    <div class="app center mw600 stealth" id="rebot" data-scroll-lock-scrollable>
             <header>
                 <div class="search">
-                    <img class="google active" width="20px" src="static/assets/google.svg">
-                    <img class="rebot" width="10px" src="static/assets/resheba.svg">
+                    <img class="google active" width="20px" src="static/icons/google.svg">
+                    <img class="rebot" width="10px" src="static/icons/resheba.svg">
                     <input class="google active" type="text" autocomplete="off">
-                    <input class="rebot" type="number" autocomplete="off">
+                    <input step="1" inputmode="decimal"  class="rebot" autocomplete="off">
                 </div>
                 <div class="wraper">
                     <button id="bel">Бел яз</button>
@@ -64,14 +60,13 @@
             </div>
 
             <div id="boxes"></div>
-        </div>
     </div>
 
     <div class="template">
         <div id="viewbox" class="viewbox" complete="false">
             <div class="viewbox-tools">
                 <button class="alt" id="alt-re" onclick="open_alt(this.parentNode, 1)">Решебник 2</button>
-                <div class="center">
+                <div class="center-section">
                     <button id="prew" onclick="ReBot.change_num(this.parentNode, -1)"><i class="fas fa-chevron-left fa-lg"></i></button>
                     <span class="num"></span>
                     <button id="next" onclick="ReBot.change_num(this.parentNode, 1)"><i class="fas fa-chevron-right fa-lg"></i></button>
@@ -79,7 +74,8 @@
                 <button class="close" onclick="ReBot.remove(this.parentNode.parentNode)"><i class="fas fa-times fa-lg"></i></button>
             </div>
             <div class="viewbox-content">
-                <img width="100%" id="view" onerror="this.src='static/assets/404.webp'">
+                <img width="100%" id="view" onerror="this.src = 'static/img/404.webp'">
+                
             </div>
         </div>
     </div>
@@ -199,17 +195,22 @@
     </div>
 
 
-    <div class="bottom-nav">
-        <span class="stealth" onclick="UI.change_tab(rebot, this)" active="false"><i class="fas fa-book"></i></span>
-        <span onclick="UI.change_tab(homescreen, this)" active="false"><i class="fas fa-home"></i></span>
-        <span onclick="UI.change_tab(marks, this)" active="false"><i class="fas fa-graduation-cap"></i></span>
-        <span onclick="UI.change_tab(week, this)" active="true"><i class="fas fa-calendar-alt"></i></span>
+    <div class="instant-view window" max="true" side="left" id="inst1">
+        <button class="close" onclick="InstantView.close(this.parentNode)"><i class="fas fa-chevron-left"></i></button>
+        <div class="content"></div>
     </div>
 
+    <div class="instant-view window" max="true" side="right" id="inst2">
+        <button class="close" onclick="InstantView.close(this.parentNode)"><i class="fas fa-chevron-right"></i></button>
+        <div class="content"></div>
+    </div>
+    
     <div id="statusBarBg"></div>
     <div class="alert"></div>
 
     <script src="bundle.js"></script>
+
+
 </body>
 
 </html>

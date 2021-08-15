@@ -31,25 +31,6 @@ class UI {
         target.classList.toggle("active");
     }
 
-    static change_tab(target, btn) {
-        const toClose = document.querySelector(".app.active");
-
-        if (toClose == target) return;
-
-        toClose.classList.remove("active");
-        target.classList.add("active");
-
-        toClose.scrollTo(0, 0);
-        target.scrollTo(0, 0);
-
-        window.scrollTo(0, 0);
-        document.body.scrollTo(0, 0);
-
-        if (btn) {
-            document.querySelector(".bottom-nav span[active='true']").setAttribute("active", "false");
-            btn.setAttribute("active", "true");
-        }
-    }
 
     static getInput(callback, param) {
         const searchWraper = document.querySelector("#rebot .search");
@@ -74,6 +55,7 @@ class UI {
 
                 callback(param, nums);
 
+                inputRebot.value = "";
                 inputRebot.blur();
 
                 inputRebot.removeEventListener("keydown", handle);
@@ -81,7 +63,14 @@ class UI {
         });
 
         inputRebot.addEventListener("blur", function onBlur() {
-            inputRebot.value = "";
+            const nums = inputRebot.value.replace(" ", "").split(',');
+
+            if (inputRebot.value) {
+                callback(param, nums);
+                inputRebot.value = "";
+            } else {
+                inputRebot.value = "";
+            }
 
             inputRebot.classList.remove("active");
             inputGoogle.classList.add("active");

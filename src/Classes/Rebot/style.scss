@@ -183,7 +183,7 @@ header {
         padding: 7px;
         box-sizing: border-box;
         
-        .center {
+        .center-section {
             gap: 5px;
             display: flex;
             flex-grow: 1;
@@ -194,7 +194,7 @@ header {
             }
         }
 
-        .center .num {
+        .center-section .num {
             background-color: #5E5CE6;
             color: #fff;
             line-height: 36px;
@@ -207,9 +207,13 @@ header {
     .viewbox-content img {
         filter: Invert(var(--inv));
         transition-duration: 0.2s;
+
+        #view2, #view3 {
+            display: none;
+        }
     }
     
-    .viewbox-content img[src="/static/files/404.png"] {
+    .viewbox-content img[src="static/img/404.webp"] {
         filter: none;
     }
 }

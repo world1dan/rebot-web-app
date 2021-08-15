@@ -1,0 +1,43 @@
+#notes {
+    #add-note {
+        background-color: var(--background3);
+        position: absolute;
+        right: 16px;
+        top: 22px;
+        padding: 8px;
+        border-radius: 7px;
+        display: grid;
+        place-items: center;
+    }
+}
+
+
+.note {
+    position: relative;
+    min-height: 40px;
+    background-color: var(--background3);
+    box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-right: 40px;
+    textarea {
+        padding: 8px;
+        background: none;
+        width: 100%;
+        outline: none;
+        border: none;
+        height: 100%;
+        min-height: 36px;
+        color: var(--text);
+        resize: none;
+        font-size: 17px;
+    }
+
+    .dropdown {
+        position: absolute !important;
+        top: 3px;
+        right: 0;
+    }
+
+}
+

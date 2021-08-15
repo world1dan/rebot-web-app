@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "rebot-f643e"
+  },
+  "targets": {
+    "rebot-f643e": {
+      "hosting": {
+        "rebot": [
+          "rebotapp"
+        ]
+      }
+    }
   }
 }

@@ -1,6 +1,12 @@
 {
   "hosting": {
+    "target": "rebot",
     "public": "build",
+    "redirects": [ {
+      "source": "/get",
+      "destination": "/start.html",
+      "type": 301
+    } ],
     "ignore": [
       "firebase.json",
       "**/.*",

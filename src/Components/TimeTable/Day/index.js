@@ -35,7 +35,7 @@ export default function Day(props) {
         toOpen && window.InstantView.open(toOpen);
     }
     return ( 
-        <div className="UIBlock">
+        <div className="UIBlock day">
             <h1>{ day_titles[props.day_num] }</h1>
             <button className="table-btn open-all stealth" onClick={openInstant}><i className="fas fa-book fa-lg"></i></button>
             <button className="table-btn share"><i className="fas fa-share fa-lg"></i></button>

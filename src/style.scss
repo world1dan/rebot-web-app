@@ -14,6 +14,7 @@
     --bottom-nav: #1B1B1Be0;
     --danger: #f57c00;
     --primary1: #5D4AE2;
+    --danger-red: #ff453a;
 }
 
 :root[theme="light"] {
@@ -95,13 +96,13 @@ button {
     font-weight: bold;
 }
 
-body {
+body, html {
     background-color: var(--background);
     margin: 0;
     box-sizing: border-box;
-    padding: 0;
-    overflow: hidden;
     touch-action: none;
+    overflow: hidden;
+    height: 100vh;
 }
 
 .min-right {
@@ -139,18 +140,15 @@ body {
 
 .center {
     margin: 0 auto;
+    padding-top: env(safe-area-inset-top, 10px);
 }
 
 
-@media (min-width: 200px) {
-    .adaptive {
-        display: grid;
-        gap: 12px;
-        grid-template-columns: repeat(auto-fill, Minmax(300px, 1fr));
-    }
-}
+
 
 .UIBlock {
+    max-height: max-content;
+    transition: height 1s;
     background-color: var(--background2);
     box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
     border-radius: 14px;
@@ -222,7 +220,6 @@ body {
     -webkit-backdrop-filter: blur(4px);
     padding-bottom: env(safe-area-inset-bottom);
     touch-action: none;
-    transform: translate3d(0, 0, 0);
     span {
         justify-content: space-around;
         display: flex;
@@ -240,12 +237,7 @@ body {
     }
 }
 
-@media (orientation: landscape) {
-    body {
-        padding-right: env(safe-area-inset-left);
-        padding-left: env(safe-area-inset-left);
-    }
-}
+
 
 @media (orientation: portrait) {
     .app {
@@ -276,11 +268,12 @@ body {
 }
 
 .app {
+    z-index: 1;
     display: none;
-    overflow: auto;
+    background-color: var(--background);
+    overflow-y: scroll;
     max-height: 100vh;
     height: 100vh;
-    
 }
 
 
@@ -328,8 +321,6 @@ body {
     bottom: -60px;
     color: var(--text);
     background-color: var(--backgroundTR2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border-radius: 10px;
     padding: 5px 20px;
     left: 0;
@@ -449,78 +440,8 @@ body {
     }
 }
 
-
-
-#lockscreen {
-    will-change: transform;
-    display: none;
-    &.unactive {
-        transform: translateY(-100vh);
-        transition: transform 0.4s;
-    }
-    &.active {
-        display: grid;
-    }
-    #indicator {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 6px;
-        margin-top: 60px;
-        .char {
-            border-radius: 50%;
-            background-color: var(--text4);
-            width: 14px;
-            height: 14px;
-            &.active {
-                background-color: var(--text);
-            }
-        }
-    }
-    #invalid-alert {
-        margin-top: 8px;
-        color: red;
-        text-align: center;
-        padding: 10px;
-        font-weight: bold;
-        font-size: 18px;
-        visibility: hidden;
-        &.active {
-            visibility: visible;
-        }
-    }
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    background-color: var(--backgroundTR2);
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    grid-template-rows: 100px 60px 1fr;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    justify-content: center;
-    align-items: center;
-    #icon svg {
-        display: block;
-        margin-top: 200px;
-        margin: 0 auto;
-        color: #fff;
-    }
-    #numpad {
-        width: 300px;
-        height: 400px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 11px;
-    }
-    #numpad button {
-        border-radius: 50%;
-        font-size: 26px;
-        font-weight: bold;
-        background-color: var(--background3);
-    }
-    #numpad button.hiden {
-        visibility: hidden;
-    }
+.block-style {
+    background-color: var(--background2);
+    box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+    color: var(--text);
 }

@@ -1,0 +1,23 @@
+
+.side-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#homescreen-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (min-width: 900px) {
+    #homescreen-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 1024px;
+        margin: 0 auto;
+        gap: 10px;
+
+    } 
+}

@@ -18,10 +18,11 @@ export default class ReBotManager {
         this.search = document.querySelector('.search input');
 
         onSnapshot(database.workspace, (doc) => {
+
             if (!doc.metadata.hasPendingWrites) {
                 const data = doc.data();
 
-                if (data && data.nums) {
+                if (data.nums && data.subj && data.nums.length != 0) {
                     this.open(data.subj, data.nums);
                 }
             }
@@ -52,6 +53,7 @@ export default class ReBotManager {
             } else return;
 
             for (num of nums) {
+
                 setDoc(database.workspace, {
                     "subj": id,
                     "nums": arrayUnion(parseInt(num))
@@ -72,16 +74,18 @@ export default class ReBotManager {
             if (!num) {
                 continue;
             }
-            if (this.box_container.querySelector(`.viewbox[num='${num}']`)) return;
+            if (this.box_container.querySelector(`.viewbox[num='${num}']`)) continue;
 
             let box = this.viewbox_template.cloneNode(true);
 
             if (subj.section == false) {
-                box.querySelector("#view").src = subj.url.replace('?', num);
+                box.querySelector("#view").src = "./static/img/404.webp";
+
+                //box.querySelector("#view").src = subj.url.replace('?', num);
 
                 if (subj.full_img == false) {
-                    box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
-                    box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
+                    //box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
+                    //box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
                 }
 
             } else {

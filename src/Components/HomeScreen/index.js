@@ -10,6 +10,7 @@ import Notes from "./Notes"
 
 import Now from "./Now"
 
+import "./style.scss"
 
 export default function HomeScreen(props) {
     const timetable = useContext(timetableContext);
@@ -18,10 +19,14 @@ export default function HomeScreen(props) {
     if (day_num == 0 || day_num == 6) day_num = 1;
 
     return (
-        <div className="adaptive">
-        <Now/>
-        { timetable && <Day className="day" day_num={day_num} day_data={timetable[2][day_num]}/> }
-        <Notes/>
+        <div id="homescreen-layout">
+            <div className="side-left">
+                <Now/>
+                <Notes/>
+            </div>
+            <div className="side-right">
+                { timetable && <Day day_num={day_num} day_data={timetable[2][day_num]}/> }
+            </div>
         </div>
     )
 }
