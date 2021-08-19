@@ -1,20 +1,17 @@
 
 #settings {
     .content {
-        padding: 15px;
+        padding: 12px;
         display: flex;
         flex-direction: column;
-        margin-top: 14px;
+        margin-top: 50px;
         gap: 14px;
     }
-    .block {
-        background-color: var(--background2);
-        box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
-        border-radius: 7px;
-    }
+
     .theme {
         padding: 0 10px;
         display: flex;
+        flex-direction: row !important;
         justify-content: space-between;
         align-items: center;
         height: 80px;
@@ -25,34 +22,63 @@
             cursor: pointer;
         }
     }
-    .config {
-        .line {
+
+    .category {
+        font-size: 17px;
+        font-weight: bold;
+        text-align: center;
+        padding: 8px;
+
+    }
+
+    .block {
+        background-color: var(--background3);
+        box-shadow: 1px var(--borders-soft) inset;
+        border-radius: 7px;
+        align-items: center;
+        padding: 0 10px;
+        font-size: 28px;
+
+        i {
+            background-color: var(--background2);
+            width: 32px;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 32px;
+            font-size: 14px;
+        }
+
+        &.switch {
             display: grid;
             grid-template-columns: 52px 1fr 46px;
-            height: 52px;
-            align-items: center;
-            padding: 0 10px;
-            font-size: 28px;
-            i {
-                background-color: var(--background);
-                width: 32px;
-                border-radius: 5px;
-                text-align: center;
-                line-height: 32px;
-                font-size: 14px;
-            }
+            min-height: 50px;
+
             a {
                 font-weight: 500;
                 font-size: 16px;
             }
-        }
-        div {
-            box-shadow: 0px 1px 0px var(--borders);
-        }
-        div:last-of-type {
-            box-shadow: none;
+
+            .label-block {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 3px;
+                padding-top: 12px;
+                padding-bottom: 14px;
+                .title {
+                    font-weight: 500;
+                    font-size: 16px;
+                }
+                .descr {
+                    font-weight: 300;
+                    font-size: 13px;
+                    color: var(--text3);
+                }
+            }
         }
     }
+
+
     .buttons {
         display: flex;
         flex-wrap: wrap;
@@ -74,18 +100,15 @@
     display: inline-block;
     width: 1.65em;
     height: 1em;
-    background: white;
-    box-shadow: inset 0 0 0 0.0625em #e9e9e9;
+    background: var(--background3);
+    box-shadow: inset 0 0 0 0.0625em var(--background2);
     border-radius: 0.5em;
     vertical-align: -0.15em;
-    transition: all 0.40s cubic-bezier(.17, .67, .43, .98);
+    transition: all 0.45s cubic-bezier(.17, .67, .43, .98);
     cursor: pointer;
 }
 
-.ios7-switch:active input+span,
-.ios7-switch input+span:active {
-    box-shadow: inset 0 0 0 0.73em #e9e9e9;
-}
+
 
 .ios7-switch input+span:after {
     position: absolute;
@@ -94,32 +117,29 @@
     width: 0.875em;
     height: 0.875em;
     border-radius: 0.4375em;
-    top: 0.0625em;
+    top: 0.058em;
     left: 0.0625em;
-    background: white;
+    background: var(--text3);
     box-shadow: inset 0 0 0 0.03em rgba(0, 0, 0, 0.1);
-    transition: all 0.25s ease-out;
+    transition: all 0.24s ease-out;
 }
 
-.ios7-switch:active input+span:after,
-.ios7-switch input+span:active:after {
-    width: 1.15em;
+
+.ios7-switch input:checked+span:after {
+    background: #fff;
 }
 
 .ios7-switch input:checked+span {
-    box-shadow: inset 0 0 0 0.73em #4cd964;
+    box-shadow: inset 0 0 0 0.73em #31d058;
 }
 
 .ios7-switch input:checked+span:after {
     left: 0.7125em;
 }
 
-.ios7-switch:active input:checked+span:after,
-.ios7-switch input:checked+span:active:after {
-    left: 0.4375em;
-}
 
-#securitySettings {
+
+#passwordSet {
     .content {
         padding: 12px;
     }

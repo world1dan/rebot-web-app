@@ -1,5 +1,5 @@
+import { visualizer } from 'rollup-plugin-visualizer';
 import serve from "rollup-plugin-serve";
-import livereload from "rollup-plugin-livereload";
 import {babel} from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -7,20 +7,24 @@ import replace from '@rollup/plugin-replace';
 import scss from 'rollup-plugin-scss';
 
 export default [{
+    caches: true,
     input: "src/index.js",
     output: {
         file: "dist/bundle.js",
         format: "iife",
-        sourcemap: false,
+        sourcemap: true,
     },
     plugins: [
         nodeResolve(),
         replace({
-            'process.env.NODE_ENV': JSON.stringify('development')
+            exclude: 'node_modules/**',
+            'process.env.NODE_ENV': JSON.stringify('development'),
+            preventAssignment: true
         }),
         babel({
+            skipPreflightCheck: true,
             presets: ["@babel/preset-react"],
-            exclude: 'node_modules/**',
+            exclude: "node_modules/**",
             babelHelpers: 'bundled'
         }),
         commonjs({ sourceMap: false }),
@@ -29,13 +33,20 @@ export default [{
             //: 'compressed'
         }),
         serve({
-            open: true,
-            verbose: true,
             contentBase: ["dist", "public"],
             host: "0.0.0.0",
             port: 3000,
+            verbose: false,
+            compress: false,
+            liveReload: true,
+            overlay: true,
+            overlay: {
+                warnings: true,
+                errors: true,
+            }
         }),
-        livereload()
+        visualizer()
+        //livereload()
     ],
 },
 
@@ -44,12 +55,13 @@ export default [{
     output: {
         file: "dist/auth.js",
         format: "iife",
-        sourcemap: false,
+        sourcemap: true,
     },
     plugins: [
         nodeResolve(),
         replace({
-            'process.env.NODE_ENV': JSON.stringify('development')
+            'process.env.NODE_ENV': JSON.stringify('development'),
+            preventAssignment: true
         }),
         commonjs({ sourceMap: false }),
         scss({

@@ -6,15 +6,17 @@
     --background2: #1B1B1B;
     --background3: #232323;
     --backgroundTR: #0f0f0fea;
-    --backgroundTR2: #0f0f0f85;
+    --backgroundTR2: #0f0f0fbe;
     --zombie-load: #2c2c2c;
     --borders: rgba(50, 50, 50, 0.4);
     --borders-soft: rgba(50, 50, 50, 0.2);
     --inv: 0.87;
-    --bottom-nav: #1B1B1Be0;
+    --bottom-nav: #1a1a1a83;
     --danger: #f57c00;
     --primary1: #5D4AE2;
     --danger-red: #ff453a;
+    --red2: #e4372e;
+
 }
 
 :root[theme="light"] {
@@ -100,23 +102,26 @@ body, html {
     background-color: var(--background);
     margin: 0;
     box-sizing: border-box;
-    touch-action: none;
-    overflow: hidden;
-    height: 100vh;
 }
 
-.min-right {
+
+.min-right #root {
     padding-left: Min(720px, 50vw);
 
-    .bottom-nav {
+    .nav-content {
         padding-left: Min(720px, 50vw);
     }
 }
 
-.min-left {
+.root {
+    height: 100vh !important;
+    width: 100vh !important;
+}
+
+.min-left #root {
     padding-right: Min(720px, 50vw);
 
-    .bottom-nav {
+    .nav-content {
         padding-right: Min(720px, 50vw);
     }
 }
@@ -186,55 +191,70 @@ body, html {
 }
 
 
-
-
-#statusBarBg {
-    width: 100vw;
-    height: env(safe-area-inset-top, 10px);
-    background-color: var(--backgroundTR2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    position: fixed;
-    display: block;
-    touch-action: none;
-    top: 0;
-    left: 0;
-    z-index: 99999;
+@media all and (display-mode: standalone) {
+    .statusBarBg {
+        background-color: var(--backgroundTR2);
+        position: fixed;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        box-sizing: content-box;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    
+        @media (width: 414px) {
+            height: 46px;
+        }
+    }
 }
 
 
 .bottom-nav {
-    box-sizing: content-box;
-    display: flex;
+    left: 0;
+    right: 0;
     position: fixed;
     background-color: var(--bottom-nav);
     color: var(--text);
     font-size: 22px;
-    left: 0;
-    right: 0;
+    width: 100%;
     bottom: 0;
-    height: 50px;
+    height: calc(50px + env(safe-area-inset-bottom));
     border-top: 1px solid var(--borders);
-    z-index: 2;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 3;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     touch-action: none;
+
+    .nav-content {
+        display: flex;
+        height: 50px;
+        width: 100%;
+    }
+
     span {
         justify-content: space-around;
         display: flex;
         flex-grow: 1;
         align-items: center;
         cursor: pointer;
-        &[active="false"] {
-            filter: opacity(0.6);
-            transition: transform 0.2s;
+
+        transform: scale(0.93);
+        transition: all 0.2s;
+        opacity: 0.8;
+
+
+        &.active {
+            transform: scale(1.12);
+            transition: all 0.2s;
+            opacity: 1;
         }
-        &[active="true"] {
-            transform: scale(1.13);
-            transition: transform 0.2s;
-        }
+
+    
     }
+
+
 }
 
 
@@ -270,6 +290,23 @@ body, html {
 .app {
     z-index: 1;
     display: none;
+    transition: opacity 0.4s;
+}
+
+.mw700 {
+    max-width: 700px;
+}
+.unfocused {
+    opacity: 0.55;
+    transition: opacity 0.5s;
+}
+
+.main {
+    transition: opacity 0.4s;
+}
+
+#root {
+    z-index: 1;
     background-color: var(--background);
     overflow-y: scroll;
     max-height: 100vh;
@@ -277,12 +314,11 @@ body, html {
 }
 
 
-
 .app.active {
     display: block;
-    animation: scaleup2 0.18s;
-    animation-fill-mode: both;
 }
+
+
 
 .center-auto {
     padding: 10px;
@@ -362,14 +398,14 @@ body, html {
 
 .window {
     touch-action: none;
-    background-color: var(--background);
+    background-color: var(--background2);
     color: var(--text);
     position: fixed;
     width: 100vw;
     bottom: 0;
     top: 0;
     z-index: 3;
-    transition: transform 0.4s cubic-bezier(.51, .16, .55, .9);
+    transition: transform 0.6s;
     will-change: transform;
     &[max="true"] {
         max-width: Min(720px, 50vw)
@@ -401,7 +437,7 @@ body, html {
         border-right: 1px var(--borders) solid;
     }
     &.active {
-        transition: transform 0.45s;
+        transition: transform 0.6s cubic-bezier(.380,.700,.125,1.000);
     }
     &.active[side="right"] {
         transform: translateX(Min(-420px, -100vw));
@@ -414,7 +450,7 @@ body, html {
     }
     .close {
         margin-top: env(safe-area-inset-top);
-        background-color: var(--background2);
+        background-color: var(--background3);
         color: var(--text4);
         border-radius: 7px;
         position: absolute;
@@ -434,11 +470,182 @@ body, html {
         top: 10px;
         right: 10px;
     }
-    .title {
-        margin-top: 70px;
+    & > .title {
         font-size: 30px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.windowReact {
+    overflow: auto;
+    padding-bottom: 150px;
+    background-color: var(--background2);
+    color: var(--text);
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    z-index: 3;
+    will-change: transform;
+    &[max="true"] {
+        max-width: Min(720px, 50vw)
+    }
+    &[max="false"] {
+        max-width: 420px;
+    }
+    @media screen and (orientation: portrait) and (max-width: 780px) {
+        &[max="true"] {
+            max-width: 100%;
+        }
+    }
+    .close {
+        margin-top: env(safe-area-inset-top);
+        background-color: var(--background3);
+        color: var(--text4);
+        border-radius: 7px;
+        position: absolute;
+        top: 10px;
+        font-size: 20px;
+        width: 67px;
+        height: 34px;
+        z-index: 999;
+    }
+    &[side="right"] .close {
+        left: 10px;
+    }
+    &[side="left"] .close {
+        right: 10px;
+    }
+    &[side="bottom"] .close {
+        top: 10px;
+        right: 10px;
+    }
+    & > .title {
+        margin-top: calc(80px + env(safe-area-inset-top));
+        font-size: 30px;
+    }
+}
+
+
+.windowReact-enter {
+    transform: translateX(Min(420px, 100vw));
+}
+.windowReact-enter-active {
+    transition: transform 0.6s cubic-bezier(.380,.700,.125,1.000);
+    transform: none;
+}
+
+.windowReact-exit {
+    transition: transform 0.4s;
+    transform: none;
+}
+.windowReact-exit-active {
+    transform: translateX(Min(420px, 100vw));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.windowBottom {
+    overflow: auto;
+    padding-bottom: 150px;
+    background-color: var(--background2);
+    color: var(--text);
+    position: fixed;
+    width: 100vw;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    z-index: 3;
+    will-change: transform;
+    &[max="true"] {
+        max-width: Min(720px, 50vw)
+    }
+    &[max="false"] {
+        max-width: 420px;
+    }
+    @media screen and (orientation: portrait) and (max-width: 780px) {
+        &[max="true"] {
+            max-width: 100%;
+        }
+    }
+    .close {
+        margin-top: env(safe-area-inset-top);
+        background-color: var(--background3);
+        color: var(--text4);
+        border-radius: 7px;
+        position: absolute;
+        top: 10px;
+        font-size: 20px;
+        width: 67px;
+        height: 34px;
+        z-index: 999;
+    }
+    &[side="right"] .close {
+        left: 10px;
+    }
+    &[side="left"] .close {
+        right: 10px;
+    }
+    &[side="bottom"] .close {
+        top: 10px;
+        right: 10px;
+    }
+    & > .title {
+        margin-top: calc(80px + env(safe-area-inset-top));
+        font-size: 30px;
+    }
+}
+
+
+.windowBottom-enter {
+    transform: translateY(500px);
+}
+.windowBottom-enter-active {
+    transition: transform 0.5s cubic-bezier(.380,.700,.125,1.000);
+    transform: none;
+}
+
+.windowBottom-exit {
+    transition: transform 0.4s;
+    transform: none;
+}
+.windowBottom-exit-active {
+    transform: translateY(500px);;
+}
+
+
+
+
+
+
 
 .block-style {
     background-color: var(--background2);

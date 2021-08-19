@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { settingsContext } from '../../../Context';
 
 import SubjectRow from './SubjectRow';
 import './style.scss';
@@ -17,6 +19,9 @@ const day_titles = {
 
 
 export default function Day(props) {
+
+    const settings = useContext(settingsContext);
+
     const day_data = props.day_data;
     let rows = [];
     let subj;
@@ -37,7 +42,7 @@ export default function Day(props) {
     return ( 
         <div className="UIBlock day">
             <h1>{ day_titles[props.day_num] }</h1>
-            <button className="table-btn open-all stealth" onClick={openInstant}><i className="fas fa-book fa-lg"></i></button>
+            { !settings.stealth && <button className="table-btn open-all stealth" onClick={openInstant}><i className="fas fa-book fa-lg"></i></button> }
             <button className="table-btn share"><i className="fas fa-share fa-lg"></i></button>
             <div className="content">
                 { rows }

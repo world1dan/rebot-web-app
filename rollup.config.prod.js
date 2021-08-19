@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import scss from 'rollup-plugin-scss';
 import { terser } from "rollup-plugin-terser";
+import { visualizer } from 'rollup-plugin-visualizer';
 import copy from 'rollup-plugin-copy';
 
 export default [{
@@ -46,7 +47,8 @@ export default [{
         }),
         strip({
             labels: ['unittest']
-        })
+        }),
+        visualizer()
     ]
 },
 

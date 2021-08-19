@@ -11,6 +11,13 @@ class LockScreen {
         });
     }
     addCodeNum(event) {
+
+        event.target.classList.add("clicked");
+
+        event.target.addEventListener("transitionend", (event) => {
+            event.target.classList.remove("clicked");
+        }, {once: true})
+    
         const lockscreen = document.querySelector("#lockscreen");
         const indicator = lockscreen.querySelector("#indicator");
         const unactiveDots = indicator.querySelectorAll(".char:not(.active)");

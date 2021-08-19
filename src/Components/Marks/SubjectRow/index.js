@@ -68,7 +68,7 @@ export default memo(function SubjectRow(props) {
             <div className="subj" style={style}>{title}</div>
             <div className="homework fr">
                 <form onSubmit={handleSubmit} style={{display: "inline-block"}}>
-                    <input type="text" defaultValue={marks} ref={marksInput} onBlur={handleSubmit}/>
+                    <input type="text" inputMode="decimal" defaultValue={marks} ref={marksInput} onBlur={handleSubmit}/>
                 </form>
             </div>
             { marks && average && <div className="tool">{average}</div> }

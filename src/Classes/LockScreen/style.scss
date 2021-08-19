@@ -2,6 +2,7 @@
 #lockscreen {
     will-change: transform;
     display: none;
+    padding-top: env(safe-area-inset-top);
     &.unactive {
         transform: translateY(-100vh);
         transition: transform 0.4s;
@@ -67,6 +68,12 @@
         font-size: 26px;
         font-weight: bold;
         background-color: var(--background3);
+        transition: filter 0.3s;
+
+        &.clicked {
+            filter: brightness(1.5);
+            transition: filter 0.3s;
+        }
     }
     #numpad button.hiden {
         visibility: hidden;

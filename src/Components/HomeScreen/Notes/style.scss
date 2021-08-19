@@ -20,6 +20,16 @@
     border-radius: 5px;
     cursor: pointer;
     padding-right: 40px;
+
+    &.pinned {
+        background-color: var(--red2);
+        transition: background 0.5s;
+
+        textarea {
+            font-weight: bold;
+        }
+    }
+
     textarea {
         padding: 8px;
         background: none;
@@ -31,6 +41,8 @@
         color: var(--text);
         resize: none;
         font-size: 17px;
+        user-select: all;
+        -webkit-user-select: auto;
     }
 
     .dropdown {

@@ -4,7 +4,19 @@
     gap: 5px;
     font-size: 13px;
     font-weight: bold;
-    div {
+
+    &.test {
+        background-color: var(--danger-red);
+        padding: 4px;
+        border-radius: 7px;
+
+        &:last-of-type {
+            border-radius: 7px 7px 10px 10px;
+        }
+    }
+
+    .tool, .subj, .homework {
+        position: relative;
         height: 38px;
         background-color: var(--background3);
         box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
@@ -38,6 +50,12 @@
         &::-webkit-scrollbar-thumb {
             background-color: var(--background);
             border-radius: 10px;
+        }
+
+        .dropdown {
+            position: absolute;
+            right: 0;
+            top: 0;
         }
     }
     input {

@@ -5,12 +5,14 @@ import { timetableContext } from '../../../Context';
 import Day from '../Day';
 import './style.scss';
 
-export default function Week() {
+export default function Week(props) {
     const [ isOffline, setOffline ] = useState(!navigator.onLine);
+
     const [ week, setWeek ] = useState(2);
 
+
+
     const fullTimetable = useContext(timetableContext);
-   
 
     useEffect(() => {
         window.addEventListener('online',  () => setOffline(true));
@@ -57,7 +59,7 @@ export default function Week() {
                         </button>
                     }
                 </div>
-                <button className="block-style settings-btn" onClick={() => globalThis.UI.slide(globalThis.settings)}><i className="fas fa-cog"></i></button>
+                <button className="block-style settings-btn" onClick={() => props.setSettingsOpen(true)}><i className="fas fa-cog"></i></button>
             </header>
     
             { isOffline &&

@@ -23,11 +23,11 @@ remoteConfig.settings.minimumFetchIntervalMillis = 110000;
 
 
 
-
 enableIndexedDbPersistence(firestore, { forceOwnership: true })
 .catch((err) => {
         console.log(err.code);
     });
+
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -50,6 +50,6 @@ export const database = {
 }
 
 
-
+export const settingsContext = createContext(null);
 export const manifestContext = createContext(null);
 export const timetableContext = createContext(null);
