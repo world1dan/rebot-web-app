@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect, memo } from 'react';
 import { setDoc } from "firebase/firestore";
-
+import AutosizeInput from 'react-input-autosize';
 import { database } from '../../../Context';
 
 
@@ -67,15 +67,15 @@ function SubjectRow(props) {
         <div className="SubjectRow">
             <div className="subj" style={style}>{title}</div>
             <div className="homework fr">
-                <form onSubmit={handleSubmit} style={{display: "inline-block"}}>
-                    <input
+                <div className="scroll-wraper">
+                    <AutosizeInput
                         type="text" 
                         inputMode="decimal" 
                         value={marks}
                         ref={marksInput} 
                         onChange={(e) => setMarks(e.target.value)} 
                         onBlur={handleSubmit}/>
-                </form>
+                </div>
             </div>
             { marks && average && <div className="tool">{average}</div> }
             <div className="tool" onClick={createPattern}><i className="fas fa-plus"></i></div>

@@ -30326,7 +30326,7 @@
 	    return getUA().indexOf('Electron/') >= 0;
 	}
 	/** Detects Internet Explorer. */
-	function isIE$1() {
+	function isIE$2() {
 	    var ua = getUA();
 	    return ua.indexOf('MSIE ') >= 0 || ua.indexOf('Trident/') >= 0;
 	}
@@ -43143,7 +43143,7 @@
 	        // doesn't have an Origin header. So we have to exclude a few browser environments that are
 	        // known to (sometimes) not include an Origin. See
 	        // https://github.com/firebase/firebase-js-sdk/issues/1491.
-	        isMobileCordova() || isReactNative() || isElectron() || isIE$1() || isUWP() || isBrowserExtension() || (r.httpHeadersOverwriteParam = "$httpHeaders");
+	        isMobileCordova() || isReactNative() || isElectron() || isIE$2() || isUWP() || isBrowserExtension() || (r.httpHeadersOverwriteParam = "$httpHeaders");
 	        const o = n.join("");
 	        $("Connection", "Creating WebChannel: " + o, r);
 	        const c = s.createWebChannel(o, r);
@@ -50431,8 +50431,8 @@
 	/** register component and version */
 	registerRemoteConfig();
 
-	function _extends() {
-	  _extends = Object.assign || function (target) {
+	function _extends$1() {
+	  _extends$1 = Object.assign || function (target) {
 	    for (var i = 1; i < arguments.length; i++) {
 	      var source = arguments[i];
 
@@ -50446,7 +50446,7 @@
 	    return target;
 	  };
 
-	  return _extends.apply(this, arguments);
+	  return _extends$1.apply(this, arguments);
 	}
 
 	function _objectWithoutPropertiesLoose(source, excluded) {
@@ -52402,7 +52402,7 @@
 	        _this$props.classNames;
 	        var props = _objectWithoutPropertiesLoose(_this$props, ["classNames"]);
 
-	    return /*#__PURE__*/React.createElement(Transition, _extends({}, props, {
+	    return /*#__PURE__*/React.createElement(Transition, _extends$1({}, props, {
 	      onEnter: this.onEnter,
 	      onEntered: this.onEntered,
 	      onEntering: this.onEntering,
@@ -52418,7 +52418,7 @@
 	CSSTransition.defaultProps = {
 	  classNames: ''
 	};
-	CSSTransition.propTypes = "development" !== "production" ? _extends({}, Transition.propTypes, {
+	CSSTransition.propTypes = "development" !== "production" ? _extends$1({}, Transition.propTypes, {
 	  /**
 	   * The animation classNames applied to the component as it appears, enters,
 	   * exits or has finished the transition. A single name can be provided, which
@@ -52781,7 +52781,7 @@
 
 	    if (this.mounted) {
 	      this.setState(function (state) {
-	        var children = _extends({}, state.children);
+	        var children = _extends$1({}, state.children);
 
 	        delete children[child.key];
 	        return {
@@ -53784,14 +53784,6 @@
 	    backgroundColor: manifest ? manifest[props.lesson_data.id].color : "var(--background3)"
 	  };
 
-	  function handleSubmit(event) {
-	    event.preventDefault();
-	    hwInput.current.blur();
-	    hh(database.timetable, {
-	      [props.path + ".hw"]: hwInput.current.value
-	    });
-	  }
-
 	  function setTest() {
 	    hh(database.timetable, {
 	      [props.path + ".test"]: !props.lesson_data.test
@@ -53820,14 +53812,12 @@
 	    style: style
 	  }, title), /*#__PURE__*/React.createElement("div", {
 	    className: "homework fr"
-	  }, /*#__PURE__*/React.createElement("form", {
-	    onSubmit: handleSubmit,
-	    style: {
-	      display: "inline-block"
-	    }
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "scroll-wraper"
 	  }, /*#__PURE__*/React.createElement("input", {
 	    type: "text",
-	    ref: hwInput
+	    ref: hwInput,
+	    contentEditable: "true"
 	  })), /*#__PURE__*/React.createElement(Dropdown, null, /*#__PURE__*/React.createElement("button", {
 	    className: "withIcon",
 	    onClick: setTest
@@ -54036,7 +54026,7 @@
 	var SIZING_STYLE = ['borderBottomWidth', 'borderLeftWidth', 'borderRightWidth', 'borderTopWidth', 'boxSizing', 'fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'letterSpacing', 'lineHeight', 'paddingBottom', 'paddingLeft', 'paddingRight', 'paddingTop', // non-standard
 	'tabSize', 'textIndent', // non-standard
 	'textRendering', 'textTransform', 'width', 'wordBreak'];
-	var isIE = typeof document !== 'undefined' ? !!document.documentElement.currentStyle : false;
+	var isIE$1 = typeof document !== 'undefined' ? !!document.documentElement.currentStyle : false;
 
 	var getSizingData = function getSizingData(node) {
 	  var style = window.getComputedStyle(node);
@@ -54054,7 +54044,7 @@
 	  // so we need to add manually padding and border widths
 
 
-	  if (isIE && boxSizing === 'border-box') {
+	  if (isIE$1 && boxSizing === 'border-box') {
 	    sizingStyle.width = parseFloat(sizingStyle.width) + parseFloat(sizingStyle.borderRightWidth) + parseFloat(sizingStyle.borderLeftWidth) + parseFloat(sizingStyle.paddingRight) + parseFloat(sizingStyle.paddingLeft) + 'px';
 	  }
 
@@ -54143,7 +54133,7 @@
 	    useWindowResizeListener(resizeTextarea);
 	  }
 
-	  return /*#__PURE__*/react.exports.createElement("textarea", _extends({}, props, {
+	  return /*#__PURE__*/react.exports.createElement("textarea", _extends$1({}, props, {
 	    onChange: handleChange,
 	    ref: ref
 	  }));
@@ -54459,6 +54449,276 @@
 	  })))));
 	}
 
+	var AutosizeInput$1 = {};
+
+	Object.defineProperty(AutosizeInput$1, "__esModule", {
+		value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = react.exports;
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _propTypes = propTypes.exports;
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var sizerStyle = {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		visibility: 'hidden',
+		height: 0,
+		overflow: 'scroll',
+		whiteSpace: 'pre'
+	};
+
+	var INPUT_PROPS_BLACKLIST = ['extraWidth', 'injectStyles', 'inputClassName', 'inputRef', 'inputStyle', 'minWidth', 'onAutosize', 'placeholderIsMinWidth'];
+
+	var cleanInputProps = function cleanInputProps(inputProps) {
+		INPUT_PROPS_BLACKLIST.forEach(function (field) {
+			return delete inputProps[field];
+		});
+		return inputProps;
+	};
+
+	var copyStyles = function copyStyles(styles, node) {
+		node.style.fontSize = styles.fontSize;
+		node.style.fontFamily = styles.fontFamily;
+		node.style.fontWeight = styles.fontWeight;
+		node.style.fontStyle = styles.fontStyle;
+		node.style.letterSpacing = styles.letterSpacing;
+		node.style.textTransform = styles.textTransform;
+	};
+
+	var isIE = typeof window !== 'undefined' && window.navigator ? /MSIE |Trident\/|Edge\//.test(window.navigator.userAgent) : false;
+
+	var generateId = function generateId() {
+		// we only need an auto-generated ID for stylesheet injection, which is only
+		// used for IE. so if the browser is not IE, this should return undefined.
+		return isIE ? '_' + Math.random().toString(36).substr(2, 12) : undefined;
+	};
+
+	var AutosizeInput = function (_Component) {
+		_inherits(AutosizeInput, _Component);
+
+		_createClass(AutosizeInput, null, [{
+			key: 'getDerivedStateFromProps',
+			value: function getDerivedStateFromProps(props, state) {
+				var id = props.id;
+
+				return id !== state.prevId ? { inputId: id || generateId(), prevId: id } : null;
+			}
+		}]);
+
+		function AutosizeInput(props) {
+			_classCallCheck(this, AutosizeInput);
+
+			var _this = _possibleConstructorReturn(this, (AutosizeInput.__proto__ || Object.getPrototypeOf(AutosizeInput)).call(this, props));
+
+			_this.inputRef = function (el) {
+				_this.input = el;
+				if (typeof _this.props.inputRef === 'function') {
+					_this.props.inputRef(el);
+				}
+			};
+
+			_this.placeHolderSizerRef = function (el) {
+				_this.placeHolderSizer = el;
+			};
+
+			_this.sizerRef = function (el) {
+				_this.sizer = el;
+			};
+
+			_this.state = {
+				inputWidth: props.minWidth,
+				inputId: props.id || generateId(),
+				prevId: props.id
+			};
+			return _this;
+		}
+
+		_createClass(AutosizeInput, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.mounted = true;
+				this.copyInputStyles();
+				this.updateInputWidth();
+			}
+		}, {
+			key: 'componentDidUpdate',
+			value: function componentDidUpdate(prevProps, prevState) {
+				if (prevState.inputWidth !== this.state.inputWidth) {
+					if (typeof this.props.onAutosize === 'function') {
+						this.props.onAutosize(this.state.inputWidth);
+					}
+				}
+				this.updateInputWidth();
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				this.mounted = false;
+			}
+		}, {
+			key: 'copyInputStyles',
+			value: function copyInputStyles() {
+				if (!this.mounted || !window.getComputedStyle) {
+					return;
+				}
+				var inputStyles = this.input && window.getComputedStyle(this.input);
+				if (!inputStyles) {
+					return;
+				}
+				copyStyles(inputStyles, this.sizer);
+				if (this.placeHolderSizer) {
+					copyStyles(inputStyles, this.placeHolderSizer);
+				}
+			}
+		}, {
+			key: 'updateInputWidth',
+			value: function updateInputWidth() {
+				if (!this.mounted || !this.sizer || typeof this.sizer.scrollWidth === 'undefined') {
+					return;
+				}
+				var newInputWidth = void 0;
+				if (this.props.placeholder && (!this.props.value || this.props.value && this.props.placeholderIsMinWidth)) {
+					newInputWidth = Math.max(this.sizer.scrollWidth, this.placeHolderSizer.scrollWidth) + 2;
+				} else {
+					newInputWidth = this.sizer.scrollWidth + 2;
+				}
+				// add extraWidth to the detected width. for number types, this defaults to 16 to allow for the stepper UI
+				var extraWidth = this.props.type === 'number' && this.props.extraWidth === undefined ? 16 : parseInt(this.props.extraWidth) || 0;
+				newInputWidth += extraWidth;
+				if (newInputWidth < this.props.minWidth) {
+					newInputWidth = this.props.minWidth;
+				}
+				if (newInputWidth !== this.state.inputWidth) {
+					this.setState({
+						inputWidth: newInputWidth
+					});
+				}
+			}
+		}, {
+			key: 'getInput',
+			value: function getInput() {
+				return this.input;
+			}
+		}, {
+			key: 'focus',
+			value: function focus() {
+				this.input.focus();
+			}
+		}, {
+			key: 'blur',
+			value: function blur() {
+				this.input.blur();
+			}
+		}, {
+			key: 'select',
+			value: function select() {
+				this.input.select();
+			}
+		}, {
+			key: 'renderStyles',
+			value: function renderStyles() {
+				// this method injects styles to hide IE's clear indicator, which messes
+				// with input size detection. the stylesheet is only injected when the
+				// browser is IE, and can also be disabled by the `injectStyles` prop.
+				var injectStyles = this.props.injectStyles;
+
+				return isIE && injectStyles ? _react2.default.createElement('style', { dangerouslySetInnerHTML: {
+						__html: 'input#' + this.state.inputId + '::-ms-clear {display: none;}'
+					} }) : null;
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var sizerValue = [this.props.defaultValue, this.props.value, ''].reduce(function (previousValue, currentValue) {
+					if (previousValue !== null && previousValue !== undefined) {
+						return previousValue;
+					}
+					return currentValue;
+				});
+
+				var wrapperStyle = _extends({}, this.props.style);
+				if (!wrapperStyle.display) wrapperStyle.display = 'inline-block';
+
+				var inputStyle = _extends({
+					boxSizing: 'content-box',
+					width: this.state.inputWidth + 'px'
+				}, this.props.inputStyle);
+
+				var inputProps = _objectWithoutProperties(this.props, []);
+
+				cleanInputProps(inputProps);
+				inputProps.className = this.props.inputClassName;
+				inputProps.id = this.state.inputId;
+				inputProps.style = inputStyle;
+
+				return _react2.default.createElement(
+					'div',
+					{ className: this.props.className, style: wrapperStyle },
+					this.renderStyles(),
+					_react2.default.createElement('input', _extends({}, inputProps, { ref: this.inputRef })),
+					_react2.default.createElement(
+						'div',
+						{ ref: this.sizerRef, style: sizerStyle },
+						sizerValue
+					),
+					this.props.placeholder ? _react2.default.createElement(
+						'div',
+						{ ref: this.placeHolderSizerRef, style: sizerStyle },
+						this.props.placeholder
+					) : null
+				);
+			}
+		}]);
+
+		return AutosizeInput;
+	}(_react.Component);
+
+	AutosizeInput.propTypes = {
+		className: _propTypes2.default.string, // className for the outer element
+		defaultValue: _propTypes2.default.any, // default field value
+		extraWidth: _propTypes2.default.oneOfType([// additional width for input element
+		_propTypes2.default.number, _propTypes2.default.string]),
+		id: _propTypes2.default.string, // id to use for the input, can be set for consistent snapshots
+		injectStyles: _propTypes2.default.bool, // inject the custom stylesheet to hide clear UI, defaults to true
+		inputClassName: _propTypes2.default.string, // className for the input element
+		inputRef: _propTypes2.default.func, // ref callback for the input element
+		inputStyle: _propTypes2.default.object, // css styles for the input element
+		minWidth: _propTypes2.default.oneOfType([// minimum width for input element
+		_propTypes2.default.number, _propTypes2.default.string]),
+		onAutosize: _propTypes2.default.func, // onAutosize handler: function(newWidth) {}
+		onChange: _propTypes2.default.func, // onChange handler: function(event) {}
+		placeholder: _propTypes2.default.string, // placeholder text
+		placeholderIsMinWidth: _propTypes2.default.bool, // don't collapse size to less than the placeholder
+		style: _propTypes2.default.object, // css styles for the outer element
+		value: _propTypes2.default.any // field value
+	};
+	AutosizeInput.defaultProps = {
+		minWidth: 1,
+		injectStyles: true
+	};
+
+	var _default = AutosizeInput$1.default = AutosizeInput;
+
 	// TEST READY
 
 	function SubjectRow(props) {
@@ -54517,12 +54777,9 @@
 	    style: style
 	  }, title), /*#__PURE__*/React.createElement("div", {
 	    className: "homework fr"
-	  }, /*#__PURE__*/React.createElement("form", {
-	    onSubmit: handleSubmit,
-	    style: {
-	      display: "inline-block"
-	    }
-	  }, /*#__PURE__*/React.createElement("input", {
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "scroll-wraper"
+	  }, /*#__PURE__*/React.createElement(_default, {
 	    type: "text",
 	    inputMode: "decimal",
 	    value: marks,
