@@ -53770,7 +53770,7 @@
 	  }, props.children)));
 	}
 
-	function SubjectRow$1(props) {
+	function SubjectRow$2(props) {
 	  const manifest = react.exports.useContext(manifestContext);
 	  const settings = react.exports.useContext(settingsContext);
 	  const hwInput = react.exports.useRef(null);
@@ -53851,7 +53851,7 @@
 	  })));
 	}
 
-	var SubjectRow$2 = /*#__PURE__*/react.exports.memo(SubjectRow$1);
+	var SubjectRow$3 = /*#__PURE__*/react.exports.memo(SubjectRow$2);
 
 	const day_titles = {
 	  1: "Понедельник",
@@ -53869,7 +53869,7 @@
 	  let subj;
 
 	  for (subj in props.day_data) {
-	    rows.push( /*#__PURE__*/React.createElement(SubjectRow$2, {
+	    rows.push( /*#__PURE__*/React.createElement(SubjectRow$3, {
 	      key: subj,
 	      path: props.pathToDay + "." + subj,
 	      lesson_data: day_data[subj]
@@ -54459,15 +54459,17 @@
 	  })))));
 	}
 
-	var SubjectRow = /*#__PURE__*/react.exports.memo(function SubjectRow(props) {
-	  const manifest = react.exports.useContext(manifestContext);
+	// TEST READY
+
+	function SubjectRow(props) {
 	  const marksInput = react.exports.useRef(null);
-	  const marks = props.marks;
-	  const title = manifest ? manifest[props.subj_id].title : /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-circle-notch fa-spin"
-	  });
+	  const [marks, setMarks] = react.exports.useState(props.marks);
+	  react.exports.useEffect(() => {
+	    setMarks(props.marks);
+	  }, [props.marks]);
+	  const title = props.subject.title;
 	  const style = {
-	    backgroundColor: manifest ? manifest[props.subj_id].color : "var(--background3)"
+	    backgroundColor: props.subject.color
 	  };
 	  let sum = 0;
 	  let length = 0;
@@ -54483,30 +54485,29 @@
 	    });
 	    average = sum / length;
 
-	    if (!isNaN(average)) {
+	    if (!isNaN(average) && average <= 10) {
 	      average = Number(average.toFixed(1));
 	    } else {
 	      average = null;
 	    }
 	  }
 
-	  function addMark() {
-	    const input = marksInput.current;
-	    input.focus();
+	  function createPattern() {
+	    marksInput.current.focus();
 
-	    if (input.value.trim().slice(-1) != "," && input.value != "") {
-	      input.value += ", ";
+	    if (marks.trim().slice(-1) != "," && marks != "") {
+	      setMarks(marks + ", ");
 	    }
 	  }
 
 	  function handleSubmit(event) {
-	    event.preventDefault();
-	    marksInput.current.blur();
 	    ah(database.marks, {
-	      [props.subj_id]: marksInput.current.value
+	      [props.subject.id]: marks
 	    }, {
 	      merge: true
 	    });
+	    marksInput.current.blur();
+	    event.preventDefault();
 	  }
 
 	  return /*#__PURE__*/React.createElement("div", {
@@ -54524,22 +54525,26 @@
 	  }, /*#__PURE__*/React.createElement("input", {
 	    type: "text",
 	    inputMode: "decimal",
-	    defaultValue: marks,
+	    value: marks,
 	    ref: marksInput,
+	    onChange: e => setMarks(e.target.value),
 	    onBlur: handleSubmit
 	  }))), marks && average && /*#__PURE__*/React.createElement("div", {
 	    className: "tool"
 	  }, average), /*#__PURE__*/React.createElement("div", {
 	    className: "tool",
-	    onClick: addMark
+	    onClick: createPattern
 	  }, /*#__PURE__*/React.createElement("i", {
 	    className: "fas fa-plus"
 	  })));
-	});
+	}
 
+	var SubjectRow$1 = /*#__PURE__*/react.exports.memo(SubjectRow);
+
+	// TEST READY
 	function Marks() {
-	  const [marks, setMarks] = react.exports.useState({});
 	  const manifest = react.exports.useContext(manifestContext);
+	  const [marks, setMarks] = react.exports.useState(null);
 	  react.exports.useEffect(() => {
 	    dh(database.marks, snapshot => {
 	      if (snapshot.data()) {
@@ -54547,15 +54552,18 @@
 	      }
 	    });
 	  }, []);
-	  let subj;
-	  let rows = [];
+	  const rows = [];
 
-	  for (subj in manifest) {
-	    rows.push( /*#__PURE__*/React.createElement(SubjectRow, {
-	      key: subj,
-	      subj_id: subj,
-	      marks: marks[subj]
-	    }));
+	  if (marks) {
+	    for (let subjID in manifest) {
+	      const subject = manifest[subjID];
+	      subject.id = subjID;
+	      rows.push( /*#__PURE__*/React.createElement(SubjectRow$1, {
+	        key: subjID,
+	        subject: subject,
+	        marks: marks[subjID]
+	      }));
+	    }
 	  }
 
 	  return /*#__PURE__*/React.createElement("div", {
@@ -55023,7 +55031,7 @@
 
 	}
 
-	function passwordSet(props) {
+	function PasswordSet(props) {
 	  const oldCodeInput = react.exports.useRef(null);
 	  const newCodeInput = react.exports.useRef(null);
 
@@ -55250,7 +55258,7 @@
 	    },
 	    classNames: "windowBottom",
 	    unmountOnExit: true
-	  }, /*#__PURE__*/React.createElement(passwordSet, {
+	  }, /*#__PURE__*/React.createElement(PasswordSet, {
 	    setPasswordSetOpen: setPasswordSetOpen
 	  })));
 	}
@@ -55423,11 +55431,6 @@
 
 	ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('root'));
 	window.ios = /iPad|iPhone|iPod/.test(navigator.platform) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
-
-	if (window.ios) {
-	  const targetElement = document.getElementById('root');
-	  scrollLock.exports.disablePageScroll(targetElement);
-	}
 	/*
 	navigator.serviceWorker.register('/sw.js').then((registration) => {
 	    console.log('ServiceWorker registration successful');

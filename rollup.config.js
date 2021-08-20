@@ -39,11 +39,7 @@ export default [{
             verbose: false,
             compress: false,
             liveReload: true,
-            overlay: true,
-            overlay: {
-                warnings: true,
-                errors: true,
-            }
+            overlay: true
         }),
         visualizer()
         //livereload()
@@ -51,7 +47,7 @@ export default [{
 },
 
 {
-    input: "src/auth.js",
+    input: "src/Auth/auth.js",
     output: {
         file: "dist/auth.js",
         format: "iife",

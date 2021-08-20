@@ -35,6 +35,7 @@
         }
         &.fr {
             flex-grow: 1;
+            overflow: scroll;
         }
         &.homework form, &.homework input {
             background: none;

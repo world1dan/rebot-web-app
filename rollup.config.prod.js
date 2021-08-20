@@ -53,7 +53,7 @@ export default [{
 },
 
 {
-    input: "src/auth.js",
+    input: "src/Auth/auth.js",
     output: {
         file: "build/auth.js",
         format: "iife",

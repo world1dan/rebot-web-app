@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-export default function passwordSet(props) {
+export default function PasswordSet(props) {
     
     const oldCodeInput = useRef(null);
     const newCodeInput = useRef(null);

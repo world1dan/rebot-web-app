@@ -1,24 +1,27 @@
-import React, { useRef, useContext, memo } from 'react';
+// TEST READY
+
+import React, { useRef, useState, useEffect, memo } from 'react';
 import { setDoc } from "firebase/firestore";
 
-import { database, manifestContext } from '../../../Context';
+import { database } from '../../../Context';
 
 
-export default memo(function SubjectRow(props) {
-    const manifest = useContext(manifestContext);
+function SubjectRow(props) {
     const marksInput = useRef(null);
 
-    const marks = props.marks;
+    const [marks, setMarks] = useState(props.marks);
 
-    const title = manifest ? manifest[props.subj_id].title :  <i className="fas fa-circle-notch fa-spin"></i>;
+    useEffect(() => {
+        setMarks(props.marks)
+    }, [props.marks])
 
+    const title = props.subject.title;
     const style = {
-        backgroundColor: manifest ? manifest[props.subj_id].color : "var(--background3)"
-    }
+        backgroundColor: props.subject.color
+    };
 
     let sum = 0;
     let length = 0;
-
     let average = null;
 
     if (marks) {
@@ -35,46 +38,49 @@ export default memo(function SubjectRow(props) {
     
         average = sum / length;
     
-        if (!isNaN(average)) {
+        if (!isNaN(average) && average <= 10) {
             average = Number(average.toFixed(1));
         } else {
             average = null;
         }
     }
 
-    function addMark() {
-        const input = marksInput.current;
-        input.focus();
+    function createPattern() {
+        marksInput.current.focus();
 
-        if (input.value.trim().slice(-1) != "," && input.value != "") {
-            input.value += ", ";
+        if (marks.trim().slice(-1) != "," && marks != "") {
+            setMarks(marks + ", ");
         }
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
-
-        marksInput.current.blur();
 
         setDoc(database.marks, {
-            [props.subj_id]: marksInput.current.value
+            [props.subject.id]: marks
         }, { merge: true });
-    }
-    
 
+        marksInput.current.blur();
+        event.preventDefault();
+    }
 
     return (
         <div className="SubjectRow">
             <div className="subj" style={style}>{title}</div>
             <div className="homework fr">
                 <form onSubmit={handleSubmit} style={{display: "inline-block"}}>
-                    <input type="text" inputMode="decimal" defaultValue={marks} ref={marksInput} onBlur={handleSubmit}/>
+                    <input
+                        type="text" 
+                        inputMode="decimal" 
+                        value={marks}
+                        ref={marksInput} 
+                        onChange={(e) => setMarks(e.target.value)} 
+                        onBlur={handleSubmit}/>
                 </form>
             </div>
             { marks && average && <div className="tool">{average}</div> }
-            <div className="tool" onClick={addMark}><i className="fas fa-plus"></i></div>
+            <div className="tool" onClick={createPattern}><i className="fas fa-plus"></i></div>
         </div>
     );
-    
-})
+}
 
+export default memo(SubjectRow);

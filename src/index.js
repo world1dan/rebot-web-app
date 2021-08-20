@@ -5,7 +5,7 @@ import { setDoc, onSnapshot } from "firebase/firestore";
 import { getValue, fetchAndActivate } from "firebase/remote-config";
 
 import { CSSTransition } from 'react-transition-group';
-import { disablePageScroll } from 'scroll-lock';
+import { disablePageScroll, allowTouchMove } from 'scroll-lock';
 
 import { database, remoteConfig, manifestContext, timetableContext, settingsContext } from './Context';
 
@@ -179,9 +179,9 @@ ReactDOM.render(<App/>, document.getElementById('root'));
 
 window.ios = /iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 
-if (window.ios) {
+if (false) {
     const targetElement = document.getElementById('root');
-    disablePageScroll(targetElement);
+    setTimeout(() => disablePageScroll(targetElement, { allowTouchMove: el => el.tagName === 'input' }), 1000);
 }
 
 /*
