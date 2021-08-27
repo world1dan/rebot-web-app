@@ -55127,11 +55127,13 @@
 	    exit: false
 	  }, /*#__PURE__*/React.createElement(CSSTransition, {
 	    key: week,
-	    timeout: 300,
+	    timeout: 400,
 	    classNames: "week-grid"
 	  }, /*#__PURE__*/React.createElement("div", {
 	    className: "week-grid"
-	  }, days))));
+	  }, days.length != 0 ? days : /*#__PURE__*/React.createElement("div", {
+	    className: "no-timetable-alert UIBlock"
+	  }, "\u0420\u0430\u0441\u043F\u0438\u0441\u0430\u043D\u0438\u044F \u043F\u043E\u043A\u0430 \u043D\u0435\u0442")))));
 	});
 
 	function Resheba(props) {

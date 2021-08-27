@@ -8,7 +8,23 @@
     @media (min-width: 1000px) {
         grid-template-columns: repeat(auto-fit, Minmax(400px, 1fr));
     }
+    
 }
+
+
+.no-timetable-alert {
+    font-size: 18px;
+    font-weight: bold;
+    height: 60px;
+    text-align: center;
+    display: grid;
+    place-items: center;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 140px;
+}
+
 
 .tools {
     border-radius: 9px;
@@ -100,12 +116,15 @@
 }
 
 
+
 .week-grid-enter {
-    transform: scale(0.97);
-    opacity: 0.5;
+    transform: translateY(5%);
+    opacity: 0.4;
 }
+
 .week-grid-enter-active {
-    transform: scale(1);
+    transition: all 0.4s cubic-bezier(0.38, 0.7, 0.125, 1);
+    transform: none;
     opacity: 1;
-    transition: all 0.3s;
 }
+

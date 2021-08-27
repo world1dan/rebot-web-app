@@ -25,13 +25,13 @@ export default memo(function Week(props) {
 
     if (fullTimetable) {
         const timetable = fullTimetable[week];
+
         let day;
         
         for (day in timetable) {
             days.push(<Day key={day} pathToDay={week + "." + day} day_num={day} day_data={timetable[day]}/>);
         }
     }
-
 
     return (
         <div>
@@ -72,9 +72,12 @@ export default memo(function Week(props) {
                 </div>
             }
             <TransitionGroup exit={false}>
-                <CSSTransition key={week} timeout={300} classNames="week-grid">
+                <CSSTransition key={week} timeout={400} classNames="week-grid">
                     <div className="week-grid">
-                        { days }
+                        { days.length != 0 ? 
+                            days : 
+                            <div className="no-timetable-alert UIBlock">Расписания пока нет</div>
+                         }
                     </div>
                 </CSSTransition>
             </TransitionGroup>
