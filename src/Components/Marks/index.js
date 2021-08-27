@@ -1,13 +1,11 @@
-// TEST READY
-
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, memo } from 'react';
 import { onSnapshot } from "firebase/firestore";
 
 import { database, manifestContext } from '../../Context';
 import SubjectRow from "./SubjectRow";
 
 
-export default function Marks() {
+export default memo(function Marks() {
 
     const manifest = useContext(manifestContext);
     const [marks, setMarks] = useState(null);
@@ -27,7 +25,9 @@ export default function Marks() {
             const subject = manifest[subjID];
             subject.id = subjID;
 
-            rows.push(<SubjectRow key={subjID} subject={subject} marks={marks[subjID]}/>);
+            if (subject.marks) {
+                rows.push(<SubjectRow key={subjID} subject={subject} marks={marks[subjID]}/>);
+            }
         }
     }
 
@@ -39,4 +39,4 @@ export default function Marks() {
             </div>
         </div>
     );
-}
+});

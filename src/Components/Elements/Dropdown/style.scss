@@ -12,21 +12,18 @@
 
 
 .dropdown {
-    --offset: -10%;
-    
-    @media (max-width: 500px) {
-        --offset: -70%;
-    }
+
     .menuBtn {
-        height: 34px;
-        width: 34px;
+        height: 38px;
+        width: 38px;
         font-size: 16px;
     }
+
     position: relative;
 
 
     .dropdown-content {
-        transform: translate(var(--offset));
+        transform: translateX(-70%);
         display: flex;
         flex-direction: column;
         gap: 3px;
@@ -42,13 +39,13 @@
 
     .dropdown-content-enter {
         opacity: 0;
-        transform: scale(0.9) translateX(var(--offset));
+        transform: scale(0.9) translateX(-70%);
     }
 
     .dropdown-content-enter-active {
         opacity: 1;
-        transform: scale(1) translateX(var(--offset));
-        transition: all 220ms;
+        transform: scale(1) translateX(-70%);
+        transition: all 200ms;
     }
 
     .dropdown-content-exit {
@@ -57,7 +54,7 @@
 
     .dropdown-content-exit-active {
         opacity: 0;
-        transition: opacity 180ms;
+        transition: opacity 160ms;
     }
 
 
@@ -67,7 +64,6 @@
         grid-template-columns: 28px 1fr;
         place-items: center;
         border-radius: 5px;
-        transition: background 200ms;
 
         span {
             padding: 6px;
@@ -75,15 +71,15 @@
         }
 
         &:hover {
-            transform: scale(0.94);
-            transition: transform 0.3s;
+            filter: brightness(1.35);
+            transition: filter 240ms;
         }
 
         background-color: var(--background3);
 
 
         &.danger {
-            background-color: var(--danger-red);
+            background-color: var(--red2);
         }
     }
 

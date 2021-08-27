@@ -29,7 +29,7 @@ export default function Dropdown(props) {
                 <i className="fas fa-ellipsis-v"></i>
             </button>
 
-            <CSSTransition in={isOpen} timeout={300} classNames='dropdown-content' onEnter={setUnfocusListener} unmountOnExit>
+            <CSSTransition in={isOpen} timeout={{ enter: 200, exit: 160 }} classNames='dropdown-content' onEnter={setUnfocusListener} unmountOnExit>
                 <div className="dropdown-content">{props.children}</div> 
             </CSSTransition>
         </div>

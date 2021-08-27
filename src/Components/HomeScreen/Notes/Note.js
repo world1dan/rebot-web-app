@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { deleteDoc, setDoc } from "firebase/firestore";
 
 import TextareaAutosize from 'react-textarea-autosize';
-import Dropdown from '../../Dropdown';
+import Dropdown from '../../Elements/Dropdown';
 
 export default function Note(props) {
 

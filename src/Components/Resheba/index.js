@@ -1,4 +1,5 @@
 import React from 'react'
+import './style.scss';
 
 export default function Resheba(props) {
     return (
@@ -11,14 +12,14 @@ export default function Resheba(props) {
                 <input step="1" inputMode="decimal" className="rebot" autoComplete="off" />
             </div>
             <div className="wraper">
-                <button id="bel">Бел яз</button>
-                <button id="rus">Рус яз</button>
-                <button id="alg">Алгебра</button>
-                <button id="geom">Геометрия</button>
-                <button id="him">Химия</button>
-                <button id="phis">Физика</button>
-                <button id="brainly">Brainly</button>
                 <button id="eng">Английский</button>
+                <button id="rus">Рус яз</button>
+                <button id="bel">Бел яз</button>
+                <button id="phis">Физика</button>
+                <button id="alg">Алгебра</button>
+                <button id="him">Химия</button>
+                <button id="brainly">Brainly</button>
+                <button id="geom">Геометрия</button>
                 <button id="math">Photomath</button>
             </div>
         </header>
@@ -37,23 +38,6 @@ export default function Resheba(props) {
 
         <div id="boxes"></div>
 
-
-        <div className="template">
-            <div id="viewbox" className="viewbox" complete="false">
-                <div className="viewbox-tools">
-                    <button className="alt" id="alt-re">Решебник 2</button>
-                    <div className="center-section">
-                        <button id="prew" onClick={() => globalThis.ReBot.change_num(this.parentNode, -1)}><i className="fas fa-chevron-left fa-lg"></i></button>
-                        <span className="num"></span>
-                        <button id="next" onClick={() => globalThis.ReBot.change_num(this.parentNode, 1)}><i className="fas fa-chevron-right fa-lg"></i></button>
-                    </div>
-                    <button className="close" onClick={() => globalThis.ReBot.remove(this.parentNode.parentNode)}><i className="fas fa-times fa-lg"></i></button>
-                </div>
-                <div className="viewbox-content">
-                    <img width="100%" id="view"/>
-                </div>
-            </div>
-        </div>
         </>
     )
 }

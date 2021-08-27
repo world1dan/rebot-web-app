@@ -35,10 +35,7 @@ if (!user) {
     window.location = "./auth.html";
 }
 
-//const userCollection = collection(firestore, `users/${user.id}/`);
-
 const id = `${user.id}`;
-
 
 export const database = {
     timetable: doc(firestore, "timeTables", "9D"),

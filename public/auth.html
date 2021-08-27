@@ -28,14 +28,17 @@
     </div>
     
     <div class="content">
-        <button onclick="onTelegramAuth({'id': 1046049249,'first_name': 'Даник','username': 'world1dan','photo_url': 'https://t.me/i/userpic/320/-wjS6LMe-1tZv-m0sojDlCBc1O5kGM5yQZdJPDAaTCY.jpg','auth_date': 1626863014,'hash': '00bbd3863ce078e160bd57b31287c7959dfff66af0a00d6357b2446fbbcaa052'})">TEST</button>
-        <h2>Вход</h2>
-        <h5>Сначала нужно авторизоваться</h5>
-
-        <div id="auth">
-            <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="resh1_bot" data-size="large" data-radius="7" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+        <div class="block">
+            <h5 class="group-title">Группа по английскому</h5>
+            <div class="group">
+                <button class="active" onclick="changeGroup(this, 1)">1</button>
+                <button onclick="changeGroup(this, 2)">2</button>
+                <button onclick="changeGroup(this, 3)">3</button>   
+            </div>
+            <div id="auth">
+                <script async src="https://telegram.org/js/telegram-widget.js?15" data-telegram-login="resh1_bot" data-size="large" data-radius="7" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+            </div>
         </div>
-
     </div>
 
     <script src="./auth.js"></script>

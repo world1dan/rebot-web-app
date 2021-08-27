@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext} from 'react';
+import React, { memo,  useContext} from 'react';
 
-import { onSnapshot } from "firebase/firestore";
-
-import { database, timetableContext } from "../../Context";
+import { timetableContext } from "../../Context";
 
 import Day from "../TimeTable/Day";
 
@@ -12,7 +10,7 @@ import Now from "./Now"
 
 import "./style.scss"
 
-export default function HomeScreen(props) {
+export default memo(function HomeScreen() {
     const timetable = useContext(timetableContext);
 
     let day_num = new Date().getDay();
@@ -29,4 +27,4 @@ export default function HomeScreen(props) {
             </div>
         </div>
     )
-}
+})

@@ -1,4 +1,4 @@
-import { visualizer } from 'rollup-plugin-visualizer';
+import external from "rollup-plugin-peer-deps-external";
 import serve from "rollup-plugin-serve";
 import {babel} from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
@@ -7,14 +7,17 @@ import replace from '@rollup/plugin-replace';
 import scss from 'rollup-plugin-scss';
 
 export default [{
-    caches: true,
+    cache: true,
     input: "src/index.js",
     output: {
         file: "dist/bundle.js",
         format: "iife",
-        sourcemap: true,
+        sourcemap: false,
     },
     plugins: [
+        external({
+            includeDependencies: false
+        }),
         nodeResolve(),
         replace({
             exclude: 'node_modules/**',
@@ -36,13 +39,8 @@ export default [{
             contentBase: ["dist", "public"],
             host: "0.0.0.0",
             port: 3000,
-            verbose: false,
-            compress: false,
-            liveReload: true,
-            overlay: true
-        }),
-        visualizer()
-        //livereload()
+            verbose: false
+        })
     ],
 },
 
@@ -64,6 +62,11 @@ export default [{
             output: 'dist/auth.css'
         }),
     ],
+
+    watch: {
+        buildDelay: 0,
+        exclude: "node_modules/**"
+    }
 }
 
 

@@ -1,12 +1,3 @@
-import {
-    setDoc,
-    onSnapshot,
-    arrayUnion,
-    arrayRemove
-} from "firebase/firestore";
-
-import { database } from "../../Context";
-import './style.scss';
 
 export default class ReBotManager {
 
@@ -16,17 +7,6 @@ export default class ReBotManager {
         this.viewbox_template = document.querySelector('.template #viewbox');
         this.status_title = document.querySelector('#current-subj');
         this.search = document.querySelector('.search input');
-
-        onSnapshot(database.workspace, (doc) => {
-
-            if (!doc.metadata.hasPendingWrites) {
-                const data = doc.data();
-
-                if (data.nums && data.subj && data.nums.length != 0) {
-                    this.open(data.subj, data.nums);
-                }
-            }
-        });
 
 
         document.querySelectorAll("#rebot header button").forEach((el) => {
@@ -38,12 +18,13 @@ export default class ReBotManager {
             if (event.key == "Enter") {
                 window.open("https://www.google.com/search?q=" + this.search.value, '_blank');
                 this.search.value = "";
+                this.search.blur();
             }
         });
     }
 
 
-    open(id, num) {
+    open(id, num) { 
         let nums;
 
         if (num == undefined) {
@@ -52,19 +33,9 @@ export default class ReBotManager {
                 nums = nums.split(',');
             } else return;
 
-            for (num of nums) {
-
-                setDoc(database.workspace, {
-                    "subj": id,
-                    "nums": arrayUnion(parseInt(num))
-                }, { merge: true });
-            }
-
         } else {
             nums = num;
         }
-
-
 
         const subj = this.manifest[id];
 
@@ -133,21 +104,7 @@ export default class ReBotManager {
     }
 
     remove(box) {
-        const num = parseInt(box.getAttribute('num'));
-
         box.remove();
-
-        if (!(this.box_container.hasChildNodes())) {
-            this.status_title.textContent = "ReBot";
-            setDoc(database.workspace, {
-                "nums": null,
-                "subj": null
-            }, { merge: true });
-        } else {
-            setDoc(database.workspace, {
-                "nums": arrayRemove(num)
-            }, { merge: true });
-        }
     }
 
     open_alt(box) {

@@ -1,12 +1,8 @@
 
-#settings {
-    .content {
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        margin-top: 50px;
-        gap: 14px;
-    }
+.settings-block {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 
     .theme {
         padding: 0 10px;
@@ -150,9 +146,9 @@
         input {
             border: none;
             outline: none;
-            background-color: var(--background2);
+            background-color: var(--background3);
             border-radius: 7px;
-            height: 40px;
+            height: 42px;
             font-size: 16px;
             color: var(--text);
             text-indent: 10px;
@@ -165,7 +161,7 @@
         button {
             margin-top: 10px;
             background-color: var(--primary1);
-            height: 40px;
+            height: 42px;
             border-radius: 7px;
         }
         .info {

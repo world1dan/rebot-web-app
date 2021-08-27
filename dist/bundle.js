@@ -3205,7 +3205,7 @@
 	F$2=8;return a}function Sc$2(a){switch(a){case 99:return 15;case 98:return 10;case 97:case 96:return 8;case 95:return 2;default:return 0}}function Tc$2(a){switch(a){case 15:case 14:return 99;case 13:case 12:case 11:case 10:return 98;case 9:case 8:case 7:case 6:case 4:case 5:return 97;case 3:case 2:case 1:return 95;case 0:return 90;default:throw Error(y$2(358,a));}}
 	function Uc$2(a,b){var c=a.pendingLanes;if(0===c)return F$2=0;var d=0,e=0,f=a.expiredLanes,g=a.suspendedLanes,h=a.pingedLanes;if(0!==f)d=f,e=F$2=15;else if(f=c&134217727,0!==f){var k=f&~g;0!==k?(d=Rc$2(k),e=F$2):(h&=f,0!==h&&(d=Rc$2(h),e=F$2));}else f=c&~g,0!==f?(d=Rc$2(f),e=F$2):0!==h&&(d=Rc$2(h),e=F$2);if(0===d)return 0;d=31-Vc$1(d);d=c&((0>d?0:1<<d)<<1)-1;if(0!==b&&b!==d&&0===(b&g)){Rc$2(b);if(e<=F$2)return b;F$2=e;}b=a.entangledLanes;if(0!==b)for(a=a.entanglements,b&=d;0<b;)c=31-Vc$1(b),e=1<<c,d|=a[c],b&=~e;return d}
 	function Wc$1(a){a=a.pendingLanes&-1073741825;return 0!==a?a:a&1073741824?1073741824:0}function Xc$1(a,b){switch(a){case 15:return 1;case 14:return 2;case 12:return a=Yc$1(24&~b),0===a?Xc$1(10,b):a;case 10:return a=Yc$1(192&~b),0===a?Xc$1(8,b):a;case 8:return a=Yc$1(3584&~b),0===a&&(a=Yc$1(4186112&~b),0===a&&(a=512)),a;case 2:return b=Yc$1(805306368&~b),0===b&&(b=268435456),b}throw Error(y$2(358,a));}function Yc$1(a){return a&-a}function Zc$2(a){for(var b=[],c=0;31>c;c++)b.push(a);return b}
-	function $c$2(a,b,c){a.pendingLanes|=b;var d=b-1;a.suspendedLanes&=d;a.pingedLanes&=d;a=a.eventTimes;b=31-Vc$1(b);a[b]=c;}var Vc$1=Math.clz32?Math.clz32:ad$1,bd$1=Math.log,cd$1=Math.LN2;function ad$1(a){return 0===a?32:31-(bd$1(a)/cd$1|0)|0}var dd$1=r$1.unstable_UserBlockingPriority,ed$1=r$1.unstable_runWithPriority,fd$1=!0;function gd$1(a,b,c,d){Kb$1||Ib$1();var e=hd$1,f=Kb$1;Kb$1=!0;try{Hb$1(e,a,b,c,d);}finally{(Kb$1=f)||Mb$1();}}function id$2(a,b,c,d){ed$1(dd$1,hd$1.bind(null,a,b,c,d));}
+	function $c$2(a,b,c){a.pendingLanes|=b;var d=b-1;a.suspendedLanes&=d;a.pingedLanes&=d;a=a.eventTimes;b=31-Vc$1(b);a[b]=c;}var Vc$1=Math.clz32?Math.clz32:ad$1,bd$1=Math.log,cd$1=Math.LN2;function ad$1(a){return 0===a?32:31-(bd$1(a)/cd$1|0)|0}var dd$1=r$1.unstable_UserBlockingPriority,ed$1=r$1.unstable_runWithPriority,fd$1=!0;function gd$1(a,b,c,d){Kb$1||Ib$1();var e=hd$1,f=Kb$1;Kb$1=!0;try{Hb$1(e,a,b,c,d);}finally{(Kb$1=f)||Mb$1();}}function id$6(a,b,c,d){ed$1(dd$1,hd$1.bind(null,a,b,c,d));}
 	function hd$1(a,b,c,d){if(fd$1){var e;if((e=0===(b&4))&&0<jc$1.length&&-1<qc$2.indexOf(a))a=rc$2(null,a,b,c,d),jc$1.push(a);else {var f=yc$1(a,b,c,d);if(null===f)e&&sc$2(a,d);else {if(e){if(-1<qc$2.indexOf(a)){a=rc$2(f,a,b,c,d);jc$1.push(a);return}if(uc$2(f,a,b,c,d))return;sc$2(a,d);}jd$1(a,b,d,null,c);}}}}
 	function yc$1(a,b,c,d){var e=xb(d);e=wc$1(e);if(null!==e){var f=Zb$1(e);if(null===f)e=null;else {var g=f.tag;if(13===g){e=$b$1(f);if(null!==e)return e;e=null;}else if(3===g){if(f.stateNode.hydrate)return 3===f.tag?f.stateNode.containerInfo:null;e=null;}else f!==e&&(e=null);}}jd$1(a,b,d,e,c);return null}var kd$1=null,ld$1=null,md$1=null;
 	function nd$1(){if(md$1)return md$1;var a,b=ld$1,c=b.length,d,e="value"in kd$1?kd$1.value:kd$1.textContent,f=e.length;for(a=0;a<c&&b[a]===e[a];a++);var g=c-a;for(d=1;d<=g&&b[c-d]===e[f-d];d++);return md$1=e.slice(a,1<d?1-d:void 0)}function od$1(a){var b=a.keyCode;"charCode"in a?(a=a.charCode,0===a&&13===b&&(a=13)):a=b;10===a&&(a=13);return 32<=a||13===a?a:0}function pd$1(){return !0}function qd$1(){return !1}
@@ -3236,7 +3236,7 @@
 	function se$1(a,b){b=0!==(b&4);for(var c=0;c<a.length;c++){var d=a[c],e=d.event;d=d.listeners;a:{var f=void 0;if(b)for(var g=d.length-1;0<=g;g--){var h=d[g],k=h.instance,l=h.currentTarget;h=h.listener;if(k!==f&&e.isPropagationStopped())break a;Ze$1(e,h,l);f=k;}else for(g=0;g<d.length;g++){h=d[g];k=h.instance;l=h.currentTarget;h=h.listener;if(k!==f&&e.isPropagationStopped())break a;Ze$1(e,h,l);f=k;}}}if(Ub$1)throw a=Vb$1,Ub$1=!1,Vb$1=null,a;}
 	function G$1(a,b){var c=$e$1(b),d=a+"__bubble";c.has(d)||(af(b,a,2,!1),c.add(d));}var bf="_reactListening"+Math.random().toString(36).slice(2);function cf(a){a[bf]||(a[bf]=!0,ba$2.forEach(function(b){Ye$1.has(b)||df(b,!1,a,null);df(b,!0,a,null);}));}
 	function df(a,b,c,d){var e=4<arguments.length&&void 0!==arguments[4]?arguments[4]:0,f=c;"selectionchange"===a&&9!==c.nodeType&&(f=c.ownerDocument);if(null!==d&&!b&&Ye$1.has(a)){if("scroll"!==a)return;e|=2;f=d;}var g=$e$1(f),h=a+"__"+(b?"capture":"bubble");g.has(h)||(b&&(e|=4),af(f,a,e,b),g.add(h));}
-	function af(a,b,c,d){var e=Nc$1.get(b);switch(void 0===e?2:e){case 0:e=gd$1;break;case 1:e=id$2;break;default:e=hd$1;}c=e.bind(null,b,c,a);e=void 0;!Pb$1||"touchstart"!==b&&"touchmove"!==b&&"wheel"!==b||(e=!0);d?void 0!==e?a.addEventListener(b,c,{capture:!0,passive:e}):a.addEventListener(b,c,!0):void 0!==e?a.addEventListener(b,c,{passive:e}):a.addEventListener(b,c,!1);}
+	function af(a,b,c,d){var e=Nc$1.get(b);switch(void 0===e?2:e){case 0:e=gd$1;break;case 1:e=id$6;break;default:e=hd$1;}c=e.bind(null,b,c,a);e=void 0;!Pb$1||"touchstart"!==b&&"touchmove"!==b&&"wheel"!==b||(e=!0);d?void 0!==e?a.addEventListener(b,c,{capture:!0,passive:e}):a.addEventListener(b,c,!0):void 0!==e?a.addEventListener(b,c,{passive:e}):a.addEventListener(b,c,!1);}
 	function jd$1(a,b,c,d,e){var f=d;if(0===(b&1)&&0===(b&2)&&null!==d)a:for(;;){if(null===d)return;var g=d.tag;if(3===g||4===g){var h=d.stateNode.containerInfo;if(h===e||8===h.nodeType&&h.parentNode===e)break;if(4===g)for(g=d.return;null!==g;){var k=g.tag;if(3===k||4===k)if(k=g.stateNode.containerInfo,k===e||8===k.nodeType&&k.parentNode===e)return;g=g.return;}for(;null!==h;){g=wc$1(h);if(null===g)return;k=g.tag;if(5===k||6===k){d=f=g;continue a}h=h.parentNode;}}d=d.return;}Nb$1(function(){var d=f,e=xb(c),g=[];
 	a:{var h=Mc$1.get(a);if(void 0!==h){var k=td$1,x=a;switch(a){case "keypress":if(0===od$1(c))break a;case "keydown":case "keyup":k=Rd$1;break;case "focusin":x="focus";k=Fd$1;break;case "focusout":x="blur";k=Fd$1;break;case "beforeblur":case "afterblur":k=Fd$1;break;case "click":if(2===c.button)break a;case "auxclick":case "dblclick":case "mousedown":case "mousemove":case "mouseup":case "mouseout":case "mouseover":case "contextmenu":k=Bd$1;break;case "drag":case "dragend":case "dragenter":case "dragexit":case "dragleave":case "dragover":case "dragstart":case "drop":k=
 	Dd$1;break;case "touchcancel":case "touchend":case "touchmove":case "touchstart":k=Vd$1;break;case Ic$2:case Jc$1:case Kc$1:k=Hd$1;break;case Lc$1:k=Xd;break;case "scroll":k=vd$1;break;case "wheel":k=Zd;break;case "copy":case "cut":case "paste":k=Jd$1;break;case "gotpointercapture":case "lostpointercapture":case "pointercancel":case "pointerdown":case "pointermove":case "pointerout":case "pointerover":case "pointerup":k=Td$1;}var w=0!==(b&4),z=!w&&"scroll"===a,u=w?null!==h?h+"Capture":null:h;w=[];for(var t=d,q;null!==
@@ -30326,7 +30326,7 @@
 	    return getUA().indexOf('Electron/') >= 0;
 	}
 	/** Detects Internet Explorer. */
-	function isIE$2() {
+	function isIE$1() {
 	    var ua = getUA();
 	    return ua.indexOf('MSIE ') >= 0 || ua.indexOf('Trident/') >= 0;
 	}
@@ -32572,7 +32572,7 @@
 	}());
 	function gd(a) { this.l = a || hd; l$1.PerformanceNavigationTiming ? (a = l$1.performance.getEntriesByType("navigation"), a = 0 < a.length && ("hq" == a[0].nextHopProtocol || "h2" == a[0].nextHopProtocol)) : a = !!(l$1.g && l$1.g.Ea && l$1.g.Ea() && l$1.g.Ea().Zb); this.j = a ? this.l : 1; this.g = null; 1 < this.j && (this.g = new Set); this.h = null; this.i = []; }
 	var hd = 10;
-	function id$1(a) { return a.h ? !0 : a.g ? a.g.size >= a.j : !1; }
+	function id$5(a) { return a.h ? !0 : a.g ? a.g.size >= a.j : !1; }
 	function Cc(a) { return a.h ? 1 : a.g ? a.g.size : 0; }
 	function yc(a, b) { return a.h ? a.h == b : a.g ? a.g.has(b) : !1; }
 	function Dc(a, b) { a.g ? a.g.add(b) : a.h = b; }
@@ -32920,7 +32920,7 @@
 	function Ac(a) { a.g && (wc(a), a.g.cancel(), a.g = null); }
 	function Jd(a) { Ac(a); a.u && (l$1.clearTimeout(a.u), a.u = null); zc(a); a.i.cancel(); a.m && ("number" === typeof a.m && l$1.clearTimeout(a.m), a.m = null); }
 	function Md(a, b) { a.l.push(new fd(a.Za++, b)); 3 == a.G && Hc(a); }
-	function Hc(a) { id$1(a.i) || a.m || (a.m = !0, zb(a.Ha, a), a.C = 0); }
+	function Hc(a) { id$5(a.i) || a.m || (a.m = !0, zb(a.Ha, a), a.C = 0); }
 	function Nd(a, b) { if (Cc(a.i) >= a.i.j - (a.m ? 1 : 0))
 	    return !1; if (a.m)
 	    return a.l = b.D.concat(a.l), !0; if (1 == a.G || 2 == a.G || a.C >= (a.Xa ? 0 : a.Ya))
@@ -32978,7 +32978,7 @@
 	            }
 	        }
 	        else
-	            3 == this.G && (a ? Qd(this, a) : 0 == this.l.length || id$1(this.i) || Qd(this));
+	            3 == this.G && (a ? Qd(this, a) : 0 == this.l.length || id$5(this.i) || Qd(this));
 	};
 	function Qd(a, b) { var c; b ? c = b.m : c = a.V++; var d = N$1(a.F); R(d, "SID", a.J); R(d, "RID", c); R(d, "AID", a.U); Kd(a, d); a.o && a.s && Gd(d, a.o, a.s); c = new M$1(a, a.h, c, a.C + 1); null === a.o && (c.H = a.s); b && (a.l = b.D.concat(a.l)); b = Pd(a, c, 1E3); c.setTimeout(Math.round(.5 * a.ra) + Math.round(.5 * a.ra * Math.random())); Dc(a.i, c); ic$1(c, d, b); }
 	function Kd(a, b) { a.j && Kc({}, function (c, d) { R(b, d, c); }); }
@@ -43143,7 +43143,7 @@
 	        // doesn't have an Origin header. So we have to exclude a few browser environments that are
 	        // known to (sometimes) not include an Origin. See
 	        // https://github.com/firebase/firebase-js-sdk/issues/1491.
-	        isMobileCordova() || isReactNative() || isElectron() || isIE$2() || isUWP() || isBrowserExtension() || (r.httpHeadersOverwriteParam = "$httpHeaders");
+	        isMobileCordova() || isReactNative() || isElectron() || isIE$1() || isUWP() || isBrowserExtension() || (r.httpHeadersOverwriteParam = "$httpHeaders");
 	        const o = n.join("");
 	        $("Connection", "Creating WebChannel: " + o, r);
 	        const c = s.createWebChannel(o, r);
@@ -50449,7 +50449,7 @@
 	  return _extends$1.apply(this, arguments);
 	}
 
-	function _objectWithoutPropertiesLoose(source, excluded) {
+	function _objectWithoutPropertiesLoose$1(source, excluded) {
 	  if (source == null) return {};
 	  var target = {};
 	  var sourceKeys = Object.keys(source);
@@ -50807,7 +50807,7 @@
 	 */
 
 	var ReactIs$1 = reactIs.exports;
-	var assign = objectAssign;
+	var assign$1 = objectAssign;
 
 	var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
 	var checkPropTypes = checkPropTypes_1;
@@ -51230,7 +51230,7 @@
 	      }
 	      // We need to check all keys in case some are required but missing from
 	      // props.
-	      var allKeys = assign({}, props[propName], shapeTypes);
+	      var allKeys = assign$1({}, props[propName], shapeTypes);
 	      for (var key in allKeys) {
 	        var checker = shapeTypes[key];
 	        if (!checker) {
@@ -51922,7 +51922,7 @@
 	        _this$props.onExiting;
 	        _this$props.onExited;
 	        _this$props.nodeRef;
-	        var childProps = _objectWithoutPropertiesLoose(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
+	        var childProps = _objectWithoutPropertiesLoose$1(_this$props, ["children", "in", "mountOnEnter", "unmountOnExit", "appear", "enter", "exit", "timeout", "addEndListener", "onEnter", "onEntering", "onEntered", "onExit", "onExiting", "onExited", "nodeRef"]);
 
 	    return (
 	      /*#__PURE__*/
@@ -52400,7 +52400,7 @@
 	  _proto.render = function render() {
 	    var _this$props = this.props;
 	        _this$props.classNames;
-	        var props = _objectWithoutPropertiesLoose(_this$props, ["classNames"]);
+	        var props = _objectWithoutPropertiesLoose$1(_this$props, ["classNames"]);
 
 	    return /*#__PURE__*/React.createElement(Transition, _extends$1({}, props, {
 	      onEnter: this.onEnter,
@@ -52795,7 +52795,7 @@
 	    var _this$props = this.props,
 	        Component = _this$props.component,
 	        childFactory = _this$props.childFactory,
-	        props = _objectWithoutPropertiesLoose(_this$props, ["component", "childFactory"]);
+	        props = _objectWithoutPropertiesLoose$1(_this$props, ["component", "childFactory"]);
 
 	    var contextValue = this.state.contextValue;
 	    var children = values(this.state.children).map(childFactory);
@@ -52877,801 +52877,6 @@
 	} : {};
 	TransitionGroup.defaultProps = defaultProps;
 
-	var scrollLock = {exports: {}};
-
-	(function (module, exports) {
-	(function webpackUniversalModuleDefinition(root, factory) {
-		module.exports = factory();
-	})(commonjsGlobal$1, function() {
-	return /******/ (function(modules) { // webpackBootstrap
-	/******/ 	// The module cache
-	/******/ 	var installedModules = {};
-	/******/
-	/******/ 	// The require function
-	/******/ 	function __webpack_require__(moduleId) {
-	/******/
-	/******/ 		// Check if module is in cache
-	/******/ 		if(installedModules[moduleId]) {
-	/******/ 			return installedModules[moduleId].exports;
-	/******/ 		}
-	/******/ 		// Create a new module (and put it into the cache)
-	/******/ 		var module = installedModules[moduleId] = {
-	/******/ 			i: moduleId,
-	/******/ 			l: false,
-	/******/ 			exports: {}
-	/******/ 		};
-	/******/
-	/******/ 		// Execute the module function
-	/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-	/******/
-	/******/ 		// Flag the module as loaded
-	/******/ 		module.l = true;
-	/******/
-	/******/ 		// Return the exports of the module
-	/******/ 		return module.exports;
-	/******/ 	}
-	/******/
-	/******/
-	/******/ 	// expose the modules object (__webpack_modules__)
-	/******/ 	__webpack_require__.m = modules;
-	/******/
-	/******/ 	// expose the module cache
-	/******/ 	__webpack_require__.c = installedModules;
-	/******/
-	/******/ 	// define getter function for harmony exports
-	/******/ 	__webpack_require__.d = function(exports, name, getter) {
-	/******/ 		if(!__webpack_require__.o(exports, name)) {
-	/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-	/******/ 		}
-	/******/ 	};
-	/******/
-	/******/ 	// define __esModule on exports
-	/******/ 	__webpack_require__.r = function(exports) {
-	/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-	/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-	/******/ 		}
-	/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-	/******/ 	};
-	/******/
-	/******/ 	// create a fake namespace object
-	/******/ 	// mode & 1: value is a module id, require it
-	/******/ 	// mode & 2: merge all properties of value into the ns
-	/******/ 	// mode & 4: return value when already ns object
-	/******/ 	// mode & 8|1: behave like require
-	/******/ 	__webpack_require__.t = function(value, mode) {
-	/******/ 		if(mode & 1) value = __webpack_require__(value);
-	/******/ 		if(mode & 8) return value;
-	/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-	/******/ 		var ns = Object.create(null);
-	/******/ 		__webpack_require__.r(ns);
-	/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-	/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-	/******/ 		return ns;
-	/******/ 	};
-	/******/
-	/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-	/******/ 	__webpack_require__.n = function(module) {
-	/******/ 		var getter = module && module.__esModule ?
-	/******/ 			function getDefault() { return module['default']; } :
-	/******/ 			function getModuleExports() { return module; };
-	/******/ 		__webpack_require__.d(getter, 'a', getter);
-	/******/ 		return getter;
-	/******/ 	};
-	/******/
-	/******/ 	// Object.prototype.hasOwnProperty.call
-	/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-	/******/
-	/******/ 	// __webpack_public_path__
-	/******/ 	__webpack_require__.p = "";
-	/******/
-	/******/
-	/******/ 	// Load entry module and return exports
-	/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-	/******/ })
-	/************************************************************************/
-	/******/ ([
-	/* 0 */
-	/***/ (function(module, __webpack_exports__, __webpack_require__) {
-	__webpack_require__.r(__webpack_exports__);
-
-	// CONCATENATED MODULE: ./src/tools.js
-	var argumentAsArray = function argumentAsArray(argument) {
-	  return Array.isArray(argument) ? argument : [argument];
-	};
-	var isElement = function isElement(target) {
-	  return target instanceof Node;
-	};
-	var isElementList = function isElementList(nodeList) {
-	  return nodeList instanceof NodeList;
-	};
-	var eachNode = function eachNode(nodeList, callback) {
-	  if (nodeList && callback) {
-	    nodeList = isElementList(nodeList) ? nodeList : [nodeList];
-
-	    for (var i = 0; i < nodeList.length; i++) {
-	      if (callback(nodeList[i], i, nodeList.length) === true) {
-	        break;
-	      }
-	    }
-	  }
-	};
-	var throwError = function throwError(message) {
-	  return console.error("[scroll-lock] ".concat(message));
-	};
-	var arrayAsSelector = function arrayAsSelector(array) {
-	  if (Array.isArray(array)) {
-	    var selector = array.join(', ');
-	    return selector;
-	  }
-	};
-	var nodeListAsArray = function nodeListAsArray(nodeList) {
-	  var nodes = [];
-	  eachNode(nodeList, function (node) {
-	    return nodes.push(node);
-	  });
-	  return nodes;
-	};
-	var findParentBySelector = function findParentBySelector($el, selector) {
-	  var self = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-	  var $root = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : document;
-
-	  if (self && nodeListAsArray($root.querySelectorAll(selector)).indexOf($el) !== -1) {
-	    return $el;
-	  }
-
-	  while (($el = $el.parentElement) && nodeListAsArray($root.querySelectorAll(selector)).indexOf($el) === -1) {
-	  }
-
-	  return $el;
-	};
-	var elementHasSelector = function elementHasSelector($el, selector) {
-	  var $root = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : document;
-	  var has = nodeListAsArray($root.querySelectorAll(selector)).indexOf($el) !== -1;
-	  return has;
-	};
-	var elementHasOverflowHidden = function elementHasOverflowHidden($el) {
-	  if ($el) {
-	    var computedStyle = getComputedStyle($el);
-	    var overflowIsHidden = computedStyle.overflow === 'hidden';
-	    return overflowIsHidden;
-	  }
-	};
-	var elementScrollTopOnStart = function elementScrollTopOnStart($el) {
-	  if ($el) {
-	    if (elementHasOverflowHidden($el)) {
-	      return true;
-	    }
-
-	    var scrollTop = $el.scrollTop;
-	    return scrollTop <= 0;
-	  }
-	};
-	var elementScrollTopOnEnd = function elementScrollTopOnEnd($el) {
-	  if ($el) {
-	    if (elementHasOverflowHidden($el)) {
-	      return true;
-	    }
-
-	    var scrollTop = $el.scrollTop;
-	    var scrollHeight = $el.scrollHeight;
-	    var scrollTopWithHeight = scrollTop + $el.offsetHeight;
-	    return scrollTopWithHeight >= scrollHeight;
-	  }
-	};
-	var elementScrollLeftOnStart = function elementScrollLeftOnStart($el) {
-	  if ($el) {
-	    if (elementHasOverflowHidden($el)) {
-	      return true;
-	    }
-
-	    var scrollLeft = $el.scrollLeft;
-	    return scrollLeft <= 0;
-	  }
-	};
-	var elementScrollLeftOnEnd = function elementScrollLeftOnEnd($el) {
-	  if ($el) {
-	    if (elementHasOverflowHidden($el)) {
-	      return true;
-	    }
-
-	    var scrollLeft = $el.scrollLeft;
-	    var scrollWidth = $el.scrollWidth;
-	    var scrollLeftWithWidth = scrollLeft + $el.offsetWidth;
-	    return scrollLeftWithWidth >= scrollWidth;
-	  }
-	};
-	var elementIsScrollableField = function elementIsScrollableField($el) {
-	  var selector = 'textarea, [contenteditable="true"]';
-	  return elementHasSelector($el, selector);
-	};
-	var elementIsInputRange = function elementIsInputRange($el) {
-	  var selector = 'input[type="range"]';
-	  return elementHasSelector($el, selector);
-	};
-	// CONCATENATED MODULE: ./src/scroll-lock.js
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "disablePageScroll", function() { return disablePageScroll; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enablePageScroll", function() { return enablePageScroll; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getScrollState", function() { return getScrollState; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearQueueScrollLocks", function() { return clearQueueScrollLocks; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTargetScrollBarWidth", function() { return scroll_lock_getTargetScrollBarWidth; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentTargetScrollBarWidth", function() { return scroll_lock_getCurrentTargetScrollBarWidth; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPageScrollBarWidth", function() { return getPageScrollBarWidth; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCurrentPageScrollBarWidth", function() { return getCurrentPageScrollBarWidth; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addScrollableTarget", function() { return scroll_lock_addScrollableTarget; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeScrollableTarget", function() { return scroll_lock_removeScrollableTarget; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addScrollableSelector", function() { return scroll_lock_addScrollableSelector; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeScrollableSelector", function() { return scroll_lock_removeScrollableSelector; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addLockableTarget", function() { return scroll_lock_addLockableTarget; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addLockableSelector", function() { return scroll_lock_addLockableSelector; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFillGapMethod", function() { return scroll_lock_setFillGapMethod; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFillGapTarget", function() { return scroll_lock_addFillGapTarget; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeFillGapTarget", function() { return scroll_lock_removeFillGapTarget; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addFillGapSelector", function() { return scroll_lock_addFillGapSelector; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeFillGapSelector", function() { return scroll_lock_removeFillGapSelector; });
-	/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "refillGaps", function() { return refillGaps; });
-	function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-	var FILL_GAP_AVAILABLE_METHODS = ['padding', 'margin', 'width', 'max-width', 'none'];
-	var TOUCH_DIRECTION_DETECT_OFFSET = 3;
-	var state = {
-	  scroll: true,
-	  queue: 0,
-	  scrollableSelectors: ['[data-scroll-lock-scrollable]'],
-	  lockableSelectors: ['body', '[data-scroll-lock-lockable]'],
-	  fillGapSelectors: ['body', '[data-scroll-lock-fill-gap]', '[data-scroll-lock-lockable]'],
-	  fillGapMethod: FILL_GAP_AVAILABLE_METHODS[0],
-	  //
-	  startTouchY: 0,
-	  startTouchX: 0
-	};
-	var disablePageScroll = function disablePageScroll(target) {
-	  if (state.queue <= 0) {
-	    state.scroll = false;
-	    scroll_lock_hideLockableOverflow();
-	    fillGaps();
-	  }
-
-	  scroll_lock_addScrollableTarget(target);
-	  state.queue++;
-	};
-	var enablePageScroll = function enablePageScroll(target) {
-	  state.queue > 0 && state.queue--;
-
-	  if (state.queue <= 0) {
-	    state.scroll = true;
-	    scroll_lock_showLockableOverflow();
-	    unfillGaps();
-	  }
-
-	  scroll_lock_removeScrollableTarget(target);
-	};
-	var getScrollState = function getScrollState() {
-	  return state.scroll;
-	};
-	var clearQueueScrollLocks = function clearQueueScrollLocks() {
-	  state.queue = 0;
-	};
-	var scroll_lock_getTargetScrollBarWidth = function getTargetScrollBarWidth($target) {
-	  var onlyExists = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-	  if (isElement($target)) {
-	    var currentOverflowYProperty = $target.style.overflowY;
-
-	    if (onlyExists) {
-	      if (!getScrollState()) {
-	        $target.style.overflowY = $target.getAttribute('data-scroll-lock-saved-overflow-y-property');
-	      }
-	    } else {
-	      $target.style.overflowY = 'scroll';
-	    }
-
-	    var width = scroll_lock_getCurrentTargetScrollBarWidth($target);
-	    $target.style.overflowY = currentOverflowYProperty;
-	    return width;
-	  } else {
-	    return 0;
-	  }
-	};
-	var scroll_lock_getCurrentTargetScrollBarWidth = function getCurrentTargetScrollBarWidth($target) {
-	  if (isElement($target)) {
-	    if ($target === document.body) {
-	      var documentWidth = document.documentElement.clientWidth;
-	      var windowWidth = window.innerWidth;
-	      var currentWidth = windowWidth - documentWidth;
-	      return currentWidth;
-	    } else {
-	      var borderLeftWidthCurrentProperty = $target.style.borderLeftWidth;
-	      var borderRightWidthCurrentProperty = $target.style.borderRightWidth;
-	      $target.style.borderLeftWidth = '0px';
-	      $target.style.borderRightWidth = '0px';
-
-	      var _currentWidth = $target.offsetWidth - $target.clientWidth;
-
-	      $target.style.borderLeftWidth = borderLeftWidthCurrentProperty;
-	      $target.style.borderRightWidth = borderRightWidthCurrentProperty;
-	      return _currentWidth;
-	    }
-	  } else {
-	    return 0;
-	  }
-	};
-	var getPageScrollBarWidth = function getPageScrollBarWidth() {
-	  var onlyExists = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-	  return scroll_lock_getTargetScrollBarWidth(document.body, onlyExists);
-	};
-	var getCurrentPageScrollBarWidth = function getCurrentPageScrollBarWidth() {
-	  return scroll_lock_getCurrentTargetScrollBarWidth(document.body);
-	};
-	var scroll_lock_addScrollableTarget = function addScrollableTarget(target) {
-	  if (target) {
-	    var targets = argumentAsArray(target);
-	    targets.map(function ($targets) {
-	      eachNode($targets, function ($target) {
-	        if (isElement($target)) {
-	          $target.setAttribute('data-scroll-lock-scrollable', '');
-	        } else {
-	          throwError("\"".concat($target, "\" is not a Element."));
-	        }
-	      });
-	    });
-	  }
-	};
-	var scroll_lock_removeScrollableTarget = function removeScrollableTarget(target) {
-	  if (target) {
-	    var targets = argumentAsArray(target);
-	    targets.map(function ($targets) {
-	      eachNode($targets, function ($target) {
-	        if (isElement($target)) {
-	          $target.removeAttribute('data-scroll-lock-scrollable');
-	        } else {
-	          throwError("\"".concat($target, "\" is not a Element."));
-	        }
-	      });
-	    });
-	  }
-	};
-	var scroll_lock_addScrollableSelector = function addScrollableSelector(selector) {
-	  if (selector) {
-	    var selectors = argumentAsArray(selector);
-	    selectors.map(function (selector) {
-	      state.scrollableSelectors.push(selector);
-	    });
-	  }
-	};
-	var scroll_lock_removeScrollableSelector = function removeScrollableSelector(selector) {
-	  if (selector) {
-	    var selectors = argumentAsArray(selector);
-	    selectors.map(function (selector) {
-	      state.scrollableSelectors = state.scrollableSelectors.filter(function (sSelector) {
-	        return sSelector !== selector;
-	      });
-	    });
-	  }
-	};
-	var scroll_lock_addLockableTarget = function addLockableTarget(target) {
-	  if (target) {
-	    var targets = argumentAsArray(target);
-	    targets.map(function ($targets) {
-	      eachNode($targets, function ($target) {
-	        if (isElement($target)) {
-	          $target.setAttribute('data-scroll-lock-lockable', '');
-	        } else {
-	          throwError("\"".concat($target, "\" is not a Element."));
-	        }
-	      });
-	    });
-
-	    if (!getScrollState()) {
-	      scroll_lock_hideLockableOverflow();
-	    }
-	  }
-	};
-	var scroll_lock_addLockableSelector = function addLockableSelector(selector) {
-	  if (selector) {
-	    var selectors = argumentAsArray(selector);
-	    selectors.map(function (selector) {
-	      state.lockableSelectors.push(selector);
-	    });
-
-	    if (!getScrollState()) {
-	      scroll_lock_hideLockableOverflow();
-	    }
-
-	    scroll_lock_addFillGapSelector(selector);
-	  }
-	};
-	var scroll_lock_setFillGapMethod = function setFillGapMethod(method) {
-	  if (method) {
-	    if (FILL_GAP_AVAILABLE_METHODS.indexOf(method) !== -1) {
-	      state.fillGapMethod = method;
-	      refillGaps();
-	    } else {
-	      var methods = FILL_GAP_AVAILABLE_METHODS.join(', ');
-	      throwError("\"".concat(method, "\" method is not available!\nAvailable fill gap methods: ").concat(methods, "."));
-	    }
-	  }
-	};
-	var scroll_lock_addFillGapTarget = function addFillGapTarget(target) {
-	  if (target) {
-	    var targets = argumentAsArray(target);
-	    targets.map(function ($targets) {
-	      eachNode($targets, function ($target) {
-	        if (isElement($target)) {
-	          $target.setAttribute('data-scroll-lock-fill-gap', '');
-
-	          if (!state.scroll) {
-	            scroll_lock_fillGapTarget($target);
-	          }
-	        } else {
-	          throwError("\"".concat($target, "\" is not a Element."));
-	        }
-	      });
-	    });
-	  }
-	};
-	var scroll_lock_removeFillGapTarget = function removeFillGapTarget(target) {
-	  if (target) {
-	    var targets = argumentAsArray(target);
-	    targets.map(function ($targets) {
-	      eachNode($targets, function ($target) {
-	        if (isElement($target)) {
-	          $target.removeAttribute('data-scroll-lock-fill-gap');
-
-	          if (!state.scroll) {
-	            scroll_lock_unfillGapTarget($target);
-	          }
-	        } else {
-	          throwError("\"".concat($target, "\" is not a Element."));
-	        }
-	      });
-	    });
-	  }
-	};
-	var scroll_lock_addFillGapSelector = function addFillGapSelector(selector) {
-	  if (selector) {
-	    var selectors = argumentAsArray(selector);
-	    selectors.map(function (selector) {
-	      if (state.fillGapSelectors.indexOf(selector) === -1) {
-	        state.fillGapSelectors.push(selector);
-
-	        if (!state.scroll) {
-	          scroll_lock_fillGapSelector(selector);
-	        }
-	      }
-	    });
-	  }
-	};
-	var scroll_lock_removeFillGapSelector = function removeFillGapSelector(selector) {
-	  if (selector) {
-	    var selectors = argumentAsArray(selector);
-	    selectors.map(function (selector) {
-	      state.fillGapSelectors = state.fillGapSelectors.filter(function (fSelector) {
-	        return fSelector !== selector;
-	      });
-
-	      if (!state.scroll) {
-	        scroll_lock_unfillGapSelector(selector);
-	      }
-	    });
-	  }
-	};
-	var refillGaps = function refillGaps() {
-	  if (!state.scroll) {
-	    fillGaps();
-	  }
-	};
-
-	var scroll_lock_hideLockableOverflow = function hideLockableOverflow() {
-	  var selector = arrayAsSelector(state.lockableSelectors);
-	  scroll_lock_hideLockableOverflowSelector(selector);
-	};
-
-	var scroll_lock_showLockableOverflow = function showLockableOverflow() {
-	  var selector = arrayAsSelector(state.lockableSelectors);
-	  scroll_lock_showLockableOverflowSelector(selector);
-	};
-
-	var scroll_lock_hideLockableOverflowSelector = function hideLockableOverflowSelector(selector) {
-	  var $targets = document.querySelectorAll(selector);
-	  eachNode($targets, function ($target) {
-	    scroll_lock_hideLockableOverflowTarget($target);
-	  });
-	};
-
-	var scroll_lock_showLockableOverflowSelector = function showLockableOverflowSelector(selector) {
-	  var $targets = document.querySelectorAll(selector);
-	  eachNode($targets, function ($target) {
-	    scroll_lock_showLockableOverflowTarget($target);
-	  });
-	};
-
-	var scroll_lock_hideLockableOverflowTarget = function hideLockableOverflowTarget($target) {
-	  if (isElement($target) && $target.getAttribute('data-scroll-lock-locked') !== 'true') {
-	    var computedStyle = window.getComputedStyle($target);
-	    $target.setAttribute('data-scroll-lock-saved-overflow-y-property', computedStyle.overflowY);
-	    $target.setAttribute('data-scroll-lock-saved-inline-overflow-property', $target.style.overflow);
-	    $target.setAttribute('data-scroll-lock-saved-inline-overflow-y-property', $target.style.overflowY);
-	    $target.style.overflow = 'hidden';
-	    $target.setAttribute('data-scroll-lock-locked', 'true');
-	  }
-	};
-
-	var scroll_lock_showLockableOverflowTarget = function showLockableOverflowTarget($target) {
-	  if (isElement($target) && $target.getAttribute('data-scroll-lock-locked') === 'true') {
-	    $target.style.overflow = $target.getAttribute('data-scroll-lock-saved-inline-overflow-property');
-	    $target.style.overflowY = $target.getAttribute('data-scroll-lock-saved-inline-overflow-y-property');
-	    $target.removeAttribute('data-scroll-lock-saved-overflow-property');
-	    $target.removeAttribute('data-scroll-lock-saved-inline-overflow-property');
-	    $target.removeAttribute('data-scroll-lock-saved-inline-overflow-y-property');
-	    $target.removeAttribute('data-scroll-lock-locked');
-	  }
-	};
-
-	var fillGaps = function fillGaps() {
-	  state.fillGapSelectors.map(function (selector) {
-	    scroll_lock_fillGapSelector(selector);
-	  });
-	};
-
-	var unfillGaps = function unfillGaps() {
-	  state.fillGapSelectors.map(function (selector) {
-	    scroll_lock_unfillGapSelector(selector);
-	  });
-	};
-
-	var scroll_lock_fillGapSelector = function fillGapSelector(selector) {
-	  var $targets = document.querySelectorAll(selector);
-	  var isLockable = state.lockableSelectors.indexOf(selector) !== -1;
-	  eachNode($targets, function ($target) {
-	    scroll_lock_fillGapTarget($target, isLockable);
-	  });
-	};
-
-	var scroll_lock_fillGapTarget = function fillGapTarget($target) {
-	  var isLockable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-	  if (isElement($target)) {
-	    var scrollBarWidth;
-
-	    if ($target.getAttribute('data-scroll-lock-lockable') === '' || isLockable) {
-	      scrollBarWidth = scroll_lock_getTargetScrollBarWidth($target, true);
-	    } else {
-	      var $lockableParent = findParentBySelector($target, arrayAsSelector(state.lockableSelectors));
-	      scrollBarWidth = scroll_lock_getTargetScrollBarWidth($lockableParent, true);
-	    }
-
-	    if ($target.getAttribute('data-scroll-lock-filled-gap') === 'true') {
-	      scroll_lock_unfillGapTarget($target);
-	    }
-
-	    var computedStyle = window.getComputedStyle($target);
-	    $target.setAttribute('data-scroll-lock-filled-gap', 'true');
-	    $target.setAttribute('data-scroll-lock-current-fill-gap-method', state.fillGapMethod);
-
-	    if (state.fillGapMethod === 'margin') {
-	      var currentMargin = parseFloat(computedStyle.marginRight);
-	      $target.style.marginRight = "".concat(currentMargin + scrollBarWidth, "px");
-	    } else if (state.fillGapMethod === 'width') {
-	      $target.style.width = "calc(100% - ".concat(scrollBarWidth, "px)");
-	    } else if (state.fillGapMethod === 'max-width') {
-	      $target.style.maxWidth = "calc(100% - ".concat(scrollBarWidth, "px)");
-	    } else if (state.fillGapMethod === 'padding') {
-	      var currentPadding = parseFloat(computedStyle.paddingRight);
-	      $target.style.paddingRight = "".concat(currentPadding + scrollBarWidth, "px");
-	    }
-	  }
-	};
-
-	var scroll_lock_unfillGapSelector = function unfillGapSelector(selector) {
-	  var $targets = document.querySelectorAll(selector);
-	  eachNode($targets, function ($target) {
-	    scroll_lock_unfillGapTarget($target);
-	  });
-	};
-
-	var scroll_lock_unfillGapTarget = function unfillGapTarget($target) {
-	  if (isElement($target)) {
-	    if ($target.getAttribute('data-scroll-lock-filled-gap') === 'true') {
-	      var currentFillGapMethod = $target.getAttribute('data-scroll-lock-current-fill-gap-method');
-	      $target.removeAttribute('data-scroll-lock-filled-gap');
-	      $target.removeAttribute('data-scroll-lock-current-fill-gap-method');
-
-	      if (currentFillGapMethod === 'margin') {
-	        $target.style.marginRight = "";
-	      } else if (currentFillGapMethod === 'width') {
-	        $target.style.width = "";
-	      } else if (currentFillGapMethod === 'max-width') {
-	        $target.style.maxWidth = "";
-	      } else if (currentFillGapMethod === 'padding') {
-	        $target.style.paddingRight = "";
-	      }
-	    }
-	  }
-	};
-
-	var onResize = function onResize(e) {
-	  refillGaps();
-	};
-
-	var onTouchStart = function onTouchStart(e) {
-	  if (!state.scroll) {
-	    state.startTouchY = e.touches[0].clientY;
-	    state.startTouchX = e.touches[0].clientX;
-	  }
-	};
-
-	var scroll_lock_onTouchMove = function onTouchMove(e) {
-	  if (!state.scroll) {
-	    var startTouchY = state.startTouchY,
-	        startTouchX = state.startTouchX;
-	    var currentClientY = e.touches[0].clientY;
-	    var currentClientX = e.touches[0].clientX;
-
-	    if (e.touches.length < 2) {
-	      var selector = arrayAsSelector(state.scrollableSelectors);
-	      var direction = {
-	        up: startTouchY < currentClientY,
-	        down: startTouchY > currentClientY,
-	        left: startTouchX < currentClientX,
-	        right: startTouchX > currentClientX
-	      };
-	      var directionWithOffset = {
-	        up: startTouchY + TOUCH_DIRECTION_DETECT_OFFSET < currentClientY,
-	        down: startTouchY - TOUCH_DIRECTION_DETECT_OFFSET > currentClientY,
-	        left: startTouchX + TOUCH_DIRECTION_DETECT_OFFSET < currentClientX,
-	        right: startTouchX - TOUCH_DIRECTION_DETECT_OFFSET > currentClientX
-	      };
-
-	      var handle = function handle($el) {
-	        var skip = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-	        if ($el) {
-	          var parentScrollableEl = findParentBySelector($el, selector, false);
-
-	          if (elementIsInputRange($el)) {
-	            return false;
-	          }
-
-	          if (skip || elementIsScrollableField($el) && findParentBySelector($el, selector) || elementHasSelector($el, selector)) {
-	            var prevent = false;
-
-	            if (elementScrollLeftOnStart($el) && elementScrollLeftOnEnd($el)) {
-	              if (direction.up && elementScrollTopOnStart($el) || direction.down && elementScrollTopOnEnd($el)) {
-	                prevent = true;
-	              }
-	            } else if (elementScrollTopOnStart($el) && elementScrollTopOnEnd($el)) {
-	              if (direction.left && elementScrollLeftOnStart($el) || direction.right && elementScrollLeftOnEnd($el)) {
-	                prevent = true;
-	              }
-	            } else if (directionWithOffset.up && elementScrollTopOnStart($el) || directionWithOffset.down && elementScrollTopOnEnd($el) || directionWithOffset.left && elementScrollLeftOnStart($el) || directionWithOffset.right && elementScrollLeftOnEnd($el)) {
-	              prevent = true;
-	            }
-
-	            if (prevent) {
-	              if (parentScrollableEl) {
-	                handle(parentScrollableEl, true);
-	              } else {
-	                if (e.cancelable) {
-	                  e.preventDefault();
-	                }
-	              }
-	            }
-	          } else {
-	            handle(parentScrollableEl);
-	          }
-	        } else {
-	          if (e.cancelable) {
-	            e.preventDefault();
-	          }
-	        }
-	      };
-
-	      handle(e.target);
-	    }
-	  }
-	};
-
-	var onTouchEnd = function onTouchEnd(e) {
-	  if (!state.scroll) {
-	    state.startTouchY = 0;
-	    state.startTouchX = 0;
-	  }
-	};
-
-	if (typeof window !== 'undefined') {
-	  window.addEventListener('resize', onResize);
-	}
-
-	if (typeof document !== 'undefined') {
-	  document.addEventListener('touchstart', onTouchStart);
-	  document.addEventListener('touchmove', scroll_lock_onTouchMove, {
-	    passive: false
-	  });
-	  document.addEventListener('touchend', onTouchEnd);
-	}
-
-	var deprecatedMethods = {
-	  hide: function hide(target) {
-	    throwError('"hide" is deprecated! Use "disablePageScroll" instead. \n https://github.com/FL3NKEY/scroll-lock#disablepagescrollscrollabletarget');
-	    disablePageScroll(target);
-	  },
-	  show: function show(target) {
-	    throwError('"show" is deprecated! Use "enablePageScroll" instead. \n https://github.com/FL3NKEY/scroll-lock#enablepagescrollscrollabletarget');
-	    enablePageScroll(target);
-	  },
-	  toggle: function toggle(target) {
-	    throwError('"toggle" is deprecated! Do not use it.');
-
-	    if (getScrollState()) {
-	      disablePageScroll();
-	    } else {
-	      enablePageScroll(target);
-	    }
-	  },
-	  getState: function getState() {
-	    throwError('"getState" is deprecated! Use "getScrollState" instead. \n https://github.com/FL3NKEY/scroll-lock#getscrollstate');
-	    return getScrollState();
-	  },
-	  getWidth: function getWidth() {
-	    throwError('"getWidth" is deprecated! Use "getPageScrollBarWidth" instead. \n https://github.com/FL3NKEY/scroll-lock#getpagescrollbarwidth');
-	    return getPageScrollBarWidth();
-	  },
-	  getCurrentWidth: function getCurrentWidth() {
-	    throwError('"getCurrentWidth" is deprecated! Use "getCurrentPageScrollBarWidth" instead. \n https://github.com/FL3NKEY/scroll-lock#getcurrentpagescrollbarwidth');
-	    return getCurrentPageScrollBarWidth();
-	  },
-	  setScrollableTargets: function setScrollableTargets(target) {
-	    throwError('"setScrollableTargets" is deprecated! Use "addScrollableTarget" instead. \n https://github.com/FL3NKEY/scroll-lock#addscrollabletargetscrollabletarget');
-	    scroll_lock_addScrollableTarget(target);
-	  },
-	  setFillGapSelectors: function setFillGapSelectors(selector) {
-	    throwError('"setFillGapSelectors" is deprecated! Use "addFillGapSelector" instead. \n https://github.com/FL3NKEY/scroll-lock#addfillgapselectorfillgapselector');
-	    scroll_lock_addFillGapSelector(selector);
-	  },
-	  setFillGapTargets: function setFillGapTargets(target) {
-	    throwError('"setFillGapTargets" is deprecated! Use "addFillGapTarget" instead. \n https://github.com/FL3NKEY/scroll-lock#addfillgaptargetfillgaptarget');
-	    scroll_lock_addFillGapTarget(target);
-	  },
-	  clearQueue: function clearQueue() {
-	    throwError('"clearQueue" is deprecated! Use "clearQueueScrollLocks" instead. \n https://github.com/FL3NKEY/scroll-lock#clearqueuescrolllocks');
-	    clearQueueScrollLocks();
-	  }
-	};
-
-	var scrollLock = _objectSpread({
-	  disablePageScroll: disablePageScroll,
-	  enablePageScroll: enablePageScroll,
-	  getScrollState: getScrollState,
-	  clearQueueScrollLocks: clearQueueScrollLocks,
-	  getTargetScrollBarWidth: scroll_lock_getTargetScrollBarWidth,
-	  getCurrentTargetScrollBarWidth: scroll_lock_getCurrentTargetScrollBarWidth,
-	  getPageScrollBarWidth: getPageScrollBarWidth,
-	  getCurrentPageScrollBarWidth: getCurrentPageScrollBarWidth,
-	  addScrollableSelector: scroll_lock_addScrollableSelector,
-	  removeScrollableSelector: scroll_lock_removeScrollableSelector,
-	  addScrollableTarget: scroll_lock_addScrollableTarget,
-	  removeScrollableTarget: scroll_lock_removeScrollableTarget,
-	  addLockableSelector: scroll_lock_addLockableSelector,
-	  addLockableTarget: scroll_lock_addLockableTarget,
-	  addFillGapSelector: scroll_lock_addFillGapSelector,
-	  removeFillGapSelector: scroll_lock_removeFillGapSelector,
-	  addFillGapTarget: scroll_lock_addFillGapTarget,
-	  removeFillGapTarget: scroll_lock_removeFillGapTarget,
-	  setFillGapMethod: scroll_lock_setFillGapMethod,
-	  refillGaps: refillGaps,
-	  _state: state
-	}, deprecatedMethods);
-
-	/* harmony default export */ __webpack_exports__["default"] = (scrollLock);
-
-	/***/ })
-	/******/ ])["default"];
-	});
-	}(scrollLock));
-
 	var name = "firebase-exp";
 	var version = "9.0.0-beta.8";
 
@@ -53713,21 +52918,1582 @@
 
 	if (!user) {
 	  window.location = "./auth.html";
-	} //const userCollection = collection(firestore, `users/${user.id}/`);
+	}
 
-
-	const id = `${user.id}`;
+	const id$4 = `${user.id}`;
 	const database = {
 	  timetable: Iu(firestore, "timeTables", "9D"),
-	  settings: Iu(firestore, "users", id, "userStorage", "config"),
-	  workspace: Iu(firestore, "users", id, "userStorage", "workspace"),
-	  marks: Iu(firestore, "users", id, "userStorage", "marks"),
-	  notes: Eu(firestore, "users", id, "notes"),
+	  settings: Iu(firestore, "users", id$4, "userStorage", "config"),
+	  workspace: Iu(firestore, "users", id$4, "userStorage", "workspace"),
+	  marks: Iu(firestore, "users", id$4, "userStorage", "marks"),
+	  notes: Eu(firestore, "users", id$4, "notes"),
 	  firestore
 	};
 	const settingsContext = /*#__PURE__*/react.exports.createContext(null);
 	const manifestContext = /*#__PURE__*/react.exports.createContext(null);
 	const timetableContext = /*#__PURE__*/react.exports.createContext(null);
+
+	var IconSettingsContext = /*#__PURE__*/react.exports.createContext({});
+
+	var browserSymbol = {exports: {}};
+
+	(function (module, exports) {
+	(function (global, factory) {
+		module.exports = factory() ;
+	}(commonjsGlobal$1, (function () {
+	var SpriteSymbol = function SpriteSymbol(ref) {
+	  var id = ref.id;
+	  var viewBox = ref.viewBox;
+	  var content = ref.content;
+
+	  this.id = id;
+	  this.viewBox = viewBox;
+	  this.content = content;
+	};
+
+	/**
+	 * @return {string}
+	 */
+	SpriteSymbol.prototype.stringify = function stringify () {
+	  return this.content;
+	};
+
+	/**
+	 * @return {string}
+	 */
+	SpriteSymbol.prototype.toString = function toString () {
+	  return this.stringify();
+	};
+
+	SpriteSymbol.prototype.destroy = function destroy () {
+	    var this$1$1 = this;
+
+	  ['id', 'viewBox', 'content'].forEach(function (prop) { return delete this$1$1[prop]; });
+	};
+
+	/**
+	 * @param {string} content
+	 * @return {Element}
+	 */
+	var parse = function (content) {
+	  var hasImportNode = !!document.importNode;
+	  var doc = new DOMParser().parseFromString(content, 'image/svg+xml').documentElement;
+
+	  /**
+	   * Fix for browser which are throwing WrongDocumentError
+	   * if you insert an element which is not part of the document
+	   * @see http://stackoverflow.com/a/7986519/4624403
+	   */
+	  if (hasImportNode) {
+	    return document.importNode(doc, true);
+	  }
+
+	  return doc;
+	};
+
+	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof commonjsGlobal$1 !== 'undefined' ? commonjsGlobal$1 : typeof self !== 'undefined' ? self : {};
+
+
+
+
+
+	function createCommonjsModule(fn, module) {
+		return module = { exports: {} }, fn(module, module.exports), module.exports;
+	}
+
+	var deepmerge = createCommonjsModule(function (module, exports) {
+	(function (root, factory) {
+	    {
+	        module.exports = factory();
+	    }
+	}(commonjsGlobal, function () {
+
+	function isMergeableObject(val) {
+	    var nonNullObject = val && typeof val === 'object';
+
+	    return nonNullObject
+	        && Object.prototype.toString.call(val) !== '[object RegExp]'
+	        && Object.prototype.toString.call(val) !== '[object Date]'
+	}
+
+	function emptyTarget(val) {
+	    return Array.isArray(val) ? [] : {}
+	}
+
+	function cloneIfNecessary(value, optionsArgument) {
+	    var clone = optionsArgument && optionsArgument.clone === true;
+	    return (clone && isMergeableObject(value)) ? deepmerge(emptyTarget(value), value, optionsArgument) : value
+	}
+
+	function defaultArrayMerge(target, source, optionsArgument) {
+	    var destination = target.slice();
+	    source.forEach(function(e, i) {
+	        if (typeof destination[i] === 'undefined') {
+	            destination[i] = cloneIfNecessary(e, optionsArgument);
+	        } else if (isMergeableObject(e)) {
+	            destination[i] = deepmerge(target[i], e, optionsArgument);
+	        } else if (target.indexOf(e) === -1) {
+	            destination.push(cloneIfNecessary(e, optionsArgument));
+	        }
+	    });
+	    return destination
+	}
+
+	function mergeObject(target, source, optionsArgument) {
+	    var destination = {};
+	    if (isMergeableObject(target)) {
+	        Object.keys(target).forEach(function (key) {
+	            destination[key] = cloneIfNecessary(target[key], optionsArgument);
+	        });
+	    }
+	    Object.keys(source).forEach(function (key) {
+	        if (!isMergeableObject(source[key]) || !target[key]) {
+	            destination[key] = cloneIfNecessary(source[key], optionsArgument);
+	        } else {
+	            destination[key] = deepmerge(target[key], source[key], optionsArgument);
+	        }
+	    });
+	    return destination
+	}
+
+	function deepmerge(target, source, optionsArgument) {
+	    var array = Array.isArray(source);
+	    var options = optionsArgument || { arrayMerge: defaultArrayMerge };
+	    var arrayMerge = options.arrayMerge || defaultArrayMerge;
+
+	    if (array) {
+	        return Array.isArray(target) ? arrayMerge(target, source, optionsArgument) : cloneIfNecessary(source, optionsArgument)
+	    } else {
+	        return mergeObject(target, source, optionsArgument)
+	    }
+	}
+
+	deepmerge.all = function deepmergeAll(array, optionsArgument) {
+	    if (!Array.isArray(array) || array.length < 2) {
+	        throw new Error('first argument should be an array with at least two elements')
+	    }
+
+	    // we are sure there are at least 2 values, so it is safe to have no initial value
+	    return array.reduce(function(prev, next) {
+	        return deepmerge(prev, next, optionsArgument)
+	    })
+	};
+
+	return deepmerge
+
+	}));
+	});
+
+	var namespaces_1 = createCommonjsModule(function (module, exports) {
+	var namespaces = {
+	  svg: {
+	    name: 'xmlns',
+	    uri: 'http://www.w3.org/2000/svg'
+	  },
+	  xlink: {
+	    name: 'xmlns:xlink',
+	    uri: 'http://www.w3.org/1999/xlink'
+	  }
+	};
+
+	exports.default = namespaces;
+	module.exports = exports.default;
+	});
+
+	/**
+	 * @param {Object} attrs
+	 * @return {string}
+	 */
+	var objectToAttrsString = function (attrs) {
+	  return Object.keys(attrs).map(function (attr) {
+	    var value = attrs[attr].toString().replace(/"/g, '&quot;');
+	    return (attr + "=\"" + value + "\"");
+	  }).join(' ');
+	};
+
+	var svg = namespaces_1.svg;
+	var xlink = namespaces_1.xlink;
+
+	var defaultAttrs = {};
+	defaultAttrs[svg.name] = svg.uri;
+	defaultAttrs[xlink.name] = xlink.uri;
+
+	/**
+	 * @param {string} [content]
+	 * @param {Object} [attributes]
+	 * @return {string}
+	 */
+	var wrapInSvgString = function (content, attributes) {
+	  if ( content === void 0 ) content = '';
+
+	  var attrs = deepmerge(defaultAttrs, attributes || {});
+	  var attrsRendered = objectToAttrsString(attrs);
+	  return ("<svg " + attrsRendered + ">" + content + "</svg>");
+	};
+
+	var BrowserSpriteSymbol = (function (SpriteSymbol$$1) {
+	  function BrowserSpriteSymbol () {
+	    SpriteSymbol$$1.apply(this, arguments);
+	  }
+
+	  if ( SpriteSymbol$$1 ) BrowserSpriteSymbol.__proto__ = SpriteSymbol$$1;
+	  BrowserSpriteSymbol.prototype = Object.create( SpriteSymbol$$1 && SpriteSymbol$$1.prototype );
+	  BrowserSpriteSymbol.prototype.constructor = BrowserSpriteSymbol;
+
+	  var prototypeAccessors = { isMounted: {} };
+
+	  prototypeAccessors.isMounted.get = function () {
+	    return !!this.node;
+	  };
+
+	  /**
+	   * @param {Element} node
+	   * @return {BrowserSpriteSymbol}
+	   */
+	  BrowserSpriteSymbol.createFromExistingNode = function createFromExistingNode (node) {
+	    return new BrowserSpriteSymbol({
+	      id: node.getAttribute('id'),
+	      viewBox: node.getAttribute('viewBox'),
+	      content: node.outerHTML
+	    });
+	  };
+
+	  BrowserSpriteSymbol.prototype.destroy = function destroy () {
+	    if (this.isMounted) {
+	      this.unmount();
+	    }
+	    SpriteSymbol$$1.prototype.destroy.call(this);
+	  };
+
+	  /**
+	   * @param {Element|string} target
+	   * @return {Element}
+	   */
+	  BrowserSpriteSymbol.prototype.mount = function mount (target) {
+	    if (this.isMounted) {
+	      return this.node;
+	    }
+
+	    var mountTarget = typeof target === 'string' ? document.querySelector(target) : target;
+	    var node = this.render();
+	    this.node = node;
+
+	    mountTarget.appendChild(node);
+
+	    return node;
+	  };
+
+	  /**
+	   * @return {Element}
+	   */
+	  BrowserSpriteSymbol.prototype.render = function render () {
+	    var content = this.stringify();
+	    return parse(wrapInSvgString(content)).childNodes[0];
+	  };
+
+	  BrowserSpriteSymbol.prototype.unmount = function unmount () {
+	    this.node.parentNode.removeChild(this.node);
+	  };
+
+	  Object.defineProperties( BrowserSpriteSymbol.prototype, prototypeAccessors );
+
+	  return BrowserSpriteSymbol;
+	}(SpriteSymbol));
+
+	return BrowserSpriteSymbol;
+
+	})));
+	}(browserSymbol));
+
+	var BrowserSymbol = browserSymbol.exports;
+
+	/**
+	 * Code refactored from Mozilla Developer Network:
+	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+	 */
+
+	function assign(target, firstSource) {
+	  if (target === undefined || target === null) {
+	    throw new TypeError('Cannot convert first argument to object');
+	  }
+
+	  var to = Object(target);
+	  for (var i = 1; i < arguments.length; i++) {
+	    var nextSource = arguments[i];
+	    if (nextSource === undefined || nextSource === null) {
+	      continue;
+	    }
+
+	    var keysArray = Object.keys(Object(nextSource));
+	    for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+	      var nextKey = keysArray[nextIndex];
+	      var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+	      if (desc !== undefined && desc.enumerable) {
+	        to[nextKey] = nextSource[nextKey];
+	      }
+	    }
+	  }
+	  return to;
+	}
+
+	function polyfill() {
+	  if (!Object.assign) {
+	    Object.defineProperty(Object, 'assign', {
+	      enumerable: false,
+	      configurable: true,
+	      writable: true,
+	      value: assign
+	    });
+	  }
+	}
+
+	var es6ObjectAssign = {
+	  assign: assign,
+	  polyfill: polyfill
+	};
+
+	var browserSprite$1 = {exports: {}};
+
+	(function (module, exports) {
+	(function (global, factory) {
+		module.exports = factory() ;
+	}(commonjsGlobal$1, (function () {
+	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof commonjsGlobal$1 !== 'undefined' ? commonjsGlobal$1 : typeof self !== 'undefined' ? self : {};
+
+
+
+
+
+	function createCommonjsModule(fn, module) {
+		return module = { exports: {} }, fn(module, module.exports), module.exports;
+	}
+
+	var deepmerge = createCommonjsModule(function (module, exports) {
+	(function (root, factory) {
+	    {
+	        module.exports = factory();
+	    }
+	}(commonjsGlobal, function () {
+
+	function isMergeableObject(val) {
+	    var nonNullObject = val && typeof val === 'object';
+
+	    return nonNullObject
+	        && Object.prototype.toString.call(val) !== '[object RegExp]'
+	        && Object.prototype.toString.call(val) !== '[object Date]'
+	}
+
+	function emptyTarget(val) {
+	    return Array.isArray(val) ? [] : {}
+	}
+
+	function cloneIfNecessary(value, optionsArgument) {
+	    var clone = optionsArgument && optionsArgument.clone === true;
+	    return (clone && isMergeableObject(value)) ? deepmerge(emptyTarget(value), value, optionsArgument) : value
+	}
+
+	function defaultArrayMerge(target, source, optionsArgument) {
+	    var destination = target.slice();
+	    source.forEach(function(e, i) {
+	        if (typeof destination[i] === 'undefined') {
+	            destination[i] = cloneIfNecessary(e, optionsArgument);
+	        } else if (isMergeableObject(e)) {
+	            destination[i] = deepmerge(target[i], e, optionsArgument);
+	        } else if (target.indexOf(e) === -1) {
+	            destination.push(cloneIfNecessary(e, optionsArgument));
+	        }
+	    });
+	    return destination
+	}
+
+	function mergeObject(target, source, optionsArgument) {
+	    var destination = {};
+	    if (isMergeableObject(target)) {
+	        Object.keys(target).forEach(function (key) {
+	            destination[key] = cloneIfNecessary(target[key], optionsArgument);
+	        });
+	    }
+	    Object.keys(source).forEach(function (key) {
+	        if (!isMergeableObject(source[key]) || !target[key]) {
+	            destination[key] = cloneIfNecessary(source[key], optionsArgument);
+	        } else {
+	            destination[key] = deepmerge(target[key], source[key], optionsArgument);
+	        }
+	    });
+	    return destination
+	}
+
+	function deepmerge(target, source, optionsArgument) {
+	    var array = Array.isArray(source);
+	    var options = optionsArgument || { arrayMerge: defaultArrayMerge };
+	    var arrayMerge = options.arrayMerge || defaultArrayMerge;
+
+	    if (array) {
+	        return Array.isArray(target) ? arrayMerge(target, source, optionsArgument) : cloneIfNecessary(source, optionsArgument)
+	    } else {
+	        return mergeObject(target, source, optionsArgument)
+	    }
+	}
+
+	deepmerge.all = function deepmergeAll(array, optionsArgument) {
+	    if (!Array.isArray(array) || array.length < 2) {
+	        throw new Error('first argument should be an array with at least two elements')
+	    }
+
+	    // we are sure there are at least 2 values, so it is safe to have no initial value
+	    return array.reduce(function(prev, next) {
+	        return deepmerge(prev, next, optionsArgument)
+	    })
+	};
+
+	return deepmerge
+
+	}));
+	});
+
+	//      
+	// An event handler can take an optional event argument
+	// and should not return a value
+	                                          
+	// An array of all currently registered event handlers for a type
+	                                            
+	// A map of event types and their corresponding event handlers.
+	                        
+	                                   
+	  
+
+	/** Mitt: Tiny (~200b) functional event emitter / pubsub.
+	 *  @name mitt
+	 *  @returns {Mitt}
+	 */
+	function mitt(all                 ) {
+		all = all || Object.create(null);
+
+		return {
+			/**
+			 * Register an event handler for the given type.
+			 *
+			 * @param  {String} type	Type of event to listen for, or `"*"` for all events
+			 * @param  {Function} handler Function to call in response to given event
+			 * @memberOf mitt
+			 */
+			on: function on(type        , handler              ) {
+				(all[type] || (all[type] = [])).push(handler);
+			},
+
+			/**
+			 * Remove an event handler for the given type.
+			 *
+			 * @param  {String} type	Type of event to unregister `handler` from, or `"*"`
+			 * @param  {Function} handler Handler function to remove
+			 * @memberOf mitt
+			 */
+			off: function off(type        , handler              ) {
+				if (all[type]) {
+					all[type].splice(all[type].indexOf(handler) >>> 0, 1);
+				}
+			},
+
+			/**
+			 * Invoke all handlers for the given type.
+			 * If present, `"*"` handlers are invoked after type-matched handlers.
+			 *
+			 * @param {String} type  The event type to invoke
+			 * @param {Any} [evt]  Any value (object is recommended and powerful), passed to each handler
+			 * @memberof mitt
+			 */
+			emit: function emit(type        , evt     ) {
+				(all[type] || []).map(function (handler) { handler(evt); });
+				(all['*'] || []).map(function (handler) { handler(type, evt); });
+			}
+		};
+	}
+
+	var namespaces_1 = createCommonjsModule(function (module, exports) {
+	var namespaces = {
+	  svg: {
+	    name: 'xmlns',
+	    uri: 'http://www.w3.org/2000/svg'
+	  },
+	  xlink: {
+	    name: 'xmlns:xlink',
+	    uri: 'http://www.w3.org/1999/xlink'
+	  }
+	};
+
+	exports.default = namespaces;
+	module.exports = exports.default;
+	});
+
+	/**
+	 * @param {Object} attrs
+	 * @return {string}
+	 */
+	var objectToAttrsString = function (attrs) {
+	  return Object.keys(attrs).map(function (attr) {
+	    var value = attrs[attr].toString().replace(/"/g, '&quot;');
+	    return (attr + "=\"" + value + "\"");
+	  }).join(' ');
+	};
+
+	var svg = namespaces_1.svg;
+	var xlink = namespaces_1.xlink;
+
+	var defaultAttrs = {};
+	defaultAttrs[svg.name] = svg.uri;
+	defaultAttrs[xlink.name] = xlink.uri;
+
+	/**
+	 * @param {string} [content]
+	 * @param {Object} [attributes]
+	 * @return {string}
+	 */
+	var wrapInSvgString = function (content, attributes) {
+	  if ( content === void 0 ) content = '';
+
+	  var attrs = deepmerge(defaultAttrs, attributes || {});
+	  var attrsRendered = objectToAttrsString(attrs);
+	  return ("<svg " + attrsRendered + ">" + content + "</svg>");
+	};
+
+	var svg$1 = namespaces_1.svg;
+	var xlink$1 = namespaces_1.xlink;
+
+	var defaultConfig = {
+	  attrs: ( obj = {
+	    style: ['position: absolute', 'width: 0', 'height: 0'].join('; '),
+	    'aria-hidden': 'true'
+	  }, obj[svg$1.name] = svg$1.uri, obj[xlink$1.name] = xlink$1.uri, obj )
+	};
+	var obj;
+
+	var Sprite = function Sprite(config) {
+	  this.config = deepmerge(defaultConfig, config || {});
+	  this.symbols = [];
+	};
+
+	/**
+	 * Add new symbol. If symbol with the same id exists it will be replaced.
+	 * @param {SpriteSymbol} symbol
+	 * @return {boolean} `true` - symbol was added, `false` - replaced
+	 */
+	Sprite.prototype.add = function add (symbol) {
+	  var ref = this;
+	    var symbols = ref.symbols;
+	  var existing = this.find(symbol.id);
+
+	  if (existing) {
+	    symbols[symbols.indexOf(existing)] = symbol;
+	    return false;
+	  }
+
+	  symbols.push(symbol);
+	  return true;
+	};
+
+	/**
+	 * Remove symbol & destroy it
+	 * @param {string} id
+	 * @return {boolean} `true` - symbol was found & successfully destroyed, `false` - otherwise
+	 */
+	Sprite.prototype.remove = function remove (id) {
+	  var ref = this;
+	    var symbols = ref.symbols;
+	  var symbol = this.find(id);
+
+	  if (symbol) {
+	    symbols.splice(symbols.indexOf(symbol), 1);
+	    symbol.destroy();
+	    return true;
+	  }
+
+	  return false;
+	};
+
+	/**
+	 * @param {string} id
+	 * @return {SpriteSymbol|null}
+	 */
+	Sprite.prototype.find = function find (id) {
+	  return this.symbols.filter(function (s) { return s.id === id; })[0] || null;
+	};
+
+	/**
+	 * @param {string} id
+	 * @return {boolean}
+	 */
+	Sprite.prototype.has = function has (id) {
+	  return this.find(id) !== null;
+	};
+
+	/**
+	 * @return {string}
+	 */
+	Sprite.prototype.stringify = function stringify () {
+	  var ref = this.config;
+	    var attrs = ref.attrs;
+	  var stringifiedSymbols = this.symbols.map(function (s) { return s.stringify(); }).join('');
+	  return wrapInSvgString(stringifiedSymbols, attrs);
+	};
+
+	/**
+	 * @return {string}
+	 */
+	Sprite.prototype.toString = function toString () {
+	  return this.stringify();
+	};
+
+	Sprite.prototype.destroy = function destroy () {
+	  this.symbols.forEach(function (s) { return s.destroy(); });
+	};
+
+	var SpriteSymbol = function SpriteSymbol(ref) {
+	  var id = ref.id;
+	  var viewBox = ref.viewBox;
+	  var content = ref.content;
+
+	  this.id = id;
+	  this.viewBox = viewBox;
+	  this.content = content;
+	};
+
+	/**
+	 * @return {string}
+	 */
+	SpriteSymbol.prototype.stringify = function stringify () {
+	  return this.content;
+	};
+
+	/**
+	 * @return {string}
+	 */
+	SpriteSymbol.prototype.toString = function toString () {
+	  return this.stringify();
+	};
+
+	SpriteSymbol.prototype.destroy = function destroy () {
+	    var this$1$1 = this;
+
+	  ['id', 'viewBox', 'content'].forEach(function (prop) { return delete this$1$1[prop]; });
+	};
+
+	/**
+	 * @param {string} content
+	 * @return {Element}
+	 */
+	var parse = function (content) {
+	  var hasImportNode = !!document.importNode;
+	  var doc = new DOMParser().parseFromString(content, 'image/svg+xml').documentElement;
+
+	  /**
+	   * Fix for browser which are throwing WrongDocumentError
+	   * if you insert an element which is not part of the document
+	   * @see http://stackoverflow.com/a/7986519/4624403
+	   */
+	  if (hasImportNode) {
+	    return document.importNode(doc, true);
+	  }
+
+	  return doc;
+	};
+
+	var BrowserSpriteSymbol = (function (SpriteSymbol$$1) {
+	  function BrowserSpriteSymbol () {
+	    SpriteSymbol$$1.apply(this, arguments);
+	  }
+
+	  if ( SpriteSymbol$$1 ) BrowserSpriteSymbol.__proto__ = SpriteSymbol$$1;
+	  BrowserSpriteSymbol.prototype = Object.create( SpriteSymbol$$1 && SpriteSymbol$$1.prototype );
+	  BrowserSpriteSymbol.prototype.constructor = BrowserSpriteSymbol;
+
+	  var prototypeAccessors = { isMounted: {} };
+
+	  prototypeAccessors.isMounted.get = function () {
+	    return !!this.node;
+	  };
+
+	  /**
+	   * @param {Element} node
+	   * @return {BrowserSpriteSymbol}
+	   */
+	  BrowserSpriteSymbol.createFromExistingNode = function createFromExistingNode (node) {
+	    return new BrowserSpriteSymbol({
+	      id: node.getAttribute('id'),
+	      viewBox: node.getAttribute('viewBox'),
+	      content: node.outerHTML
+	    });
+	  };
+
+	  BrowserSpriteSymbol.prototype.destroy = function destroy () {
+	    if (this.isMounted) {
+	      this.unmount();
+	    }
+	    SpriteSymbol$$1.prototype.destroy.call(this);
+	  };
+
+	  /**
+	   * @param {Element|string} target
+	   * @return {Element}
+	   */
+	  BrowserSpriteSymbol.prototype.mount = function mount (target) {
+	    if (this.isMounted) {
+	      return this.node;
+	    }
+
+	    var mountTarget = typeof target === 'string' ? document.querySelector(target) : target;
+	    var node = this.render();
+	    this.node = node;
+
+	    mountTarget.appendChild(node);
+
+	    return node;
+	  };
+
+	  /**
+	   * @return {Element}
+	   */
+	  BrowserSpriteSymbol.prototype.render = function render () {
+	    var content = this.stringify();
+	    return parse(wrapInSvgString(content)).childNodes[0];
+	  };
+
+	  BrowserSpriteSymbol.prototype.unmount = function unmount () {
+	    this.node.parentNode.removeChild(this.node);
+	  };
+
+	  Object.defineProperties( BrowserSpriteSymbol.prototype, prototypeAccessors );
+
+	  return BrowserSpriteSymbol;
+	}(SpriteSymbol));
+
+	var defaultConfig$1 = {
+	  /**
+	   * Should following options be automatically configured:
+	   * - `syncUrlsWithBaseTag`
+	   * - `locationChangeAngularEmitter`
+	   * - `moveGradientsOutsideSymbol`
+	   * @type {boolean}
+	   */
+	  autoConfigure: true,
+
+	  /**
+	   * Default mounting selector
+	   * @type {string}
+	   */
+	  mountTo: 'body',
+
+	  /**
+	   * Fix disappearing SVG elements when <base href> exists.
+	   * Executes when sprite mounted.
+	   * @see http://stackoverflow.com/a/18265336/796152
+	   * @see https://github.com/everdimension/angular-svg-base-fix
+	   * @see https://github.com/angular/angular.js/issues/8934#issuecomment-56568466
+	   * @type {boolean}
+	   */
+	  syncUrlsWithBaseTag: false,
+
+	  /**
+	   * Should sprite listen custom location change event
+	   * @type {boolean}
+	   */
+	  listenLocationChangeEvent: true,
+
+	  /**
+	   * Custom window event name which should be emitted to update sprite urls
+	   * @type {string}
+	   */
+	  locationChangeEvent: 'locationChange',
+
+	  /**
+	   * Emit location change event in Angular automatically
+	   * @type {boolean}
+	   */
+	  locationChangeAngularEmitter: false,
+
+	  /**
+	   * Selector to find symbols usages when updating sprite urls
+	   * @type {string}
+	   */
+	  usagesToUpdate: 'use[*|href]',
+
+	  /**
+	   * Fix Firefox bug when gradients and patterns don't work if they are within a symbol.
+	   * Executes when sprite is rendered, but not mounted.
+	   * @see https://bugzilla.mozilla.org/show_bug.cgi?id=306674
+	   * @see https://bugzilla.mozilla.org/show_bug.cgi?id=353575
+	   * @see https://bugzilla.mozilla.org/show_bug.cgi?id=1235364
+	   * @type {boolean}
+	   */
+	  moveGradientsOutsideSymbol: false
+	};
+
+	/**
+	 * @param {*} arrayLike
+	 * @return {Array}
+	 */
+	var arrayFrom = function (arrayLike) {
+	  return Array.prototype.slice.call(arrayLike, 0);
+	};
+
+	var browser = {
+	  isChrome: function () { return /chrome/i.test(navigator.userAgent); },
+	  isFirefox: function () { return /firefox/i.test(navigator.userAgent); },
+
+	  // https://msdn.microsoft.com/en-us/library/ms537503(v=vs.85).aspx
+	  isIE: function () { return /msie/i.test(navigator.userAgent) || /trident/i.test(navigator.userAgent); },
+	  isEdge: function () { return /edge/i.test(navigator.userAgent); }
+	};
+
+	/**
+	 * @param {string} name
+	 * @param {*} data
+	 */
+	var dispatchEvent = function (name, data) {
+	  var event = document.createEvent('CustomEvent');
+	  event.initCustomEvent(name, false, false, data);
+	  window.dispatchEvent(event);
+	};
+
+	/**
+	 * IE doesn't evaluate <style> tags in SVGs that are dynamically added to the page.
+	 * This trick will trigger IE to read and use any existing SVG <style> tags.
+	 * @see https://github.com/iconic/SVGInjector/issues/23
+	 * @see https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/10898469/
+	 *
+	 * @param {Element} node DOM Element to search <style> tags in
+	 * @return {Array<HTMLStyleElement>}
+	 */
+	var evalStylesIEWorkaround = function (node) {
+	  var updatedNodes = [];
+
+	  arrayFrom(node.querySelectorAll('style'))
+	    .forEach(function (style) {
+	      style.textContent += '';
+	      updatedNodes.push(style);
+	    });
+
+	  return updatedNodes;
+	};
+
+	/**
+	 * @param {string} [url] If not provided - current URL will be used
+	 * @return {string}
+	 */
+	var getUrlWithoutFragment = function (url) {
+	  return (url || window.location.href).split('#')[0];
+	};
+
+	/* global angular */
+	/**
+	 * @param {string} eventName
+	 */
+	var locationChangeAngularEmitter = function (eventName) {
+	  angular.module('ng').run(['$rootScope', function ($rootScope) {
+	    $rootScope.$on('$locationChangeSuccess', function (e, newUrl, oldUrl) {
+	      dispatchEvent(eventName, { oldUrl: oldUrl, newUrl: newUrl });
+	    });
+	  }]);
+	};
+
+	var defaultSelector = 'linearGradient, radialGradient, pattern, mask, clipPath';
+
+	/**
+	 * @param {Element} svg
+	 * @param {string} [selector]
+	 * @return {Element}
+	 */
+	var moveGradientsOutsideSymbol = function (svg, selector) {
+	  if ( selector === void 0 ) selector = defaultSelector;
+
+	  arrayFrom(svg.querySelectorAll('symbol')).forEach(function (symbol) {
+	    arrayFrom(symbol.querySelectorAll(selector)).forEach(function (node) {
+	      symbol.parentNode.insertBefore(node, symbol);
+	    });
+	  });
+	  return svg;
+	};
+
+	/**
+	 * @param {NodeList} nodes
+	 * @param {Function} [matcher]
+	 * @return {Attr[]}
+	 */
+	function selectAttributes(nodes, matcher) {
+	  var attrs = arrayFrom(nodes).reduce(function (acc, node) {
+	    if (!node.attributes) {
+	      return acc;
+	    }
+
+	    var arrayfied = arrayFrom(node.attributes);
+	    var matched = matcher ? arrayfied.filter(matcher) : arrayfied;
+	    return acc.concat(matched);
+	  }, []);
+
+	  return attrs;
+	}
+
+	/**
+	 * @param {NodeList|Node} nodes
+	 * @param {boolean} [clone=true]
+	 * @return {string}
+	 */
+
+	var xLinkNS = namespaces_1.xlink.uri;
+	var xLinkAttrName = 'xlink:href';
+
+	// eslint-disable-next-line no-useless-escape
+	var specialUrlCharsPattern = /[{}|\\\^\[\]`"<>]/g;
+
+	function encoder(url) {
+	  return url.replace(specialUrlCharsPattern, function (match) {
+	    return ("%" + (match[0].charCodeAt(0).toString(16).toUpperCase()));
+	  });
+	}
+
+	function escapeRegExp(str) {
+	  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+	}
+
+	/**
+	 * @param {NodeList} nodes
+	 * @param {string} startsWith
+	 * @param {string} replaceWith
+	 * @return {NodeList}
+	 */
+	function updateReferences(nodes, startsWith, replaceWith) {
+	  arrayFrom(nodes).forEach(function (node) {
+	    var href = node.getAttribute(xLinkAttrName);
+	    if (href && href.indexOf(startsWith) === 0) {
+	      var newUrl = href.replace(startsWith, replaceWith);
+	      node.setAttributeNS(xLinkNS, xLinkAttrName, newUrl);
+	    }
+	  });
+
+	  return nodes;
+	}
+
+	/**
+	 * List of SVG attributes to update url() target in them
+	 */
+	var attList = [
+	  'clipPath',
+	  'colorProfile',
+	  'src',
+	  'cursor',
+	  'fill',
+	  'filter',
+	  'marker',
+	  'markerStart',
+	  'markerMid',
+	  'markerEnd',
+	  'mask',
+	  'stroke',
+	  'style'
+	];
+
+	var attSelector = attList.map(function (attr) { return ("[" + attr + "]"); }).join(',');
+
+	/**
+	 * Update URLs in svg image (like `fill="url(...)"`) and update referencing elements
+	 * @param {Element} svg
+	 * @param {NodeList} references
+	 * @param {string|RegExp} startsWith
+	 * @param {string} replaceWith
+	 * @return {void}
+	 *
+	 * @example
+	 * const sprite = document.querySelector('svg.sprite');
+	 * const usages = document.querySelectorAll('use');
+	 * updateUrls(sprite, usages, '#', 'prefix#');
+	 */
+	var updateUrls = function (svg, references, startsWith, replaceWith) {
+	  var startsWithEncoded = encoder(startsWith);
+	  var replaceWithEncoded = encoder(replaceWith);
+
+	  var nodes = svg.querySelectorAll(attSelector);
+	  var attrs = selectAttributes(nodes, function (ref) {
+	    var localName = ref.localName;
+	    var value = ref.value;
+
+	    return attList.indexOf(localName) !== -1 && value.indexOf(("url(" + startsWithEncoded)) !== -1;
+	  });
+
+	  attrs.forEach(function (attr) { return attr.value = attr.value.replace(new RegExp(escapeRegExp(startsWithEncoded), 'g'), replaceWithEncoded); });
+	  updateReferences(references, startsWithEncoded, replaceWithEncoded);
+	};
+
+	/**
+	 * Internal emitter events
+	 * @enum
+	 * @private
+	 */
+	var Events = {
+	  MOUNT: 'mount',
+	  SYMBOL_MOUNT: 'symbol_mount'
+	};
+
+	var BrowserSprite = (function (Sprite$$1) {
+	  function BrowserSprite(cfg) {
+	    var this$1$1 = this;
+	    if ( cfg === void 0 ) cfg = {};
+
+	    Sprite$$1.call(this, deepmerge(defaultConfig$1, cfg));
+
+	    var emitter = mitt();
+	    this._emitter = emitter;
+	    this.node = null;
+
+	    var ref = this;
+	    var config = ref.config;
+
+	    if (config.autoConfigure) {
+	      this._autoConfigure(cfg);
+	    }
+
+	    if (config.syncUrlsWithBaseTag) {
+	      var baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+	      emitter.on(Events.MOUNT, function () { return this$1$1.updateUrls('#', baseUrl); });
+	    }
+
+	    var handleLocationChange = this._handleLocationChange.bind(this);
+	    this._handleLocationChange = handleLocationChange;
+
+	    // Provide way to update sprite urls externally via dispatching custom window event
+	    if (config.listenLocationChangeEvent) {
+	      window.addEventListener(config.locationChangeEvent, handleLocationChange);
+	    }
+
+	    // Emit location change event in Angular automatically
+	    if (config.locationChangeAngularEmitter) {
+	      locationChangeAngularEmitter(config.locationChangeEvent);
+	    }
+
+	    // After sprite mounted
+	    emitter.on(Events.MOUNT, function (spriteNode) {
+	      if (config.moveGradientsOutsideSymbol) {
+	        moveGradientsOutsideSymbol(spriteNode);
+	      }
+	    });
+
+	    // After symbol mounted into sprite
+	    emitter.on(Events.SYMBOL_MOUNT, function (symbolNode) {
+	      if (config.moveGradientsOutsideSymbol) {
+	        moveGradientsOutsideSymbol(symbolNode.parentNode);
+	      }
+
+	      if (browser.isIE() || browser.isEdge()) {
+	        evalStylesIEWorkaround(symbolNode);
+	      }
+	    });
+	  }
+
+	  if ( Sprite$$1 ) BrowserSprite.__proto__ = Sprite$$1;
+	  BrowserSprite.prototype = Object.create( Sprite$$1 && Sprite$$1.prototype );
+	  BrowserSprite.prototype.constructor = BrowserSprite;
+
+	  var prototypeAccessors = { isMounted: {} };
+
+	  /**
+	   * @return {boolean}
+	   */
+	  prototypeAccessors.isMounted.get = function () {
+	    return !!this.node;
+	  };
+
+	  /**
+	   * Automatically configure following options
+	   * - `syncUrlsWithBaseTag`
+	   * - `locationChangeAngularEmitter`
+	   * - `moveGradientsOutsideSymbol`
+	   * @param {Object} cfg
+	   * @private
+	   */
+	  BrowserSprite.prototype._autoConfigure = function _autoConfigure (cfg) {
+	    var ref = this;
+	    var config = ref.config;
+
+	    if (typeof cfg.syncUrlsWithBaseTag === 'undefined') {
+	      config.syncUrlsWithBaseTag = typeof document.getElementsByTagName('base')[0] !== 'undefined';
+	    }
+
+	    if (typeof cfg.locationChangeAngularEmitter === 'undefined') {
+	        config.locationChangeAngularEmitter = typeof window.angular !== 'undefined';
+	    }
+
+	    if (typeof cfg.moveGradientsOutsideSymbol === 'undefined') {
+	      config.moveGradientsOutsideSymbol = browser.isFirefox();
+	    }
+	  };
+
+	  /**
+	   * @param {Event} event
+	   * @param {Object} event.detail
+	   * @param {string} event.detail.oldUrl
+	   * @param {string} event.detail.newUrl
+	   * @private
+	   */
+	  BrowserSprite.prototype._handleLocationChange = function _handleLocationChange (event) {
+	    var ref = event.detail;
+	    var oldUrl = ref.oldUrl;
+	    var newUrl = ref.newUrl;
+	    this.updateUrls(oldUrl, newUrl);
+	  };
+
+	  /**
+	   * Add new symbol. If symbol with the same id exists it will be replaced.
+	   * If sprite already mounted - `symbol.mount(sprite.node)` will be called.
+	   * @fires Events#SYMBOL_MOUNT
+	   * @param {BrowserSpriteSymbol} symbol
+	   * @return {boolean} `true` - symbol was added, `false` - replaced
+	   */
+	  BrowserSprite.prototype.add = function add (symbol) {
+	    var sprite = this;
+	    var isNewSymbol = Sprite$$1.prototype.add.call(this, symbol);
+
+	    if (this.isMounted && isNewSymbol) {
+	      symbol.mount(sprite.node);
+	      this._emitter.emit(Events.SYMBOL_MOUNT, symbol.node);
+	    }
+
+	    return isNewSymbol;
+	  };
+
+	  /**
+	   * Attach to existing DOM node
+	   * @param {string|Element} target
+	   * @return {Element|null} attached DOM Element. null if node to attach not found.
+	   */
+	  BrowserSprite.prototype.attach = function attach (target) {
+	    var this$1$1 = this;
+
+	    var sprite = this;
+
+	    if (sprite.isMounted) {
+	      return sprite.node;
+	    }
+
+	    /** @type Element */
+	    var node = typeof target === 'string' ? document.querySelector(target) : target;
+	    sprite.node = node;
+
+	    // Already added symbols needs to be mounted
+	    this.symbols.forEach(function (symbol) {
+	      symbol.mount(sprite.node);
+	      this$1$1._emitter.emit(Events.SYMBOL_MOUNT, symbol.node);
+	    });
+
+	    // Create symbols from existing DOM nodes, add and mount them
+	    arrayFrom(node.querySelectorAll('symbol'))
+	      .forEach(function (symbolNode) {
+	        var symbol = BrowserSpriteSymbol.createFromExistingNode(symbolNode);
+	        symbol.node = symbolNode; // hack to prevent symbol mounting to sprite when adding
+	        sprite.add(symbol);
+	      });
+
+	    this._emitter.emit(Events.MOUNT, node);
+
+	    return node;
+	  };
+
+	  BrowserSprite.prototype.destroy = function destroy () {
+	    var ref = this;
+	    var config = ref.config;
+	    var symbols = ref.symbols;
+	    var _emitter = ref._emitter;
+
+	    symbols.forEach(function (s) { return s.destroy(); });
+
+	    _emitter.off('*');
+	    window.removeEventListener(config.locationChangeEvent, this._handleLocationChange);
+
+	    if (this.isMounted) {
+	      this.unmount();
+	    }
+	  };
+
+	  /**
+	   * @fires Events#MOUNT
+	   * @param {string|Element} [target]
+	   * @param {boolean} [prepend=false]
+	   * @return {Element|null} rendered sprite node. null if mount node not found.
+	   */
+	  BrowserSprite.prototype.mount = function mount (target, prepend) {
+	    if ( target === void 0 ) target = this.config.mountTo;
+	    if ( prepend === void 0 ) prepend = false;
+
+	    var sprite = this;
+
+	    if (sprite.isMounted) {
+	      return sprite.node;
+	    }
+
+	    var mountNode = typeof target === 'string' ? document.querySelector(target) : target;
+	    var node = sprite.render();
+	    this.node = node;
+
+	    if (prepend && mountNode.childNodes[0]) {
+	      mountNode.insertBefore(node, mountNode.childNodes[0]);
+	    } else {
+	      mountNode.appendChild(node);
+	    }
+
+	    this._emitter.emit(Events.MOUNT, node);
+
+	    return node;
+	  };
+
+	  /**
+	   * @return {Element}
+	   */
+	  BrowserSprite.prototype.render = function render () {
+	    return parse(this.stringify());
+	  };
+
+	  /**
+	   * Detach sprite from the DOM
+	   */
+	  BrowserSprite.prototype.unmount = function unmount () {
+	    this.node.parentNode.removeChild(this.node);
+	  };
+
+	  /**
+	   * Update URLs in sprite and usage elements
+	   * @param {string} oldUrl
+	   * @param {string} newUrl
+	   * @return {boolean} `true` - URLs was updated, `false` - sprite is not mounted
+	   */
+	  BrowserSprite.prototype.updateUrls = function updateUrls$1 (oldUrl, newUrl) {
+	    if (!this.isMounted) {
+	      return false;
+	    }
+
+	    var usages = document.querySelectorAll(this.config.usagesToUpdate);
+
+	    updateUrls(
+	      this.node,
+	      usages,
+	      ((getUrlWithoutFragment(oldUrl)) + "#"),
+	      ((getUrlWithoutFragment(newUrl)) + "#")
+	    );
+
+	    return true;
+	  };
+
+	  Object.defineProperties( BrowserSprite.prototype, prototypeAccessors );
+
+	  return BrowserSprite;
+	}(Sprite));
+
+	return BrowserSprite;
+
+	})));
+	}(browserSprite$1));
+
+	var BrowserSprite = browserSprite$1.exports;
+
+	// @ts-ignore
+	var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+	var browserSprite;
+
+	if (canUseDOM) {
+	  var spriteId = '__SVG_SPRITE_NODE__';
+	  browserSprite = new BrowserSprite({
+	    attrs: {
+	      id: spriteId
+	    }
+	  });
+
+	  var mount = function mount() {
+	    var spriteNode = document.getElementById(spriteId);
+
+	    if (spriteNode) {
+	      browserSprite.attach(spriteNode);
+	    } else {
+	      browserSprite.mount();
+	    }
+	  };
+
+	  if (document.querySelector('body')) {
+	    mount();
+	  } else {
+	    document.addEventListener('DOMContentLoaded', mount);
+	  }
+	} else {
+	  browserSprite = null;
+	}
+
+	function addSpriteSymbol(symbol) {
+	  if (browserSprite) {
+	    browserSprite.add(symbol);
+	  }
+	}
+	var useIsomorphicLayoutEffect = canUseDOM ? react.exports.useLayoutEffect : react.exports.useEffect;
+
+	function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+	function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+	function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+	function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+	var svgStyle = {
+	  display: 'block'
+	};
+
+	function iconClass(fragments, _ref) {
+	  var classPrefix = _ref.classPrefix,
+	      globalClasses = _ref.globalClasses;
+	  var res = '';
+
+	  for (var i = 0; i < fragments.length; i++) {
+	    if (classPrefix) {
+	      res += ' ' + (classPrefix + fragments[i]);
+	    }
+
+	    if (!classPrefix || globalClasses) {
+	      res += ' ' + fragments[i];
+	    }
+	  }
+
+	  return res;
+	}
+
+	var SvgIcon = function SvgIcon(_ref2) {
+	  var width = _ref2.width,
+	      height = _ref2.height,
+	      viewBox = _ref2.viewBox,
+	      id = _ref2.id,
+	      className = _ref2.className,
+	      style = _ref2.style,
+	      fill = _ref2.fill,
+	      getRootRef = _ref2.getRootRef,
+	      Component = _ref2.Component,
+	      restProps = _objectWithoutProperties(_ref2, ["width", "height", "viewBox", "id", "className", "style", "fill", "getRootRef", "Component"]);
+
+	  var size = Math.max(width, height);
+	  var iconSettings = react.exports.useContext(IconSettingsContext);
+	  var ownClass = iconClass(['Icon', "Icon--".concat(size), "Icon--w-".concat(width), "Icon--h-".concat(height), "Icon--".concat(id)], iconSettings);
+	  return /*#__PURE__*/React.createElement(Component, _extends({
+	    role: "presentation"
+	  }, restProps, {
+	    ref: getRootRef,
+	    className: "".concat(ownClass, " ").concat(className),
+	    style: _objectSpread(_objectSpread({}, style), {}, {
+	      width: width,
+	      height: height
+	    })
+	  }), /*#__PURE__*/React.createElement("svg", {
+	    viewBox: viewBox,
+	    width: width,
+	    height: height,
+	    style: svgStyle
+	  }, /*#__PURE__*/React.createElement("use", {
+	    xlinkHref: "#".concat(id),
+	    style: {
+	      fill: 'currentColor',
+	      color: fill
+	    }
+	  })));
+	};
+	SvgIcon.defaultProps = {
+	  Component: 'div',
+	  className: '',
+	  style: {}
+	};
+
+	var viewBox$3 = '0 0 28 28';
+	var id$3 = 'calendar_outline_28';
+	var content$3 = '<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" id="calendar_outline_28"><g fill="none" fill-rule="evenodd"><path d="M0 0h28v28H0z" /><path d="M19 1a1 1 0 011 1v1.16c.84.133 1.384.35 1.93.641A5.452 5.452 0 0124.2 6.07c.475.889.748 1.77.794 3.93L25 10v7.308l-.005.61c-.041 2.22-.315 3.113-.796 4.013a5.452 5.452 0 01-2.268 2.268c-.978.523-1.948.801-4.623.801h-6.616l-.61-.005c-2.22-.041-3.113-.315-4.013-.796a5.452 5.452 0 01-2.268-2.268c-.502-.94-.778-1.87-.8-4.31L3 10.691V10c.053-2.16.326-3.042.801-3.93A5.452 5.452 0 016.07 3.8 5.679 5.679 0 018 3.16V2a1 1 0 112 0v1.007c.217-.005.447-.007.692-.007h6.616c.245 0 .476.002.694.007L18 2a1 1 0 011-1zm3.999 11H5v5.591l.01.57c.039 1.506.198 2.159.555 2.826.337.63.818 1.111 1.448 1.448.746.4 1.473.551 3.396.564h7.182l.57-.009c1.506-.039 2.159-.198 2.826-.555a3.453 3.453 0 001.448-1.448c.4-.746.551-1.473.564-3.396V12zm-3.953 5c.433 0 .774.081 1.059.234.285.152.509.376.661.661.153.285.234.626.234 1.059v.092c0 .433-.081.774-.234 1.059a1.59 1.59 0 01-.661.661c-.285.153-.626.234-1.059.234h-.092c-.433 0-.774-.081-1.059-.234a1.59 1.59 0 01-.661-.661c-.153-.285-.234-.626-.234-1.059v-.092c0-.433.081-.774.234-1.059a1.59 1.59 0 01.661-.661c.285-.153.626-.234 1.059-.234h.092zM17.591 5H10.41L10 5.007V6a1 1 0 11-2 0v-.807c-.381.087-.683.21-.987.372a3.453 3.453 0 00-1.448 1.448c-.37.69-.527 1.365-.559 2.986L22.993 10l-.003-.16c-.039-1.507-.198-2.16-.555-2.827a3.453 3.453 0 00-1.448-1.448 3.835 3.835 0 00-.986-.372L20 6a1 1 0 01-2 0l.002-.994-.41-.005z" fill="currentColor" fill-rule="nonzero" /></g></symbol>';
+	var isMounted$3 = false;
+
+	function mountIcon$3() {
+	  if (!isMounted$3) {
+	    addSpriteSymbol(new BrowserSymbol({
+	      id: id$3,
+	      viewBox: viewBox$3,
+	      content: content$3
+	    }));
+	    isMounted$3 = true;
+	  }
+	}
+
+	var Icon28CalendarOutline = function Icon28CalendarOutline(props) {
+	  useIsomorphicLayoutEffect(function () {
+	    mountIcon$3();
+	  }, []);
+	  return /*#__PURE__*/React.createElement(SvgIcon, es6ObjectAssign.assign({}, props, {
+	    viewBox: viewBox$3,
+	    id: id$3,
+	    width: !isNaN(props.width) ? +props.width : 28,
+	    height: !isNaN(props.height) ? +props.height : 28
+	  }));
+	};
+
+	Icon28CalendarOutline.mountIcon = mountIcon$3;
+
+	var viewBox$2 = '0 0 28 28';
+	var id$2 = 'education_outline_28';
+	var content$2 = '<symbol fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" id="education_outline_28"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.428 6.043a5 5 0 015.145 0l6.681 4.01a.5.5 0 01-.016.866l-6.828 3.756a5 5 0 01-4.82 0l-6.828-3.756a.5.5 0 01-.016-.867l6.681-4.009zm6.174-1.715l6.681 4.01c1.654.992 1.609 3.404-.081 4.334l-6.828 3.755a7 7 0 01-6.747 0l-6.829-3.755c-1.69-.93-1.735-3.342-.081-4.335l6.681-4.009a7 7 0 017.204 0z" fill="currentColor" /><path d="M23.5 10.5a1 1 0 012 0v5a1 1 0 01-2 0v-5z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M8 13v5a5 5 0 005 5h2a5 5 0 005-5v-5h2v5a7 7 0 01-7 7h-2a7 7 0 01-7-7v-5h2z" fill="currentColor" /></symbol>';
+	var isMounted$2 = false;
+
+	function mountIcon$2() {
+	  if (!isMounted$2) {
+	    addSpriteSymbol(new BrowserSymbol({
+	      id: id$2,
+	      viewBox: viewBox$2,
+	      content: content$2
+	    }));
+	    isMounted$2 = true;
+	  }
+	}
+
+	var Icon28EducationOutline = function Icon28EducationOutline(props) {
+	  useIsomorphicLayoutEffect(function () {
+	    mountIcon$2();
+	  }, []);
+	  return /*#__PURE__*/React.createElement(SvgIcon, es6ObjectAssign.assign({}, props, {
+	    viewBox: viewBox$2,
+	    id: id$2,
+	    width: !isNaN(props.width) ? +props.width : 28,
+	    height: !isNaN(props.height) ? +props.height : 28
+	  }));
+	};
+
+	Icon28EducationOutline.mountIcon = mountIcon$2;
+
+	var viewBox$1 = '0 0 28 28';
+	var id$1 = 'home_outline_28';
+	var content$1 = '<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" id="home_outline_28"><g fill="none" fill-rule="evenodd"><path d="M0 0h28v28H0z" /><path d="M15.13 2.691l8.936 8.49A3 3 0 0125 13.356v8.641a2.5 2.5 0 01-2.5 2.5h-6a1 1 0 01-1-1v-5.5a1.5 1.5 0 00-3 0v5.5a1 1 0 01-1 1h-6a2.5 2.5 0 01-2.5-2.5v-8.641a3 3 0 01.934-2.175l8.936-8.49a1.64 1.64 0 012.26 0zM14 4.377L5.311 12.63a1 1 0 00-.311.725v8.641a.5.5 0 00.5.5h5v-4.5a3.5 3.5 0 017 0v4.5h5a.5.5 0 00.5-.5v-8.641a1 1 0 00-.311-.725L14 4.377z" fill="currentColor" fill-rule="nonzero" /></g></symbol>';
+	var isMounted$1 = false;
+
+	function mountIcon$1() {
+	  if (!isMounted$1) {
+	    addSpriteSymbol(new BrowserSymbol({
+	      id: id$1,
+	      viewBox: viewBox$1,
+	      content: content$1
+	    }));
+	    isMounted$1 = true;
+	  }
+	}
+
+	var Icon28HomeOutline = function Icon28HomeOutline(props) {
+	  useIsomorphicLayoutEffect(function () {
+	    mountIcon$1();
+	  }, []);
+	  return /*#__PURE__*/React.createElement(SvgIcon, es6ObjectAssign.assign({}, props, {
+	    viewBox: viewBox$1,
+	    id: id$1,
+	    width: !isNaN(props.width) ? +props.width : 28,
+	    height: !isNaN(props.height) ? +props.height : 28
+	  }));
+	};
+
+	Icon28HomeOutline.mountIcon = mountIcon$1;
+
+	var viewBox = '0 0 28 28';
+	var id = 'search_28';
+	var content = '<symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" id="search_28"><g fill="none" fill-rule="evenodd"><path d="M0 0h28v28H0z" /><path d="M20.522 18.966l3.756 3.756a1.1 1.1 0 11-1.556 1.556l-3.756-3.756A9.56 9.56 0 0113 22.6a9.6 9.6 0 119.6-9.6 9.56 9.56 0 01-2.078 5.966zM13 20.4a7.4 7.4 0 100-14.8 7.4 7.4 0 000 14.8z" fill="currentColor" fill-rule="nonzero" /></g></symbol>';
+	var isMounted = false;
+
+	function mountIcon() {
+	  if (!isMounted) {
+	    addSpriteSymbol(new BrowserSymbol({
+	      id: id,
+	      viewBox: viewBox,
+	      content: content
+	    }));
+	    isMounted = true;
+	  }
+	}
+
+	var Icon28Search = function Icon28Search(props) {
+	  useIsomorphicLayoutEffect(function () {
+	    mountIcon();
+	  }, []);
+	  return /*#__PURE__*/React.createElement(SvgIcon, es6ObjectAssign.assign({}, props, {
+	    viewBox: viewBox,
+	    id: id,
+	    width: !isNaN(props.width) ? +props.width : 28,
+	    height: !isNaN(props.height) ? +props.height : 28
+	  }));
+	};
+
+	Icon28Search.mountIcon = mountIcon;
+
+	function NavButton(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    onClick: props.setActiveTab,
+	    className: "NavButton " + (props.isActive ? "active" : "")
+	  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(props.icon, null)), /*#__PURE__*/React.createElement("span", null, props.title));
+	}
+
+	function Navigation(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "bottom-nav"
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "nav-content"
+	  }, /*#__PURE__*/React.createElement(NavButton, {
+	    title: "Главная",
+	    icon: Icon28HomeOutline,
+	    setActiveTab: () => props.setActiveTab(1),
+	    isActive: props.activeTab == 1
+	  }), /*#__PURE__*/React.createElement(NavButton, {
+	    title: "Поиск",
+	    icon: Icon28Search,
+	    setActiveTab: () => props.setActiveTab(2),
+	    isActive: props.activeTab == 2
+	  }), /*#__PURE__*/React.createElement(NavButton, {
+	    title: "Оценки",
+	    icon: Icon28EducationOutline,
+	    setActiveTab: () => props.setActiveTab(3),
+	    isActive: props.activeTab == 3
+	  }), /*#__PURE__*/React.createElement(NavButton, {
+	    title: "Неделя",
+	    icon: Icon28CalendarOutline,
+	    setActiveTab: () => props.setActiveTab(4),
+	    isActive: props.activeTab == 4
+	  })));
+	}
+
+	function EditableField(props, ref) {
+	  const [isEditing, setIsEditing] = react.exports.useState(false);
+	  const editor = react.exports.useRef(null);
+	  react.exports.useImperativeHandle(ref, () => ({
+	    focus() {
+	      setIsEditing(true);
+	    }
+
+	  }));
+
+	  function saveValue() {
+	    props.onSave(editor.current.value);
+	    setIsEditing(false);
+	  }
+
+	  function changeValue() {
+	    props.onChange(editor.current.value);
+	  }
+
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "editable-field",
+	    onClick: () => setIsEditing(true)
+	  }, isEditing ? /*#__PURE__*/React.createElement("input", {
+	    type: "text",
+	    value: props.value,
+	    onChange: changeValue,
+	    onBlur: saveValue,
+	    ref: editor,
+	    autoFocus: true,
+	    autoComplete: "off"
+	  }) : props.value);
+	}
+
+	var EditableField$1 = /*#__PURE__*/react.exports.forwardRef(EditableField);
 
 	function Dropdown(props) {
 	  const [isOpen, setIsOpen] = react.exports.useState(false);
@@ -53761,7 +54527,10 @@
 	    className: "fas fa-ellipsis-v"
 	  })), /*#__PURE__*/React.createElement(CSSTransition, {
 	    in: isOpen,
-	    timeout: 300,
+	    timeout: {
+	      enter: 200,
+	      exit: 160
+	    },
 	    classNames: "dropdown-content",
 	    onEnter: setUnfocusListener,
 	    unmountOnExit: true
@@ -53774,8 +54543,9 @@
 	  const manifest = react.exports.useContext(manifestContext);
 	  const settings = react.exports.useContext(settingsContext);
 	  const hwInput = react.exports.useRef(null);
+	  const [homework, setHomework] = react.exports.useState(props.lesson_data.hw);
 	  react.exports.useEffect(() => {
-	    hwInput.current.value = props.lesson_data.hw;
+	    setHomework(props.lesson_data.hw);
 	  }, [props.lesson_data.hw]);
 	  const title = manifest ? manifest[props.lesson_data.id].title : /*#__PURE__*/React.createElement("i", {
 	    className: "fas fa-circle-notch fa-spin"
@@ -53783,6 +54553,12 @@
 	  const style = {
 	    backgroundColor: manifest ? manifest[props.lesson_data.id].color : "var(--background3)"
 	  };
+
+	  function saveHomework() {
+	    hh(database.timetable, {
+	      [props.path + ".hw"]: homework
+	    });
+	  }
 
 	  function setTest() {
 	    hh(database.timetable, {
@@ -53793,32 +54569,38 @@
 	  function openInstant() {
 	    const toOpen = [{
 	      id: props.lesson_data.id,
-	      hw: props.lesson_data.hw
+	      hw: homework
 	    }];
 	    window.InstantView.open(toOpen);
 	  }
 
 	  function copy() {
-	    navigator.clipboard.writeText(hwInput.current.value).then(() => {
+	    navigator.clipboard.writeText(homework).then(() => {
 	      window.UI.alert("Скопировано");
 	    });
 	  }
 
-	  const classes = props.lesson_data.test ? "SubjectRow test" : "SubjectRow";
+	  const classes = props.lesson_data.test ? "flexRow highlighted" : "flexRow";
 	  return /*#__PURE__*/React.createElement("div", {
 	    className: classes
 	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "subj",
+	    className: "rowBlock medium colored",
 	    style: style
 	  }, title), /*#__PURE__*/React.createElement("div", {
-	    className: "homework fr"
-	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "scroll-wraper"
-	  }, /*#__PURE__*/React.createElement("input", {
-	    type: "text",
+	    className: "rowBlock mainField"
+	  }, /*#__PURE__*/React.createElement(EditableField$1, {
 	    ref: hwInput,
-	    contentEditable: "true"
-	  })), /*#__PURE__*/React.createElement(Dropdown, null, /*#__PURE__*/React.createElement("button", {
+	    value: homework,
+	    onChange: setHomework,
+	    onSave: saveHomework
+	  })), /*#__PURE__*/React.createElement("div", {
+	    className: "rowBlock square"
+	  }, /*#__PURE__*/React.createElement(Dropdown, null, !settings.stealth && homework && /*#__PURE__*/React.createElement("button", {
+	    className: "withIcon",
+	    onClick: openInstant
+	  }, /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-book"
+	  }), /*#__PURE__*/React.createElement("span", null, "\u0420\u0435\u0448\u0435\u0431\u043D\u0438\u043A")), /*#__PURE__*/React.createElement("button", {
 	    className: "withIcon",
 	    onClick: setTest
 	  }, /*#__PURE__*/React.createElement("svg", {
@@ -53833,12 +54615,7 @@
 	    onClick: copy
 	  }, /*#__PURE__*/React.createElement("i", {
 	    className: "fas fa-clone"
-	  }), /*#__PURE__*/React.createElement("span", null, "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C")))), !settings.stealth && props.lesson_data.hw && /*#__PURE__*/React.createElement("div", {
-	    className: "tool stealth",
-	    onClick: openInstant
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-book"
-	  })));
+	  }), /*#__PURE__*/React.createElement("span", null, "\u0421\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C")))));
 	}
 
 	var SubjectRow$3 = /*#__PURE__*/react.exports.memo(SubjectRow$2);
@@ -53858,11 +54635,21 @@
 	  let rows = [];
 	  let subj;
 
-	  for (subj in props.day_data) {
+	  for (subj in day_data) {
+	    let lesson, path;
+
+	    if (day_data[subj].groups) {
+	      lesson = day_data[subj][settings.group];
+	      path = `${props.pathToDay}.${subj}.${settings.group}`;
+	    } else {
+	      lesson = day_data[subj];
+	      path = `${props.pathToDay}.${subj}`;
+	    }
+
 	    rows.push( /*#__PURE__*/React.createElement(SubjectRow$3, {
 	      key: subj,
-	      path: props.pathToDay + "." + subj,
-	      lesson_data: day_data[subj]
+	      path: path,
+	      lesson_data: lesson
 	    }));
 	  }
 
@@ -54026,7 +54813,7 @@
 	var SIZING_STYLE = ['borderBottomWidth', 'borderLeftWidth', 'borderRightWidth', 'borderTopWidth', 'boxSizing', 'fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'letterSpacing', 'lineHeight', 'paddingBottom', 'paddingLeft', 'paddingRight', 'paddingTop', // non-standard
 	'tabSize', 'textIndent', // non-standard
 	'textRendering', 'textTransform', 'width', 'wordBreak'];
-	var isIE$1 = typeof document !== 'undefined' ? !!document.documentElement.currentStyle : false;
+	var isIE = typeof document !== 'undefined' ? !!document.documentElement.currentStyle : false;
 
 	var getSizingData = function getSizingData(node) {
 	  var style = window.getComputedStyle(node);
@@ -54044,7 +54831,7 @@
 	  // so we need to add manually padding and border widths
 
 
-	  if (isIE$1 && boxSizing === 'border-box') {
+	  if (isIE && boxSizing === 'border-box') {
 	    sizingStyle.width = parseFloat(sizingStyle.width) + parseFloat(sizingStyle.borderRightWidth) + parseFloat(sizingStyle.borderLeftWidth) + parseFloat(sizingStyle.paddingRight) + parseFloat(sizingStyle.paddingLeft) + 'px';
 	  }
 
@@ -54079,7 +54866,7 @@
 	      onChange = _ref$onChange === void 0 ? noop : _ref$onChange,
 	      _ref$onHeightChange = _ref.onHeightChange,
 	      onHeightChange = _ref$onHeightChange === void 0 ? noop : _ref$onHeightChange,
-	      props = _objectWithoutPropertiesLoose(_ref, ["cacheMeasurements", "maxRows", "minRows", "onChange", "onHeightChange"]);
+	      props = _objectWithoutPropertiesLoose$1(_ref, ["cacheMeasurements", "maxRows", "minRows", "onChange", "onHeightChange"]);
 
 	  if ("development" !== 'production' && props.style) {
 	    if ('maxHeight' in props.style) {
@@ -54263,7 +55050,7 @@
 	  }, notes));
 	}
 
-	function HomeScreen(props) {
+	var HomeScreen = /*#__PURE__*/react.exports.memo(function HomeScreen() {
 	  const timetable = react.exports.useContext(timetableContext);
 	  let day_num = new Date().getDay();
 	  if (day_num == 0 || day_num == 6) day_num = 1;
@@ -54278,9 +55065,9 @@
 	    pathToDay: "2." + day_num,
 	    day_data: timetable[2][day_num]
 	  })));
-	}
+	});
 
-	function Week(props) {
+	var Week = /*#__PURE__*/react.exports.memo(function Week(props) {
 	  const [isOffline, setOffline] = react.exports.useState(!navigator.onLine);
 	  const [week, setWeek] = react.exports.useState(2);
 	  const fullTimetable = react.exports.useContext(timetableContext);
@@ -54345,7 +55132,7 @@
 	  }, /*#__PURE__*/React.createElement("div", {
 	    className: "week-grid"
 	  }, days))));
-	}
+	});
 
 	function Resheba(props) {
 	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("header", null, /*#__PURE__*/React.createElement("div", {
@@ -54370,22 +55157,22 @@
 	  })), /*#__PURE__*/React.createElement("div", {
 	    className: "wraper"
 	  }, /*#__PURE__*/React.createElement("button", {
-	    id: "bel"
-	  }, "\u0411\u0435\u043B \u044F\u0437"), /*#__PURE__*/React.createElement("button", {
-	    id: "rus"
-	  }, "\u0420\u0443\u0441 \u044F\u0437"), /*#__PURE__*/React.createElement("button", {
-	    id: "alg"
-	  }, "\u0410\u043B\u0433\u0435\u0431\u0440\u0430"), /*#__PURE__*/React.createElement("button", {
-	    id: "geom"
-	  }, "\u0413\u0435\u043E\u043C\u0435\u0442\u0440\u0438\u044F"), /*#__PURE__*/React.createElement("button", {
-	    id: "him"
-	  }, "\u0425\u0438\u043C\u0438\u044F"), /*#__PURE__*/React.createElement("button", {
-	    id: "phis"
-	  }, "\u0424\u0438\u0437\u0438\u043A\u0430"), /*#__PURE__*/React.createElement("button", {
-	    id: "brainly"
-	  }, "Brainly"), /*#__PURE__*/React.createElement("button", {
 	    id: "eng"
 	  }, "\u0410\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u0438\u0439"), /*#__PURE__*/React.createElement("button", {
+	    id: "rus"
+	  }, "\u0420\u0443\u0441 \u044F\u0437"), /*#__PURE__*/React.createElement("button", {
+	    id: "bel"
+	  }, "\u0411\u0435\u043B \u044F\u0437"), /*#__PURE__*/React.createElement("button", {
+	    id: "phis"
+	  }, "\u0424\u0438\u0437\u0438\u043A\u0430"), /*#__PURE__*/React.createElement("button", {
+	    id: "alg"
+	  }, "\u0410\u043B\u0433\u0435\u0431\u0440\u0430"), /*#__PURE__*/React.createElement("button", {
+	    id: "him"
+	  }, "\u0425\u0438\u043C\u0438\u044F"), /*#__PURE__*/React.createElement("button", {
+	    id: "brainly"
+	  }, "Brainly"), /*#__PURE__*/React.createElement("button", {
+	    id: "geom"
+	  }, "\u0413\u0435\u043E\u043C\u0435\u0442\u0440\u0438\u044F"), /*#__PURE__*/React.createElement("button", {
 	    id: "math"
 	  }, "Photomath"))), /*#__PURE__*/React.createElement("div", {
 	    className: "tool-bar"
@@ -54411,313 +55198,8 @@
 	    d: "M13.2002 23.0059H14.8086C15.3359 23.0059 15.7314 22.6895 15.8457 22.1709L16.2852 20.3164C16.584 20.2109 16.8652 20.0967 17.1289 19.9736L18.7549 20.9756C19.1855 21.248 19.7041 21.2041 20.0645 20.8438L21.1982 19.71C21.5586 19.3496 21.6113 18.8135 21.3213 18.374L20.3281 16.7656C20.4512 16.502 20.5654 16.2207 20.6533 15.9482L22.5254 15.5088C23.0439 15.3945 23.3516 14.999 23.3516 14.4717V12.8896C23.3516 12.3711 23.0439 11.9668 22.5254 11.8525L20.6709 11.4043C20.5742 11.0967 20.4512 10.8242 20.3457 10.5869L21.3389 8.94336C21.6201 8.49512 21.585 7.99414 21.207 7.625L20.0645 6.49121C19.6953 6.15723 19.2295 6.0957 18.7812 6.3418L17.1289 7.36133C16.874 7.23828 16.5928 7.12402 16.2939 7.01855L15.8457 5.1377C15.7314 4.61914 15.3359 4.30273 14.8086 4.30273H13.2002C12.6641 4.30273 12.2686 4.61914 12.1543 5.1377L11.7148 7.00977C11.416 7.10645 11.126 7.2207 10.8623 7.35254L9.21875 6.3418C8.77051 6.0957 8.31348 6.14844 7.93555 6.49121L6.79297 7.625C6.41504 7.99414 6.37988 8.49512 6.66113 8.94336L7.6543 10.5869C7.54883 10.8242 7.43457 11.0967 7.3291 11.4043L5.47461 11.8525C4.95605 11.9668 4.64844 12.3711 4.64844 12.8896V14.4717C4.64844 14.999 4.95605 15.3945 5.47461 15.5088L7.34668 15.9482C7.43457 16.2207 7.54883 16.502 7.67188 16.7656L6.67871 18.374C6.38867 18.8135 6.44141 19.3496 6.81055 19.71L7.93555 20.8438C8.2959 21.2041 8.81445 21.248 9.25391 20.9756L10.8711 19.9736C11.1348 20.0967 11.416 20.2109 11.7148 20.3164L12.1543 22.1709C12.2686 22.6895 12.6641 23.0059 13.2002 23.0059ZM14 16.7305C12.3125 16.7305 10.9326 15.3418 10.9326 13.6455C10.9326 11.9668 12.3125 10.5869 14 10.5869C15.6963 10.5869 17.0762 11.9668 17.0762 13.6455C17.0762 15.3418 15.6963 16.7305 14 16.7305Z"
 	  })))), /*#__PURE__*/React.createElement("div", {
 	    id: "boxes"
-	  }), /*#__PURE__*/React.createElement("div", {
-	    className: "template"
-	  }, /*#__PURE__*/React.createElement("div", {
-	    id: "viewbox",
-	    className: "viewbox",
-	    complete: "false"
-	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "viewbox-tools"
-	  }, /*#__PURE__*/React.createElement("button", {
-	    className: "alt",
-	    id: "alt-re"
-	  }, "\u0420\u0435\u0448\u0435\u0431\u043D\u0438\u043A 2"), /*#__PURE__*/React.createElement("div", {
-	    className: "center-section"
-	  }, /*#__PURE__*/React.createElement("button", {
-	    id: "prew",
-	    onClick: () => globalThis.ReBot.change_num(this.parentNode, -1)
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-chevron-left fa-lg"
-	  })), /*#__PURE__*/React.createElement("span", {
-	    className: "num"
-	  }), /*#__PURE__*/React.createElement("button", {
-	    id: "next",
-	    onClick: () => globalThis.ReBot.change_num(this.parentNode, 1)
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-chevron-right fa-lg"
-	  }))), /*#__PURE__*/React.createElement("button", {
-	    className: "close",
-	    onClick: () => globalThis.ReBot.remove(this.parentNode.parentNode)
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-times fa-lg"
-	  }))), /*#__PURE__*/React.createElement("div", {
-	    className: "viewbox-content"
-	  }, /*#__PURE__*/React.createElement("img", {
-	    width: "100%",
-	    id: "view"
-	  })))));
+	  }));
 	}
-
-	var AutosizeInput$1 = {};
-
-	Object.defineProperty(AutosizeInput$1, "__esModule", {
-		value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = react.exports;
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _propTypes = propTypes.exports;
-
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var sizerStyle = {
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		visibility: 'hidden',
-		height: 0,
-		overflow: 'scroll',
-		whiteSpace: 'pre'
-	};
-
-	var INPUT_PROPS_BLACKLIST = ['extraWidth', 'injectStyles', 'inputClassName', 'inputRef', 'inputStyle', 'minWidth', 'onAutosize', 'placeholderIsMinWidth'];
-
-	var cleanInputProps = function cleanInputProps(inputProps) {
-		INPUT_PROPS_BLACKLIST.forEach(function (field) {
-			return delete inputProps[field];
-		});
-		return inputProps;
-	};
-
-	var copyStyles = function copyStyles(styles, node) {
-		node.style.fontSize = styles.fontSize;
-		node.style.fontFamily = styles.fontFamily;
-		node.style.fontWeight = styles.fontWeight;
-		node.style.fontStyle = styles.fontStyle;
-		node.style.letterSpacing = styles.letterSpacing;
-		node.style.textTransform = styles.textTransform;
-	};
-
-	var isIE = typeof window !== 'undefined' && window.navigator ? /MSIE |Trident\/|Edge\//.test(window.navigator.userAgent) : false;
-
-	var generateId = function generateId() {
-		// we only need an auto-generated ID for stylesheet injection, which is only
-		// used for IE. so if the browser is not IE, this should return undefined.
-		return isIE ? '_' + Math.random().toString(36).substr(2, 12) : undefined;
-	};
-
-	var AutosizeInput = function (_Component) {
-		_inherits(AutosizeInput, _Component);
-
-		_createClass(AutosizeInput, null, [{
-			key: 'getDerivedStateFromProps',
-			value: function getDerivedStateFromProps(props, state) {
-				var id = props.id;
-
-				return id !== state.prevId ? { inputId: id || generateId(), prevId: id } : null;
-			}
-		}]);
-
-		function AutosizeInput(props) {
-			_classCallCheck(this, AutosizeInput);
-
-			var _this = _possibleConstructorReturn(this, (AutosizeInput.__proto__ || Object.getPrototypeOf(AutosizeInput)).call(this, props));
-
-			_this.inputRef = function (el) {
-				_this.input = el;
-				if (typeof _this.props.inputRef === 'function') {
-					_this.props.inputRef(el);
-				}
-			};
-
-			_this.placeHolderSizerRef = function (el) {
-				_this.placeHolderSizer = el;
-			};
-
-			_this.sizerRef = function (el) {
-				_this.sizer = el;
-			};
-
-			_this.state = {
-				inputWidth: props.minWidth,
-				inputId: props.id || generateId(),
-				prevId: props.id
-			};
-			return _this;
-		}
-
-		_createClass(AutosizeInput, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				this.mounted = true;
-				this.copyInputStyles();
-				this.updateInputWidth();
-			}
-		}, {
-			key: 'componentDidUpdate',
-			value: function componentDidUpdate(prevProps, prevState) {
-				if (prevState.inputWidth !== this.state.inputWidth) {
-					if (typeof this.props.onAutosize === 'function') {
-						this.props.onAutosize(this.state.inputWidth);
-					}
-				}
-				this.updateInputWidth();
-			}
-		}, {
-			key: 'componentWillUnmount',
-			value: function componentWillUnmount() {
-				this.mounted = false;
-			}
-		}, {
-			key: 'copyInputStyles',
-			value: function copyInputStyles() {
-				if (!this.mounted || !window.getComputedStyle) {
-					return;
-				}
-				var inputStyles = this.input && window.getComputedStyle(this.input);
-				if (!inputStyles) {
-					return;
-				}
-				copyStyles(inputStyles, this.sizer);
-				if (this.placeHolderSizer) {
-					copyStyles(inputStyles, this.placeHolderSizer);
-				}
-			}
-		}, {
-			key: 'updateInputWidth',
-			value: function updateInputWidth() {
-				if (!this.mounted || !this.sizer || typeof this.sizer.scrollWidth === 'undefined') {
-					return;
-				}
-				var newInputWidth = void 0;
-				if (this.props.placeholder && (!this.props.value || this.props.value && this.props.placeholderIsMinWidth)) {
-					newInputWidth = Math.max(this.sizer.scrollWidth, this.placeHolderSizer.scrollWidth) + 2;
-				} else {
-					newInputWidth = this.sizer.scrollWidth + 2;
-				}
-				// add extraWidth to the detected width. for number types, this defaults to 16 to allow for the stepper UI
-				var extraWidth = this.props.type === 'number' && this.props.extraWidth === undefined ? 16 : parseInt(this.props.extraWidth) || 0;
-				newInputWidth += extraWidth;
-				if (newInputWidth < this.props.minWidth) {
-					newInputWidth = this.props.minWidth;
-				}
-				if (newInputWidth !== this.state.inputWidth) {
-					this.setState({
-						inputWidth: newInputWidth
-					});
-				}
-			}
-		}, {
-			key: 'getInput',
-			value: function getInput() {
-				return this.input;
-			}
-		}, {
-			key: 'focus',
-			value: function focus() {
-				this.input.focus();
-			}
-		}, {
-			key: 'blur',
-			value: function blur() {
-				this.input.blur();
-			}
-		}, {
-			key: 'select',
-			value: function select() {
-				this.input.select();
-			}
-		}, {
-			key: 'renderStyles',
-			value: function renderStyles() {
-				// this method injects styles to hide IE's clear indicator, which messes
-				// with input size detection. the stylesheet is only injected when the
-				// browser is IE, and can also be disabled by the `injectStyles` prop.
-				var injectStyles = this.props.injectStyles;
-
-				return isIE && injectStyles ? _react2.default.createElement('style', { dangerouslySetInnerHTML: {
-						__html: 'input#' + this.state.inputId + '::-ms-clear {display: none;}'
-					} }) : null;
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var sizerValue = [this.props.defaultValue, this.props.value, ''].reduce(function (previousValue, currentValue) {
-					if (previousValue !== null && previousValue !== undefined) {
-						return previousValue;
-					}
-					return currentValue;
-				});
-
-				var wrapperStyle = _extends({}, this.props.style);
-				if (!wrapperStyle.display) wrapperStyle.display = 'inline-block';
-
-				var inputStyle = _extends({
-					boxSizing: 'content-box',
-					width: this.state.inputWidth + 'px'
-				}, this.props.inputStyle);
-
-				var inputProps = _objectWithoutProperties(this.props, []);
-
-				cleanInputProps(inputProps);
-				inputProps.className = this.props.inputClassName;
-				inputProps.id = this.state.inputId;
-				inputProps.style = inputStyle;
-
-				return _react2.default.createElement(
-					'div',
-					{ className: this.props.className, style: wrapperStyle },
-					this.renderStyles(),
-					_react2.default.createElement('input', _extends({}, inputProps, { ref: this.inputRef })),
-					_react2.default.createElement(
-						'div',
-						{ ref: this.sizerRef, style: sizerStyle },
-						sizerValue
-					),
-					this.props.placeholder ? _react2.default.createElement(
-						'div',
-						{ ref: this.placeHolderSizerRef, style: sizerStyle },
-						this.props.placeholder
-					) : null
-				);
-			}
-		}]);
-
-		return AutosizeInput;
-	}(_react.Component);
-
-	AutosizeInput.propTypes = {
-		className: _propTypes2.default.string, // className for the outer element
-		defaultValue: _propTypes2.default.any, // default field value
-		extraWidth: _propTypes2.default.oneOfType([// additional width for input element
-		_propTypes2.default.number, _propTypes2.default.string]),
-		id: _propTypes2.default.string, // id to use for the input, can be set for consistent snapshots
-		injectStyles: _propTypes2.default.bool, // inject the custom stylesheet to hide clear UI, defaults to true
-		inputClassName: _propTypes2.default.string, // className for the input element
-		inputRef: _propTypes2.default.func, // ref callback for the input element
-		inputStyle: _propTypes2.default.object, // css styles for the input element
-		minWidth: _propTypes2.default.oneOfType([// minimum width for input element
-		_propTypes2.default.number, _propTypes2.default.string]),
-		onAutosize: _propTypes2.default.func, // onAutosize handler: function(newWidth) {}
-		onChange: _propTypes2.default.func, // onChange handler: function(event) {}
-		placeholder: _propTypes2.default.string, // placeholder text
-		placeholderIsMinWidth: _propTypes2.default.bool, // don't collapse size to less than the placeholder
-		style: _propTypes2.default.object, // css styles for the outer element
-		value: _propTypes2.default.any // field value
-	};
-	AutosizeInput.defaultProps = {
-		minWidth: 1,
-		injectStyles: true
-	};
-
-	var _default = AutosizeInput$1.default = AutosizeInput;
 
 	// TEST READY
 
@@ -54760,36 +55242,30 @@
 	    }
 	  }
 
-	  function handleSubmit(event) {
+	  function saveMarks() {
 	    ah(database.marks, {
 	      [props.subject.id]: marks
 	    }, {
 	      merge: true
 	    });
-	    marksInput.current.blur();
-	    event.preventDefault();
 	  }
 
 	  return /*#__PURE__*/React.createElement("div", {
-	    className: "SubjectRow"
+	    className: "flexRow"
 	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "subj",
+	    className: "rowBlock medium colored",
 	    style: style
 	  }, title), /*#__PURE__*/React.createElement("div", {
-	    className: "homework fr"
-	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "scroll-wraper"
-	  }, /*#__PURE__*/React.createElement(_default, {
-	    type: "text",
-	    inputMode: "decimal",
-	    value: marks,
+	    className: "rowBlock mainField"
+	  }, /*#__PURE__*/React.createElement(EditableField$1, {
 	    ref: marksInput,
-	    onChange: e => setMarks(e.target.value),
-	    onBlur: handleSubmit
-	  }))), marks && average && /*#__PURE__*/React.createElement("div", {
-	    className: "tool"
+	    value: marks,
+	    onChange: setMarks,
+	    onSave: saveMarks
+	  })), marks && average && /*#__PURE__*/React.createElement("div", {
+	    className: "rowBlock square"
 	  }, average), /*#__PURE__*/React.createElement("div", {
-	    className: "tool",
+	    className: "rowBlock square",
 	    onClick: createPattern
 	  }, /*#__PURE__*/React.createElement("i", {
 	    className: "fas fa-plus"
@@ -54798,8 +55274,7 @@
 
 	var SubjectRow$1 = /*#__PURE__*/react.exports.memo(SubjectRow);
 
-	// TEST READY
-	function Marks() {
+	var Marks = /*#__PURE__*/react.exports.memo(function Marks() {
 	  const manifest = react.exports.useContext(manifestContext);
 	  const [marks, setMarks] = react.exports.useState(null);
 	  react.exports.useEffect(() => {
@@ -54815,11 +55290,14 @@
 	    for (let subjID in manifest) {
 	      const subject = manifest[subjID];
 	      subject.id = subjID;
-	      rows.push( /*#__PURE__*/React.createElement(SubjectRow$1, {
-	        key: subjID,
-	        subject: subject,
-	        marks: marks[subjID]
-	      }));
+
+	      if (subject.marks) {
+	        rows.push( /*#__PURE__*/React.createElement(SubjectRow$1, {
+	          key: subjID,
+	          subject: subject,
+	          marks: marks[subjID]
+	        }));
+	      }
 	    }
 	  }
 
@@ -54828,9 +55306,39 @@
 	  }, /*#__PURE__*/React.createElement("h1", null, "\u041E\u0446\u0435\u043D\u043A\u0438"), /*#__PURE__*/React.createElement("div", {
 	    className: "content"
 	  }, rows));
+	});
+
+	function Main(props) {
+	  const [activeTab, setActiveTab] = react.exports.useState(1);
+	  react.exports.useEffect(() => {
+	    document.getElementById("root").scrollTop = 0;
+	  }, [activeTab]);
+	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Navigation, {
+	    settings: props.settings,
+	    activeTab: activeTab,
+	    setActiveTab: setActiveTab
+	  }), !props.settings.stealth && /*#__PURE__*/React.createElement("div", {
+	    id: "rebot",
+	    className: "app center mw600 " + (activeTab == 2 ? "active" : "")
+	  }, /*#__PURE__*/React.createElement(Resheba, {
+	    setNotebooksOpen: props.setNotebooksOpen,
+	    setSettingsOpen: props.setSettingsOpen
+	  })), /*#__PURE__*/React.createElement(manifestContext.Provider, {
+	    value: props.manifest
+	  }, props.timetable && /*#__PURE__*/React.createElement(timetableContext.Provider, {
+	    value: props.timetable
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "app center-auto " + (activeTab == 4 ? "active" : "")
+	  }, /*#__PURE__*/React.createElement(Week, {
+	    setSettingsOpen: props.setSettingsOpen
+	  })), /*#__PURE__*/React.createElement("div", {
+	    className: "app center-auto " + (activeTab == 1 ? "active" : "")
+	  }, /*#__PURE__*/React.createElement(HomeScreen, null))), /*#__PURE__*/React.createElement("div", {
+	    className: "app center-auto mw700 " + (activeTab == 3 ? "active" : "")
+	  }, /*#__PURE__*/React.createElement(Marks, null))));
 	}
 
-	class UI$1 {
+	class UI {
 	  static alert(text) {
 	    let alert = document.querySelector(".alert");
 	    alert.textContent = text;
@@ -54901,6 +55409,182 @@
 
 	}
 
+	function SideViewHeader(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "side-view-header"
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "title"
+	  }, props.title), /*#__PURE__*/React.createElement("button", {
+	    className: "close",
+	    onClick: props.onClose
+	  }, /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-chevron-" + props.side
+	  })));
+	}
+
+	function SideView(props) {
+	  function handleEnter() {
+	    globalThis.blurListener = e => {
+	      e.stopPropagation();
+	      props.onClose();
+	    };
+
+	    if (props.backgroundRef) {
+	      props.backgroundRef.current.addEventListener("click", globalThis.blurListener, {
+	        once: true
+	      });
+	      props.backgroundRef.current.classList.add("unfocused");
+	    }
+	  }
+
+	  function handleExit() {
+	    if (props.backgroundRef) {
+	      props.backgroundRef.current.classList.remove("unfocused");
+	      props.backgroundRef.current.removeEventListener("click", globalThis.blurListener);
+	    }
+	  }
+
+	  return /*#__PURE__*/React.createElement(CSSTransition, {
+	    in: props.open,
+	    timeout: 600,
+	    classNames: "side-view",
+	    unmountOnExit: true,
+	    onEnter: handleEnter,
+	    onExit: handleExit
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "side-view " + props.side,
+	    id: props.id
+	  }, /*#__PURE__*/React.createElement(SideViewHeader, {
+	    title: props.title,
+	    onClose: props.onClose,
+	    side: props.side
+	  }), /*#__PURE__*/React.createElement("div", {
+	    className: "side-view-content"
+	  }, props.children)));
+	}
+
+	SideView.propTypes = {
+	  id: PropTypes.string,
+	  open: PropTypes.bool.isRequired,
+	  onClose: PropTypes.func,
+	  side: PropTypes.oneOf(['right', 'left']),
+	  backgroundRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({
+	    current: PropTypes.any
+	  })])
+	};
+
+	class ReBotManager {
+	  constructor(manifest) {
+	    this.manifest = manifest;
+	    this.box_container = document.querySelector('#boxes');
+	    this.viewbox_template = document.querySelector('.template #viewbox');
+	    this.status_title = document.querySelector('#current-subj');
+	    this.search = document.querySelector('.search input');
+	    document.querySelectorAll("#rebot header button").forEach(el => {
+	      el.onclick = () => {
+	        window.UI.getInput((id, nums) => {
+	          this.open(id, nums);
+	        }, el.id);
+	      };
+	    });
+	    this.search.addEventListener("keydown", event => {
+	      if (event.key == "Enter") {
+	        window.open("https://www.google.com/search?q=" + this.search.value, '_blank');
+	        this.search.value = "";
+	        this.search.blur();
+	      }
+	    });
+	  }
+
+	  open(id, num) {
+	    let nums;
+
+	    if (num == undefined) {
+	      nums = prompt('Введи номер или номера через запятую:');
+
+	      if (nums) {
+	        nums = nums.split(',');
+	      } else return;
+	    } else {
+	      nums = num;
+	    }
+
+	    const subj = this.manifest[id];
+	    this.status_title.textContent = subj.title;
+
+	    for (let num of nums) {
+	      if (!num) {
+	        continue;
+	      }
+
+	      if (this.box_container.querySelector(`.viewbox[num='${num}']`)) continue;
+	      let box = this.viewbox_template.cloneNode(true);
+
+	      if (subj.section == false) {
+	        box.querySelector("#view").src = "./static/img/404.webp"; //box.querySelector("#view").src = subj.url.replace('?', num);
+
+	        if (subj.full_img == false) ;
+	      } else {
+	        box.querySelector("#prew").remove();
+	        box.querySelector("#next").remove();
+	        box.querySelector("#alt-re").remove();
+	        box.querySelector("#view").src = subj.url.replace('*', num).replace('?', 1);
+	        let i = 2;
+	        let img;
+
+	        while (i < 12) {
+	          img = box.querySelector("#view").cloneNode(true);
+
+	          img.onerror = function a() {
+	            this.remove();
+	          };
+
+	          img.src = subj.url.replace('*', num).replace('?', i);
+	          box.querySelector(".viewbox-content").append(img);
+	          i++;
+	        }
+	      }
+
+	      this.box_container.prepend(box);
+	      box.querySelector(".num").textContent = num;
+	      box.setAttribute("num", num);
+	      box.setAttribute("subj_id", id);
+	    }
+	  }
+
+	  change_num(btn, delta) {
+	    const box = btn.parentNode.parentNode;
+	    let subj = this.manifest[box.getAttribute("subj_id")];
+	    let num = parseInt(box.getAttribute('num')) + delta;
+	    box.querySelector("#view").src = subj.url.replace('?', num);
+
+	    if (subj.full_img == false) {
+	      box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
+	      box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
+	    }
+
+	    box.setAttribute('num', num);
+	    box.querySelector(".num").textContent = num;
+	  }
+
+	  remove(box) {
+	    box.remove();
+	  }
+
+	  open_alt(box) {
+	    let num = box.getAttribute('num');
+	    let url = this.manifest[box.getAttribute('subj_id')].alt_url.replace("?", num);
+
+	    if (url == '') {
+	      alert('Для этого предмета нет другого решебника');
+	      return;
+	    }
+
+	    window.open(url, '_self');
+	  }
+
+	}
+
 	class LockScreen {
 	  constructor() {
 	    this.lockscreen = document.querySelector("#lockscreen");
@@ -54951,7 +55635,7 @@
 
 	    if (oldCode) {
 	      if (oldCodeInput.value != oldCode) {
-	        UI$1.alert("Неверный код");
+	        UI.alert("Неверный код");
 	        oldCodeInput.value = "";
 	        return;
 	      }
@@ -54961,18 +55645,18 @@
 
 	    if (newCode.length == 4) {
 	      localStorage.lockCode = newCode;
-	      UI$1.alert("Код установлен");
-	      UI$1.slide(window.securitySettings);
+	      UI.alert("Код установлен");
+	      UI.slide(window.securitySettings);
 	      oldCodeInput.value = "";
 	      newCodeInput.value = "";
 	    } else if (newCode.length == 0) {
 	      localStorage.lockCode = "";
-	      UI$1.alert("Код отключен");
-	      UI$1.slide(window.securitySettings);
+	      UI.alert("Код отключен");
+	      UI.slide(window.securitySettings);
 	      oldCodeInput.value = "";
 	      newCodeInput.value = "";
 	    } else {
-	      UI$1.alert("Код должен состоять из 4 цифр");
+	      UI.alert("Код должен состоять из 4 цифр");
 	    }
 	  }
 
@@ -55288,78 +55972,90 @@
 
 	}
 
-	function PasswordSet(props) {
-	  const oldCodeInput = react.exports.useRef(null);
-	  const newCodeInput = react.exports.useRef(null);
-
-	  function setPassword() {
-	    const oldCode = localStorage.lockCode;
-
-	    if (oldCode) {
-	      if (oldCodeInput.current.value != oldCode) {
-	        UI.alert("Неверный код");
-	        oldCodeInput.current.value = "";
-	        return;
-	      }
-	    }
-
-	    const newCode = newCodeInput.current.value.replace(/\D/g, '');
-
-	    if (newCode.length == 4) {
-	      localStorage.lockCode = newCode;
-	      UI.alert("Код установлен");
-	      props.setPasswordSetOpen(false);
-	    } else if (newCode.length == 0) {
-	      localStorage.lockCode = "";
-	      UI.alert("Код отключен");
-	      props.setPasswordSetOpen(false);
-	    } else {
-	      UI.alert("Код должен состоять из 4 цифр");
-	    }
-	  }
-
+	function Button(props) {
 	  return /*#__PURE__*/React.createElement("div", {
-	    className: "windowBottom",
-	    id: "passwordSet",
-	    max: "false"
-	  }, /*#__PURE__*/React.createElement("button", {
-	    className: "close",
-	    onClick: () => props.setPasswordSetOpen(false)
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-chevron-down"
-	  })), /*#__PURE__*/React.createElement("h1", {
-	    className: "title",
-	    align: "center"
-	  }, "\u041A\u043E\u0434-\u043F\u0430\u0440\u043E\u043B\u044C"), /*#__PURE__*/React.createElement("div", {
-	    className: "content"
-	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "code"
-	  }, /*#__PURE__*/React.createElement("input", {
-	    ref: oldCodeInput,
-	    type: "numbers",
-	    maxLength: "4",
-	    id: "oldCode",
-	    placeholder: "\u0421\u0442\u0430\u0440\u044B\u0439 \u043A\u043E\u0434"
-	  }), /*#__PURE__*/React.createElement("input", {
-	    ref: newCodeInput,
-	    type: "numbers",
-	    maxLength: "4",
-	    placeholder: "\u041D\u043E\u0432\u044B\u0439 \u043A\u043E\u0434 (4 \u0446\u0438\u0444\u0440\u044B)",
-	    id: "newCode"
-	  }), /*#__PURE__*/React.createElement("span", {
-	    className: "info"
-	  }, "\u041E\u0441\u0442\u0430\u0432\u044C \u043F\u0443\u0441\u0442\u044B\u043C \u0447\u0442\u043E\u0431\u044B \u043E\u0442\u043A\u043B\u044E\u0447\u0438\u0442\u044C"), /*#__PURE__*/React.createElement("button", {
-	    onClick: setPassword
-	  }, "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043A\u043E\u0434"))));
+	    className: "switch block",
+	    onClick: props.onClick
+	  }, props.icon, /*#__PURE__*/React.createElement("div", {
+	    className: "label-block"
+	  }, /*#__PURE__*/React.createElement("a", {
+	    className: "title"
+	  }, props.title), /*#__PURE__*/React.createElement("a", {
+	    className: "descr"
+	  }, props.descr)), /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-chevron-right"
+	  }));
 	}
 
-	function Settings(props) {
-	  const [passwordSetOpen, setPasswordSetOpen] = react.exports.useState(false);
-	  const settings = react.exports.useContext(settingsContext);
+	Button.protoTypes = {
+	  title: PropTypes.string.isRequired,
+	  descr: PropTypes.string,
+	  icon: PropTypes.element,
+	  onClick: PropTypes.func
+	};
 
-	  function handleChange(e) {
+	function Switch(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "switch block"
+	  }, props.icon, /*#__PURE__*/React.createElement("div", {
+	    className: "label-block"
+	  }, /*#__PURE__*/React.createElement("a", {
+	    className: "title"
+	  }, props.title), /*#__PURE__*/React.createElement("a", {
+	    className: "descr"
+	  }, props.descr)), /*#__PURE__*/React.createElement("label", {
+	    className: "ios7-switch"
+	  }, /*#__PURE__*/React.createElement("input", {
+	    type: "checkbox",
+	    checked: props.checked,
+	    onChange: props.onChange
+	  }), /*#__PURE__*/React.createElement("span", null)));
+	}
+
+	Switch.protoTypes = {
+	  title: PropTypes.string.isRequired,
+	  descr: PropTypes.string,
+	  icon: PropTypes.element,
+	  checked: PropTypes.bool,
+	  onChange: PropTypes.func
+	};
+
+	function Panel(props) {
+	  const isActive = props.currentPanel == props.id;
+	  return /*#__PURE__*/React.createElement(CSSTransition, {
+	    in: isActive,
+	    timeout: 500,
+	    classNames: props.id == "main" ? 'view-panel-main' : 'view-panel',
+	    unmountOnExit: true
+	  }, /*#__PURE__*/React.createElement("div", {
+	    className: "view-panel"
+	  }, props.children));
+	}
+
+	function PanelHeader(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "panel-header"
+	  }, props.backButton && /*#__PURE__*/React.createElement("button", {
+	    onClick: props.onBack
+	  }, /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-chevron-left"
+	  })), /*#__PURE__*/React.createElement("div", {
+	    className: "title"
+	  }, props.title));
+	}
+
+	PanelHeader.propTypes = {
+	  backButton: PropTypes.bool,
+	  onBack: PropTypes.func,
+	  title: PropTypes.string
+	};
+
+	function Settings(props) {
+	  const settings = react.exports.useContext(settingsContext);
+	  const [currentPanel, setCurrentPanel] = react.exports.useState("main"); // security
+
+	  function handleChange(id, e) {
 	    const state = e.target.checked;
-	    const id = e.target.id;
 	    props.changeSetting(id, state);
 	  }
 
@@ -55368,24 +56064,19 @@
 	    props.changeSetting("theme", theme);
 	  }
 
-	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-	    className: "windowReact",
-	    id: "settings",
-	    max: "false",
-	    side: "right"
-	  }, /*#__PURE__*/React.createElement("button", {
-	    className: "close",
-	    onClick: () => props.setSettingsOpen(false)
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-chevron-right"
-	  })), /*#__PURE__*/React.createElement("h1", {
-	    className: "title",
-	    align: "center"
-	  }, "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"), /*#__PURE__*/React.createElement("div", {
-	    className: "content"
+	  function logout() {
+	    localStorage.user = null;
+	    window.location = "./auth.html";
+	  }
+
+	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Panel, {
+	    currentPanel: currentPanel,
+	    id: "main"
+	  }, /*#__PURE__*/React.createElement(PanelHeader, {
+	    title: "\u041E\u0441\u043D\u043E\u0432\u043D\u044B\u0435"
+	  }), /*#__PURE__*/React.createElement("div", {
+	    className: "settings-block"
 	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "category"
-	  }, "\u0422\u0435\u043C\u0430"), /*#__PURE__*/React.createElement("div", {
 	    className: "theme block"
 	  }, /*#__PURE__*/React.createElement("span", {
 	    className: "circle",
@@ -55410,9 +56101,9 @@
 	    onClick: setTheme
 	  }), /*#__PURE__*/React.createElement("span", {
 	    className: "circle",
-	    id: "sepia",
+	    id: "ultraDark",
 	    style: {
-	      backgroundColor: "#F0DCBB"
+	      backgroundColor: "#000"
 	    },
 	    onClick: setTheme
 	  }), /*#__PURE__*/React.createElement("span", {
@@ -55424,164 +56115,98 @@
 	    onClick: setTheme
 	  })), /*#__PURE__*/React.createElement("div", {
 	    className: "category"
-	  }, "\u0420\u0435\u0448\u0435\u0431\u043D\u0438\u043A\u0438"), /*#__PURE__*/React.createElement("div", {
-	    className: "switch block"
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-moon"
+	  }, "\u0420\u0435\u0448\u0435\u0431\u043D\u0438\u043A\u0438"), /*#__PURE__*/React.createElement(Switch, {
+	    title: "\u0417\u0430\u0442\u0435\u043C\u043D\u044F\u0442\u044C \u0440\u0435\u0448\u0435\u043D\u0438\u044F",
+	    descr: "\u0421\u0432\u0435\u0442\u043B\u044B\u0439 \u0442\u0435\u043A\u0441\u0442 \u043D\u0430 \u0442\u0435\u043C\u043D\u043E\u043C \u0444\u043E\u043D\u0435",
+	    icon: /*#__PURE__*/React.createElement("i", {
+	      className: "fas fa-moon"
+	    }),
+	    onChange: e => handleChange("inversion", e),
+	    checked: settings.inversion
+	  }), /*#__PURE__*/React.createElement(Switch, {
+	    title: "\u0421\u043A\u0440\u044B\u0442\u044C \u0440\u0435\u0448\u0435\u0431\u043D\u0438\u043A\u0438",
+	    descr: "\u0412\u0435\u0437\u0434\u0435, \u043D\u0430 \u0432\u0441\u0435\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0430\u0445",
+	    icon: /*#__PURE__*/React.createElement("i", {
+	      className: "fas fa-eye-slash"
+	    }),
+	    onChange: e => handleChange("stealth", e),
+	    checked: settings.stealth
+	  }), /*#__PURE__*/React.createElement(Button, {
+	    title: "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u043F\u0430\u0440\u043E\u043B\u044C",
+	    descr: "\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0431\u0443\u0434\u0435\u0442 \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E \u043F\u0430\u0440\u043E\u043B\u0435\u043C",
+	    icon: /*#__PURE__*/React.createElement("i", {
+	      className: "fas fa-lock"
+	    }),
+	    onClick: () => setCurrentPanel("security")
+	  }))), /*#__PURE__*/React.createElement(Panel, {
+	    currentPanel: currentPanel,
+	    id: "security"
+	  }, /*#__PURE__*/React.createElement(PanelHeader, {
+	    title: "\u0411\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u044C",
+	    onBack: () => setCurrentPanel("main"),
+	    backButton: true
 	  }), /*#__PURE__*/React.createElement("div", {
-	    className: "label-block"
-	  }, /*#__PURE__*/React.createElement("a", {
-	    className: "title"
-	  }, "\u0417\u0430\u0442\u0435\u043C\u043D\u044F\u0442\u044C \u0440\u0435\u0448\u0435\u043D\u0438\u044F"), /*#__PURE__*/React.createElement("a", {
-	    className: "descr"
-	  }, "\u0421\u0432\u0435\u0442\u043B\u044B\u0439 \u0442\u0435\u043A\u0441\u0442 \u043D\u0430 \u0442\u0435\u043C\u043D\u043E\u043C \u0444\u043E\u043D\u0435")), /*#__PURE__*/React.createElement("label", {
-	    className: "ios7-switch"
-	  }, /*#__PURE__*/React.createElement("input", {
-	    type: "checkbox",
-	    id: "inversion",
-	    checked: settings.inversion,
-	    onChange: handleChange
-	  }), /*#__PURE__*/React.createElement("span", null))), /*#__PURE__*/React.createElement("div", {
-	    className: "switch block"
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-eye-slash"
-	  }), /*#__PURE__*/React.createElement("div", {
-	    className: "label-block"
-	  }, /*#__PURE__*/React.createElement("a", {
-	    className: "title"
-	  }, "\u0421\u043A\u0440\u044B\u0442\u044C \u0440\u0435\u0448\u0435\u0431\u043D\u0438\u043A\u0438"), /*#__PURE__*/React.createElement("a", {
-	    className: "descr"
-	  }, "\u0412\u0435\u0437\u0434\u0435, \u043D\u0430 \u0432\u0441\u0435\u0445 \u0443\u0441\u0442\u0440\u043E\u0439\u0441\u0442\u0432\u0430\u0445")), /*#__PURE__*/React.createElement("label", {
-	    className: "ios7-switch"
-	  }, /*#__PURE__*/React.createElement("input", {
-	    type: "checkbox",
-	    id: "stealth",
-	    checked: settings.stealth,
-	    onChange: handleChange
-	  }), /*#__PURE__*/React.createElement("span", null))), /*#__PURE__*/React.createElement("div", {
-	    className: "switch block"
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-eye-slash"
-	  }), /*#__PURE__*/React.createElement("div", {
-	    className: "label-block"
-	  }, /*#__PURE__*/React.createElement("a", {
-	    className: "title"
-	  }, "\u041F\u0440\u0435\u0434\u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0442\u044C \u0440\u0435\u0448\u0435\u043D\u0438\u044F"), /*#__PURE__*/React.createElement("a", {
-	    className: "descr"
-	  }, "\u0422\u0430\u043A \u043E\u043D\u0438 \u0431\u0443\u0434\u0443\u0442 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u044B \u0431\u0435\u0437 \u0438\u043D\u0442\u0435\u0440\u043D\u0435\u0442\u0430")), /*#__PURE__*/React.createElement("label", {
-	    className: "ios7-switch"
-	  }, /*#__PURE__*/React.createElement("input", {
-	    type: "checkbox",
-	    id: "stealth",
-	    checked: settings.stealth,
-	    onChange: handleChange
-	  }), /*#__PURE__*/React.createElement("span", null))), /*#__PURE__*/React.createElement("div", {
-	    className: "category"
-	  }, "\u0411\u0435\u0437\u043E\u043F\u0430\u0441\u043D\u043E\u0441\u0442\u044C"), /*#__PURE__*/React.createElement("div", {
-	    className: "switch block",
-	    onClick: () => setPasswordSetOpen(true)
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-eye-slash"
-	  }), /*#__PURE__*/React.createElement("div", {
-	    className: "label-block"
-	  }, /*#__PURE__*/React.createElement("a", {
-	    className: "title"
-	  }, "\u041D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C \u043F\u0430\u0440\u043E\u043B\u044C"), /*#__PURE__*/React.createElement("a", {
-	    className: "descr"
-	  }, "\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0431\u0443\u0434\u0435\u0442 \u0437\u0430\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u043D\u043E \u043F\u0430\u0440\u043E\u043B\u0435\u043C")), /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-chevron-right"
-	  })), /*#__PURE__*/React.createElement("div", {
-	    className: "switch block"
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-eye-slash"
-	  }), /*#__PURE__*/React.createElement("div", {
-	    className: "label-block"
-	  }, /*#__PURE__*/React.createElement("a", {
-	    className: "title"
-	  }, "\u0410\u0432\u0442\u043E\u0431\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u043A\u0430"), /*#__PURE__*/React.createElement("a", {
-	    className: "descr"
-	  }, "\u0411\u043B\u043E\u043A\u0438\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435 \u0447\u0435\u0440\u0435\u0437 5 \u043C\u0438\u043D\u0443\u0442")), /*#__PURE__*/React.createElement("label", {
-	    className: "ios7-switch"
-	  }, /*#__PURE__*/React.createElement("input", {
-	    type: "checkbox",
-	    id: "stealth",
-	    checked: settings.stealth,
-	    onChange: handleChange
-	  }), /*#__PURE__*/React.createElement("span", null))))), /*#__PURE__*/React.createElement(CSSTransition, {
-	    in: passwordSetOpen,
-	    timeout: {
-	      enter: 500,
-	      exit: 400
-	    },
-	    classNames: "windowBottom",
-	    unmountOnExit: true
-	  }, /*#__PURE__*/React.createElement(PasswordSet, {
-	    setPasswordSetOpen: setPasswordSetOpen
-	  })));
+	    className: "settings-block"
+	  }, /*#__PURE__*/React.createElement(Button, {
+	    title: "\u0412\u044B\u0439\u0442\u0438",
+	    icon: /*#__PURE__*/React.createElement("i", {
+	      className: "fas fa-sign-out-alt"
+	    }),
+	    onClick: logout
+	  }))));
 	}
 
 	function App() {
 	  const [manifest, setManifest] = react.exports.useState(null);
 	  const [timetable, setTimetable] = react.exports.useState(null);
-	  const [settings, setSettings] = react.exports.useState({
-	    stealth: localStorage.stealth == "false" ? false : true
-	  });
+	  const [settings, setSettings] = react.exports.useState(null);
 	  const [settingsOpen, setSettingsOpen] = react.exports.useState(false);
+	  const [notebooksOpen, setNotebooksOpen] = react.exports.useState(false);
 	  const main = react.exports.useRef(null);
-	  const [activeTab, setActiveTab] = react.exports.useState(2);
-
-	  function changeTab(tabId) {
-	    setActiveTab(3);
-	    const activeOld = document.querySelector(".app.active");
-	    const activeNew = document.querySelector(".app#" + tabId);
-
-	    if (activeOld) {
-	      if (activeOld.id == activeNew.id) return;
-	      activeOld.classList.remove("active");
-	    }
-
-	    activeNew.classList.add("active");
-	    const oldBtn = document.querySelector(".bottom-nav span.active");
-
-	    if (oldBtn) {
-	      oldBtn.classList.remove("active");
-	    }
-
-	    document.querySelector(".bottom-nav #" + tabId).classList.add("active");
-	    document.getElementById("root").scrollTop = 0;
-	  }
-
 	  react.exports.useEffect(() => {
 	    if (manifest) {
-	      //window.ReBot = new ReshebaManager(manifest);
 	      window.InstantView = new InstantView(manifest);
 	    }
 	  }, [manifest]);
 	  react.exports.useEffect(() => {
+	    if (settings && manifest && !settings.stealth) {
+	      window.ReBot = new ReBotManager(manifest);
+	    }
+	  }, [manifest, settings]);
+	  react.exports.useEffect(() => {
 	    dh(database.timetable, doc => setTimetable(doc.data()));
 	    dh(database.settings, doc => {
 	      const settingsData = doc.data();
-	      setSettings(settingsData);
 	      const root = document.documentElement;
-	      root.setAttribute("theme", settingsData.theme);
-	      localStorage.setItem("theme", settingsData.theme);
+
+	      if (doc.metadata.hasPendingWrites || !localStorage.theme) {
+	        root.setAttribute("theme", settingsData.theme);
+	        localStorage.setItem("theme", settingsData.theme);
+	      }
+
 	      localStorage.setItem("stealth", settingsData.stealth);
 
-	      if (settingsData.inversion) {
-	        root.style.setProperty('--inv', 0.87);
-	      } else {
+	      if (!settingsData.inversion) {
 	        root.style.setProperty('--inv', 0);
+	      } else {
+	        root.style.removeProperty('--inv');
 	      }
 
-	      if (settingsData.stealth && !document.querySelector(".app.active")) {
-	        changeTab("homescreen");
-	      }
+	      setSettings(settingsData);
 	    });
-	    fetchAndActivate(remoteConfig).then(() => {
-	      const manifestJSON = getValue(remoteConfig, "subjectsManifest").asString();
+
+	    if (navigator.onLine) {
+	      fetchAndActivate(remoteConfig).then(() => {
+	        const manifestJSON = getValue(remoteConfig, "subjectsManifest").asString();
+	        const manifestObj = JSON.parse(manifestJSON);
+	        localStorage.setItem("cachedManifest", manifestJSON);
+	        setManifest(manifestObj);
+	      });
+	    } else {
+	      const manifestJSON = localStorage.cachedManifest;
 	      const manifestObj = JSON.parse(manifestJSON);
 	      setManifest(manifestObj);
-	    });
+	    }
 	  }, []);
 
 	  function changeSetting(key, value) {
@@ -55591,114 +56216,49 @@
 	    });
 	  }
 
-	  function windowOpened() {
-	    globalThis.blurListener = e => {
-	      e.stopPropagation();
-	      setSettingsOpen(false);
-	    };
-
-	    main.current.addEventListener("click", globalThis.blurListener, {
-	      once: true
-	    });
-	    main.current.classList.add("unfocused");
-	  }
-
-	  function windowClosed() {
-	    main.current.classList.remove("unfocused");
-	    main.current.removeEventListener("click", globalThis.blurListener);
-	  }
-
-	  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(settingsContext.Provider, {
+	  return /*#__PURE__*/React.createElement(settingsContext.Provider, {
 	    value: settings
 	  }, /*#__PURE__*/React.createElement("div", {
 	    ref: main,
 	    className: "main"
-	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "bottom-nav"
-	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "nav-content"
-	  }, !settings.stealth && /*#__PURE__*/React.createElement("span", {
-	    id: "rebot",
-	    onClick: () => changeTab("rebot")
-	  }, /*#__PURE__*/React.createElement("i", {
-	    className: "fas fa-book"
-	  })), /*#__PURE__*/React.createElement("span", {
-	    id: "homescreen",
-	    className: "active",
-	    onClick: () => changeTab("homescreen")
-	  }, /*#__PURE__*/React.createElement("svg", {
-	    height: "22",
-	    width: "22",
-	    viewBox: "0 0 512 512",
-	    fill: "var(--text)"
-	  }, /*#__PURE__*/React.createElement("path", {
-	    d: "m498.195312 222.695312c-.011718-.011718-.023437-.023437-.035156-.035156l-208.855468-208.847656c-8.902344-8.90625-20.738282-13.8125-33.328126-13.8125-12.589843 0-24.425781 4.902344-33.332031 13.808594l-208.746093 208.742187c-.070313.070313-.140626.144531-.210938.214844-18.28125 18.386719-18.25 48.21875.089844 66.558594 8.378906 8.382812 19.445312 13.238281 31.277344 13.746093.480468.046876.964843.070313 1.453124.070313h8.324219v153.699219c0 30.414062 24.746094 55.160156 55.167969 55.160156h81.710938c8.28125 0 15-6.714844 15-15v-120.5c0-13.878906 11.289062-25.167969 25.167968-25.167969h48.195313c13.878906 0 25.167969 11.289063 25.167969 25.167969v120.5c0 8.285156 6.714843 15 15 15h81.710937c30.421875 0 55.167969-24.746094 55.167969-55.160156v-153.699219h7.71875c12.585937 0 24.421875-4.902344 33.332031-13.808594 18.359375-18.371093 18.367187-48.253906.023437-66.636719zm0 0"
-	  }))), /*#__PURE__*/React.createElement("span", {
-	    id: "marks",
-	    onClick: () => changeTab("marks")
-	  }, /*#__PURE__*/React.createElement("svg", {
-	    width: "34",
-	    height: "34",
-	    viewBox: "0 0 28 28",
-	    fill: "var(--text)"
-	  }, /*#__PURE__*/React.createElement("path", {
-	    d: "M25.0039 9.51465L16.417 5.58594C15.4941 5.16406 14.7383 4.9707 14 4.98828C13.2617 4.9707 12.5059 5.16406 11.583 5.58594L2.99609 9.51465C2.38086 9.78711 2.06445 10.2969 2.06445 10.8154C2.06445 11.3428 2.38086 11.8438 2.99609 12.1162L6.39746 13.6543L12.1016 10.9912C12.0664 10.9297 12.0488 10.877 12.0488 10.8154C12.0488 10.1738 13.0244 9.7168 14.0264 9.7168C15.0371 9.7168 16.0039 10.1738 16.0039 10.8154C16.0039 11.4746 15.0371 11.9404 14.0264 11.9404C13.7188 11.9404 13.4023 11.8965 13.1211 11.8086L7.76855 14.3047L11.583 16.0537C12.5059 16.4756 13.2617 16.6602 14 16.6514C14.7383 16.6602 15.4941 16.4756 16.417 16.0537L25.0039 12.1162C25.6191 11.835 25.9355 11.3428 25.9355 10.8154C25.9355 10.2969 25.6191 9.78711 25.0039 9.51465ZM7.7334 15.7109V20.8525C9.2627 21.7666 11.4336 22.3203 14 22.3203C19.1592 22.3203 22.7012 20.0967 22.7012 17.3545V14.5859L16.9531 17.2227C15.8896 17.7061 14.9229 17.9521 14 17.9434C13.0859 17.9521 12.1104 17.7061 11.0469 17.2227L7.7334 15.7109ZM5.29883 14.5947V17.3545C5.29883 18.1191 5.70312 19.0244 6.43262 19.7979V15.1133L5.29883 14.5947ZM5.65918 22.9355V25.2119C5.65918 25.959 6.15137 26.4512 6.89844 26.4512H7.26758C8.01465 26.4512 8.49805 25.959 8.49805 25.2119V22.9355C8.49805 22.3555 8.20801 21.9336 7.7334 21.7666V20.8525C7.22363 20.5449 6.78418 20.1934 6.43262 19.7979V21.7666C5.95801 21.9248 5.65918 22.3555 5.65918 22.9355Z"
-	  }))), /*#__PURE__*/React.createElement("span", {
-	    id: "week",
-	    onClick: () => changeTab("week")
-	  }, /*#__PURE__*/React.createElement("svg", {
-	    width: "36",
-	    height: "36",
-	    fill: "var(--text)",
-	    viewBox: "0 0 28 28"
-	  }, /*#__PURE__*/React.createElement("path", {
-	    d: "M7.94434 21.8809H20.0469C21.9541 21.8809 22.9473 20.8965 22.9473 19.0156V8.31934C22.9473 6.43848 21.9541 5.4541 20.0469 5.4541H7.94434C6.0459 5.4541 5.05273 6.42969 5.05273 8.31934V19.0156C5.05273 20.8965 6.0459 21.8809 7.94434 21.8809ZM7.93555 20.1318C7.20605 20.1318 6.80176 19.7539 6.80176 18.9805V10.8945C6.80176 10.1211 7.20605 9.74316 7.93555 9.74316H20.0557C20.7852 9.74316 21.1895 10.1211 21.1895 10.8945V18.9805C21.1895 19.7539 20.7852 20.1318 20.0557 20.1318H7.93555ZM12.3037 12.7754H12.8223C13.1387 12.7754 13.2441 12.6787 13.2441 12.3711V11.8525C13.2441 11.5361 13.1387 11.4395 12.8223 11.4395H12.3037C11.9873 11.4395 11.8818 11.5361 11.8818 11.8525V12.3711C11.8818 12.6787 11.9873 12.7754 12.3037 12.7754ZM15.1777 12.7754H15.6963C16.0039 12.7754 16.1094 12.6787 16.1094 12.3711V11.8525C16.1094 11.5361 16.0039 11.4395 15.6963 11.4395H15.1777C14.8613 11.4395 14.7559 11.5361 14.7559 11.8525V12.3711C14.7559 12.6787 14.8613 12.7754 15.1777 12.7754ZM18.043 12.7754H18.5615C18.8779 12.7754 18.9834 12.6787 18.9834 12.3711V11.8525C18.9834 11.5361 18.8779 11.4395 18.5615 11.4395H18.043C17.7354 11.4395 17.6299 11.5361 17.6299 11.8525V12.3711C17.6299 12.6787 17.7354 12.7754 18.043 12.7754ZM9.43848 15.6055H9.94824C10.2646 15.6055 10.3701 15.5088 10.3701 15.1924V14.6738C10.3701 14.3662 10.2646 14.2695 9.94824 14.2695H9.43848C9.12207 14.2695 9.0166 14.3662 9.0166 14.6738V15.1924C9.0166 15.5088 9.12207 15.6055 9.43848 15.6055ZM12.3037 15.6055H12.8223C13.1387 15.6055 13.2441 15.5088 13.2441 15.1924V14.6738C13.2441 14.3662 13.1387 14.2695 12.8223 14.2695H12.3037C11.9873 14.2695 11.8818 14.3662 11.8818 14.6738V15.1924C11.8818 15.5088 11.9873 15.6055 12.3037 15.6055ZM15.1777 15.6055H15.6963C16.0039 15.6055 16.1094 15.5088 16.1094 15.1924V14.6738C16.1094 14.3662 16.0039 14.2695 15.6963 14.2695H15.1777C14.8613 14.2695 14.7559 14.3662 14.7559 14.6738V15.1924C14.7559 15.5088 14.8613 15.6055 15.1777 15.6055ZM18.043 15.6055H18.5615C18.8779 15.6055 18.9834 15.5088 18.9834 15.1924V14.6738C18.9834 14.3662 18.8779 14.2695 18.5615 14.2695H18.043C17.7354 14.2695 17.6299 14.3662 17.6299 14.6738V15.1924C17.6299 15.5088 17.7354 15.6055 18.043 15.6055ZM9.43848 18.4268H9.94824C10.2646 18.4268 10.3701 18.3301 10.3701 18.0225V17.5039C10.3701 17.1875 10.2646 17.0908 9.94824 17.0908H9.43848C9.12207 17.0908 9.0166 17.1875 9.0166 17.5039V18.0225C9.0166 18.3301 9.12207 18.4268 9.43848 18.4268ZM12.3037 18.4268H12.8223C13.1387 18.4268 13.2441 18.3301 13.2441 18.0225V17.5039C13.2441 17.1875 13.1387 17.0908 12.8223 17.0908H12.3037C11.9873 17.0908 11.8818 17.1875 11.8818 17.5039V18.0225C11.8818 18.3301 11.9873 18.4268 12.3037 18.4268ZM15.1777 18.4268H15.6963C16.0039 18.4268 16.1094 18.3301 16.1094 18.0225V17.5039C16.1094 17.1875 16.0039 17.0908 15.6963 17.0908H15.1777C14.8613 17.0908 14.7559 17.1875 14.7559 17.5039V18.0225C14.7559 18.3301 14.8613 18.4268 15.1777 18.4268Z"
-	  }))))), /*#__PURE__*/React.createElement(manifestContext.Provider, {
-	    value: manifest
-	  }, /*#__PURE__*/React.createElement(timetableContext.Provider, {
-	    value: timetable
-	  }, /*#__PURE__*/React.createElement("div", {
-	    className: "app center-auto active",
-	    id: "homescreen"
-	  }, /*#__PURE__*/React.createElement(HomeScreen, null)), /*#__PURE__*/React.createElement("div", {
-	    className: "app center-auto",
-	    id: "week"
-	  }, /*#__PURE__*/React.createElement(Week, {
-	    setSettingsOpen: setSettingsOpen
-	  })), /*#__PURE__*/React.createElement("div", {
-	    className: "app center-auto mw700",
-	    id: "marks"
-	  }, /*#__PURE__*/React.createElement(Marks, null)))), !settings.stealth && /*#__PURE__*/React.createElement("div", {
-	    className: "app center mw600 stealth",
-	    id: "rebot"
-	  }, /*#__PURE__*/React.createElement(Resheba, {
-	    setSettingsOpen: setSettingsOpen
-	  }))), /*#__PURE__*/React.createElement(CSSTransition, {
-	    in: settingsOpen,
-	    onEnter: windowOpened,
-	    onExit: windowClosed,
-	    timeout: 600,
-	    classNames: "windowReact",
-	    unmountOnExit: true
+	  }, settings && /*#__PURE__*/React.createElement(Main, {
+	    id: "notebooks",
+	    settings: settings,
+	    timetable: timetable,
+	    manifest: manifest,
+	    setSettingsOpen: setSettingsOpen,
+	    setNotebooksOpen: setNotebooksOpen
+	  })), /*#__PURE__*/React.createElement(SideView, {
+	    id: "settings",
+	    open: settingsOpen,
+	    title: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438",
+	    onClose: () => setSettingsOpen(false),
+	    backgroundRef: main,
+	    side: "right"
 	  }, /*#__PURE__*/React.createElement(Settings, {
 	    changeSetting: changeSetting,
 	    setSettingsOpen: setSettingsOpen
-	  }))));
+	  })));
 	}
 
 	ReactDOM.render( /*#__PURE__*/React.createElement(App, null), document.getElementById('root'));
 	window.ios = /iPad|iPhone|iPod/.test(navigator.platform) || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
 	/*
-	navigator.serviceWorker.register('/sw.js').then((registration) => {
+	navigator.serviceWorker.register('/sw.js').then(() => {
 	    console.log('ServiceWorker registration successful');
 	}, (e) => {
 	    console.log('ServiceWorker registration failed: ', e);
 	});
 	*/
 
-
-	window.UI = UI$1;
+	window.UI = UI;
 	window.Security = LockScreen$1;
+	setTimeout(() => {
+	  const loading = document.querySelector(".loading");
+	  loading.classList.add("unactive");
+	  loading.addEventListener("transitionend", () => {
+	    loading.remove();
+	  });
+	}, window.ios ? 180 : 100);
 
 }());
-//# sourceMappingURL=bundle.js.map

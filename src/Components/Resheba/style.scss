@@ -1,22 +1,21 @@
-
 header {
     #bel {
-        background-color: #5E5CE6
+        background-color: #636DB4
     }
     #rus {
-        background-color: #1C8E58
+        background-color: #5E5CE6
     }
     #phis {
         background-color: #0A84FF
     }
     #him {
-        background-color: #FF2D55
+        background-color: #18a742
     }
     #alg {
-        background-color: #0295a2
+        background-color: #387ec3
     }
     #geom {
-        background-color: #FF9F0A
+        background-color: #DA203D
     }
     #brainly {
         background-color: #181616
@@ -25,7 +24,7 @@ header {
         background-color: #bf0c34
     }
     #eng {
-        background-color: #181818
+        background-color: #004fa9
     }
 }
 
@@ -66,7 +65,7 @@ header {
         color: #fff;
     }
     .search {
-        width: 90%;
+        max-width: 400px;
         border: 0.7px solid var(--borders);
         display: grid;
         grid-template-columns: 20px 1fr;
@@ -98,31 +97,23 @@ header {
         @keyframes search-in {
             0% {
                 opacity: 0;
-                transform: scale(0.6)
+                transform: scale(0.7)
             }
             100% {
                 transform: scale(1);
                 opacity: 1;
             }
         }
-        @keyframes search-out {
-            0% {
-                opacity: 1;
-                transform: scale(1)
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.6)
-            }
-        }
         img {
             display: none;
+
             &.active {
                 display: block;
-                animation: search-in 0.2s cubic-bezier(.95, .4, .27, .99);
             }
+
             &.rebot {
                 margin-left: 4px;
+                animation: search-in 0.15s cubic-bezier(.95, .4, .27, .99);
             }
         }
     }
@@ -151,7 +142,7 @@ header {
 
 .viewbox {
     position: relative;
-    animation: scaleup 0.4s cubic-bezier(.95, .4, .27, .99);
+    animation: scaleup 0.25s cubic-bezier(.95, .4, .27, .99);
     margin-bottom: 24px;
     background-color: var(--background2);
     box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
@@ -206,20 +197,16 @@ header {
 
     .viewbox-content img {
         filter: Invert(var(--inv));
-        transition-duration: 0.2s;
+        transition-duration: 0.12s;
 
         #view2, #view3 {
             display: none;
         }
     }
     
-    .viewbox-content img[src="static/img/404.webp"] {
+    .viewbox-content img[src="./static/img/404.webp"] {
         filter: none;
     }
 }
-
-
-
-
 
 

@@ -11,12 +11,17 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@vkontakte/icons": "^1.124.0",
         "firebase": "^9.0.0-beta.8",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "react-edit-text": "^4.1.0",
         "react-input-autosize": "^3.0.0",
+        "react-router-dom": "^5.2.0",
         "react-textarea-autosize": "^8.3.3",
         "react-transition-group": "^4.4.2",
+        "react-use": "^17.2.4",
+        "rollup-plugin-peer-deps-external": "^2.2.4",
         "scroll-lock": "^2.1.5",
         "swiped-events": "^1.1.4"
     },

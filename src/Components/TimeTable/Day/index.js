@@ -5,6 +5,7 @@ import { settingsContext } from '../../../Context';
 import SubjectRow from './SubjectRow';
 import './style.scss';
 
+
 const day_titles = {
     1: "Понедельник",
     2: "Вторник",
@@ -17,7 +18,6 @@ const day_titles = {
 
 
 
-
 export default function Day(props) {
 
     const settings = useContext(settingsContext);
@@ -26,8 +26,17 @@ export default function Day(props) {
     let rows = [];
     let subj;
 
-    for (subj in props.day_data) {
-        rows.push(<SubjectRow key={subj} path={props.pathToDay + "." + subj} lesson_data={day_data[subj]}/>);
+    for (subj in day_data) {
+        let lesson, path;
+
+        if (day_data[subj].groups) {
+            lesson = day_data[subj][settings.group];
+            path = `${props.pathToDay}.${subj}.${settings.group}`;
+        } else {
+            lesson = day_data[subj];
+            path = `${props.pathToDay}.${subj}`;
+        }
+        rows.push(<SubjectRow key={subj} path={path} lesson_data={lesson}/>);
     }
 
     function openInstant() {

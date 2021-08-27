@@ -18,7 +18,10 @@
     <script defer src="bundle.js"></script>
 </head>
 
-<body>
+<body> 
+    <div class="loading">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+    </div>
 
     <div id="root"></div>
     
@@ -79,6 +82,23 @@
     
     <div class="alert"></div>
     <div class="statusBarBg"></div>
+
+    <div class="template">
+        <div id="viewbox" class="viewbox" complete="false">
+            <div class="viewbox-tools">
+                <button class="alt" id="alt-re">Решебник 2</button>
+                <div class="center-section">
+                    <button id="prew" onClick="ReBot.change_num(this.parentNode, -1)"><i class="fas fa-chevron-left fa-lg"></i></button>
+                    <span class="num"></span>
+                    <button id="next" onClick="ReBot.change_num(this.parentNode, 1)"><i class="fas fa-chevron-right fa-lg"></i></button>
+                </div>
+                <button class="close" onClick="ReBot.remove(this.parentNode.parentNode)"><i class="fas fa-times fa-lg"></i></button>
+            </div>
+            <div class="viewbox-content">
+                <img width="100%" id="view"/>
+            </div>
+        </div>
+    </div>
 
 </body>
 

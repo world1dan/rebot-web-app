@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, memo } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { timetableContext } from '../../../Context';
 import Day from '../Day';
 import './style.scss';
 
-export default function Week(props) {
+export default memo(function Week(props) {
     const [ isOffline, setOffline ] = useState(!navigator.onLine);
 
     const [ week, setWeek ] = useState(2);
@@ -80,4 +80,4 @@ export default function Week(props) {
             </TransitionGroup>
         </div>
     );
-}
+});

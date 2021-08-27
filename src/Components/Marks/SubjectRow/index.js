@@ -2,8 +2,9 @@
 
 import React, { useRef, useState, useEffect, memo } from 'react';
 import { setDoc } from "firebase/firestore";
-import AutosizeInput from 'react-input-autosize';
 import { database } from '../../../Context';
+
+import EditableField from '../../Elements/EditableField';
 
 
 function SubjectRow(props) {
@@ -12,13 +13,13 @@ function SubjectRow(props) {
     const [marks, setMarks] = useState(props.marks);
 
     useEffect(() => {
-        setMarks(props.marks)
-    }, [props.marks])
+        setMarks(props.marks);
+    }, [props.marks]);
 
     const title = props.subject.title;
     const style = {
         backgroundColor: props.subject.color
-    };
+    }
 
     let sum = 0;
     let length = 0;
@@ -53,32 +54,20 @@ function SubjectRow(props) {
         }
     }
 
-    function handleSubmit(event) {
-
+    function saveMarks() {
         setDoc(database.marks, {
             [props.subject.id]: marks
         }, { merge: true });
-
-        marksInput.current.blur();
-        event.preventDefault();
     }
 
     return (
-        <div className="SubjectRow">
-            <div className="subj" style={style}>{title}</div>
-            <div className="homework fr">
-                <div className="scroll-wraper">
-                    <AutosizeInput
-                        type="text" 
-                        inputMode="decimal" 
-                        value={marks}
-                        ref={marksInput} 
-                        onChange={(e) => setMarks(e.target.value)} 
-                        onBlur={handleSubmit}/>
-                </div>
+        <div className="flexRow">
+            <div className="rowBlock medium colored" style={style}>{title}</div>
+            <div className="rowBlock mainField">
+                <EditableField ref={marksInput} value={marks} onChange={setMarks} onSave={saveMarks}/>
             </div>
-            { marks && average && <div className="tool">{average}</div> }
-            <div className="tool" onClick={createPattern}><i className="fas fa-plus"></i></div>
+            { marks && average && <div className="rowBlock square">{average}</div> }
+            <div className="rowBlock square" onClick={createPattern}><i className="fas fa-plus"></i></div>
         </div>
     );
 }
