@@ -71,7 +71,7 @@ export default class InstantView {
             for (let num of nums) {
                 num = num.replace(/\D/g, "");
 
-                if (subj.section == false) {
+                if (!subj.section) {
                     let img1 = document.createElement("img");
                     img1.src = subj.url.replace('?', num);
                     img1.onerror = (ev) => { ev.target.remove(); };
@@ -79,7 +79,7 @@ export default class InstantView {
 
                     viewbox.append(img1);
 
-                    if (subj.full_img == false) {
+                    if (!subj.full_img) {
                         let img2, img3 = viewbox.querySelector("img").cloneNode(true);
 
                         img2.src = subj.url.replace('?', num + "_2");

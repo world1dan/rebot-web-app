@@ -622,6 +622,11 @@ html {
   padding-left: env(safe-area-inset-left);
 }
 
+.notebook-iframe {
+  width: 100%;
+  height: calc(100vh - 180px);
+}
+
 .settings-block {
   display: flex;
   flex-direction: column;
@@ -640,54 +645,6 @@ html {
   height: 52px;
   width: 52px;
   cursor: pointer;
-}
-.settings-block .category {
-  font-size: 17px;
-  font-weight: bold;
-  text-align: center;
-  padding: 8px;
-}
-.settings-block .block {
-  background-color: var(--background3);
-  box-shadow: 1px var(--borders-soft) inset;
-  border-radius: 7px;
-  align-items: center;
-  padding: 0 10px;
-  font-size: 28px;
-}
-.settings-block .block i {
-  background-color: var(--background2);
-  width: 32px;
-  border-radius: 5px;
-  text-align: center;
-  line-height: 32px;
-  font-size: 14px;
-}
-.settings-block .block.switch {
-  display: grid;
-  grid-template-columns: 52px 1fr 46px;
-  min-height: 50px;
-}
-.settings-block .block.switch a {
-  font-weight: 500;
-  font-size: 16px;
-}
-.settings-block .block.switch .label-block {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 3px;
-  padding-top: 12px;
-  padding-bottom: 14px;
-}
-.settings-block .block.switch .label-block .title {
-  font-weight: 500;
-  font-size: 16px;
-}
-.settings-block .block.switch .label-block .descr {
-  font-weight: 300;
-  font-size: 13px;
-  color: var(--text3);
 }
 .settings-block .buttons {
   display: flex;
@@ -743,15 +700,15 @@ html {
   left: 0.7125em;
 }
 
-#passwordSet .content {
-  padding: 12px;
-}
-#passwordSet .code {
+#security-settings {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
-#passwordSet .code input {
+#security-settings .content {
+  padding: 12px;
+}
+#security-settings input {
   border: none;
   outline: none;
   background-color: var(--background3);
@@ -761,18 +718,18 @@ html {
   color: var(--text);
   text-indent: 10px;
 }
-#passwordSet .code input::placeholder {
+#security-settings input::placeholder {
   font-size: 14px;
   font-weight: 600;
   color: var(--text3);
 }
-#passwordSet .code button {
+#security-settings button {
   margin-top: 10px;
   background-color: var(--primary1);
   height: 42px;
   border-radius: 7px;
 }
-#passwordSet .code .info {
+#security-settings .info {
   font-size: 13px;
   color: var(--text3);
   text-indent: 10px;
@@ -817,11 +774,6 @@ html {
 }
 .side-view.left .close {
   right: 10px;
-}
-@media screen and (orientation: portrait) and (max-width: 780px) {
-  .side-view {
-    max-width: 100%;
-  }
 }
 
 .side-view-header {
@@ -1057,7 +1009,7 @@ header #eng {
   filter: Invert(var(--inv));
   transition-duration: 0.12s;
 }
-.viewbox .viewbox-content img #view2, .viewbox .viewbox-content img #view3 {
+.viewbox .viewbox-content img#view2, .viewbox .viewbox-content img#view3 {
   display: none;
 }
 .viewbox .viewbox-content img[src="./static/img/404.webp"] {
@@ -1250,6 +1202,48 @@ header #eng {
   margin-top: calc(80px + env(safe-area-inset-top));
   font-size: 30px;
 }
+.view-panel .panel-element {
+  background-color: var(--background3);
+  box-shadow: 1px var(--borders-soft) inset;
+  border-radius: 7px;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 28px;
+}
+.view-panel .panel-element i {
+  background-color: var(--background2);
+  width: 32px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
+}
+.view-panel .panel-element.switch {
+  display: grid;
+  grid-template-columns: 52px 1fr 46px;
+  min-height: 50px;
+}
+.view-panel .panel-element.switch a {
+  font-weight: 500;
+  font-size: 16px;
+}
+.view-panel .panel-element.switch .label-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3px;
+  padding-top: 12px;
+  padding-bottom: 14px;
+}
+.view-panel .panel-element.switch .label-block .title {
+  font-weight: 500;
+  font-size: 16px;
+}
+.view-panel .panel-element.switch .label-block .descr {
+  font-weight: 300;
+  font-size: 13px;
+  color: var(--text3);
+}
 
 .view-panel-enter {
   transform: translateX(110%);
@@ -1312,6 +1306,17 @@ header #eng {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
+}
+
+.panel-header-icon {
+  position: absolute;
+  left: 10px;
+  background-color: var(--background2);
+  width: 32px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 32px;
+  font-size: 14px;
 }
 
 #notes #add-note {

@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useContext, memo } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { timetableContext } from '../../../Context';
+import useFirestoreListener from '../../../Hooks/useFirestoreListener';
+
+import { database } from '../../../Context';
 import Day from '../Day';
 import './style.scss';
 
@@ -10,9 +12,8 @@ export default memo(function Week(props) {
 
     const [ week, setWeek ] = useState(2);
 
+    const fullTimetable = useFirestoreListener(database.timetable);
 
-
-    const fullTimetable = useContext(timetableContext);
 
     useEffect(() => {
         window.addEventListener('online',  () => setOffline(true));

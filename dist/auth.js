@@ -382,6 +382,7 @@
             this.component = null;
             this.instances = new Map();
             this.instancesDeferred = new Map();
+            this.instancesOptions = new Map();
             this.onInitCallbacks = new Map();
         }
         /**
@@ -503,6 +504,7 @@
         Provider.prototype.clearInstance = function (identifier) {
             if (identifier === void 0) { identifier = DEFAULT_ENTRY_NAME$1; }
             this.instancesDeferred.delete(identifier);
+            this.instancesOptions.delete(identifier);
             this.instances.delete(identifier);
         };
         // app.delete() will call this method on every provider to delete the services
@@ -534,6 +536,10 @@
         Provider.prototype.isInitialized = function (identifier) {
             if (identifier === void 0) { identifier = DEFAULT_ENTRY_NAME$1; }
             return this.instances.has(identifier);
+        };
+        Provider.prototype.getOptions = function (identifier) {
+            if (identifier === void 0) { identifier = DEFAULT_ENTRY_NAME$1; }
+            return this.instancesOptions.get(identifier) || {};
         };
         Provider.prototype.initialize = function (opts) {
             var e_2, _a;
@@ -629,6 +635,7 @@
                     options: options
                 });
                 this.instances.set(instanceIdentifier, instance);
+                this.instancesOptions.set(instanceIdentifier, options);
                 /**
                  * Invoke onInit listeners.
                  * Note this.component.onInstanceCreated is different, which is used by the component creator,
@@ -1013,8 +1020,8 @@
         return (component === null || component === void 0 ? void 0 : component.type) === "VERSION" /* VERSION */;
     }
 
-    const name$o = "@firebase/app-exp";
-    const version$1 = "0.0.900-exp.8b4d7550f";
+    const name$o = "@firebase/app";
+    const version$1 = "0.7.0";
 
     /**
      * @license
@@ -1038,13 +1045,13 @@
 
     const name$m = "@firebase/analytics-compat";
 
-    const name$l = "@firebase/analytics-exp";
+    const name$l = "@firebase/analytics";
 
     const name$k = "@firebase/app-check-compat";
 
-    const name$j = "@firebase/app-check-exp";
+    const name$j = "@firebase/app-check";
 
-    const name$i = "@firebase/auth-exp";
+    const name$i = "@firebase/auth";
 
     const name$h = "@firebase/auth-compat";
 
@@ -1052,23 +1059,23 @@
 
     const name$f = "@firebase/database-compat";
 
-    const name$e = "@firebase/functions-exp";
+    const name$e = "@firebase/functions";
 
     const name$d = "@firebase/functions-compat";
 
-    const name$c = "@firebase/installations-exp";
+    const name$c = "@firebase/installations";
 
     const name$b = "@firebase/installations-compat";
 
-    const name$a = "@firebase/messaging-exp";
+    const name$a = "@firebase/messaging";
 
     const name$9 = "@firebase/messaging-compat";
 
-    const name$8 = "@firebase/performance-exp";
+    const name$8 = "@firebase/performance";
 
     const name$7 = "@firebase/performance-compat";
 
-    const name$6 = "@firebase/remote-config-exp";
+    const name$6 = "@firebase/remote-config";
 
     const name$5 = "@firebase/remote-config-compat";
 
@@ -1080,8 +1087,8 @@
 
     const name$1 = "@firebase/firestore-compat";
 
-    const name$p = "firebase-exp";
-    const version$2 = "9.0.0-beta.8";
+    const name$p = "firebase";
+    const version$2 = "9.0.0";
 
     /**
      * @license
@@ -1260,7 +1267,7 @@
             this._automaticDataCollectionEnabled =
                 config.automaticDataCollectionEnabled;
             this._container = container;
-            this.container.addComponent(new Component('app-exp', () => this, "PUBLIC" /* PUBLIC */));
+            this.container.addComponent(new Component('app', () => this, "PUBLIC" /* PUBLIC */));
         }
         get automaticDataCollectionEnabled() {
             this.checkDestroyed();
@@ -1356,7 +1363,7 @@
         return newApp;
     }
     /**
-     * Retrieves a FirebaseApp instance.
+     * Retrieves a {@link @firebase/app#FirebaseApp} instance.
      *
      * When called with no arguments, the default app is returned. When an app name
      * is provided, the app corresponding to that name is returned.
@@ -1460,8 +1467,8 @@
      */
     registerCoreComponents();
 
-    var name = "firebase-exp";
-    var version = "9.0.0-beta.8";
+    var name = "firebase";
+    var version = "9.0.0";
 
     /**
      * @license
@@ -1497,29 +1504,11 @@
      * See the License for the specific language governing permissions and
      * limitations under the License.
      */
-    let l = "8.8.1";
-
-    /**
-     * @license
-     * Copyright 2017 Google LLC
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     *   http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
-     */
     /**
      * Simple wrapper around a nullable UID. Mostly exists to make code more
      * readable.
      */
-    class f {
+    class l {
         constructor(t) {
             this.uid = t;
         }
@@ -1537,10 +1526,29 @@
         }
     }
 
-    /** A user with a null UID. */ f.UNAUTHENTICATED = new f(null), 
+    /** A user with a null UID. */ l.UNAUTHENTICATED = new l(null), 
     // TODO(mikelehen): Look into getting a proper uid-equivalent for
     // non-FirebaseAuth providers.
-    f.GOOGLE_CREDENTIALS = new f("google-credentials-uid"), f.FIRST_PARTY = new f("first-party-uid");
+    l.GOOGLE_CREDENTIALS = new l("google-credentials-uid"), l.FIRST_PARTY = new l("first-party-uid"), 
+    l.MOCK_USER = new l("mock-user");
+
+    /**
+     * @license
+     * Copyright 2017 Google LLC
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *   http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    let f = "9.0.0";
 
     /**
      * @license
@@ -1560,24 +1568,26 @@
      */
     const d = new Logger("@firebase/firestore");
 
-    function m(t, ...e) {
+    function m(t, ...n) {
         if (d.logLevel <= LogLevel.DEBUG) {
-            const n = e.map(_);
-            d.debug(`Firestore (${l}): ${t}`, ...n);
+            const e = n.map(_);
+            d.debug(`Firestore (${f}): ${t}`, ...e);
         }
     }
 
-    function p(t, ...e) {
+    function p(t, ...n) {
         if (d.logLevel <= LogLevel.ERROR) {
-            const n = e.map(_);
-            d.error(`Firestore (${l}): ${t}`, ...n);
+            const e = n.map(_);
+            d.error(`Firestore (${f}): ${t}`, ...e);
         }
     }
 
-    function y(t, ...e) {
+    /**
+     * @internal
+     */ function y(t, ...n) {
         if (d.logLevel <= LogLevel.WARN) {
-            const n = e.map(_);
-            d.warn(`Firestore (${l}): ${t}`, ...n);
+            const e = n.map(_);
+            d.warn(`Firestore (${f}): ${t}`, ...e);
         }
     }
 
@@ -1586,8 +1596,8 @@
      */ function _(t) {
         if ("string" == typeof t) return t;
         try {
-            return e = t, JSON.stringify(e);
-        } catch (e) {
+            return n = t, JSON.stringify(n);
+        } catch (n) {
             // Converting to JSON failed, just log the object directly
             return t;
         }
@@ -1608,7 +1618,7 @@
      * limitations under the License.
      */
         /** Formats an object as a JSON string, suitable for logging. */
-        var e;
+        var n;
     }
 
     /**
@@ -1637,11 +1647,11 @@
      */ function g(t = "Unexpected state") {
         // Log the failure in addition to throw an exception, just in case the
         // exception is swallowed.
-        const e = `FIRESTORE (${l}) INTERNAL ASSERTION FAILED: ` + t;
+        const n = `FIRESTORE (${f}) INTERNAL ASSERTION FAILED: ` + t;
         // NOTE: We don't use FirestoreError here because these are internal failures
         // that cannot be handled by the user. (Also it would create a circular
         // dependency between the error and assert modules which doesn't work.)
-        throw p(e), new Error(e);
+        throw p(n), new Error(n);
     }
 
     /**
@@ -1649,7 +1659,7 @@
      * given message if it did.
      *
      * Messages are stripped in production builds.
-     */ function b(t, e) {
+     */ function b(t, n) {
         t || g();
     }
 
@@ -1658,7 +1668,7 @@
      * instance of `T` before casting.
      */ function v(t, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    e) {
+    n) {
         return t;
     }
 
@@ -1677,7 +1687,7 @@
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
-     */ const E = "ok", T = "cancelled", I = "unknown", A = "invalid-argument", P = "deadline-exceeded", R = "not-found", N = "permission-denied", D = "unauthenticated", $ = "resource-exhausted", F = "failed-precondition", S = "aborted", x = "out-of-range", q = "unimplemented", O = "internal", C = "unavailable";
+     */ const E = "ok", I = "cancelled", T = "unknown", A = "invalid-argument", P = "deadline-exceeded", R = "not-found", N = "permission-denied", D = "unauthenticated", $ = "resource-exhausted", F = "failed-precondition", S = "aborted", q = "out-of-range", x = "unimplemented", O = "internal", C = "unavailable";
 
     /** An error returned by a Firestore operation. */ class U extends Error {
         /** @hideconstructor */
@@ -1689,8 +1699,8 @@
         /**
          * A custom error description.
          */
-        e) {
-            super(e), this.code = t, this.message = e, 
+        n) {
+            super(n), this.code = t, this.message = n, 
             /** The custom name for all FirestoreErrors. */
             this.name = "FirebaseError", 
             // HACK: We write a toString property directly because Error is not a real
@@ -1715,124 +1725,39 @@
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
-     */ class j {
-        constructor() {
-            this.promise = new Promise(((t, e) => {
-                this.resolve = t, this.reject = e;
-            }));
-        }
-    }
-
-    /**
-     * @license
-     * Copyright 2017 Google LLC
-     *
-     * Licensed under the Apache License, Version 2.0 (the "License");
-     * you may not use this file except in compliance with the License.
-     * You may obtain a copy of the License at
-     *
-     *   http://www.apache.org/licenses/LICENSE-2.0
-     *
-     * Unless required by applicable law or agreed to in writing, software
-     * distributed under the License is distributed on an "AS IS" BASIS,
-     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     * See the License for the specific language governing permissions and
-     * limitations under the License.
      */ class k {
-        constructor(t, e) {
-            this.user = e, this.type = "OAuth", this.authHeaders = {}, 
+        constructor(t, n) {
+            this.user = n, this.type = "OAuth", this.authHeaders = {}, 
             // Set the headers using Object Literal notation to avoid minification
             this.authHeaders.Authorization = `Bearer ${t}`;
         }
     }
 
     /** A CredentialsProvider that always yields an empty token. */ class M {
-        constructor() {
-            /**
-             * Stores the listener registered with setChangeListener()
-             * This isn't actually necessary since the UID never changes, but we use this
-             * to verify the listen contract is adhered to in tests.
-             */
-            this.changeListener = null;
-        }
         getToken() {
             return Promise.resolve(null);
         }
         invalidateToken() {}
-        setChangeListener(t, e) {
-            this.changeListener = e, 
+        start(t, n) {
             // Fire with initial user.
-            t.enqueueRetryable((() => e(f.UNAUTHENTICATED)));
+            t.enqueueRetryable((() => n(l.UNAUTHENTICATED)));
         }
-        removeChangeListener() {
-            this.changeListener = null;
-        }
+        shutdown() {}
     }
 
-    class Q {
+    /** Credential provider for the Lite SDK. */ class Q {
         constructor(t) {
-            /** Tracks the current User. */
-            this.currentUser = f.UNAUTHENTICATED, 
-            /** Promise that allows blocking on the initialization of Firebase Auth. */
-            this.t = new j, 
-            /**
-             * Counter used to detect if the token changed while a getToken request was
-             * outstanding.
-             */
-            this.i = 0, this.forceRefresh = !1, this.auth = null, this.asyncQueue = null, this.o = () => {
-                this.i++, this.currentUser = this.u(), this.t.resolve(), this.changeListener && this.asyncQueue.enqueueRetryable((() => this.changeListener(this.currentUser)));
-            };
-            const e = t => {
-                m("FirebaseCredentialsProvider", "Auth detected"), this.auth = t, this.auth.addAuthTokenListener(this.o);
-            };
-            t.onInit((t => e(t))), 
-            // Our users can initialize Auth right after Firestore, so we give it
-            // a chance to register itself with the component framework before we
-            // determine whether to start up in unauthenticated mode.
-            setTimeout((() => {
-                if (!this.auth) {
-                    const n = t.getImmediate({
-                        optional: !0
-                    });
-                    n ? e(n) : (
-                    // If auth is still not available, proceed with `null` user
-                    m("FirebaseCredentialsProvider", "Auth not yet detected"), this.t.resolve());
-                }
-            }), 0);
-        }
-        getToken() {
-            // Take note of the current value of the tokenCounter so that this method
-            // can fail (with an ABORTED error) if there is a token change while the
-            // request is outstanding.
-            const t = this.i, e = this.forceRefresh;
-            return this.forceRefresh = !1, this.auth ? this.auth.getToken(e).then((e => 
-            // Cancel the request since the token changed while the request was
-            // outstanding so the response is potentially for a previous user (which
-            // user, we can't be sure).
-            this.i !== t ? (m("FirebaseCredentialsProvider", "getToken aborted due to token change."), 
-            this.getToken()) : e ? (b("string" == typeof e.accessToken), new k(e.accessToken, this.currentUser)) : null)) : Promise.resolve(null);
-        }
-        invalidateToken() {
-            this.forceRefresh = !0;
-        }
-        setChangeListener(t, e) {
-            this.asyncQueue = t, 
-            // Blocks the AsyncQueue until the next user is available.
-            this.asyncQueue.enqueueRetryable((async () => {
-                await this.t.promise, await e(this.currentUser), this.changeListener = e;
+            this.auth = null, t.onInit((t => {
+                this.auth = t;
             }));
         }
-        removeChangeListener() {
-            this.auth && this.auth.removeAuthTokenListener(this.o), this.changeListener = () => Promise.resolve();
+        getToken() {
+            return this.auth ? this.auth.getToken().then((t => t ? (b("string" == typeof t.accessToken), 
+            new k(t.accessToken, new l(this.auth.getUid()))) : null)) : Promise.resolve(null);
         }
-        // Auth.getUid() can return null even with a user logged in. It is because
-        // getUid() is synchronous, but the auth code populating Uid is asynchronous.
-        // This method should only be called in the AuthTokenListener callback
-        // to guarantee to get the actual user.
-        u() {
-            const t = this.auth && this.auth.getUid();
-            return b(null === t || "string" == typeof t), new f(t);
-        }
+        invalidateToken() {}
+        start(t, n) {}
+        shutdown() {}
     }
 
     /*
@@ -1842,15 +1767,15 @@
      * recover from unauthenticated errors (see b/33147818 for context), but it's
      * safer to keep the implementation as-is.
      */ class z {
-        constructor(t, e, n) {
-            this.h = t, this.l = e, this.m = n, this.type = "FirstParty", this.user = f.FIRST_PARTY;
+        constructor(t, n, e) {
+            this.t = t, this.i = n, this.o = e, this.type = "FirstParty", this.user = l.FIRST_PARTY;
         }
         get authHeaders() {
             const t = {
-                "X-Goog-AuthUser": this.l
-            }, e = this.h.auth.getAuthHeaderValueForFirstParty([]);
+                "X-Goog-AuthUser": this.i
+            }, n = this.t.auth.getAuthHeaderValueForFirstParty([]);
             // Use array notation to prevent minification
-                    return e && (t.Authorization = e), this.m && (t["X-Goog-Iam-Authorization-Token"] = this.m), 
+                    return n && (t.Authorization = n), this.o && (t["X-Goog-Iam-Authorization-Token"] = this.o), 
             t;
         }
     }
@@ -1860,17 +1785,17 @@
      * to authenticate the user, using technique that is only available
      * to applications hosted by Google.
      */ class W {
-        constructor(t, e, n) {
-            this.h = t, this.l = e, this.m = n;
+        constructor(t, n, e) {
+            this.t = t, this.i = n, this.o = e;
         }
         getToken() {
-            return Promise.resolve(new z(this.h, this.l, this.m));
+            return Promise.resolve(new z(this.t, this.i, this.o));
         }
-        setChangeListener(t, e) {
+        start(t, n) {
             // Fire with initial uid.
-            t.enqueueRetryable((() => e(f.FIRST_PARTY)));
+            t.enqueueRetryable((() => n(l.FIRST_PARTY)));
         }
-        removeChangeListener() {}
+        shutdown() {}
         invalidateToken() {}
     }
 
@@ -1912,17 +1837,20 @@
          * @param useFetchStreams Whether to use the Fetch API instead of
          * XMLHTTPRequest
          */
-        constructor(t, e, n, r, s, i, o, u) {
-            this.databaseId = t, this.appId = e, this.persistenceKey = n, this.host = r, this.ssl = s, 
+        constructor(t, n, e, r, s, i, o, u) {
+            this.databaseId = t, this.appId = n, this.persistenceKey = e, this.host = r, this.ssl = s, 
             this.forceLongPolling = i, this.autoDetectLongPolling = o, this.useFetchStreams = u;
         }
     }
 
     /** The default database name for a project. */
-    /** Represents the database ID a Firestore client is associated with. */
+    /**
+     * Represents the database ID a Firestore client is associated with.
+     * @internal
+     */
     class H {
-        constructor(t, e) {
-            this.projectId = t, this.database = e || "(default)";
+        constructor(t, n) {
+            this.projectId = t, this.database = n || "(default)";
         }
         get isDefaultDatabase() {
             return "(default)" === this.database;
@@ -1952,9 +1880,9 @@
      * Path represents an ordered sequence of string segments.
      */
     class Y {
-        constructor(t, e, n) {
-            void 0 === e ? e = 0 : e > t.length && g(), void 0 === n ? n = t.length - e : n > t.length - e && g(), 
-            this.segments = t, this.offset = e, this.len = n;
+        constructor(t, n, e) {
+            void 0 === n ? n = 0 : n > t.length && g(), void 0 === e ? e = t.length - n : e > t.length - n && g(), 
+            this.segments = t, this.offset = n, this.len = e;
         }
         get length() {
             return this.len;
@@ -1963,10 +1891,10 @@
             return 0 === Y.comparator(this, t);
         }
         child(t) {
-            const e = this.segments.slice(this.offset, this.limit());
+            const n = this.segments.slice(this.offset, this.limit());
             return t instanceof Y ? t.forEach((t => {
-                e.push(t);
-            })) : e.push(t), this.construct(e);
+                n.push(t);
+            })) : n.push(t), this.construct(n);
         }
         /** The index of one past the last segment of the path. */    limit() {
             return this.offset + this.length;
@@ -1991,37 +1919,39 @@
         }
         isPrefixOf(t) {
             if (t.length < this.length) return !1;
-            for (let e = 0; e < this.length; e++) if (this.get(e) !== t.get(e)) return !1;
+            for (let n = 0; n < this.length; n++) if (this.get(n) !== t.get(n)) return !1;
             return !0;
         }
         isImmediateParentOf(t) {
             if (this.length + 1 !== t.length) return !1;
-            for (let e = 0; e < this.length; e++) if (this.get(e) !== t.get(e)) return !1;
+            for (let n = 0; n < this.length; n++) if (this.get(n) !== t.get(n)) return !1;
             return !0;
         }
         forEach(t) {
-            for (let e = this.offset, n = this.limit(); e < n; e++) t(this.segments[e]);
+            for (let n = this.offset, e = this.limit(); n < e; n++) t(this.segments[n]);
         }
         toArray() {
             return this.segments.slice(this.offset, this.limit());
         }
-        static comparator(t, e) {
-            const n = Math.min(t.length, e.length);
-            for (let r = 0; r < n; r++) {
-                const n = t.get(r), s = e.get(r);
-                if (n < s) return -1;
-                if (n > s) return 1;
+        static comparator(t, n) {
+            const e = Math.min(t.length, n.length);
+            for (let r = 0; r < e; r++) {
+                const e = t.get(r), s = n.get(r);
+                if (e < s) return -1;
+                if (e > s) return 1;
             }
-            return t.length < e.length ? -1 : t.length > e.length ? 1 : 0;
+            return t.length < n.length ? -1 : t.length > n.length ? 1 : 0;
         }
     }
 
     /**
      * A slash-separated path for navigating resources (documents and collections)
      * within Firestore.
+     *
+     * @internal
      */ class K extends Y {
-        construct(t, e, n) {
-            return new K(t, e, n);
+        construct(t, n, e) {
+            return new K(t, n, e);
         }
         canonicalString() {
             // NOTE: The client is ignorant of any path segments containing escape
@@ -2040,13 +1970,13 @@
             // NOTE: The client is ignorant of any path segments containing escape
             // sequences (e.g. __id123__) and just passes them through raw (they exist
             // for legacy reasons and should not be used frequently).
-            const e = [];
-            for (const n of t) {
-                if (n.indexOf("//") >= 0) throw new U(A, `Invalid segment (${n}). Paths must not contain // in them.`);
+            const n = [];
+            for (const e of t) {
+                if (e.indexOf("//") >= 0) throw new U(A, `Invalid segment (${e}). Paths must not contain // in them.`);
                 // Strip leading and traling slashed.
-                            e.push(...n.split("/").filter((t => t.length > 0)));
+                            n.push(...e.split("/").filter((t => t.length > 0)));
             }
-            return new K(e);
+            return new K(n);
         }
         static emptyPath() {
             return new K([]);
@@ -2055,9 +1985,12 @@
 
     const J = /^[_a-zA-Z][_a-zA-Z0-9]*$/;
 
-    /** A dot-separated path for navigating sub-objects within a document. */ class Z extends Y {
-        construct(t, e, n) {
-            return new Z(t, e, n);
+    /**
+     * A dot-separated path for navigating sub-objects within a document.
+     * @internal
+     */ class Z extends Y {
+        construct(t, n, e) {
+            return new Z(t, n, e);
         }
         /**
          * Returns true if the string could be used as a segment in a field path
@@ -2092,24 +2025,24 @@
          * TODO(b/37244157): we should make this more strict. Right now, it allows
          * non-identifier path components, even if they aren't escaped.
          */    static fromServerFormat(t) {
-            const e = [];
-            let n = "", r = 0;
+            const n = [];
+            let e = "", r = 0;
             const s = () => {
-                if (0 === n.length) throw new U(A, `Invalid field path (${t}). Paths must not be empty, begin with '.', end with '.', or contain '..'`);
-                e.push(n), n = "";
+                if (0 === e.length) throw new U(A, `Invalid field path (${t}). Paths must not be empty, begin with '.', end with '.', or contain '..'`);
+                n.push(e), e = "";
             };
             let i = !1;
             for (;r < t.length; ) {
-                const e = t[r];
-                if ("\\" === e) {
+                const n = t[r];
+                if ("\\" === n) {
                     if (r + 1 === t.length) throw new U(A, "Path has trailing escape character: " + t);
-                    const e = t[r + 1];
-                    if ("\\" !== e && "." !== e && "`" !== e) throw new U(A, "Path has invalid escape sequence: " + t);
-                    n += e, r += 2;
-                } else "`" === e ? (i = !i, r++) : "." !== e || i ? (n += e, r++) : (s(), r++);
+                    const n = t[r + 1];
+                    if ("\\" !== n && "." !== n && "`" !== n) throw new U(A, "Path has invalid escape sequence: " + t);
+                    e += n, r += 2;
+                } else "`" === n ? (i = !i, r++) : "." !== n || i ? (e += n, r++) : (s(), r++);
             }
             if (s(), i) throw new U(A, "Unterminated ` in path: " + t);
-            return new Z(e);
+            return new Z(n);
         }
         static emptyPath() {
             return new Z([]);
@@ -2131,6 +2064,9 @@
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
+     */
+    /**
+     * @internal
      */ class X {
         constructor(t) {
             this.path = t;
@@ -2150,8 +2086,8 @@
         toString() {
             return this.path.toString();
         }
-        static comparator(t, e) {
-            return K.comparator(t.path, e.path);
+        static comparator(t, n) {
+            return K.comparator(t.path, n.path);
         }
         static isDocumentKey(t) {
             return t.length % 2 == 0;
@@ -2181,18 +2117,19 @@
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
-     */ function tt(t, e, n) {
-        if (!n) throw new U(A, `Function ${t}() cannot be called with an empty ${e}.`);
+     */ function tt(t, n, e) {
+        if (!e) throw new U(A, `Function ${t}() cannot be called with an empty ${n}.`);
     }
 
     /**
      * Validates that two boolean options are not set at the same time.
+     * @internal
      */
     /**
      * Validates that `path` refers to a document (indicated by the fact it contains
      * an even numbers of segments).
      */
-    function et(t) {
+    function nt(t) {
         if (!X.isDocumentKey(t)) throw new U(A, `Invalid document reference. Document references must have an even number of segments, but ${t} has ${t.length}.`);
     }
 
@@ -2210,12 +2147,12 @@
         if ("object" == typeof t) {
             if (t instanceof Array) return "an array";
             {
-                const e = 
+                const n = 
                 /** Hacky method to try to get the constructor name for an object. */
                 function(t) {
                     if (t.constructor) {
-                        const e = /function\s+([^\s(]+)\s*\(/.exec(t.constructor.toString());
-                        if (e && e.length > 1) return e[1];
+                        const n = /function\s+([^\s(]+)\s*\(/.exec(t.constructor.toString());
+                        if (n && n.length > 1) return n[1];
                     }
                     return null;
                 }
@@ -2225,8 +2162,9 @@
      *
      * This cast is used in the Lite and Full SDK to verify instance types for
      * arguments passed to the public API.
+     * @internal
      */ (t);
-                return e ? `a custom ${e} object` : "an object";
+                return n ? `a custom ${n} object` : "an object";
             }
         }
         return "function" == typeof t ? "a function" : g();
@@ -2234,15 +2172,15 @@
 
     function st(t, 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    e) {
+    n) {
         if ("_delegate" in t && (
         // Unwrap Compat types
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        t = t._delegate), !(t instanceof e)) {
-            if (e.name === t.constructor.name) throw new U(A, "Type does not match the expected instance. Did you pass a reference from a different Firestore SDK?");
+        t = t._delegate), !(t instanceof n)) {
+            if (n.name === t.constructor.name) throw new U(A, "Type does not match the expected instance. Did you pass a reference from a different Firestore SDK?");
             {
-                const n = rt(t);
-                throw new U(A, `Expected type '${e.name}', but it was: ${n}`);
+                const e = rt(t);
+                throw new U(A, `Expected type '${n.name}', but it was: ${e}`);
             }
         }
         return t;
@@ -2321,7 +2259,7 @@
      *     Code.UNKNOWN.
      */
     function lt(t) {
-        if (void 0 === t) return p("RPC_ERROR", "HTTP error has no status"), I;
+        if (void 0 === t) return p("RPC_ERROR", "HTTP error has no status"), T;
         // The canonical error codes for Google APIs [1] specify mapping onto HTTP
         // status codes but the mapping is not bijective. In each case of ambiguity
         // this function chooses a primary error.
@@ -2360,7 +2298,7 @@
             // return Code.ALREADY_EXISTS;
                   case 416:
             // Range Not Satisfiable
-            return x;
+            return q;
 
           case 429:
             // Too Many Requests
@@ -2368,18 +2306,18 @@
 
           case 499:
             // Client Closed Request
-            return T;
+            return I;
 
           case 500:
             // Internal Server Error
-            return I;
+            return T;
 
             // Other possibilities:
             // return Code.INTERNAL;
             // return Code.DATA_LOSS;
                   case 501:
             // Unimplemented
-            return q;
+            return x;
 
           case 503:
             // Service Unavailable
@@ -2390,7 +2328,7 @@
             return P;
 
           default:
-            return t >= 200 && t < 300 ? E : t >= 400 && t < 500 ? F : t >= 500 && t < 600 ? O : I;
+            return t >= 200 && t < 300 ? E : t >= 400 && t < 500 ? F : t >= 500 && t < 600 ? O : T;
         }
     }
 
@@ -2430,58 +2368,58 @@
     class {
         constructor(t) {
             this.databaseInfo = t, this.databaseId = t.databaseId;
-            const e = t.ssl ? "https" : "http";
-            this.p = e + "://" + t.host, this.g = "projects/" + this.databaseId.projectId + "/databases/" + this.databaseId.database + "/documents";
+            const n = t.ssl ? "https" : "http";
+            this.u = n + "://" + t.host, this.h = "projects/" + this.databaseId.projectId + "/databases/" + this.databaseId.database + "/documents";
         }
-        v(t, e, n, r) {
-            const s = this.T(t, e);
-            m("RestConnection", "Sending: ", s, n);
+        l(t, n, e, r) {
+            const s = this.m(t, n);
+            m("RestConnection", "Sending: ", s, e);
             const i = {};
-            return this.I(i, r), this.A(t, s, i, n).then((t => (m("RestConnection", "Received: ", t), 
-            t)), (e => {
-                throw y("RestConnection", `${t} failed with error: `, e, "url: ", s, "request:", n), 
-                e;
+            return this.p(i, r), this.g(t, s, i, e).then((t => (m("RestConnection", "Received: ", t), 
+            t)), (n => {
+                throw y("RestConnection", `${t} failed with error: `, n, "url: ", s, "request:", e), 
+                n;
             }));
         }
-        P(t, e, n, r) {
+        v(t, n, e, r) {
             // The REST API automatically aggregates all of the streamed results, so we
             // can just use the normal invoke() method.
-            return this.v(t, e, n, r);
+            return this.l(t, n, e, r);
         }
         /**
          * Modifies the headers for a request, adding any authorization token if
          * present and any additional headers for the request.
-         */    I(t, e) {
-            if (t["X-Goog-Api-Client"] = "gl-js/ fire/" + l, 
+         */    p(t, n) {
+            if (t["X-Goog-Api-Client"] = "gl-js/ fire/" + f, 
             // Content-Type: text/plain will avoid preflight requests which might
             // mess with CORS and redirects by proxies. If we add custom headers
             // we will need to change this code to potentially use the $httpOverwrite
             // parameter supported by ESF to avoid triggering preflight requests.
             t["Content-Type"] = "text/plain", this.databaseInfo.appId && (t["X-Firebase-GMPID"] = this.databaseInfo.appId), 
-            e) for (const n in e.authHeaders) e.authHeaders.hasOwnProperty(n) && (t[n] = e.authHeaders[n]);
+            n) for (const e in n.authHeaders) n.authHeaders.hasOwnProperty(e) && (t[e] = n.authHeaders[e]);
         }
-        T(t, e) {
-            const n = ct[t];
-            return `${this.p}/v1/${e}:${n}`;
+        m(t, n) {
+            const e = ct[t];
+            return `${this.u}/v1/${n}:${e}`;
         }
     } {
         /**
          * @param databaseInfo - The connection info.
          * @param fetchImpl - `fetch` or a Polyfill that implements the fetch API.
          */
-        constructor(t, e) {
-            super(t), this.R = e;
+        constructor(t, n) {
+            super(t), this.I = n;
         }
-        V(t, e) {
+        T(t, n) {
             throw new Error("Not supported by FetchConnection");
         }
-        async A(t, e, n, r) {
+        async g(t, n, e, r) {
             const s = JSON.stringify(r);
             let i;
             try {
-                i = await this.R(e, {
+                i = await this.I(n, {
                     method: "POST",
-                    headers: n,
+                    headers: e,
                     body: s
                 });
             } catch (t) {
@@ -2532,13 +2470,13 @@
      */
     function dt(t) {
         // Polyfills for IE and WebWorker by using `self` and `msCrypto` when `crypto` is not available.
-        const e = 
+        const n = 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        "undefined" != typeof self && (self.crypto || self.msCrypto), n = new Uint8Array(t);
-        if (e && "function" == typeof e.getRandomValues) e.getRandomValues(n); else 
+        "undefined" != typeof self && (self.crypto || self.msCrypto), e = new Uint8Array(t);
+        if (n && "function" == typeof n.getRandomValues) n.getRandomValues(e); else 
         // Falls back to Math.random
-        for (let e = 0; e < t; e++) n[e] = Math.floor(256 * Math.random());
-        return n;
+        for (let n = 0; n < t; n++) e[n] = Math.floor(256 * Math.random());
+        return e;
     }
 
     /**
@@ -2557,28 +2495,28 @@
      * See the License for the specific language governing permissions and
      * limitations under the License.
      */ class wt {
-        static N() {
+        static A() {
             // Alphanumeric characters
-            const t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", e = Math.floor(256 / t.length) * t.length;
+            const t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", n = Math.floor(256 / t.length) * t.length;
             // The largest byte value that is a multiple of `char.length`.
-                    let n = "";
-            for (;n.length < 20; ) {
+                    let e = "";
+            for (;e.length < 20; ) {
                 const r = dt(40);
                 for (let s = 0; s < r.length; ++s) 
                 // Only accept values that are [0, maxMultiple), this ensures they can
                 // be evenly mapped to indices of `chars` via a modulo operation.
-                n.length < 20 && r[s] < e && (n += t.charAt(r[s] % t.length));
+                e.length < 20 && r[s] < n && (e += t.charAt(r[s] % t.length));
             }
-            return n;
+            return e;
         }
     }
 
-    function mt(t, e) {
-        return t < e ? -1 : t > e ? 1 : 0;
+    function mt(t, n) {
+        return t < n ? -1 : t > n ? 1 : 0;
     }
 
-    /** Helper to compare arrays using isEqual(). */ function pt(t, e, n) {
-        return t.length === e.length && t.every(((t, r) => n(t, e[r])));
+    /** Helper to compare arrays using isEqual(). */ function pt(t, n, e) {
+        return t.length === n.length && t.every(((t, r) => e(t, n[r])));
     }
 
     /**
@@ -2632,9 +2570,9 @@
         /**
          * The fractions of a second at nanosecond resolution.*
          */
-        e) {
-            if (this.seconds = t, this.nanoseconds = e, e < 0) throw new U(A, "Timestamp nanoseconds out of range: " + e);
-            if (e >= 1e9) throw new U(A, "Timestamp nanoseconds out of range: " + e);
+        n) {
+            if (this.seconds = t, this.nanoseconds = n, n < 0) throw new U(A, "Timestamp nanoseconds out of range: " + n);
+            if (n >= 1e9) throw new U(A, "Timestamp nanoseconds out of range: " + n);
             if (t < -62135596800) throw new U(A, "Timestamp seconds out of range: " + t);
             // This will break in the year 10,000.
                     if (t >= 253402300800) throw new U(A, "Timestamp seconds out of range: " + t);
@@ -2663,8 +2601,8 @@
          * @returns A new `Timestamp` representing the same point in time as the given
          *     number of milliseconds.
          */    static fromMillis(t) {
-            const e = Math.floor(t / 1e3), n = Math.floor(1e6 * (t - 1e3 * e));
-            return new yt(e, n);
+            const n = Math.floor(t / 1e3), e = Math.floor(1e6 * (t - 1e3 * n));
+            return new yt(n, e);
         }
         /**
          * Converts a `Timestamp` to a JavaScript `Date` object. This conversion
@@ -2696,17 +2634,17 @@
          */    isEqual(t) {
             return t.seconds === this.seconds && t.nanoseconds === this.nanoseconds;
         }
-        /** Returns a textual representation of this Timestamp. */    toString() {
+        /** Returns a textual representation of this `Timestamp`. */    toString() {
             return "Timestamp(seconds=" + this.seconds + ", nanoseconds=" + this.nanoseconds + ")";
         }
-        /** Returns a JSON-serializable representation of this Timestamp. */    toJSON() {
+        /** Returns a JSON-serializable representation of this `Timestamp`. */    toJSON() {
             return {
                 seconds: this.seconds,
                 nanoseconds: this.nanoseconds
             };
         }
         /**
-         * Converts this object to a primitive string, which allows Timestamp objects
+         * Converts this object to a primitive string, which allows `Timestamp` objects
          * to be compared using the `>`, `<=`, `>=` and `>` operators.
          */    valueOf() {
             // This method returns a string of the form <seconds>.<nanoseconds> where
@@ -2739,13 +2677,13 @@
      * See the License for the specific language governing permissions and
      * limitations under the License.
      */ function gt(t) {
-        let e = 0;
-        for (const n in t) Object.prototype.hasOwnProperty.call(t, n) && e++;
-        return e;
+        let n = 0;
+        for (const e in t) Object.prototype.hasOwnProperty.call(t, e) && n++;
+        return n;
     }
 
-    function bt(t, e) {
-        for (const n in t) Object.prototype.hasOwnProperty.call(t, n) && e(n, t[n]);
+    function bt(t, n) {
+        for (const e in t) Object.prototype.hasOwnProperty.call(t, e) && n(e, t[e]);
     }
 
     /**
@@ -2787,11 +2725,11 @@
          *
          * This is an O(n) operation, where `n` is the size of the field mask.
          */    covers(t) {
-            for (const e of this.fields) if (e.isPrefixOf(t)) return !0;
+            for (const n of this.fields) if (n.isPrefixOf(t)) return !0;
             return !1;
         }
         isEqual(t) {
-            return pt(this.fields, t.fields, ((t, e) => t.isEqual(e)));
+            return pt(this.fields, t.fields, ((t, n) => t.isEqual(n)));
         }
     }
 
@@ -2835,29 +2773,30 @@
      * sent on the wire. This class abstracts away this differentiation by holding
      * the proto byte string in a common class that must be converted into a string
      * before being sent as a proto.
+     * @internal
      */
     class Et {
         constructor(t) {
             this.binaryString = t;
         }
         static fromBase64String(t) {
-            const e = atob(t);
-            return new Et(e);
+            const n = atob(t);
+            return new Et(n);
         }
         static fromUint8Array(t) {
-            const e = 
+            const n = 
             /**
      * Helper function to convert an Uint8array to a binary string.
      */
             function(t) {
-                let e = "";
-                for (let n = 0; n < t.length; ++n) e += String.fromCharCode(t[n]);
-                return e;
+                let n = "";
+                for (let e = 0; e < t.length; ++e) n += String.fromCharCode(t[e]);
+                return n;
             }
             /**
      * Helper function to convert a binary string to an Uint8Array.
      */ (t);
-            return new Et(e);
+            return new Et(n);
         }
         toBase64() {
             return t = this.binaryString, btoa(t);
@@ -2866,9 +2805,9 @@
         }
         toUint8Array() {
             return function(t) {
-                const e = new Uint8Array(t.length);
-                for (let n = 0; n < t.length; n++) e[n] = t.charCodeAt(n);
-                return e;
+                const n = new Uint8Array(t.length);
+                for (let e = 0; e < t.length; e++) n[e] = t.charCodeAt(e);
+                return n;
             }
             /**
      * @license
@@ -2902,12 +2841,12 @@
 
     Et.EMPTY_BYTE_STRING = new Et("");
 
-    const Tt = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
+    const It = new RegExp(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.(\d+))?Z$/);
 
     /**
      * Converts the possible Proto values for a timestamp value into a "seconds and
      * nanos" representation.
-     */ function It(t) {
+     */ function Tt(t) {
         // The json interface (for the browser) will return an iso timestamp string,
         // while the proto js library (for node) will return a
         // google.protobuf.Timestamp instance.
@@ -2915,18 +2854,18 @@
             // The date string can have higher precision (nanos) than the Date class
             // (millis), so we do some custom parsing here.
             // Parse the nanos right out of the string.
-            let e = 0;
-            const n = Tt.exec(t);
-            if (b(!!n), n[1]) {
+            let n = 0;
+            const e = It.exec(t);
+            if (b(!!e), e[1]) {
                 // Pad the fraction out to 9 digits (nanos).
-                let t = n[1];
-                t = (t + "000000000").substr(0, 9), e = Number(t);
+                let t = e[1];
+                t = (t + "000000000").substr(0, 9), n = Number(t);
             }
             // Parse the date to get the seconds.
                     const r = new Date(t);
             return {
                 seconds: Math.floor(r.getTime() / 1e3),
-                nanos: e
+                nanos: n
             };
         }
         return {
@@ -2981,15 +2920,15 @@
      * - With respect to other ServerTimestampValues, they sort by their
      *   localWriteTime.
      */ function Rt(t) {
-        var e, n;
-        return "server_timestamp" === (null === (n = ((null === (e = null == t ? void 0 : t.mapValue) || void 0 === e ? void 0 : e.fields) || {}).__type__) || void 0 === n ? void 0 : n.stringValue);
+        var n, e;
+        return "server_timestamp" === (null === (e = ((null === (n = null == t ? void 0 : t.mapValue) || void 0 === n ? void 0 : n.fields) || {}).__type__) || void 0 === e ? void 0 : e.stringValue);
     }
 
     /**
      * Returns the local time at which this timestamp was first set.
      */ function Nt(t) {
-        const e = It(t.mapValue.fields.__local_write_time__.timestampValue);
-        return new yt(e.seconds, e.nanos);
+        const n = Tt(t.mapValue.fields.__local_write_time__.timestampValue);
+        return new yt(n.seconds, n.nanos);
     }
 
     /**
@@ -3012,65 +2951,65 @@
         return "nullValue" in t ? 0 /* NullValue */ : "booleanValue" in t ? 1 /* BooleanValue */ : "integerValue" in t || "doubleValue" in t ? 2 /* NumberValue */ : "timestampValue" in t ? 3 /* TimestampValue */ : "stringValue" in t ? 5 /* StringValue */ : "bytesValue" in t ? 6 /* BlobValue */ : "referenceValue" in t ? 7 /* RefValue */ : "geoPointValue" in t ? 8 /* GeoPointValue */ : "arrayValue" in t ? 9 /* ArrayValue */ : "mapValue" in t ? Rt(t) ? 4 /* ServerTimestampValue */ : 10 /* ObjectValue */ : g();
     }
 
-    /** Tests `left` and `right` for equality based on the backend semantics. */ function $t(t, e) {
-        const n = Dt(t);
-        if (n !== Dt(e)) return !1;
-        switch (n) {
+    /** Tests `left` and `right` for equality based on the backend semantics. */ function $t(t, n) {
+        const e = Dt(t);
+        if (e !== Dt(n)) return !1;
+        switch (e) {
           case 0 /* NullValue */ :
             return !0;
 
           case 1 /* BooleanValue */ :
-            return t.booleanValue === e.booleanValue;
+            return t.booleanValue === n.booleanValue;
 
           case 4 /* ServerTimestampValue */ :
-            return Nt(t).isEqual(Nt(e));
+            return Nt(t).isEqual(Nt(n));
 
           case 3 /* TimestampValue */ :
-            return function(t, e) {
-                if ("string" == typeof t.timestampValue && "string" == typeof e.timestampValue && t.timestampValue.length === e.timestampValue.length) 
+            return function(t, n) {
+                if ("string" == typeof t.timestampValue && "string" == typeof n.timestampValue && t.timestampValue.length === n.timestampValue.length) 
                 // Use string equality for ISO 8601 timestamps
-                return t.timestampValue === e.timestampValue;
-                const n = It(t.timestampValue), r = It(e.timestampValue);
-                return n.seconds === r.seconds && n.nanos === r.nanos;
-            }(t, e);
+                return t.timestampValue === n.timestampValue;
+                const e = Tt(t.timestampValue), r = Tt(n.timestampValue);
+                return e.seconds === r.seconds && e.nanos === r.nanos;
+            }(t, n);
 
           case 5 /* StringValue */ :
-            return t.stringValue === e.stringValue;
+            return t.stringValue === n.stringValue;
 
           case 6 /* BlobValue */ :
-            return function(t, e) {
-                return Pt(t.bytesValue).isEqual(Pt(e.bytesValue));
-            }(t, e);
+            return function(t, n) {
+                return Pt(t.bytesValue).isEqual(Pt(n.bytesValue));
+            }(t, n);
 
           case 7 /* RefValue */ :
-            return t.referenceValue === e.referenceValue;
+            return t.referenceValue === n.referenceValue;
 
           case 8 /* GeoPointValue */ :
-            return function(t, e) {
-                return At(t.geoPointValue.latitude) === At(e.geoPointValue.latitude) && At(t.geoPointValue.longitude) === At(e.geoPointValue.longitude);
-            }(t, e);
+            return function(t, n) {
+                return At(t.geoPointValue.latitude) === At(n.geoPointValue.latitude) && At(t.geoPointValue.longitude) === At(n.geoPointValue.longitude);
+            }(t, n);
 
           case 2 /* NumberValue */ :
-            return function(t, e) {
-                if ("integerValue" in t && "integerValue" in e) return At(t.integerValue) === At(e.integerValue);
-                if ("doubleValue" in t && "doubleValue" in e) {
-                    const n = At(t.doubleValue), r = At(e.doubleValue);
-                    return n === r ? ut(n) === ut(r) : isNaN(n) && isNaN(r);
+            return function(t, n) {
+                if ("integerValue" in t && "integerValue" in n) return At(t.integerValue) === At(n.integerValue);
+                if ("doubleValue" in t && "doubleValue" in n) {
+                    const e = At(t.doubleValue), r = At(n.doubleValue);
+                    return e === r ? ut(e) === ut(r) : isNaN(e) && isNaN(r);
                 }
                 return !1;
-            }(t, e);
+            }(t, n);
 
           case 9 /* ArrayValue */ :
-            return pt(t.arrayValue.values || [], e.arrayValue.values || [], $t);
+            return pt(t.arrayValue.values || [], n.arrayValue.values || [], $t);
 
           case 10 /* ObjectValue */ :
-            return function(t, e) {
-                const n = t.mapValue.fields || {}, r = e.mapValue.fields || {};
-                if (gt(n) !== gt(r)) return !1;
-                for (const t in n) if (n.hasOwnProperty(t) && (void 0 === r[t] || !$t(n[t], r[t]))) return !1;
+            return function(t, n) {
+                const e = t.mapValue.fields || {}, r = n.mapValue.fields || {};
+                if (gt(e) !== gt(r)) return !1;
+                for (const t in e) if (e.hasOwnProperty(t) && (void 0 === r[t] || !$t(e[t], r[t]))) return !1;
                 return !0;
             }
-            /** Returns true if the ArrayValue contains the specified element. */ (t, e);
+            /** Returns true if the ArrayValue contains the specified element. */ (t, n);
 
           default:
             return g();
@@ -3089,21 +3028,21 @@
             timestampValue: Object.assign({}, t.timestampValue)
         };
         if (t.mapValue) {
-            const e = {
+            const n = {
                 mapValue: {
                     fields: {}
                 }
             };
-            return bt(t.mapValue.fields, ((t, n) => e.mapValue.fields[t] = jt(n))), e;
+            return bt(t.mapValue.fields, ((t, e) => n.mapValue.fields[t] = jt(e))), n;
         }
         if (t.arrayValue) {
-            const e = {
+            const n = {
                 arrayValue: {
                     values: []
                 }
             };
-            for (let n = 0; n < (t.arrayValue.values || []).length; ++n) e.arrayValue.values[n] = jt(t.arrayValue.values[n]);
-            return e;
+            for (let e = 0; e < (t.arrayValue.values || []).length; ++e) n.arrayValue.values[e] = jt(t.arrayValue.values[e]);
+            return n;
         }
         return Object.assign({}, t);
     }
@@ -3144,10 +3083,10 @@
          */    field(t) {
             if (t.isEmpty()) return this.value;
             {
-                let e = this.value;
-                for (let n = 0; n < t.length - 1; ++n) if (e = (e.mapValue.fields || {})[t.get(n)], 
-                !Ut(e)) return null;
-                return e = (e.mapValue.fields || {})[t.lastSegment()], e || null;
+                let n = this.value;
+                for (let e = 0; e < t.length - 1; ++e) if (n = (n.mapValue.fields || {})[t.get(e)], 
+                !Ut(n)) return null;
+                return n = (n.mapValue.fields || {})[t.lastSegment()], n || null;
             }
         }
         /**
@@ -3155,25 +3094,25 @@
          *
          * @param path - The field path to set.
          * @param value - The value to set.
-         */    set(t, e) {
-            this.getFieldsMap(t.popLast())[t.lastSegment()] = jt(e);
+         */    set(t, n) {
+            this.getFieldsMap(t.popLast())[t.lastSegment()] = jt(n);
         }
         /**
          * Sets the provided fields to the provided values.
          *
          * @param data - A map of fields to values (or null for deletes).
          */    setAll(t) {
-            let e = Z.emptyPath(), n = {}, r = [];
+            let n = Z.emptyPath(), e = {}, r = [];
             t.forEach(((t, s) => {
-                if (!e.isImmediateParentOf(s)) {
+                if (!n.isImmediateParentOf(s)) {
                     // Insert the accumulated changes at this parent location
-                    const t = this.getFieldsMap(e);
-                    this.applyChanges(t, n, r), n = {}, r = [], e = s.popLast();
+                    const t = this.getFieldsMap(n);
+                    this.applyChanges(t, e, r), e = {}, r = [], n = s.popLast();
                 }
-                t ? n[s.lastSegment()] = jt(t) : r.push(s.lastSegment());
+                t ? e[s.lastSegment()] = jt(t) : r.push(s.lastSegment());
             }));
-            const s = this.getFieldsMap(e);
-            this.applyChanges(s, n, r);
+            const s = this.getFieldsMap(n);
+            this.applyChanges(s, e, r);
         }
         /**
          * Removes the field at the specified path. If there is no field at the
@@ -3181,8 +3120,8 @@
          *
          * @param path - The field path to remove.
          */    delete(t) {
-            const e = this.field(t.popLast());
-            Ut(e) && e.mapValue.fields && delete e.mapValue.fields[t.lastSegment()];
+            const n = this.field(t.popLast());
+            Ut(n) && n.mapValue.fields && delete n.mapValue.fields[t.lastSegment()];
         }
         isEqual(t) {
             return $t(this.value, t.value);
@@ -3191,26 +3130,26 @@
          * Returns the map that contains the leaf element of `path`. If the parent
          * entry does not yet exist, or if it is not a map, a new map will be created.
          */    getFieldsMap(t) {
-            let e = this.value;
-            e.mapValue.fields || (e.mapValue = {
+            let n = this.value;
+            n.mapValue.fields || (n.mapValue = {
                 fields: {}
             });
-            for (let n = 0; n < t.length; ++n) {
-                let r = e.mapValue.fields[t.get(n)];
+            for (let e = 0; e < t.length; ++e) {
+                let r = n.mapValue.fields[t.get(e)];
                 Ut(r) && r.mapValue.fields || (r = {
                     mapValue: {
                         fields: {}
                     }
-                }, e.mapValue.fields[t.get(n)] = r), e = r;
+                }, n.mapValue.fields[t.get(e)] = r), n = r;
             }
-            return e.mapValue.fields;
+            return n.mapValue.fields;
         }
         /**
          * Modifies `fieldsMap` by adding, replacing or deleting the specified
          * entries.
-         */    applyChanges(t, e, n) {
-            bt(e, ((e, n) => t[e] = n));
-            for (const e of n) delete t[e];
+         */    applyChanges(t, n, e) {
+            bt(n, ((n, e) => t[n] = e));
+            for (const n of e) delete t[n];
         }
         clone() {
             return new kt(jt(this.value));
@@ -3239,16 +3178,16 @@
      * query the RemoteStore results.
      *
      * Visible for testing.
-     */ class se {
+     */ class sn {
         /**
          * Initializes a Query with a path and optional additional query constraints.
          * Path must currently be empty if this is a collection group query.
          */
-        constructor(t, e = null, n = [], r = [], s = null, i = "F" /* First */ , o = null, u = null) {
-            this.path = t, this.collectionGroup = e, this.explicitOrderBy = n, this.filters = r, 
-            this.limit = s, this.limitType = i, this.startAt = o, this.endAt = u, this.q = null, 
+        constructor(t, n = null, e = [], r = [], s = null, i = "F" /* First */ , o = null, u = null) {
+            this.path = t, this.collectionGroup = n, this.explicitOrderBy = e, this.filters = r, 
+            this.limit = s, this.limitType = i, this.startAt = o, this.endAt = u, this.D = null, 
             // The corresponding `Target` of this `Query` instance.
-            this.O = null, this.startAt, this.endAt;
+            this.$ = null, this.startAt, this.endAt;
         }
     }
 
@@ -3277,10 +3216,10 @@
      * The return value is an IntegerValue if it can safely represent the value,
      * otherwise a DoubleValue is returned.
      */
-    function fe(t, e) {
+    function dn(t, n) {
         return function(t) {
             return "number" == typeof t && Number.isInteger(t) && !ut(t) && t <= Number.MAX_SAFE_INTEGER && t >= Number.MIN_SAFE_INTEGER;
-        }(e) ? 
+        }(n) ? 
         /**
      * Returns an IntegerValue for `value`.
      */
@@ -3288,22 +3227,22 @@
             return {
                 integerValue: "" + t
             };
-        }(e) : function(t, e) {
-            if (t.C) {
-                if (isNaN(e)) return {
+        }(n) : function(t, n) {
+            if (t.F) {
+                if (isNaN(n)) return {
                     doubleValue: "NaN"
                 };
-                if (e === 1 / 0) return {
+                if (n === 1 / 0) return {
                     doubleValue: "Infinity"
                 };
-                if (e === -1 / 0) return {
+                if (n === -1 / 0) return {
                     doubleValue: "-Infinity"
                 };
             }
             return {
-                doubleValue: ut(e) ? "-0" : e
+                doubleValue: ut(n) ? "-0" : n
             };
-        }(t, e);
+        }(t, n);
     }
 
     /**
@@ -3322,7 +3261,7 @@
      * See the License for the specific language governing permissions and
      * limitations under the License.
      */
-    /** Used to represent a field transform on a mutation. */ class de {
+    /** Used to represent a field transform on a mutation. */ class wn {
         constructor() {
             // Make sure that the structural type of `TransformOperation` is unique.
             // See https://github.com/microsoft/TypeScript/issues/5451
@@ -3330,15 +3269,15 @@
         }
     }
 
-    /** Transforms a value into a server-generated timestamp. */ class we extends de {}
+    /** Transforms a value into a server-generated timestamp. */ class mn extends wn {}
 
-    /** Transforms an array value via a union operation. */ class me extends de {
+    /** Transforms an array value via a union operation. */ class pn extends wn {
         constructor(t) {
             super(), this.elements = t;
         }
     }
 
-    /** Transforms an array value via a remove operation. */ class pe extends de {
+    /** Transforms an array value via a remove operation. */ class yn extends wn {
         constructor(t) {
             super(), this.elements = t;
         }
@@ -3349,9 +3288,9 @@
      * transforms. Converts all field values to integers or doubles, but unlike the
      * backend does not cap integer values at 2^63. Instead, JavaScript number
      * arithmetic is used and precision loss can occur for values greater than 2^53.
-     */ class ye extends de {
-        constructor(t, e) {
-            super(), this.L = t, this.U = e;
+     */ class _n extends wn {
+        constructor(t, n) {
+            super(), this.S = t, this.q = n;
         }
     }
 
@@ -3359,18 +3298,18 @@
      * Encodes a precondition for a mutation. This follows the model that the
      * backend accepts with the special case of an explicit "empty" precondition
      * (meaning no precondition).
-     */ class ge {
-        constructor(t, e) {
-            this.updateTime = t, this.exists = e;
+     */ class bn {
+        constructor(t, n) {
+            this.updateTime = t, this.exists = n;
         }
         /** Creates a new empty Precondition. */    static none() {
-            return new ge;
+            return new bn;
         }
         /** Creates a new Precondition with an exists flag. */    static exists(t) {
-            return new ge(void 0, t);
+            return new bn(void 0, t);
         }
         /** Creates a new Precondition based on a version a document exists at. */    static updateTime(t) {
-            return new ge(t);
+            return new bn(t);
         }
         /** Returns whether this Precondition is empty. */    get isNone() {
             return void 0 === this.updateTime && void 0 === this.exists;
@@ -3423,14 +3362,14 @@
      * applyToLocalView() to implement the actual behavior of applying the mutation
      * to some source document (see `applySetMutationToRemoteDocument()` for an
      * example).
-     */ class be {}
+     */ class vn {}
 
     /**
      * A mutation that creates or replaces the document at the given key with the
      * object value contents.
-     */ class ve extends be {
-        constructor(t, e, n, r = []) {
-            super(), this.key = t, this.value = e, this.precondition = n, this.fieldTransforms = r, 
+     */ class En extends vn {
+        constructor(t, n, e, r = []) {
+            super(), this.key = t, this.value = n, this.precondition = e, this.fieldTransforms = r, 
             this.type = 0 /* Set */;
         }
     }
@@ -3447,16 +3386,16 @@
      *    is deleted.
      *  * When a field is not in the mask but is in the values, the values map is
      *    ignored.
-     */ class Ee extends be {
-        constructor(t, e, n, r, s = []) {
-            super(), this.key = t, this.data = e, this.fieldMask = n, this.precondition = r, 
+     */ class In extends vn {
+        constructor(t, n, e, r, s = []) {
+            super(), this.key = t, this.data = n, this.fieldMask = e, this.precondition = r, 
             this.fieldTransforms = s, this.type = 1 /* Patch */;
         }
     }
 
-    /** A mutation that deletes the document at the given key. */ class Te extends be {
-        constructor(t, e) {
-            super(), this.key = t, this.precondition = e, this.type = 2 /* Delete */ , this.fieldTransforms = [];
+    /** A mutation that deletes the document at the given key. */ class Tn extends vn {
+        constructor(t, n) {
+            super(), this.key = t, this.precondition = n, this.type = 2 /* Delete */ , this.fieldTransforms = [];
         }
     }
 
@@ -3466,9 +3405,9 @@
      *
      * The `verify` operation is only used in Transactions, and this class serves
      * primarily to facilitate serialization into protos.
-     */ class Ie extends be {
-        constructor(t, e) {
-            super(), this.key = t, this.precondition = e, this.type = 3 /* Verify */ , this.fieldTransforms = [];
+     */ class An extends vn {
+        constructor(t, n) {
+            super(), this.key = t, this.precondition = n, this.type = 3 /* Verify */ , this.fieldTransforms = [];
         }
     }
 
@@ -3486,9 +3425,9 @@
      * TODO(klimt): We can remove the databaseId argument if we keep the full
      * resource name in documents.
      */
-    class Re {
-        constructor(t, e) {
-            this.databaseId = t, this.C = e;
+    class Vn {
+        constructor(t, n) {
+            this.databaseId = t, this.F = n;
         }
     }
 
@@ -3503,13 +3442,13 @@
     /**
      * Returns a value for a Date that's appropriate to put into a proto.
      */
-    function Ve(t, e) {
-        if (t.C) {
-            return `${new Date(1e3 * e.seconds).toISOString().replace(/\.\d*/, "").replace("Z", "")}.${("000000000" + e.nanoseconds).slice(-9)}Z`;
+    function Nn(t, n) {
+        if (t.F) {
+            return `${new Date(1e3 * n.seconds).toISOString().replace(/\.\d*/, "").replace("Z", "")}.${("000000000" + n.nanoseconds).slice(-9)}Z`;
         }
         return {
-            seconds: "" + e.seconds,
-            nanos: e.nanoseconds
+            seconds: "" + n.seconds,
+            nanos: n.nanoseconds
         };
     }
 
@@ -3518,86 +3457,86 @@
      *
      * Visible for testing.
      */
-    function Ne(t, e) {
-        return t.C ? e.toBase64() : e.toUint8Array();
+    function Dn(t, n) {
+        return t.F ? n.toBase64() : n.toUint8Array();
     }
 
-    function De(t, e) {
-        return Ve(t, e.toTimestamp());
+    function $n(t, n) {
+        return Nn(t, n.toTimestamp());
     }
 
-    function Fe(t, e) {
+    function Sn(t, n) {
         return function(t) {
             return new K([ "projects", t.projectId, "databases", t.database ]);
-        }(t).child("documents").child(e).canonicalString();
+        }(t).child("documents").child(n).canonicalString();
     }
 
-    function Se(t, e) {
-        return Fe(t.databaseId, e.path);
+    function qn(t, n) {
+        return Sn(t.databaseId, n.path);
     }
 
-    function Oe(t) {
+    function Cn(t) {
         return new K([ "projects", t.databaseId.projectId, "databases", t.databaseId.database ]).canonicalString();
     }
 
-    function Ce(t, e, n) {
+    function Ln(t, n, e) {
         return {
-            name: Se(t, e),
-            fields: n.value.mapValue.fields
+            name: qn(t, n),
+            fields: e.value.mapValue.fields
         };
     }
 
-    function Ue(t, e) {
-        let n;
-        if (e instanceof ve) n = {
-            update: Ce(t, e.key, e.value)
-        }; else if (e instanceof Te) n = {
-            delete: Se(t, e.key)
-        }; else if (e instanceof Ee) n = {
-            update: Ce(t, e.key, e.data),
-            updateMask: ze(e.fieldMask)
+    function jn(t, n) {
+        let e;
+        if (n instanceof En) e = {
+            update: Ln(t, n.key, n.value)
+        }; else if (n instanceof Tn) e = {
+            delete: qn(t, n.key)
+        }; else if (n instanceof In) e = {
+            update: Ln(t, n.key, n.data),
+            updateMask: Wn(n.fieldMask)
         }; else {
-            if (!(e instanceof Ie)) return g();
-            n = {
-                verify: Se(t, e.key)
+            if (!(n instanceof An)) return g();
+            e = {
+                verify: qn(t, n.key)
             };
         }
-        return e.fieldTransforms.length > 0 && (n.updateTransforms = e.fieldTransforms.map((t => function(t, e) {
-            const n = e.transform;
-            if (n instanceof we) return {
-                fieldPath: e.field.canonicalString(),
+        return n.fieldTransforms.length > 0 && (e.updateTransforms = n.fieldTransforms.map((t => function(t, n) {
+            const e = n.transform;
+            if (e instanceof mn) return {
+                fieldPath: n.field.canonicalString(),
                 setToServerValue: "REQUEST_TIME"
             };
-            if (n instanceof me) return {
-                fieldPath: e.field.canonicalString(),
+            if (e instanceof pn) return {
+                fieldPath: n.field.canonicalString(),
                 appendMissingElements: {
-                    values: n.elements
+                    values: e.elements
                 }
             };
-            if (n instanceof pe) return {
-                fieldPath: e.field.canonicalString(),
+            if (e instanceof yn) return {
+                fieldPath: n.field.canonicalString(),
                 removeAllFromArray: {
-                    values: n.elements
+                    values: e.elements
                 }
             };
-            if (n instanceof ye) return {
-                fieldPath: e.field.canonicalString(),
-                increment: n.U
+            if (e instanceof _n) return {
+                fieldPath: n.field.canonicalString(),
+                increment: e.q
             };
             throw g();
-        }(0, t)))), e.precondition.isNone || (n.currentDocument = function(t, e) {
-            return void 0 !== e.updateTime ? {
-                updateTime: De(t, e.updateTime)
-            } : void 0 !== e.exists ? {
-                exists: e.exists
+        }(0, t)))), n.precondition.isNone || (e.currentDocument = function(t, n) {
+            return void 0 !== n.updateTime ? {
+                updateTime: $n(t, n.updateTime)
+            } : void 0 !== n.exists ? {
+                exists: n.exists
             } : g();
-        }(t, e.precondition)), n;
+        }(t, n.precondition)), e;
     }
 
-    function ze(t) {
-        const e = [];
-        return t.fields.forEach((t => e.push(t.canonicalString()))), {
-            fieldPaths: e
+    function Wn(t) {
+        const n = [];
+        return t.fields.forEach((t => n.push(t.canonicalString()))), {
+            fieldPaths: n
         };
     }
 
@@ -3616,8 +3555,8 @@
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
-     */ function Ge(t) {
-        return new Re(t, /* useProto3Json= */ !0);
+     */ function Hn(t) {
+        return new Vn(t, /* useProto3Json= */ !0);
     }
 
     /**
@@ -3645,37 +3584,37 @@
      * An implementation of Datastore that exposes additional state for internal
      * consumption.
      */
-    class Ye extends class {} {
-        constructor(t, e, n) {
-            super(), this.credentials = t, this.X = e, this.L = n, this.tt = !1;
+    class Kn extends class {} {
+        constructor(t, n, e) {
+            super(), this.credentials = t, this.Y = n, this.S = e, this.K = !1;
         }
-        et() {
-            if (this.tt) throw new U(F, "The client has already been terminated.");
+        J() {
+            if (this.K) throw new U(F, "The client has already been terminated.");
         }
-        /** Gets an auth token and invokes the provided RPC. */    v(t, e, n) {
-            return this.et(), this.credentials.getToken().then((r => this.X.v(t, e, n, r))).catch((t => {
+        /** Gets an auth token and invokes the provided RPC. */    l(t, n, e) {
+            return this.J(), this.credentials.getToken().then((r => this.Y.l(t, n, e, r))).catch((t => {
                 throw "FirebaseError" === t.name ? (t.code === D && this.credentials.invalidateToken(), 
-                t) : new U(I, t.toString());
+                t) : new U(T, t.toString());
             }));
         }
-        /** Gets an auth token and invokes the provided RPC with streamed results. */    P(t, e, n) {
-            return this.et(), this.credentials.getToken().then((r => this.X.P(t, e, n, r))).catch((t => {
+        /** Gets an auth token and invokes the provided RPC with streamed results. */    v(t, n, e) {
+            return this.J(), this.credentials.getToken().then((r => this.Y.v(t, n, e, r))).catch((t => {
                 throw "FirebaseError" === t.name ? (t.code === D && this.credentials.invalidateToken(), 
-                t) : new U(I, t.toString());
+                t) : new U(T, t.toString());
             }));
         }
         terminate() {
-            this.tt = !0;
+            this.K = !0;
         }
     }
 
     // TODO(firestorexp): Make sure there is only one Datastore instance per
     // firestore-exp client.
-    async function Ke(t, e) {
-        const n = v(t), r = Oe(n.L) + "/documents", s = {
-            writes: e.map((t => Ue(n.L, t)))
+    async function Jn(t, n) {
+        const e = v(t), r = Cn(e.S) + "/documents", s = {
+            writes: n.map((t => jn(e.S, t)))
         };
-        await n.v("Commit", r, s);
+        await e.l("Commit", r, s);
     }
 
     /**
@@ -3693,7 +3632,7 @@
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
-     */ const Xe = new Map;
+     */ const te = new Map;
 
     /**
      * An instance map that ensures only one Datastore exists per Firestore
@@ -3704,19 +3643,19 @@
      * instance. Callers must invoke removeComponents() when the Firestore
      * instance is terminated.
      */
-    function tn(t) {
+    function ne(t) {
         if (t._terminated) throw new U(F, "The client has already been terminated.");
-        if (!Xe.has(t)) {
+        if (!te.has(t)) {
             m("ComponentProvider", "Initializing Datastore");
             const i = function(t) {
                 return new ft(t, fetch.bind(null));
-            }((e = t._databaseId, n = t.app.options.appId || "", r = t._persistenceKey, s = t._freezeSettings(), 
-            new G(e, n, r, s.host, s.ssl, s.experimentalForceLongPolling, s.experimentalAutoDetectLongPolling, s.useFetchStreams))), o = Ge(t._databaseId), u = function(t, e, n) {
-                return new Ye(t, e, n);
+            }((n = t._databaseId, e = t.app.options.appId || "", r = t._persistenceKey, s = t._freezeSettings(), 
+            new G(n, e, r, s.host, s.ssl, s.experimentalForceLongPolling, s.experimentalAutoDetectLongPolling, s.useFetchStreams))), o = Hn(t._databaseId), u = function(t, n, e) {
+                return new Kn(t, n, e);
             }(t._credentials, i, o);
-            Xe.set(t, u);
+            te.set(t, u);
         }
-        var e, n, r, s;
+        var n, e, r, s;
         /**
      * @license
      * Copyright 2018 Google LLC
@@ -3732,7 +3671,7 @@
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
-     */    return Xe.get(t);
+     */    return te.get(t);
     }
 
     /**
@@ -3741,24 +3680,24 @@
      */
     /**
      * A concrete type describing all the values that can be applied via a
-     * user-supplied firestore.Settings object. This is a separate type so that
+     * user-supplied `FirestoreSettings` object. This is a separate type so that
      * defaults can be supplied and the value can be checked for equality.
      */
-    class en {
+    class ee {
         constructor(t) {
-            var e;
+            var n;
             if (void 0 === t.host) {
                 if (void 0 !== t.ssl) throw new U(A, "Can't provide ssl option if host option is not set");
                 this.host = "firestore.googleapis.com", this.ssl = true;
-            } else this.host = t.host, this.ssl = null === (e = t.ssl) || void 0 === e || e;
+            } else this.host = t.host, this.ssl = null === (n = t.ssl) || void 0 === n || n;
             if (this.credentials = t.credentials, this.ignoreUndefinedProperties = !!t.ignoreUndefinedProperties, 
             void 0 === t.cacheSizeBytes) this.cacheSizeBytes = 41943040; else {
                 if (-1 !== t.cacheSizeBytes && t.cacheSizeBytes < 1048576) throw new U(A, "cacheSizeBytes must be at least 1048576");
                 this.cacheSizeBytes = t.cacheSizeBytes;
             }
             this.experimentalForceLongPolling = !!t.experimentalForceLongPolling, this.experimentalAutoDetectLongPolling = !!t.experimentalAutoDetectLongPolling, 
-            this.useFetchStreams = !!t.useFetchStreams, function(t, e, n, r) {
-                if (!0 === e && !0 === r) throw new U(A, `${t} and ${n} cannot be used together.`);
+            this.useFetchStreams = !!t.useFetchStreams, function(t, n, e, r) {
+                if (!0 === n && !0 === r) throw new U(A, `${t} and ${e} cannot be used together.`);
             }("experimentalForceLongPolling", t.experimentalForceLongPolling, "experimentalAutoDetectLongPolling", t.experimentalAutoDetectLongPolling);
         }
         isEqual(t) {
@@ -3786,14 +3725,15 @@
      * The Cloud Firestore service interface.
      *
      * Do not call this constructor directly. Instead, use {@link getFirestore}.
-     */ class nn {
+     */ class re {
         /** @hideconstructor */
-        constructor(t, e) {
+        constructor(t, n) {
+            this._credentials = n, 
             /**
              * Whether it's a Firestore or Firestore Lite instance.
              */
-            this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new en({}), 
-            this._settingsFrozen = !1, t instanceof H ? (this._databaseId = t, this._credentials = new M) : (this._app = t, 
+            this.type = "firestore-lite", this._persistenceKey = "(lite)", this._settings = new ee({}), 
+            this._settingsFrozen = !1, t instanceof H ? this._databaseId = t : (this._app = t, 
             this._databaseId = function(t) {
                 if (!Object.prototype.hasOwnProperty.apply(t.options, [ "projectId" ])) throw new U(A, '"projectId" not provided in firebase.initializeApp.');
                 return new H(t.options.projectId);
@@ -3807,8 +3747,8 @@
      * @param app - The {@link @firebase/app#FirebaseApp} with which the `Firestore` instance will
      * be associated.
      * @param settings - A settings object to configure the `Firestore` instance.
-     * @returns A newly initialized Firestore instance.
-     */ (t), this._credentials = new Q(e));
+     * @returns A newly initialized `Firestore` instance.
+     */ (t));
         }
         /**
          * The {@link @firebase/app#FirebaseApp} associated with this `Firestore` service
@@ -3825,14 +3765,14 @@
         }
         _setSettings(t) {
             if (this._settingsFrozen) throw new U(F, "Firestore has already been started and its settings can no longer be changed. You can only modify settings before calling any other methods on a Firestore object.");
-            this._settings = new en(t), void 0 !== t.credentials && (this._credentials = function(t) {
+            this._settings = new ee(t), void 0 !== t.credentials && (this._credentials = function(t) {
                 if (!t) return new M;
                 switch (t.type) {
                   case "gapi":
-                    const e = t.client;
+                    const n = t.client;
                     // Make sure this really is a Gapi client.
-                                    return b(!("object" != typeof e || null === e || !e.auth || !e.auth.getAuthHeaderValueForFirstParty)), 
-                    new W(e, t.sessionIndex || "0", t.iamToken || null);
+                                    return b(!("object" != typeof n || null === n || !n.auth || !n.auth.getAuthHeaderValueForFirstParty)), 
+                    new W(n, t.sessionIndex || "0", t.iamToken || null);
 
                   case "provider":
                     return t.client;
@@ -3851,7 +3791,7 @@
         _delete() {
             return this._terminateTask || (this._terminateTask = this._terminate()), this._terminateTask;
         }
-        /** Returns a JSON-serializable representation of this Firestore instance. */    toJSON() {
+        /** Returns a JSON-serializable representation of this `Firestore` instance. */    toJSON() {
             return {
                 app: this._app,
                 databaseId: this._databaseId,
@@ -3866,22 +3806,22 @@
          * Only ever called once.
          */    _terminate() {
             return function(t) {
-                const e = Xe.get(t);
-                e && (m("ComponentProvider", "Removing Datastore"), Xe.delete(t), e.terminate());
+                const n = te.get(t);
+                n && (m("ComponentProvider", "Removing Datastore"), te.delete(t), n.terminate());
             }(this), Promise.resolve();
         }
     }
 
     /**
-     * Returns the existing instance of Firestore that is associated with the
+     * Returns the existing `Firestore` instance that is associated with the
      * provided {@link @firebase/app#FirebaseApp}. If no instance exists, initializes a new
      * instance with default settings.
      *
-     * @param app - The {@link @firebase/app#FirebaseApp} instance that the returned Firestore
+     * @param app - The {@link @firebase/app#FirebaseApp} instance that the returned `Firestore`
      * instance is associated with.
      * @returns The `Firestore` instance of the provided app.
-     */ function sn(n = getApp()) {
-        return _getProvider(n, "firestore/lite").getImmediate();
+     */ function ie(e = getApp()) {
+        return _getProvider(e, "firestore/lite").getImmediate();
     }
 
     /**
@@ -3921,14 +3861,14 @@
      * and can be used to write, read, or listen to the location. The document at
      * the referenced location may or may not exist.
      */
-    class cn {
+    class ce {
         /** @hideconstructor */
         constructor(t, 
         /**
          * If provided, the `FirestoreDataConverter` associated with this instance.
          */
-        e, n) {
-            this.converter = e, this._key = n, 
+        n, e) {
+            this.converter = n, this._key = e, 
             /** The type of this Firestore reference. */
             this.type = "document", this.firestore = t;
         }
@@ -3949,40 +3889,40 @@
         /**
          * The collection this `DocumentReference` belongs to.
          */    get parent() {
-            return new hn(this.firestore, this.converter, this._key.path.popLast());
+            return new he(this.firestore, this.converter, this._key.path.popLast());
         }
         withConverter(t) {
-            return new cn(this.firestore, t, this._key);
+            return new ce(this.firestore, t, this._key);
         }
     }
 
     /**
-     * A `Query` refers to a Query which you can read or listen to. You can also
+     * A `Query` refers to a query which you can read or listen to. You can also
      * construct refined `Query` objects by adding filters and ordering.
-     */ class an {
+     */ class ae {
         // This is the lite version of the Query class in the main SDK.
         /** @hideconstructor protected */
         constructor(t, 
         /**
          * If provided, the `FirestoreDataConverter` associated with this instance.
          */
-        e, n) {
-            this.converter = e, this._query = n, 
+        n, e) {
+            this.converter = n, this._query = e, 
             /** The type of this Firestore reference. */
             this.type = "query", this.firestore = t;
         }
         withConverter(t) {
-            return new an(this.firestore, t, this._query);
+            return new ae(this.firestore, t, this._query);
         }
     }
 
     /**
      * A `CollectionReference` object can be used for adding documents, getting
      * document references, and querying for documents (using {@link query}).
-     */ class hn extends an {
+     */ class he extends ae {
         /** @hideconstructor */
-        constructor(t, e, n) {
-            super(t, e, new se(n)), this._path = n, 
+        constructor(t, n, e) {
+            super(t, n, new sn(e)), this._path = e, 
             /** The type of this Firestore reference. */
             this.type = "collection";
         }
@@ -4000,27 +3940,27 @@
          * subcollection. If this isn't a subcollection, the reference is null.
          */    get parent() {
             const t = this._path.popLast();
-            return t.isEmpty() ? null : new cn(this.firestore, 
+            return t.isEmpty() ? null : new ce(this.firestore, 
             /* converter= */ null, new X(t));
         }
         withConverter(t) {
-            return new hn(this.firestore, t, this._path);
+            return new he(this.firestore, t, this._path);
         }
     }
 
-    function dn(t, e, ...n) {
+    function de(t, n, ...e) {
         if (t = getModularInstance(t), 
         // We allow omission of 'pathString' but explicitly prohibit passing in both
         // 'undefined' and 'null'.
-        1 === arguments.length && (e = wt.N()), tt("doc", "path", e), t instanceof nn) {
-            const r = K.fromString(e, ...n);
-            return et(r), new cn(t, 
+        1 === arguments.length && (n = wt.A()), tt("doc", "path", n), t instanceof re) {
+            const r = K.fromString(n, ...e);
+            return nt(r), new ce(t, 
             /* converter= */ null, new X(r));
         }
         {
-            if (!(t instanceof cn || t instanceof hn)) throw new U(A, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
-            const r = t._path.child(K.fromString(e, ...n));
-            return et(r), new cn(t.firestore, t instanceof hn ? t.converter : null, new X(r));
+            if (!(t instanceof ce || t instanceof he)) throw new U(A, "Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore");
+            const r = t._path.child(K.fromString(n, ...e));
+            return nt(r), new ce(t.firestore, t instanceof he ? t.converter : null, new X(r));
         }
     }
 
@@ -4047,15 +3987,15 @@
      *
      * Create a `FieldPath` by providing field names. If more than one field
      * name is provided, the path will point to a nested field in a document.
-     */ class pn {
+     */ class pe {
         /**
-         * Creates a FieldPath from the provided field names. If more than one field
+         * Creates a `FieldPath` from the provided field names. If more than one field
          * name is provided, the path will point to a nested field in a document.
          *
          * @param fieldNames - A list of field names.
          */
         constructor(...t) {
-            for (let e = 0; e < t.length; ++e) if (0 === t[e].length) throw new U(A, "Invalid field name at argument $(i + 1). Field names must not be empty.");
+            for (let n = 0; n < t.length; ++n) if (0 === t[n].length) throw new U(A, "Invalid field name at argument $(i + 1). Field names must not be empty.");
             this._internalPath = new Z(t);
         }
         /**
@@ -4086,7 +4026,7 @@
      */
     /**
      * An immutable object representing an array of bytes.
-     */ class _n {
+     */ class _e {
         /** @hideconstructor */
         constructor(t) {
             this._byteString = t;
@@ -4098,7 +4038,7 @@
          * @param base64 - The Base64 string used to create the `Bytes` object.
          */    static fromBase64String(t) {
             try {
-                return new _n(Et.fromBase64String(t));
+                return new _e(Et.fromBase64String(t));
             } catch (t) {
                 throw new U(A, "Failed to construct data from Base64 string: " + t);
             }
@@ -4108,7 +4048,7 @@
          *
          * @param array - The Uint8Array used to create the `Bytes` object.
          */    static fromUint8Array(t) {
-            return new _n(Et.fromUint8Array(t));
+            return new _e(Et.fromUint8Array(t));
         }
         /**
          * Returns the underlying bytes as a Base64-encoded string.
@@ -4160,7 +4100,7 @@
     /**
      * Sentinel values that can be used when writing document fields with `set()`
      * or `update()`.
-     */ class gn {
+     */ class ge {
         /**
          * @param _methodName - The public API endpoint that returns this class.
          * @hideconstructor
@@ -4192,17 +4132,17 @@
      *
      * Latitude values are in the range of [-90, 90].
      * Longitude values are in the range of [-180, 180].
-     */ class bn {
+     */ class be {
         /**
          * Creates a new immutable `GeoPoint` object with the provided latitude and
          * longitude values.
          * @param latitude - The latitude as number between -90 and 90.
          * @param longitude - The longitude as number between -180 and 180.
          */
-        constructor(t, e) {
+        constructor(t, n) {
             if (!isFinite(t) || t < -90 || t > 90) throw new U(A, "Latitude must be a number between -90 and 90, but was: " + t);
-            if (!isFinite(e) || e < -180 || e > 180) throw new U(A, "Longitude must be a number between -180 and 180, but was: " + e);
-            this._lat = t, this._long = e;
+            if (!isFinite(n) || n < -180 || n > 180) throw new U(A, "Longitude must be a number between -180 and 180, but was: " + n);
+            this._lat = t, this._long = n;
         }
         /**
          * The latitude of this `GeoPoint` instance.
@@ -4251,18 +4191,18 @@
      * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      * See the License for the specific language governing permissions and
      * limitations under the License.
-     */ const vn = /^__.*__$/;
+     */ const ve = /^__.*__$/;
 
-    /** The result of parsing document data (e.g. for a setData call). */ class En {
-        constructor(t, e, n) {
-            this.data = t, this.fieldMask = e, this.fieldTransforms = n;
+    /** The result of parsing document data (e.g. for a setData call). */ class Ee {
+        constructor(t, n, e) {
+            this.data = t, this.fieldMask = n, this.fieldTransforms = e;
         }
-        toMutation(t, e) {
-            return null !== this.fieldMask ? new Ee(t, this.data, this.fieldMask, e, this.fieldTransforms) : new ve(t, this.data, e, this.fieldTransforms);
+        toMutation(t, n) {
+            return null !== this.fieldMask ? new In(t, this.data, this.fieldMask, n, this.fieldTransforms) : new En(t, this.data, n, this.fieldTransforms);
         }
     }
 
-    function In(t) {
+    function Te(t) {
         switch (t) {
           case 0 /* Set */ :
      // fall through
@@ -4280,7 +4220,7 @@
         }
     }
 
-    /** A "context" object passed around while parsing user data. */ class An {
+    /** A "context" object passed around while parsing user data. */ class Ae {
         /**
          * Initializes a ParseContext with the given source and path.
          *
@@ -4299,101 +4239,101 @@
          * which case certain features will not work and errors will be somewhat
          * compromised).
          */
-        constructor(t, e, n, r, s, i) {
-            this.settings = t, this.databaseId = e, this.L = n, this.ignoreUndefinedProperties = r, 
+        constructor(t, n, e, r, s, i) {
+            this.settings = t, this.databaseId = n, this.S = e, this.ignoreUndefinedProperties = r, 
             // Minor hack: If fieldTransforms is undefined, we assume this is an
             // external call and we need to validate the entire path.
-            void 0 === s && this.nt(), this.fieldTransforms = s || [], this.fieldMask = i || [];
+            void 0 === s && this.Z(), this.fieldTransforms = s || [], this.fieldMask = i || [];
         }
         get path() {
             return this.settings.path;
         }
-        get rt() {
-            return this.settings.rt;
+        get X() {
+            return this.settings.X;
         }
-        /** Returns a new context with the specified settings overwritten. */    st(t) {
-            return new An(Object.assign(Object.assign({}, this.settings), t), this.databaseId, this.L, this.ignoreUndefinedProperties, this.fieldTransforms, this.fieldMask);
+        /** Returns a new context with the specified settings overwritten. */    tt(t) {
+            return new Ae(Object.assign(Object.assign({}, this.settings), t), this.databaseId, this.S, this.ignoreUndefinedProperties, this.fieldTransforms, this.fieldMask);
+        }
+        nt(t) {
+            var n;
+            const e = null === (n = this.path) || void 0 === n ? void 0 : n.child(t), r = this.tt({
+                path: e,
+                et: !1
+            });
+            return r.rt(t), r;
+        }
+        st(t) {
+            var n;
+            const e = null === (n = this.path) || void 0 === n ? void 0 : n.child(t), r = this.tt({
+                path: e,
+                et: !1
+            });
+            return r.Z(), r;
         }
         it(t) {
-            var e;
-            const n = null === (e = this.path) || void 0 === e ? void 0 : e.child(t), r = this.st({
-                path: n,
-                ot: !1
-            });
-            return r.ut(t), r;
-        }
-        ct(t) {
-            var e;
-            const n = null === (e = this.path) || void 0 === e ? void 0 : e.child(t), r = this.st({
-                path: n,
-                ot: !1
-            });
-            return r.nt(), r;
-        }
-        at(t) {
             // TODO(b/34871131): We don't support array paths right now; so make path
             // undefined.
-            return this.st({
+            return this.tt({
                 path: void 0,
-                ot: !0
+                et: !0
             });
         }
-        ht(t) {
-            return zn(t, this.settings.methodName, this.settings.lt || !1, this.path, this.settings.ft);
+        ot(t) {
+            return ze(t, this.settings.methodName, this.settings.ut || !1, this.path, this.settings.ct);
         }
         /** Returns 'true' if 'fieldPath' was traversed when creating this context. */    contains(t) {
-            return void 0 !== this.fieldMask.find((e => t.isPrefixOf(e))) || void 0 !== this.fieldTransforms.find((e => t.isPrefixOf(e.field)));
+            return void 0 !== this.fieldMask.find((n => t.isPrefixOf(n))) || void 0 !== this.fieldTransforms.find((n => t.isPrefixOf(n.field)));
         }
-        nt() {
+        Z() {
             // TODO(b/34871131): Remove null check once we have proper paths for fields
             // within arrays.
-            if (this.path) for (let t = 0; t < this.path.length; t++) this.ut(this.path.get(t));
+            if (this.path) for (let t = 0; t < this.path.length; t++) this.rt(this.path.get(t));
         }
-        ut(t) {
-            if (0 === t.length) throw this.ht("Document fields must not be empty");
-            if (In(this.rt) && vn.test(t)) throw this.ht('Document fields cannot begin and end with "__"');
+        rt(t) {
+            if (0 === t.length) throw this.ot("Document fields must not be empty");
+            if (Te(this.X) && ve.test(t)) throw this.ot('Document fields cannot begin and end with "__"');
         }
     }
 
     /**
      * Helper for parsing raw user input (provided via the API) into internal model
      * classes.
-     */ class Pn {
-        constructor(t, e, n) {
-            this.databaseId = t, this.ignoreUndefinedProperties = e, this.L = n || Ge(t);
+     */ class Pe {
+        constructor(t, n, e) {
+            this.databaseId = t, this.ignoreUndefinedProperties = n, this.S = e || Hn(t);
         }
-        /** Creates a new top-level parse context. */    dt(t, e, n, r = !1) {
-            return new An({
-                rt: t,
-                methodName: e,
-                ft: n,
+        /** Creates a new top-level parse context. */    at(t, n, e, r = !1) {
+            return new Ae({
+                X: t,
+                methodName: n,
+                ct: e,
                 path: Z.emptyPath(),
-                ot: !1,
-                lt: r
-            }, this.databaseId, this.L, this.ignoreUndefinedProperties);
+                et: !1,
+                ut: r
+            }, this.databaseId, this.S, this.ignoreUndefinedProperties);
         }
     }
 
-    function Rn(t) {
-        const e = t._freezeSettings(), n = Ge(t._databaseId);
-        return new Pn(t._databaseId, !!e.ignoreUndefinedProperties, n);
+    function Re(t) {
+        const n = t._freezeSettings(), e = Hn(t._databaseId);
+        return new Pe(t._databaseId, !!n.ignoreUndefinedProperties, e);
     }
 
-    /** Parse document data from a set() call. */ function Vn(t, e, n, r, s, i = {}) {
-        const o = t.dt(i.merge || i.mergeFields ? 2 /* MergeSet */ : 0 /* Set */ , e, n, s);
-        kn("Data must be an object, but it was:", o, r);
-        const u = Un(r, o);
+    /** Parse document data from a set() call. */ function Ve(t, n, e, r, s, i = {}) {
+        const o = t.at(i.merge || i.mergeFields ? 2 /* MergeSet */ : 0 /* Set */ , n, e, s);
+        ke("Data must be an object, but it was:", o, r);
+        const u = Ue(r, o);
         let c, a;
         if (i.merge) c = new vt(o.fieldMask), a = o.fieldTransforms; else if (i.mergeFields) {
             const t = [];
             for (const r of i.mergeFields) {
-                const s = Mn(e, r, n);
+                const s = Me(n, r, e);
                 if (!o.contains(s)) throw new U(A, `Field '${s}' is specified in your field mask but missing from your input data.`);
-                Wn(t, s) || t.push(s);
+                We(t, s) || t.push(s);
             }
             c = new vt(t), a = o.fieldTransforms.filter((t => c.covers(t.field)));
         } else c = null, a = o.fieldTransforms;
-        return new En(new kt(u), c, a);
+        return new Ee(new kt(u), c, a);
     }
 
     /**
@@ -4404,12 +4344,12 @@
      * the source of the data being parsed, etc.
      * @returns The parsed value, or null if the value was a FieldValue sentinel
      * that should not be included in the resulting parsed data.
-     */ function Ln(t, e) {
-        if (jn(
+     */ function Le(t, n) {
+        if (je(
         // Unwrap the API type from the Compat SDK. This will return the API type
         // from firestore-exp.
-        t = getModularInstance(t))) return kn("Unsupported field value:", e, t), Un(t, e);
-        if (t instanceof gn) 
+        t = getModularInstance(t))) return ke("Unsupported field value:", n, t), Ue(t, n);
+        if (t instanceof ge) 
         // FieldValues usually parse into transforms (except FieldValue.delete())
         // in which case we do not want to include this field in our parsed data
         // (as doing so will overwrite the field directly prior to the transform
@@ -4419,19 +4359,19 @@
      * "Parses" the provided FieldValueImpl, adding any necessary transforms to
      * context.fieldTransforms.
      */
-        return function(t, e) {
+        return function(t, n) {
             // Sentinels are only supported with writes, and not within arrays.
-            if (!In(e.rt)) throw e.ht(`${t._methodName}() can only be used with update() and set()`);
-            if (!e.path) throw e.ht(`${t._methodName}() is not currently supported inside arrays`);
-            const n = t._toFieldTransform(e);
-            n && e.fieldTransforms.push(n);
+            if (!Te(n.X)) throw n.ot(`${t._methodName}() can only be used with update() and set()`);
+            if (!n.path) throw n.ot(`${t._methodName}() is not currently supported inside arrays`);
+            const e = t._toFieldTransform(n);
+            e && n.fieldTransforms.push(e);
         }
         /**
      * Helper to parse a scalar value (i.e. not an Object, Array, or FieldValue)
      *
      * @returns The parsed value
-     */ (t, e), null;
-        if (void 0 === t && e.ignoreUndefinedProperties) 
+     */ (t, n), null;
+        if (void 0 === t && n.ignoreUndefinedProperties) 
         // If the input is undefined it can never participate in the fieldMask, so
         // don't handle this below. If `ignoreUndefinedProperties` is false,
         // `parseScalarValue` will reject an undefined value.
@@ -4439,38 +4379,38 @@
         if (
         // If context.path is null we are inside an array and we don't support
         // field mask paths more granular than the top-level array.
-        e.path && e.fieldMask.push(e.path), t instanceof Array) {
+        n.path && n.fieldMask.push(n.path), t instanceof Array) {
             // TODO(b/34871131): Include the path containing the array in the error
             // message.
             // In the case of IN queries, the parsed data is an array (representing
             // the set of values to be included for the IN query) that may directly
             // contain additional arrays (each representing an individual field
             // value), so we disable this validation.
-            if (e.settings.ot && 4 /* ArrayArgument */ !== e.rt) throw e.ht("Nested arrays are not supported");
-            return function(t, e) {
-                const n = [];
+            if (n.settings.et && 4 /* ArrayArgument */ !== n.X) throw n.ot("Nested arrays are not supported");
+            return function(t, n) {
+                const e = [];
                 let r = 0;
                 for (const s of t) {
-                    let t = Ln(s, e.at(r));
+                    let t = Le(s, n.it(r));
                     null == t && (
                     // Just include nulls in the array for fields being replaced with a
                     // sentinel.
                     t = {
                         nullValue: "NULL_VALUE"
-                    }), n.push(t), r++;
+                    }), e.push(t), r++;
                 }
                 return {
                     arrayValue: {
-                        values: n
+                        values: e
                     }
                 };
-            }(t, e);
+            }(t, n);
         }
-        return function(t, e) {
+        return function(t, n) {
             if (null === (t = getModularInstance(t))) return {
                 nullValue: "NULL_VALUE"
             };
-            if ("number" == typeof t) return fe(e.L, t);
+            if ("number" == typeof t) return dn(n.S, t);
             if ("boolean" == typeof t) return {
                 booleanValue: t
             };
@@ -4478,37 +4418,37 @@
                 stringValue: t
             };
             if (t instanceof Date) {
-                const n = yt.fromDate(t);
+                const e = yt.fromDate(t);
                 return {
-                    timestampValue: Ve(e.L, n)
+                    timestampValue: Nn(n.S, e)
                 };
             }
             if (t instanceof yt) {
                 // Firestore backend truncates precision down to microseconds. To ensure
                 // offline mode works the same with regards to truncation, perform the
                 // truncation immediately without waiting for the backend to do that.
-                const n = new yt(t.seconds, 1e3 * Math.floor(t.nanoseconds / 1e3));
+                const e = new yt(t.seconds, 1e3 * Math.floor(t.nanoseconds / 1e3));
                 return {
-                    timestampValue: Ve(e.L, n)
+                    timestampValue: Nn(n.S, e)
                 };
             }
-            if (t instanceof bn) return {
+            if (t instanceof be) return {
                 geoPointValue: {
                     latitude: t.latitude,
                     longitude: t.longitude
                 }
             };
-            if (t instanceof _n) return {
-                bytesValue: Ne(e.L, t._byteString)
+            if (t instanceof _e) return {
+                bytesValue: Dn(n.S, t._byteString)
             };
-            if (t instanceof cn) {
-                const n = e.databaseId, r = t.firestore._databaseId;
-                if (!r.isEqual(n)) throw e.ht(`Document reference is for database ${r.projectId}/${r.database} but should be for database ${n.projectId}/${n.database}`);
+            if (t instanceof ce) {
+                const e = n.databaseId, r = t.firestore._databaseId;
+                if (!r.isEqual(e)) throw n.ot(`Document reference is for database ${r.projectId}/${r.database} but should be for database ${e.projectId}/${e.database}`);
                 return {
-                    referenceValue: Fe(t.firestore._databaseId || e.databaseId, t._key.path)
+                    referenceValue: Sn(t.firestore._databaseId || n.databaseId, t._key.path)
                 };
             }
-            throw e.ht(`Unsupported field value: ${rt(t)}`);
+            throw n.ot(`Unsupported field value: ${rt(t)}`);
         }
         /**
      * Checks whether an object looks like a JSON object that should be converted
@@ -4516,56 +4456,56 @@
      * JSON objects since they should be converted to a struct value. Arrays, Dates,
      * GeoPoints, etc. are not considered to look like JSON objects since they map
      * to specific FieldValue types other than ObjectValue.
-     */ (t, e);
+     */ (t, n);
     }
 
-    function Un(t, e) {
-        const n = {};
+    function Ue(t, n) {
+        const e = {};
         return !function(t) {
-            for (const e in t) if (Object.prototype.hasOwnProperty.call(t, e)) return !1;
+            for (const n in t) if (Object.prototype.hasOwnProperty.call(t, n)) return !1;
             return !0;
         }(t) ? bt(t, ((t, r) => {
-            const s = Ln(r, e.it(t));
-            null != s && (n[t] = s);
+            const s = Le(r, n.nt(t));
+            null != s && (e[t] = s);
         })) : 
         // If we encounter an empty object, we explicitly add it to the update
         // mask to ensure that the server creates a map entry.
-        e.path && e.path.length > 0 && e.fieldMask.push(e.path), {
+        n.path && n.path.length > 0 && n.fieldMask.push(n.path), {
             mapValue: {
-                fields: n
+                fields: e
             }
         };
     }
 
-    function jn(t) {
-        return !("object" != typeof t || null === t || t instanceof Array || t instanceof Date || t instanceof yt || t instanceof bn || t instanceof _n || t instanceof cn || t instanceof gn);
+    function je(t) {
+        return !("object" != typeof t || null === t || t instanceof Array || t instanceof Date || t instanceof yt || t instanceof be || t instanceof _e || t instanceof ce || t instanceof ge);
     }
 
-    function kn(t, e, n) {
-        if (!jn(n) || !function(t) {
+    function ke(t, n, e) {
+        if (!je(e) || !function(t) {
             return "object" == typeof t && null !== t && (Object.getPrototypeOf(t) === Object.prototype || null === Object.getPrototypeOf(t));
-        }(n)) {
-            const r = rt(n);
-            throw "an object" === r ? e.ht(t + " a custom object") : e.ht(t + " " + r);
+        }(e)) {
+            const r = rt(e);
+            throw "an object" === r ? n.ot(t + " a custom object") : n.ot(t + " " + r);
         }
     }
 
     /**
      * Helper that calls fromDotSeparatedString() but wraps any error thrown.
-     */ function Mn(t, e, n) {
+     */ function Me(t, n, e) {
         if ((
         // If required, replace the FieldPath Compat class with with the firestore-exp
         // FieldPath.
-        e = getModularInstance(e)) instanceof pn) return e._internalPath;
-        if ("string" == typeof e) return Qn(t, e);
-        throw zn("Field path arguments must be of type string or FieldPath.", t, 
+        n = getModularInstance(n)) instanceof pe) return n._internalPath;
+        if ("string" == typeof n) return Qe(t, n);
+        throw ze("Field path arguments must be of type string or FieldPath.", t, 
         /* hasConverter= */ !1, 
-        /* path= */ void 0, n);
+        /* path= */ void 0, e);
     }
 
     /**
      * Matches any characters in a field path string that are reserved.
-     */ const Bn = new RegExp("[~\\*/\\[\\]]");
+     */ const Be = new RegExp("[~\\*/\\[\\]]");
 
     /**
      * Wraps fromDotSeparatedString with an error message about the method that
@@ -4575,30 +4515,30 @@
      * split on dots.
      * @param targetDoc - The document against which the field path will be
      * evaluated.
-     */ function Qn(t, e, n) {
-        if (e.search(Bn) >= 0) throw zn(`Invalid field path (${e}). Paths must not contain '~', '*', '/', '[', or ']'`, t, 
+     */ function Qe(t, n, e) {
+        if (n.search(Be) >= 0) throw ze(`Invalid field path (${n}). Paths must not contain '~', '*', '/', '[', or ']'`, t, 
         /* hasConverter= */ !1, 
-        /* path= */ void 0, n);
+        /* path= */ void 0, e);
         try {
-            return new pn(...e.split("."))._internalPath;
+            return new pe(...n.split("."))._internalPath;
         } catch (r) {
-            throw zn(`Invalid field path (${e}). Paths must not be empty, begin with '.', end with '.', or contain '..'`, t, 
+            throw ze(`Invalid field path (${n}). Paths must not be empty, begin with '.', end with '.', or contain '..'`, t, 
             /* hasConverter= */ !1, 
-            /* path= */ void 0, n);
+            /* path= */ void 0, e);
         }
     }
 
-    function zn(t, e, n, r, s) {
+    function ze(t, n, e, r, s) {
         const i = r && !r.isEmpty(), o = void 0 !== s;
-        let u = `Function ${e}() called with invalid data`;
-        n && (u += " (via `toFirestore()`)"), u += ". ";
+        let u = `Function ${n}() called with invalid data`;
+        e && (u += " (via `toFirestore()`)"), u += ". ";
         let c = "";
         return (i || o) && (c += " (found", i && (c += ` in field ${r}`), o && (c += ` in document ${s}`), 
         c += ")"), new U(A, u + t + c);
     }
 
-    /** Checks `haystack` if FieldPath `needle` is present. Runs in O(n). */ function Wn(t, e) {
-        return t.some((t => t.isEqual(e)));
+    /** Checks `haystack` if FieldPath `needle` is present. Runs in O(n). */ function We(t, n) {
+        return t.some((t => t.isEqual(n)));
     }
 
     /**
@@ -4640,26 +4580,26 @@
      * limitations under the License.
      */
     /**
-     * Converts custom model object of type T into DocumentData by applying the
+     * Converts custom model object of type T into `DocumentData` by applying the
      * converter if it exists.
      *
-     * This function is used when converting user objects to DocumentData
+     * This function is used when converting user objects to `DocumentData`
      * because we want to provide the user with a more specific error message if
-     * their set() or fails due to invalid data originating from a toFirestore()
+     * their `set()` or fails due to invalid data originating from a `toFirestore()`
      * call.
      */
-    function yr(t, e, n) {
+    function yr(t, n, e) {
         let r;
         // Cast to `any` in order to satisfy the union type constraint on
         // toFirestore().
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return r = t ? n && (n.merge || n.mergeFields) ? t.toFirestore(e, n) : t.toFirestore(e) : e, 
+        return r = t ? e && (e.merge || e.mergeFields) ? t.toFirestore(n, e) : t.toFirestore(n) : n, 
         r;
     }
 
-    function vr(t, e, n) {
-        const r = yr((t = st(t, cn)).converter, e, n), s = Vn(Rn(t.firestore), "setDoc", t._key, r, null !== t.converter, n);
-        return Ke(tn(t.firestore), [ s.toMutation(t._key, ge.none()) ]);
+    function vr(t, n, e) {
+        const r = yr((t = st(t, ce)).converter, n, e), s = Ve(Re(t.firestore), "setDoc", t._key, r, null !== t.converter, e);
+        return Jn(ne(t.firestore), [ s.toMutation(t._key, bn.none()) ]);
     }
 
     /**
@@ -4670,11 +4610,11 @@
      * directly to the backend, and `onSnapshot()` APIs are not supported.
      * @packageDocumentation
      */ !function(t) {
-        l = t;
-    }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", ((t, {options: e}) => {
-        const n = t.getProvider("app-exp").getImmediate(), r = new nn(n, t.getProvider("auth-internal"));
-        return e && r._setSettings(e), r;
-    }), "PUBLIC" /* PUBLIC */)), registerVersion("firestore-lite", "0.0.900-exp.8b4d7550f", "node");
+        f = t;
+    }(`${SDK_VERSION}_lite`), _registerComponent(new Component("firestore/lite", ((t, {options: n}) => {
+        const e = t.getProvider("app").getImmediate(), r = new re(e, new Q(t.getProvider("auth-internal")));
+        return n && r._setSettings(n), r;
+    }), "PUBLIC" /* PUBLIC */)), registerVersion("firestore-lite", "3.0.0", "node");
 
     initializeApp({
         apiKey: "AIzaSyAkNpqlq9hU_cDu1_4wQIBNNc9OJd4LT1g",
@@ -4685,13 +4625,13 @@
         appId: "1:329205426356:web:d8c730df77b0d7b9890fe1"
     });
 
-    const firestore = sn();
+    const firestore = ie();
 
     window.onTelegramAuth = (user) => {
 
 
-        vr(dn(firestore, "users", `${user.id}`), user);
-        vr(dn(firestore, "users", `${user.id}`, "userStorage", "config"), {
+        vr(de(firestore, "users", `${user.id}`), user);
+        vr(de(firestore, "users", `${user.id}`, "userStorage", "config"), {
             group: window.group
         }, { merge: true });
 

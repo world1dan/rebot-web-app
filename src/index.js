@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import { setDoc, onSnapshot } from "firebase/firestore";
 import { getValue, fetchAndActivate } from "firebase/remote-config";
 
-import { CSSTransition } from 'react-transition-group';
-
 import { database, remoteConfig, settingsContext } from './Context';
 
 import Main from './Main';
@@ -16,7 +14,7 @@ import ReBotManager from './Classes/Rebot'
 import LockScreen from './Classes/LockScreen';
 import InstantView from './Classes/InstantView';
 import Settings from './Components/Settings';
-
+import Notebooks from './Components/Notebooks';
 
 import './style.scss';
 
@@ -25,8 +23,6 @@ import './style.scss';
 
 function App() {
     const [manifest, setManifest] = useState(null);
-
-    const [timetable, setTimetable] = useState(null);
     const [settings, setSettings] = useState(null);
 
     const [settingsOpen, setSettingsOpen] = useState(false);
@@ -48,8 +44,6 @@ function App() {
     }, [manifest, settings]);
 
     useEffect(() => {
-        
-        onSnapshot(database.timetable, (doc) => setTimetable(doc.data()))
 
         onSnapshot(database.settings, (doc) => {
             const settingsData = doc.data();
@@ -98,33 +92,43 @@ function App() {
 
 
     return (
-        <settingsContext.Provider value={settings}>
+        settings &&
+            <settingsContext.Provider value={settings}>
 
-            <div ref={main} className="main">
-                { settings && 
+                <div ref={main} className="main">
                     <Main
                         id="notebooks"
                         settings={settings} 
-                        timetable={timetable} 
                         manifest={manifest} 
                         setSettingsOpen={setSettingsOpen}
                         setNotebooksOpen={setNotebooksOpen}/> }
-            </div>
-            
+                </div>
+                
 
 
-            <SideView
-                id="settings"
-                open={settingsOpen}
-                title="Настройки"
-                onClose={() => setSettingsOpen(false)}
-                backgroundRef={main}
-                side="right">
+                <SideView
+                    id="settings"
+                    open={settingsOpen}
+                    title="Настройки"
+                    onClose={() => setSettingsOpen(false)}
+                    backgroundRef={main}
+                    side="right">
 
-                <Settings changeSetting={changeSetting} setSettingsOpen={setSettingsOpen}/>
-            </SideView>
+                    <Settings changeSetting={changeSetting} setSettingsOpen={setSettingsOpen}/>
+                </SideView>
 
-        </settingsContext.Provider>
+                <SideView
+                    id="notebooks"
+                    open={notebooksOpen}
+                    title="Тетради"
+                    onClose={() => setNotebooksOpen(false)}
+                    backgroundRef={main}
+                    side="left">
+
+                    <Notebooks/>
+                </SideView>
+
+            </settingsContext.Provider>
     )
 }
 

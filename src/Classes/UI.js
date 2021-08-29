@@ -33,6 +33,7 @@ class UI {
 
 
     static getInput(callback, param) {
+
         const searchWraper = document.querySelector("#rebot .search");
 
         const inputRebot = searchWraper.querySelector("input.rebot");

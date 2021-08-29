@@ -2,9 +2,10 @@ import React, { useContext, useState } from "react";
 
 import { settingsContext } from "../../Context";
 
-
-import Button from "./Button";
-import Switch from "./Switch";
+import SecuritySettings from "./SecuritySettings";
+import ThemeChanger from "./ThemeChanger";
+import Button from "../Elements/Panel/Button";
+import Switch from "../Elements/Panel/Switch";
 
 import Panel from "../Elements/Panel";
 import PanelHeader from "../Elements/Panel/PanelHeader";
@@ -22,11 +23,6 @@ export default function Settings(props) {
         props.changeSetting(id, state);
     }
 
-    function setTheme(e) {
-        const theme = e.target.id;
-        props.changeSetting("theme", theme);
-    }
-    
     function logout() {
         localStorage.user = null;
         window.location = "./auth.html"
@@ -36,16 +32,9 @@ export default function Settings(props) {
         <>
             <Panel currentPanel={currentPanel} id="main">
                 <PanelHeader title="Основные"/>
-                <div className="settings-block">
-                    <div className="theme block">
-                        <span className="circle" id="purple" style={{ backgroundColor: "#360A6C" }} onClick={setTheme}></span>
-                        <span className="circle" id="blue" style={{ backgroundColor: "#0A1B3C" }} onClick={setTheme}></span>
-                        <span className="circle" id="dark" style={{ backgroundColor: "#0F0F0F" }} onClick={setTheme}></span>
-                        <span className="circle" id="ultraDark" style={{ backgroundColor: "#000" }} onClick={setTheme}></span>
-                        <span className="circle" id="light" style={{ backgroundColor: "#F2F3F4" }} onClick={setTheme}></span>
-                    </div>
 
-                    <div className="category">Решебники</div>
+                <div className="settings-block">
+                    <ThemeChanger theme={settings.theme} changeSetting={props.changeSetting}/>
 
                     <Switch
                         title="Затемнять решения"
@@ -69,6 +58,12 @@ export default function Settings(props) {
                         icon={<i className="fas fa-lock"></i>}
                         onClick={() => setCurrentPanel("security")}
                     />
+
+                    <Button
+                        title="Выйти"
+                        icon={<i className="fas fa-sign-out-alt"></i>}
+                        onClick={logout}
+                    />
                 </div>
             </Panel>
             <Panel currentPanel={currentPanel} id="security">
@@ -79,11 +74,7 @@ export default function Settings(props) {
                 />
 
                 <div className="settings-block">
-                    <Button
-                        title="Выйти"
-                        icon={<i className="fas fa-sign-out-alt"></i>}
-                        onClick={logout}
-                    />
+                    <SecuritySettings setCurrentPanel={setCurrentPanel}/>
                 </div>
             </Panel>
         </>

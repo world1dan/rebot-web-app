@@ -1,22 +1,19 @@
-import React, { useContext, useEffect, useState, memo } from 'react';
-import { onSnapshot } from "firebase/firestore";
+import React, { useContext, memo } from 'react';
 
 import { database, manifestContext } from '../../Context';
 import SubjectRow from "./SubjectRow";
+
+import useFirestoreListener from '../../Hooks/useFirestoreListener';
 
 
 export default memo(function Marks() {
 
     const manifest = useContext(manifestContext);
-    const [marks, setMarks] = useState(null);
-
-    useEffect(() => {
-        onSnapshot(database.marks, (snapshot) => {
-            if (snapshot.data()) {
-                setMarks(Object.fromEntries(Object.entries(snapshot.data()).sort()));
-            }
-        });
-    }, []);
+    let marks = useFirestoreListener(database.marks);
+    
+    if (marks) {
+        marks = Object.fromEntries(Object.entries(marks).sort());
+    }
 
     const rows = [];
 

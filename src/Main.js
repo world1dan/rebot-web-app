@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Navigation from './Components/Elements/Navigation';
 
-import { manifestContext, timetableContext } from './Context';
+import { manifestContext } from './Context';
 import HomeScreen from './Components/HomeScreen';
 import Week from './Components/TimeTable/Week';
 import Resheba from './Components/Resheba';
@@ -24,12 +24,8 @@ export default function Main(props) {
 
         <manifestContext.Provider value={props.manifest}>
 
-            { props.timetable && 
-                <timetableContext.Provider value={props.timetable}>
-                    <div className={"app center-auto " + (activeTab == 4 ? "active" : "")}><Week setSettingsOpen={props.setSettingsOpen}/></div>
-                    <div className={"app center-auto " + (activeTab == 1 ? "active" : "")}><HomeScreen/></div>
-                </timetableContext.Provider> 
-            }
+            <div className={"app center-auto " + (activeTab == 4 ? "active" : "")}><Week setSettingsOpen={props.setSettingsOpen}/></div>
+            <div className={"app center-auto " + (activeTab == 1 ? "active" : "")}><HomeScreen/></div>
 
             <div className={"app center-auto mw700 " + (activeTab == 3 ? "active" : "")}><Marks/></div>
         </manifestContext.Provider>

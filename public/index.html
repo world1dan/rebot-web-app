@@ -95,7 +95,9 @@
                 <button class="close" onClick="ReBot.remove(this.parentNode.parentNode)"><i class="fas fa-times fa-lg"></i></button>
             </div>
             <div class="viewbox-content">
-                <img width="100%" id="view"/>
+                <img width="100%" id="view" onerror="this.src='./static/img/404.webp'"/>
+                <img width="100%" id="view2" onerror="this.style.display = 'none'"/>
+                <img width="100%" id="view3" onerror="this.style.display = 'none'"/>
             </div>
         </div>
     </div>

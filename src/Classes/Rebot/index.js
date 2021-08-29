@@ -49,14 +49,13 @@ export default class ReBotManager {
 
             let box = this.viewbox_template.cloneNode(true);
 
-            if (subj.section == false) {
-                box.querySelector("#view").src = "./static/img/404.webp";
+            if (!subj.section) {
 
-                //box.querySelector("#view").src = subj.url.replace('?', num);
+                box.querySelector("#view").src = subj.url.replace('?', num);
 
-                if (subj.full_img == false) {
-                    //box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
-                    //box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
+                if (!subj.full_img) {
+                    box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
+                    box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
                 }
 
             } else {
@@ -95,8 +94,16 @@ export default class ReBotManager {
         box.querySelector("#view").src = subj.url.replace('?', num);
 
         if (subj.full_img == false) {
-            box.querySelector("#view2").src = subj.url.replace('?', num + "_2");
-            box.querySelector("#view3").src = subj.url.replace('?', num + "_3");
+            const view2 = box.querySelector("#view2");
+            const view3 = box.querySelector("#view3");
+            
+            view2.style.display = "";
+            view3.style.display = "";
+
+            view2.src = subj.url.replace('?', num + "_2");
+            view3.src = subj.url.replace('?', num + "_3");
+
+
         }
 
         box.setAttribute('num', num);

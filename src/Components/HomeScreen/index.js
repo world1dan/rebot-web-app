@@ -1,7 +1,7 @@
-import React, { memo,  useContext} from 'react';
+import React, { memo } from 'react';
 
-import { timetableContext } from "../../Context";
-
+import { database } from "../../Context";
+import useFirestoreListener from '../../Hooks/useFirestoreListener';
 import Day from "../TimeTable/Day";
 
 import Notes from "./Notes"
@@ -11,7 +11,7 @@ import Now from "./Now"
 import "./style.scss"
 
 export default memo(function HomeScreen() {
-    const timetable = useContext(timetableContext);
+    const timetable = useFirestoreListener(database.timetable);
 
     let day_num = new Date().getDay();
     if (day_num == 0 || day_num == 6) day_num = 1;

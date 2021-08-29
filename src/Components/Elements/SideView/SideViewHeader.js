@@ -11,6 +11,11 @@ function SideViewHeader(props) {
     )
 }
 
-
+SideViewHeader.propTypes = {
+    title: PropTypes.string.isRequired,
+    side: PropTypes.string.isRequired,
+    onClose: PropTypes.func.isRequired,
+}
 
 export default SideViewHeader;
+

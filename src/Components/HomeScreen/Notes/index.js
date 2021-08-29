@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-
-import { onSnapshot, addDoc } from "firebase/firestore";
+import React from 'react';
+import useCollectionListener from '../../../Hooks/useCollectionListener';
+import { addDoc } from "firebase/firestore";
 
 import { database } from '../../../Context';
 
@@ -9,28 +9,21 @@ import Note from "./Note";
 
 import "./style.scss"
 
+
 export default function Notes() {
 
-    const [notes, setNotes] = useState([]);
+    const notesCollection = useCollectionListener(database.notes);
 
+    const notes = [];
 
+    notesCollection.forEach((doc) => {
 
+        const data = doc.data();
+        const block = <Note docRef={doc.ref} key={doc.id} noteData={data}/>
 
-    useEffect(() => {
-        onSnapshot(database.notes, (collection) => {
-            const newNotes = [];
+        notes.push(block)
+    })
 
-            collection.forEach((doc) => {
-
-                const data = doc.data();
-                const block = <Note docRef={doc.ref} key={doc.id} noteData={data}/>
-
-                newNotes.push(block)
-            })
-
-            setNotes(newNotes);
-        })
-    }, [])
 
     function addNote() {
         if (notes.length <= 8) {

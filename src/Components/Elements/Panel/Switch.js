@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Switch(props) {
     return (
-        <div className="switch block">
+        <div className="switch panel-element">
             { props.icon }
             <div className="label-block">
                 <a className="title">{ props.title }</a>

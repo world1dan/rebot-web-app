@@ -48,10 +48,6 @@
 	will-change: transform;
 
 	max-width: 420px;
-
-	@media screen and (orientation: portrait) and (max-width: 780px) {
-		max-width: 100%;
-	}
 }
 
 

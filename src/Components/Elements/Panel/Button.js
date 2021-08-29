@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Button(props) {
     return (
-        <div className="switch block" onClick={props.onClick}>
+        <div className="switch panel-element" onClick={props.onClick}>
             { props.icon }
             <div className="label-block">
                 <a className="title">{ props.title }</a>

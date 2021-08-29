@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-export default function PasswordSet(props) {
+export default function SecuritySettings(props) {
     
     const oldCodeInput = useRef(null);
     const newCodeInput = useRef(null);
@@ -22,11 +22,11 @@ export default function PasswordSet(props) {
         if (newCode.length == 4) {
             localStorage.lockCode = newCode;
             UI.alert("Код установлен");
-            props.setPasswordSetOpen(false);
+            props.setCurrentPanel("main");
         } else if (newCode.length == 0) {
             localStorage.lockCode = "";
             UI.alert("Код отключен");
-            props.setPasswordSetOpen(false);
+            props.setCurrentPanel("main");
         } else {
             UI.alert("Код должен состоять из 4 цифр");
         }
@@ -34,7 +34,7 @@ export default function PasswordSet(props) {
 
 
     return (
-        <div className="code">
+        <div id="security-settings">
             <input ref={oldCodeInput} type="numbers" maxLength="4" id="oldCode" placeholder="Старый код"/>
             <input ref={newCodeInput} type="numbers" maxLength="4" placeholder="Новый код (4 цифры)" id="newCode"/>
             <span className="info">Оставь пустым чтобы отключить</span>

@@ -68,3 +68,4 @@ SideView.propTypes = {
 
 
 export default SideView
+
