@@ -2,3 +2,25 @@
     width: 100%;
     height: calc(100vh - 180px);
 }
+
+
+.notebook-loader {
+    background-color: var(--background3);
+    box-shadow: 1px var(--borders-soft) inset;
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    height: calc(100vh - 180px);
+    border-radius: 10px;
+}
+
+.notebooks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, Minmax(100px, 1fr));
+    gap: 8px;
+    margin-bottom: 20px;
+    .notebook img {
+        border-radius: 7px;
+        width: 100%;
+    }
+}

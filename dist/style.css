@@ -514,100 +514,6 @@ html {
   transition: opacity 0.3s;
 }
 
-#lockscreen {
-  will-change: transform;
-  display: none;
-  padding-top: env(safe-area-inset-top);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  background-color: var(--backgroundTR2);
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  grid-template-rows: 100px 60px 1fr;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  justify-content: center;
-  align-items: center;
-}
-#lockscreen.unactive {
-  transform: translateY(-100vh);
-  transition: transform 0.4s;
-}
-#lockscreen.active {
-  display: grid;
-}
-#lockscreen #indicator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-  margin-top: 60px;
-}
-#lockscreen #indicator .char {
-  border-radius: 50%;
-  background-color: var(--text4);
-  width: 14px;
-  height: 14px;
-}
-#lockscreen #indicator .char.active {
-  background-color: var(--text);
-}
-#lockscreen #invalid-alert {
-  margin-top: 8px;
-  color: red;
-  text-align: center;
-  padding: 10px;
-  font-weight: bold;
-  font-size: 18px;
-  visibility: hidden;
-}
-#lockscreen #invalid-alert.active {
-  visibility: visible;
-}
-#lockscreen #icon svg {
-  display: block;
-  margin-top: 200px;
-  margin: 0 auto;
-  color: #fff;
-}
-#lockscreen #numpad {
-  width: 300px;
-  height: 400px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 11px;
-}
-#lockscreen #numpad button {
-  border-radius: 50%;
-  font-size: 26px;
-  font-weight: bold;
-  background-color: var(--background3);
-  transition: filter 0.3s;
-}
-#lockscreen #numpad button.clicked {
-  filter: brightness(1.5);
-  transition: filter 0.3s;
-}
-#lockscreen #numpad button.hiden {
-  visibility: hidden;
-}
-@media (max-height: 630px) {
-  #lockscreen {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100px 60px 1fr;
-  }
-  #lockscreen #numpad {
-    width: 150px;
-    height: 200px;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 4;
-  }
-}
-
 .instant-view {
   touch-action: none;
 }
@@ -620,11 +526,6 @@ html {
   padding-bottom: 150px;
   padding-top: calc(40px + env(safe-area-inset-top));
   padding-left: env(safe-area-inset-left);
-}
-
-.notebook-iframe {
-  width: 100%;
-  height: calc(100vh - 180px);
 }
 
 .settings-block {
@@ -733,6 +634,126 @@ html {
   font-size: 13px;
   color: var(--text3);
   text-indent: 10px;
+}
+
+.notebook-iframe {
+  width: 100%;
+  height: calc(100vh - 180px);
+}
+
+.notebook-loader {
+  background-color: var(--background3);
+  box-shadow: 1px var(--borders-soft) inset;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  height: calc(100vh - 180px);
+  border-radius: 10px;
+}
+
+.notebooks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, Minmax(100px, 1fr));
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.notebooks-grid .notebook img {
+  border-radius: 7px;
+  width: 100%;
+}
+
+#lockscreen {
+  will-change: transform;
+  display: none;
+  padding-top: env(safe-area-inset-top);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  background-color: var(--backgroundTR2);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  grid-template-rows: 100px 60px 1fr;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  justify-content: center;
+  align-items: center;
+}
+#lockscreen.unactive {
+  transform: translateY(-100vh);
+  transition: transform 0.4s;
+}
+#lockscreen.active {
+  display: grid;
+}
+#lockscreen #indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 60px;
+}
+#lockscreen #indicator .char {
+  border-radius: 50%;
+  background-color: var(--text4);
+  width: 14px;
+  height: 14px;
+}
+#lockscreen #indicator .char.active {
+  background-color: var(--text);
+}
+#lockscreen #invalid-alert {
+  margin-top: 8px;
+  color: red;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  visibility: hidden;
+}
+#lockscreen #invalid-alert.active {
+  visibility: visible;
+}
+#lockscreen #icon svg {
+  display: block;
+  margin-top: 200px;
+  margin: 0 auto;
+  color: #fff;
+}
+#lockscreen #numpad {
+  width: 300px;
+  height: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 11px;
+}
+#lockscreen #numpad button {
+  border-radius: 50%;
+  font-size: 26px;
+  font-weight: bold;
+  background-color: var(--background3);
+  transition: filter 0.3s;
+}
+#lockscreen #numpad button.clicked {
+  filter: brightness(1.5);
+  transition: filter 0.3s;
+}
+#lockscreen #numpad button.hiden {
+  visibility: hidden;
+}
+@media (max-height: 630px) {
+  #lockscreen {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100px 60px 1fr;
+  }
+  #lockscreen #numpad {
+    width: 150px;
+    height: 200px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 4;
+  }
 }
 
 .side-view {

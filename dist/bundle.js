@@ -56270,8 +56270,27 @@
 	  }))));
 	}
 
+	function Notebook(props) {
+	  return /*#__PURE__*/React.createElement("div", {
+	    className: "notebook",
+	    onClick: props.onClick
+	  }, /*#__PURE__*/React.createElement("img", {
+	    src: props.img
+	  }));
+	}
+	Notebook.propTypes = {};
+
 	function NotebookViewer(props) {
-	  const [isFrameLoaded, setIsFrameLoaded] = react.exports.useState(false);
+	  const view = react.exports.useRef(null);
+	  const loader = react.exports.useRef(null);
+	  react.exports.useEffect(() => {
+	    if (props.currentPanel == props.id) {
+	      setTimeout(() => {
+	        loader.current.style.display = "none";
+	        view.current.style.display = "";
+	      }, 450);
+	    }
+	  }, [props.currentPanel, props.id]);
 	  return /*#__PURE__*/React.createElement(Panel, {
 	    currentPanel: props.currentPanel,
 	    id: props.id
@@ -56279,14 +56298,20 @@
 	    title: props.title,
 	    backButton: true,
 	    onBack: () => props.setCurrentPanel("main")
-	  }), /*#__PURE__*/React.createElement("iframe", {
-	    style: isFrameLoaded ? {} : {
+	  }), /*#__PURE__*/React.createElement("div", {
+	    className: "notebook-loader",
+	    ref: loader
+	  }, /*#__PURE__*/React.createElement("i", {
+	    className: "fas fa-spinner fa-spin fa-2x"
+	  })), /*#__PURE__*/React.createElement("iframe", {
+	    ref: view,
+	    style: {
 	      display: "none"
 	    },
 	    frameBorder: "0",
 	    src: props.url,
 	    className: "notebook-iframe",
-	    onLoad: () => setIsFrameLoaded(true)
+	    sandbox: "allow-same-origin"
 	  }));
 	}
 
@@ -56296,22 +56321,52 @@
 	    currentPanel: currentPanel,
 	    id: "main"
 	  }, /*#__PURE__*/React.createElement(PanelHeader, {
-	    title: "\u041B\u0430\u0431\u043E\u0440\u0430\u0442\u043E\u0440\u043D\u044B\u0435",
+	    title: "\u041B\u0430\u0431\u043E\u0440\u0430\u0442\u043E\u0440\u043D\u044B\u0435 / \u041F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435",
 	    icon: /*#__PURE__*/React.createElement("i", {
 	      className: "fas fa-flask"
 	    })
-	  }), /*#__PURE__*/React.createElement(Button, {
-	    title: "\u041B\u0430\u0431\u043E\u0440\u0430\u0442\u043E\u0440\u043D\u044B\u0435",
-	    descr: "\u041F\u043E \u0444\u0438\u0437\u0438\u043A\u0435 \u0438 \u0445\u0438\u043C\u0438\u0438",
+	  }), /*#__PURE__*/React.createElement("div", {
+	    className: "notebooks-grid"
+	  }, /*#__PURE__*/React.createElement(Notebook, {
+	    title: "\u0424\u0438\u0437\u0438\u043A\u0430",
+	    onClick: () => setCurrentPanel("phis"),
+	    img: "./static/img/phis.jpg"
+	  }), /*#__PURE__*/React.createElement(Notebook, {
+	    title: "\u0411\u0438\u043E\u043B\u043E\u0433\u0438\u044F",
+	    onClick: () => setCurrentPanel("bio"),
+	    img: "./static/img/bio.jpg"
+	  }), /*#__PURE__*/React.createElement(Notebook, {
+	    title: "\u0425\u0438\u043C\u0438\u044F",
+	    onClick: () => setCurrentPanel("him"),
+	    img: "./static/img/him.jpg"
+	  })), /*#__PURE__*/React.createElement(PanelHeader, {
+	    title: "\u0420\u0430\u0431\u043E\u0447\u0438\u0435",
+	    icon: /*#__PURE__*/React.createElement("i", {
+	      className: "fas fa-flask"
+	    })
+	  }), /*#__PURE__*/React.createElement("div", {
+	    className: "notebooks-grid"
+	  }, /*#__PURE__*/React.createElement(Notebook, {
+	    title: "\u0410\u043D\u0433\u043B\u0438\u0439\u0441\u043A\u0438\u0439",
 	    onClick: () => setCurrentPanel("labs"),
-	    icon: /*#__PURE__*/React.createElement("i", {
-	      className: "fas fa-flask"
-	    })
-	  })), /*#__PURE__*/React.createElement(NotebookViewer, {
-	    id: "labs",
+	    img: "./static/img/demo.jpg"
+	  }))), /*#__PURE__*/React.createElement(NotebookViewer, {
+	    id: "phis",
 	    setCurrentPanel: setCurrentPanel,
 	    currentPanel: currentPanel,
-	    url: "https://example.com/",
+	    url: "https://megaresheba.ru/publ/reshebnik/anglijskij/otvety_k_english_workbook_9_klass_lapickaja/42-1-0-1202",
+	    title: "\u0410\u0410\u0410"
+	  }), /*#__PURE__*/React.createElement(NotebookViewer, {
+	    id: "bio",
+	    setCurrentPanel: setCurrentPanel,
+	    currentPanel: currentPanel,
+	    url: "https://megaresheba.ru/publ/reshebnik/anglijskij/otvety_k_english_workbook_9_klass_lapickaja/42-1-0-1202",
+	    title: "\u0410\u0410\u0410"
+	  }), /*#__PURE__*/React.createElement(NotebookViewer, {
+	    id: "him",
+	    setCurrentPanel: setCurrentPanel,
+	    currentPanel: currentPanel,
+	    url: "https://megaresheba.ru/publ/reshebnik/anglijskij/otvety_k_english_workbook_9_klass_lapickaja/42-1-0-1202",
 	    title: "\u0410\u0410\u0410"
 	  }));
 	}

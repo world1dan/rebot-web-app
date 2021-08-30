@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 import Panel from '../Elements/Panel'
 import PanelHeader from '../Elements/Panel/PanelHeader'
 
 
 export default function NotebookViewer(props) {
-    const [isFrameLoaded, setIsFrameLoaded] = useState(false);
+    const view = useRef(null);
+    const loader = useRef(null);
+    
+    useEffect(() => {
+        if (props.currentPanel == props.id) {
+            setTimeout(() => {
+                loader.current.style.display = "none";
+                view.current.style.display = "";
+            }, 450)
+        }
+    }, [props.currentPanel, props.id]);
+
 
     return (
         <Panel currentPanel={props.currentPanel} id={props.id}>
@@ -15,14 +28,17 @@ export default function NotebookViewer(props) {
                 onBack={() => props.setCurrentPanel("main")}
             />
 
+            <div className="notebook-loader" ref={loader}>
+                <i className="fas fa-spinner fa-spin fa-2x"></i>
+            </div>
+
             <iframe 
-                style={ isFrameLoaded ? 
-                    {} :
-                    {display: "none"}}
+                ref={view}
+                style={{display: "none"}}
                 frameBorder="0" 
                 src={props.url}
                 className="notebook-iframe"
-                onLoad={() => setIsFrameLoaded(true)}
+                sandbox="allow-same-origin"
             />
 
         </Panel>
