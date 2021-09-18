@@ -1,9 +1,10 @@
-const CACHE = "7";
+const CACHE = "6";
 
 const urlsToCache = [
   'style.css',
   'bundle.js',
   '/',
+  'index.html',
   'static/lib/fontawesome/all.min.css',
   'static/lib/fontawesome/fa-brands-400.woff2',
   'static/lib/fontawesome/fa-regular-400.woff2',
@@ -15,13 +16,16 @@ const urlsToCache = [
   'static/icons/manifest-icon-192.png',
   'static/icons/manifest-icon-512.png',
   'static/img/404.webp',
-  'static/img/demo.jpg',
+  'static/img/bio.webp',
+  'static/img/engwb.webp',
+  'static/img/geo.webp',
+  'static/img/him.webp',
+  'static/img/phis.webp',
   'favicon.ico',
 ];
 
 
 self.addEventListener('install', function(event) {
-
     event.waitUntil(
         caches.open(CACHE).then((cache) => {
             return cache.addAll(urlsToCache);
@@ -46,10 +50,6 @@ self.addEventListener('activate', () => {
 		})
 	})
 })
-
-
-
-
 
 
 

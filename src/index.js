@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import { setDoc, onSnapshot } from "firebase/firestore";
 import { getValue, fetchAndActivate } from "firebase/remote-config";
 
-import { database, remoteConfig, settingsContext } from './Context';
+import { remoteConfig } from './Context';
 
 import Main from './Main';
 
@@ -19,117 +18,73 @@ import Notebooks from './Components/Notebooks';
 import './style.scss';
 
 
-
-
 function App() {
     const [manifest, setManifest] = useState(null);
-    const [settings, setSettings] = useState(null);
 
-    const [settingsOpen, setSettingsOpen] = useState(false);
     const [notebooksOpen, setNotebooksOpen] = useState(false);
 
     const main = useRef(null);
+    const settings = useRef(null);
 
 
     useEffect(() => {
         if (manifest) {
-            window.InstantView = new InstantView(manifest);
+            globalThis.InstantView = new InstantView(manifest);
+            globalThis.ReBot = new ReBotManager(manifest);
         }
     }, [manifest]);
 
-    useEffect(() => {
-        if (settings && manifest && !settings.stealth) {
-            window.ReBot = new ReBotManager(manifest);
-        }
-    }, [manifest, settings]);
 
     useEffect(() => {
-
-        onSnapshot(database.settings, (doc) => {
-            const settingsData = doc.data();
-    
-            const root = document.documentElement;
-
-            if (doc.metadata.hasPendingWrites || !localStorage.theme) {
-                root.setAttribute("theme", settingsData.theme);
-                localStorage.setItem("theme", settingsData.theme);
-            } 
-
-            localStorage.setItem("stealth", settingsData.stealth);
-
-            if (!settingsData.inversion) {
-                root.style.setProperty('--inv', 0);
-            } else {
-                root.style.removeProperty('--inv');
-            }
-            
-            setSettings(settingsData);
-        });
 
         if (navigator.onLine) {
-            fetchAndActivate(remoteConfig).then(() => {
-                const manifestJSON = getValue(remoteConfig, "subjectsManifest").asString();
+            try {
+                fetchAndActivate(remoteConfig).then(() => {
+                    const manifestJSON = getValue(remoteConfig, "subjectsManifest").asString();
+                    const manifestObj = JSON.parse(manifestJSON);
+                    
+                    localStorage.setItem("cachedManifest", manifestJSON);
+                    setManifest(manifestObj);
+                });
+            } catch {
+                const manifestJSON = localStorage.cachedManifest;
                 const manifestObj = JSON.parse(manifestJSON);
-                
-                localStorage.setItem("cachedManifest", manifestJSON);
                 setManifest(manifestObj);
-            });
+            }
+
         } else {
             const manifestJSON = localStorage.cachedManifest;
             const manifestObj = JSON.parse(manifestJSON);
             setManifest(manifestObj);
         }
 
-
     }, []);
 
 
-
-    function changeSetting(key, value) {
-        settings[key] = value;
-        setDoc(database.settings, settings, { merge: true });
-    }
-
-
     return (
-        settings &&
-            <settingsContext.Provider value={settings}>
+        <>
+        <div ref={main} className="main">
+            <Main
+                id="notebooks"
+                manifest={manifest} 
+                setSettingsOpen={(state) => settings.current.setSettingsOpen(state)}
+                setNotebooksOpen={setNotebooksOpen}/>
+        </div>
 
-                <div ref={main} className="main">
-                    <Main
-                        id="notebooks"
-                        settings={settings} 
-                        manifest={manifest} 
-                        setSettingsOpen={setSettingsOpen}
-                        setNotebooksOpen={setNotebooksOpen}/> }
-                </div>
-                
+        <SideView
+            id="notebooks"
+            open={notebooksOpen}
+            title="Тетради"
+            onClose={() => setNotebooksOpen(false)}
+            backgroundRef={main}
+            side="right">
 
+            <Notebooks/>
+        </SideView>
 
-                <SideView
-                    id="settings"
-                    open={settingsOpen}
-                    title="Настройки"
-                    onClose={() => setSettingsOpen(false)}
-                    backgroundRef={main}
-                    side="right">
-
-                    <Settings changeSetting={changeSetting} setSettingsOpen={setSettingsOpen}/>
-                </SideView>
-
-                <SideView
-                    id="notebooks"
-                    open={notebooksOpen}
-                    title="Тетради"
-                    onClose={() => setNotebooksOpen(false)}
-                    backgroundRef={main}
-                    side="left">
-
-                    <Notebooks/>
-                </SideView>
-
-            </settingsContext.Provider>
-    )
+        <Settings ref={settings} backgroundRef={main}/>
+    </>
+    );
 }
 
 
@@ -138,20 +93,19 @@ function App() {
 
 ReactDOM.render(<App/>, document.getElementById('root'));
 
+try {
+    navigator.serviceWorker.register('/sw.js')
+}
+catch {
+    console.log("cant register sw")
+}
 
+const isSafari = /iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+globalThis.ios = isSafari;
 
-window.ios = /iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+globalThis.UI = UI;
+globalThis.Security = LockScreen;
 
-/*
-navigator.serviceWorker.register('/sw.js').then(() => {
-    console.log('ServiceWorker registration successful');
-}, (e) => {
-    console.log('ServiceWorker registration failed: ', e);
-});
-*/
-
-window.UI = UI;
-window.Security = LockScreen;
 
 setTimeout(() => {
     const loading = document.querySelector(".loading");
@@ -162,4 +116,48 @@ setTimeout(() => {
         loading.remove();
     });
 
-}, window.ios ? 180 : 100)
+}, isSafari ? 200 : 100);
+
+
+
+
+
+
+if (isSafari) {
+document.addEventListener("touchstart", startTouch, {passive: false});
+document.addEventListener("touchmove", moveTouch, {passive: false});
+
+
+
+var initialY = null;
+ 
+function startTouch(e) {
+  initialY = e.touches[0].clientY;
+};
+ 
+function moveTouch(e) {
+
+  if (initialY === null) {
+    return;
+  }
+ 
+  var currentY = e.touches[0].clientY;
+ 
+  var diffY = initialY - currentY;
+  
+    if (diffY > 0) {
+        const root = document.getElementById("root");
+
+        if (root.scrollHeight - root.scrollTop == root.clientHeight) {
+            e.preventDefault()
+        }
+    } else {
+        if (document.getElementById("root").scrollTop == 0) {
+            e.preventDefault()
+        }
+    }
+
+  initialY = null;
+};
+
+}

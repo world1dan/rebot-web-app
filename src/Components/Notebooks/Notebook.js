@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 
 function Notebook(props) {
@@ -8,11 +7,8 @@ function Notebook(props) {
          <img src={props.img}></img>
      </div>
   )
-};
-
-
-Notebook.propTypes = {
-
 }
+
+
 
 export default Notebook;

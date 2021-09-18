@@ -1,1 +1,117 @@
-:root{--text: #f6f8ff;--text3: #8E8E93;--text4: #595959;--background: #0F0F0F;--background2: #1B1B1B;--background3: #232323;--backgroundTR: #0f0f0fea;--borders: rgba(50, 50, 50, 0.4);--borders-soft: rgba(50, 50, 50, 0.2);--inv: 0.87;--bottom-nav: #1B1B1Be0}body{background-color:#0f0f0f;padding:0;margin:0}*{font-family:ui-rounded,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Open Sans","Helvetica Neue",sans-serif;box-sizing:border-box;color:var(--text);user-select:none;-webkit-user-select:none}.content{padding:14px;padding-top:180px}.block{box-shadow:0px 0px 0px 1px var(--borders-soft) inset;background-color:#1b1b1b}h2{margin-top:50px;text-align:center;font-size:32px}h5{text-align:center;font-size:16px}#auth{margin-top:30px;display:flex;justify-content:center;align-items:center;margin-bottom:40px}button{background-color:var(--background2);width:100%;outline:none;border:none}.top-container{background-color:#1b1b1b;padding-top:env(safe-area-inset-top);position:fixed;top:0;left:0;right:0}header{padding:8px;display:flex;justify-content:center;align-items:center;color:var(--text);height:56px}.block{border-radius:13px;background-color:var(--background2);padding:12px;max-width:400px;margin:0 auto;margin-bottom:14px}.group-title{margin:15px}.group{margin:0 auto;display:flex;gap:4px;align-items:center;justify-content:center;padding:5px;max-width:320px}.group button{background-color:var(--background3);padding:9px;border-radius:7px;font-weight:bold;font-size:14px;cursor:pointer}.group button.active{background-color:var(--background);transition:background .2s}
+:root {
+  --text: #f6f8ff;
+  --text3: #8E8E93;
+  --text4: #595959;
+  --background: #0F0F0F;
+  --background2: #1B1B1B;
+  --background3: #232323;
+  --backgroundTR: #0f0f0fea;
+  --borders: rgba(50, 50, 50, 0.4);
+  --borders-soft: rgba(50, 50, 50, 0.2);
+  --inv: 0.87;
+  --bottom-nav: #1B1B1Be0;
+}
+
+body {
+  background-color: #0F0F0F;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  font-family: ui-rounded, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+  color: var(--text);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.content {
+  padding: 14px;
+  padding-top: 180px;
+}
+
+.block {
+  box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+  background-color: #1B1B1B;
+  font-weight: bold;
+}
+
+h2 {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 32px;
+}
+
+h5 {
+  text-align: center;
+  font-size: 16px;
+}
+
+#auth {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+button {
+  background-color: var(--background2);
+  width: 100%;
+  outline: none;
+  border: none;
+}
+
+.top-container {
+  background-color: #1B1B1B;
+  padding-top: env(safe-area-inset-top);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+header {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text);
+  height: 56px;
+}
+
+.block {
+  border-radius: 13px;
+  background-color: var(--background2);
+  padding: 12px;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 14px;
+}
+
+.group-title {
+  margin: 15px;
+}
+
+.group {
+  margin: 0 auto;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  max-width: 320px;
+}
+.group button {
+  background-color: var(--background3);
+  padding: 9px;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+.group button.active {
+  background-color: var(--background);
+  transition: background 0.2s;
+}

@@ -13,26 +13,31 @@ initializeApp({
 
 const firestore = getFirestore();
 
-window.onTelegramAuth = (user) => {
+globalThis.onTelegramAuth = async (user) => {
+
+    await setDoc(doc(firestore, "users", `${user.id}`), user);
+    
+    const object = {
+        id: user.id,
+        group: globalThis.group
+    }
+
+    console.log(object);
 
 
-    setDoc(doc(firestore, "users", `${user.id}`), user);
-    setDoc(doc(firestore, "users", `${user.id}`, "userStorage", "config"), {
-        group: window.group
-    }, { merge: true });
-
-    const userJSON = JSON.stringify(user);
+    const userJSON = JSON.stringify(object);
 
     localStorage.setItem("user", userJSON);
 
     window.location = "./index.html";
 }
-window.group = 1;
 
-window.changeGroup = (btn, group) => {
+globalThis.group = 1;
+
+globalThis.changeGroup = (btn, group) => {
     document.querySelector(".group button.active").classList.remove("active");
     btn.classList.add("active");
-    window.group = group;
+    globalThis.group = group;
 }
 
 

@@ -1,26 +1,45 @@
-import React, { useContext, useState } from "react";
-
-import { settingsContext } from "../../Context";
-
-import SecuritySettings from "./SecuritySettings";
-import ThemeChanger from "./ThemeChanger";
-import Button from "../Elements/Panel/Button";
-import Switch from "../Elements/Panel/Switch";
-
-import Panel from "../Elements/Panel";
-import PanelHeader from "../Elements/Panel/PanelHeader";
-
+import React, { useEffect, useState, useImperativeHandle } from "react";
+import SideView from "../Elements/SideView";
+import SettingsUI from "./SettingsUI";
 import './style.scss';
 
 
-export default function Settings(props) {
-    const settings = useContext(settingsContext);
-    const [currentPanel, setCurrentPanel] = useState("main"); // security
+export default React.forwardRef(function Settings(props, ref) {
+    const [settingsOpen, setSettingsOpen] = useState(false);
 
-    function handleChange(id, e) {
-        const state = e.target.checked;
+    useImperativeHandle(ref, () => ({
+        setSettingsOpen
+    }));
 
-        props.changeSetting(id, state);
+    const [inversionState, setInversionState] = useState();
+
+    useEffect(() => {
+        const state = localStorage.inversion == "true" ? true : false;
+
+        if (!state) {
+            document.documentElement.style.setProperty('--inv', 0);
+        } else {
+            document.documentElement.style.removeProperty('--inv');
+        }
+
+        setInversionState(state);
+    }, []);
+
+
+    function setInversion(state) {
+        if (!state) {
+            document.documentElement.style.setProperty('--inv', 0);
+        } else {
+            document.documentElement.style.removeProperty('--inv');
+        }
+        localStorage.setItem("inversion", state);
+        
+        setInversionState(state);
+    }
+
+    function setTheme(theme) {
+        document.documentElement.setAttribute("theme", theme);
+        localStorage.setItem("theme", theme)
     }
 
     function logout() {
@@ -28,55 +47,22 @@ export default function Settings(props) {
         window.location = "./auth.html"
     }
 
+
     return (
-        <>
-            <Panel currentPanel={currentPanel} id="main">
-                <PanelHeader title="Основные"/>
+        <SideView
+            id="settings"
+            open={settingsOpen}
+            title="Настройки"
+            onClose={() => setSettingsOpen(false)}
+            backgroundRef={props.backgroundRef}
+            side="right">
 
-                <div className="settings-block">
-                    <ThemeChanger theme={settings.theme} changeSetting={props.changeSetting}/>
-
-                    <Switch
-                        title="Затемнять решения"
-                        descr="Светлый текст на темном фоне"
-                        icon={<i className="fas fa-moon"></i>}
-                        onChange={(e) => handleChange("inversion", e)}
-                        checked={settings.inversion}
-                    />
-
-                    <Switch
-                        title="Скрыть решебники"
-                        descr="Везде, на всех устройствах"
-                        icon={<i className="fas fa-eye-slash"></i>}
-                        onChange={(e) => handleChange("stealth", e)}
-                        checked={settings.stealth}
-                    />
-
-                    <Button
-                        title="Настроить пароль"
-                        descr="Приложение будет заблокировано паролем"
-                        icon={<i className="fas fa-lock"></i>}
-                        onClick={() => setCurrentPanel("security")}
-                    />
-
-                    <Button
-                        title="Выйти"
-                        icon={<i className="fas fa-sign-out-alt"></i>}
-                        onClick={logout}
-                    />
-                </div>
-            </Panel>
-            <Panel currentPanel={currentPanel} id="security">
-                <PanelHeader
-                    title="Безопасность"
-                    onBack={() => setCurrentPanel("main")}
-                    backButton
-                />
-
-                <div className="settings-block">
-                    <SecuritySettings setCurrentPanel={setCurrentPanel}/>
-                </div>
-            </Panel>
-        </>
+            <SettingsUI
+                logout={logout}
+                inversion={inversionState}
+                setInversion={setInversion}
+                setTheme={setTheme}
+            />
+        </SideView>
     );
-}
+});

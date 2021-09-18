@@ -1,72 +1,112 @@
-import external from "rollup-plugin-peer-deps-external";
+
 import serve from "rollup-plugin-serve";
-import {babel} from '@rollup/plugin-babel';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import scss from 'rollup-plugin-scss';
+import copy from "rollup-plugin-copy";
+import { terser } from "rollup-plugin-terser";
+
+const production = !process.env.ROLLUP_WATCH;
+
+
+const plugins = [
+
+    scss({
+        output: production ? 'build/style.css' : 'dist/style.css',
+        outputStyle: production ? 'compressed' : null
+    }),
+
+    babel({
+        presets: ["@babel/preset-react"],
+        extensions: ['.jsx', '.js', '.tsx'], 
+        exclude: 'node_modules/**',
+        babelHelpers: 'bundled',
+        skipPreflightCheck: true
+    }),
+
+    nodeResolve({ extensions: ['.jsx', '.js', '.tsx'] }),
+    commonjs({ sourceMap: false
+    }),
+
+    replace({
+        'process.env.NODE_ENV': JSON.stringify('development'),
+        preventAssignment: true
+    }),
+
+    !production && serve({
+        port: 3000,
+        contentBase: ["dist", "public"]
+    }),
+
+    production && copy({
+        targets: [
+            { src: 'public/*', dest: 'build/' },
+        ]
+    }),
+
+    production && terser({
+        compress: {
+            ecma: 2021
+        },
+        format: {
+            comments: false
+        },
+        mangle: true
+    }),
+]
+
+
+
+
+
 
 export default [{
-    cache: true,
     input: "src/index.js",
     output: {
-        file: "dist/bundle.js",
+        file: production ? "build/bundle.js" : "dist/bundle.js",
         format: "iife",
-        sourcemap: false,
+        sourcemap: true,
     },
-    plugins: [
-        external({
-            includeDependencies: false
-        }),
-        nodeResolve(),
-        replace({
-            exclude: 'node_modules/**',
-            'process.env.NODE_ENV': JSON.stringify('development'),
-            preventAssignment: true
-        }),
-        babel({
-            skipPreflightCheck: true,
-            presets: ["@babel/preset-react"],
-            exclude: "node_modules/**",
-            babelHelpers: 'bundled'
-        }),
-        commonjs({ sourceMap: false }),
-        scss({
-            output: 'dist/style.css',
-            //: 'compressed'
-        }),
-        serve({
-            contentBase: ["dist", "public"],
-            host: "0.0.0.0",
-            port: 3000,
-            verbose: false
-        })
-    ],
+    plugins
 },
+
+
+
+
+
+
+
+
 
 {
     input: "src/Auth/auth.js",
     output: {
-        file: "dist/auth.js",
+        file: "build/auth.js",
         format: "iife",
         sourcemap: true,
     },
     plugins: [
         nodeResolve(),
         replace({
-            'process.env.NODE_ENV': JSON.stringify('development'),
+            'process.env.NODE_ENV': JSON.stringify('production'),
             preventAssignment: true
         }),
         commonjs({ sourceMap: false }),
         scss({
-            output: 'dist/auth.css'
+            output: 'build/auth.css'
         }),
-    ],
-
-    watch: {
-        buildDelay: 0,
-        exclude: "node_modules/**"
-    }
+        terser({
+            compress: {
+                ecma: 2021
+            },
+            format: {
+                comments: false
+            },
+            mangle: true
+        }),
+    ]
 }
 
 

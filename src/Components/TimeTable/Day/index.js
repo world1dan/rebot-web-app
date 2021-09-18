@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { settingsContext } from '../../../Context';
+import { user } from '../../../Context';
 
 import SubjectRow from './SubjectRow';
 import './style.scss';
@@ -19,9 +19,8 @@ const day_titles = {
 
 
 export default function Day(props) {
-
-    const settings = useContext(settingsContext);
-
+    
+    const group = user.group;
     const day_data = props.day_data;
     let rows = [];
     let subj;
@@ -30,8 +29,10 @@ export default function Day(props) {
         let lesson, path;
 
         if (day_data[subj].groups) {
-            lesson = day_data[subj][settings.group];
-            path = `${props.pathToDay}.${subj}.${settings.group}`;
+            if (day_data[subj][group]) {
+                lesson = day_data[subj][group];
+                path = `${props.pathToDay}.${subj}.${group}`;
+            } else break
         } else {
             lesson = day_data[subj];
             path = `${props.pathToDay}.${subj}`;
@@ -45,14 +46,18 @@ export default function Day(props) {
         for (let subj in day_data) {
             day_data[subj].hw && toOpen.push(day_data[subj])
         }
+        
+        if (toOpen.length != 0) {
+            globalThis.InstantView.open(toOpen);
+        } else {
+            globalThis.UI.alert("Решебники не найдены");
+        }
 
-        toOpen && window.InstantView.open(toOpen);
     }
     return ( 
         <div className="UIBlock day">
             <h1>{ day_titles[props.day_num] }</h1>
-            { !settings.stealth && <button className="table-btn open-all stealth" onClick={openInstant}><i className="fas fa-book fa-lg"></i></button> }
-            <button className="table-btn share"><i className="fas fa-share fa-lg"></i></button>
+            <button className="table-btn share" onClick={openInstant}><i className="fas fa-book fa-lg"></i></button>
             <div className="content">
                 { rows }
             </div>

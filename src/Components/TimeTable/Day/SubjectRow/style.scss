@@ -4,15 +4,6 @@
     font-size: 13px;
     font-weight: bold;
 
-    &.highlighted {
-        background-color: var(--danger-red);
-        padding: 4px;
-        border-radius: 7px;
-
-        &:last-of-type {
-            border-radius: 7px 7px 10px 10px;
-        }
-    }
 
     .rowBlock {
         height: 38px;

@@ -10,7 +10,9 @@ export default class ReBotManager {
 
 
         document.querySelectorAll("#rebot header button").forEach((el) => {
-            el.onclick = () => { window.UI.getInput((id, nums) => { this.open(id, nums); }, el.id); };
+            if (el.id != "brainly" && el.id != "math") {
+                el.onclick = () => { window.UI.getInput((id, nums) => { this.open(id, nums); }, el.id); };
+            }
         });
 
 
@@ -112,18 +114,25 @@ export default class ReBotManager {
 
     remove(box) {
         box.remove();
+
+        if (this.box_container.childElementCount == 0) {
+            this.status_title.textContent = "ReBot";
+        }
     }
 
     open_alt(box) {
-        let num = box.getAttribute('num');
-        let url = this.manifest[box.getAttribute('subj_id')].alt_url.replace("?", num);
+        const num = box.getAttribute('num');
+   
+        const subj = this.manifest[box.getAttribute('subj_id')]
 
-        if (url == '') {
+        if (subj.alt_url) {
+            const url = subj.alt_url.replace("?", num);
+
+            window.open(url, '_blank');
+        } else {
             alert('Для этого предмета нет другого решебника');
-            return;
         }
 
-        window.open(url, '_self');
     }
 
 }

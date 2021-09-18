@@ -2,6 +2,14 @@ import React from 'react'
 import './style.scss';
 
 export default function Resheba(props) {
+
+    function openSystemApp(url) {
+        if (window.ios) {
+            open(url)
+        } else {
+            window.UI.alert("Пока это работает только на iOS")
+        }
+    }
     return (
         <>
         <header>
@@ -18,9 +26,9 @@ export default function Resheba(props) {
                 <button id="phis">Физика</button>
                 <button id="alg">Алгебра</button>
                 <button id="him">Химия</button>
-                <button id="brainly">Brainly</button>
+                <button id="brainly" onClick={() => openSystemApp("brainly://")}>Brainly</button>
                 <button id="geom">Геометрия</button>
-                <button id="math">Photomath</button>
+                <button id="math" onClick={() => openSystemApp("photomath://")}>Photomath</button>
             </div>
         </header>
 

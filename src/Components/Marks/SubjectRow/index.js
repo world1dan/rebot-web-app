@@ -60,11 +60,15 @@ function SubjectRow(props) {
         }, { merge: true });
     }
 
+    function handleChange(value) {
+        setMarks(value);
+    }
+
     return (
         <div className="flexRow">
             <div className="rowBlock medium colored" style={style}>{title}</div>
             <div className="rowBlock mainField">
-                <EditableField ref={marksInput} value={marks} onChange={setMarks} onSave={saveMarks}/>
+                <EditableField ref={marksInput} value={marks} onChange={handleChange} onSave={saveMarks}/>
             </div>
             { marks && average && <div className="rowBlock square">{average}</div> }
             <div className="rowBlock square" onClick={createPattern}><i className="fas fa-plus"></i></div>

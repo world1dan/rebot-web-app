@@ -1,10 +1,24 @@
-import React, { forwardRef, useRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useState, useEffect } from 'react';
 
 import './style.scss';
 
 function EditableField(props, ref) {
 
     const [isEditing, setIsEditing] = useState(false);
+
+    const handleEnter = (e) => {
+        if (e.keyCode == 13) {
+            editor.current.blur();
+        }
+    }
+
+    useEffect(() => {
+        if (isEditing) {
+            editor.current.addEventListener("keydown", handleEnter)
+        }
+    }, [isEditing]);
+
+
 
     const editor = useRef(null);
 

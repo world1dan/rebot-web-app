@@ -4627,11 +4627,10 @@
 
     const firestore = ie();
 
-    window.onTelegramAuth = (user) => {
+    window.onTelegramAuth = async (user) => {
 
-
-        vr(de(firestore, "users", `${user.id}`), user);
-        vr(de(firestore, "users", `${user.id}`, "userStorage", "config"), {
+        await vr(de(firestore, "users", `${user.id}`), user);
+        await vr(de(firestore, "users", `${user.id}`, "userStorage", "config"), {
             group: window.group
         }, { merge: true });
 

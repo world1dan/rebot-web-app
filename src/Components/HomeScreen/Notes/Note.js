@@ -41,7 +41,7 @@ export default function Note(props) {
     function copy() {
         navigator.clipboard.writeText(text)
         .then(() => {
-            window.UI.alert("Скопировано в буфер обмена");
+            window.UI.alert("Скопировано");
         })
     }
 

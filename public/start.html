@@ -5,12 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, user-scalable=0, viewport-fit=cover">
     <title>ReBot</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="static/lib/fontawesome/all.min.css">
     <link type="preload" href="static/lib/fontawesome/fa-brands-400.woff2">
     <link type="preload" href="static/lib/fontawesome/fa-regular-400.woff2">
     <link type="preload" href="static/lib/fontawesome/fa-solid-900.woff2">
-
+    <link type="text/css" rel="stylesheet" href="./auth.css" />
     <link rel="manifest" href="static/manifest.json">
     <link rel="apple-touch-icon" href="static/icons/apple-icon-180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -46,7 +45,47 @@
 </head>
 
 <body>
-    <h1>Нажми добавить на главный экран</h1>
+    <div class="top-container">
+        <header>
+            <div class="logo">
+                <img width="36px" src="static/icons/icon-128.png">
+            </div>
+        </header>
+    </div>
+    
+    <div class="content">
+        <div class="block">
+            <button id="installApp">Установить</button>
+        </div>
+    </div>
+
+    <script>
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            deferredPrompt = e;
+            console.log(e)
+        });
+
+        navigator.serviceWorker.register('/sw.js').then(() => {
+            console.log('ServiceWorker registration successful');
+        }, (e) => {
+            console.log('ServiceWorker registration failed: ', e);
+        });
+
+
+        const installApp = document.getElementById('installApp');
+
+        installApp.addEventListener('click', async () => {
+            if (deferredPrompt !== null) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    deferredPrompt = null;
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

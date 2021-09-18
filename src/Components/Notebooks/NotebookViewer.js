@@ -14,7 +14,7 @@ export default function NotebookViewer(props) {
         if (props.currentPanel == props.id) {
             setTimeout(() => {
                 loader.current.style.display = "none";
-                view.current.style.display = "";
+                view.current.style.display = "block";
             }, 450)
         }
     }, [props.currentPanel, props.id]);
@@ -38,7 +38,8 @@ export default function NotebookViewer(props) {
                 frameBorder="0" 
                 src={props.url}
                 className="notebook-iframe"
-                sandbox="allow-same-origin"
+                sandbox={props.scripts ? "allow-same-origin allow-scripts" : "allow-same-origin"}
+                
             />
 
         </Panel>

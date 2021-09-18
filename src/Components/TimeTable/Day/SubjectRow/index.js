@@ -26,16 +26,12 @@ function SubjectRow(props) {
     
 
     function saveHomework () {
-        updateDoc(database.timetable, {
-            [props.path + ".hw"]: homework
-        });
+        if (homework != props.lesson_data.hw) {
+            updateDoc(database.timetable, {
+                [props.path + ".hw"]: homework
+            });
+        }
     }  
-
-    function setTest() {
-        updateDoc(database.timetable, {
-            [props.path + ".test"]: !props.lesson_data.test
-        });
-    }
 
     function openInstant() {
 
@@ -65,10 +61,8 @@ function SubjectRow(props) {
             <div className="rowBlock square">
                 <RowContextMenu
                     openInstant={openInstant}
-                    setTest={setTest}
                     copy={copy}
                     isResheba={manifest && manifest[props.lesson_data.id].url}
-                    isTest={props.lesson_data.test}
                     homework={homework}
                 />
             </div>

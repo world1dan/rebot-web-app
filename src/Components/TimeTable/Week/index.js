@@ -8,7 +8,7 @@ import Day from '../Day';
 import './style.scss';
 
 export default memo(function Week(props) {
-    const [ isOffline, setOffline ] = useState(!navigator.onLine);
+    const [ isOffline, setOffline ] = useState(false);
 
     const [ week, setWeek ] = useState(2);
 
@@ -16,8 +16,13 @@ export default memo(function Week(props) {
 
 
     useEffect(() => {
-        window.addEventListener('online',  () => setOffline(true));
+        window.addEventListener('online',  () => setOffline(false));
         window.addEventListener('offline', () => setOffline(true));
+
+        return () => {
+            window.removeEventListener('online');
+            window.removeEventListener('offline');
+        }
     }, []);
     
 

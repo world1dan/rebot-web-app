@@ -1,6 +1,6 @@
 @media (min-width: 700px) {
 	body:not(.min-right, .min-left) .bottom-nav {
-		height: calc(46px + env(safe-area-inset-bottom));
+		height: calc(46px + env(--bottom-save-zone));
 
 		.nav-content {
 			height: 46px;
@@ -22,7 +22,7 @@
 	position: fixed;
 	background-color: var(--NavBackground);
 	bottom: 0;
-	height: calc(50px + env(safe-area-inset-bottom));
+	height: calc(50px + var(--bottom-save-zone));
 	border-top: 1px solid var(--borders);
 	z-index: 3;
 	-webkit-backdrop-filter: blur(18px);

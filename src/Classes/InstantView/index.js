@@ -33,18 +33,11 @@ export default class InstantView {
 
         if (this.window1.classList.contains("active")) {
             win = this.window2;
-            document.querySelectorAll(".app").forEach((el) => {
-                el.classList.add("noscroll");
-            });
             window.instRight = true;
             window.instLeft = true;
         } else {
-            if (window.orientation == 90 || window.screen.width >= 800) {
+            if (window.orientation == 90 || window.innerWidth >= 800) {
                 document.querySelector("body").classList.add("min-right");
-            } else {
-                document.querySelectorAll(".app").forEach((el) => {
-                    el.classList.add("noscroll");
-                });
             }
             win = this.window1;
             window.instLeft = true;
@@ -65,44 +58,38 @@ export default class InstantView {
 
         for (let el of toOpen) {
             const subj = this.manifest[el.id];
-            const nums = el.hw.split(",");
 
+            if (subj.url) {
 
-            for (let num of nums) {
-                num = num.replace(/\D/g, "");
-
-                if (!subj.section) {
-                    let img1 = document.createElement("img");
-                    img1.src = subj.url.replace('?', num);
-                    img1.onerror = (ev) => { ev.target.remove(); };
-                    img1.style.width = "100%";
-
-                    viewbox.append(img1);
-
-                    if (!subj.full_img) {
-                        let img2, img3 = viewbox.querySelector("img").cloneNode(true);
-
-                        img2.src = subj.url.replace('?', num + "_2");
-                        img3.src = subj.url.replace('?', num + "_3");
-
-                        viewbox.append(img2, img3);
-                    }
-                } else {
-                    let i = 1;
-                    let img;
-
-                    while (i < 11) {
-                        img = document.createElement("img");
-                        img.src = subj.url.replace('*', num).replace('?', i);
-                        img.style.width = "100%";
-                        img.onerror = (ev) => { ev.target.remove(); };
-
-                        viewbox.append(img);
-                        i++;
+                const nums = el.hw.replace(/ *\([^)]*\) */g, "").split(",");
+                
+                for (let num of nums) {
+                    num = num.replace(/\D/g, "");
+    
+                    if (!subj.section) {
+                        let img1 = document.createElement("img");
+                        img1.src = subj.url.replace('?', num);
+                        img1.onerror = (ev) => { ev.target.remove(); };
+                        img1.style.width = "100%";
+    
+                        viewbox.append(img1);
+    
+                    } else {
+                        let i = 1;
+                        let img;
+    
+                        while (i < 11) {
+                            img = document.createElement("img");
+                            img.src = subj.url.replace('*', num).replace('?', i);
+                            img.style.width = "100%";
+                            img.onerror = (ev) => { ev.target.remove(); };
+    
+                            viewbox.append(img);
+                            i++;
+                        }
                     }
                 }
             }
-
         }
 
         win.classList.add("active");

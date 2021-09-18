@@ -1,6 +1,9 @@
 .notebook-iframe {
     width: 100%;
+    min-height: 200px !important;
     height: calc(100vh - 180px);
+    z-index: 9999;
+    transform: translate3d(0,0,0);
 }
 
 

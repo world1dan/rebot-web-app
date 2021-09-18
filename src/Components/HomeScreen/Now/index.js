@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 import { fetchAndActivate, getValue } from '@firebase/remote-config';
-import { connectFirestoreEmulator, onSnapshot } from "firebase/firestore";
-
-import { timetableContext, remoteConfig } from '../../../Context';
+import { remoteConfig } from '../../../Context';
 
 import SubjectRow from "../../TimeTable/Day/SubjectRow";
 //import Tools from "./Tools";

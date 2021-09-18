@@ -5,7 +5,6 @@ import { getFirestore, enableIndexedDbPersistence, doc, collection } from "fireb
 import { getRemoteConfig } from "firebase/remote-config";
 
 
-
 export const firebaseApp = initializeApp({
     apiKey: "AIzaSyAkNpqlq9hU_cDu1_4wQIBNNc9OJd4LT1g",
     authDomain: "rebot-f643e.firebaseapp.com",
@@ -16,37 +15,29 @@ export const firebaseApp = initializeApp({
 });
 
 export const firestore = getFirestore();
+enableIndexedDbPersistence(firestore, { forceOwnership: true });
+
 export const remoteConfig = getRemoteConfig()
+remoteConfig.settings.minimumFetchIntervalMillis = 2400000;;
 
 
-remoteConfig.settings.minimumFetchIntervalMillis = 110000;
+const userObj = JSON.parse(localStorage.getItem("user"));
 
-
-
-enableIndexedDbPersistence(firestore, { forceOwnership: true })
-.catch((err) => {
-        console.log(err.code);
-    });
-
-
-const user = JSON.parse(localStorage.getItem("user"));
-
-if (!user) {
+if (!userObj) {
     window.location = "./auth.html";
 }
 
-const id = `${user.id}`;
+const id = `${userObj.id}`;
 
 export const database = {
     timetable: doc(firestore, "timeTables", "9D"),
-    settings: doc(firestore, "users", id, "userStorage", "config"),
-    workspace: doc(firestore, "users", id, "userStorage", "workspace"),
     marks: doc(firestore, "users", id, "userStorage", "marks"),
-    notes: collection(firestore, "users", id, "notes"),
-    firestore
+    notes: collection(firestore, "users", id, "notes")
+}
+
+export const user = {
+    group: userObj.group
 }
 
 
-export const settingsContext = createContext(null);
 export const manifestContext = createContext(null);
-export const timetableContext = createContext(null);

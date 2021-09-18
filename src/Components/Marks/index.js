@@ -17,14 +17,12 @@ export default memo(function Marks() {
 
     const rows = [];
 
-    if (marks) {
-        for (let subjID in manifest) {
-            const subject = manifest[subjID];
-            subject.id = subjID;
+    for (let subjID in manifest) {
+        const subject = manifest[subjID];
+        subject.id = subjID;
 
-            if (subject.marks) {
-                rows.push(<SubjectRow key={subjID} subject={subject} marks={marks[subjID]}/>);
-            }
+        if (subject.marks) {
+            rows.push(<SubjectRow key={subjID} subject={subject} marks={marks && marks[subjID] ? marks[subjID] : ""}/>);
         }
     }
 

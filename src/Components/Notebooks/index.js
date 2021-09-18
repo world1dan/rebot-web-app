@@ -1,48 +1,39 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 
 import Panel from '../Elements/Panel'
-import PanelHeader from '../Elements/Panel/PanelHeader'
-import Button from '../Elements/Panel/Button'
-
 import Notebook from './Notebook'
 import NotebookViewer from './NotebookViewer'
 
 import './style.scss'
 
 
-function Notebooks(props) {
+function Notebooks() {
 
     const [currentPanel, setCurrentPanel] = useState("main");
 
     return (
         <>
         <Panel currentPanel={currentPanel} id="main">
-            <PanelHeader title="Лабораторные / Практические" icon={<i className="fas fa-flask"></i>}/>
             <div className="notebooks-grid">
                 <Notebook 
-                    title="Физика"
                     onClick={() => setCurrentPanel("phis")}
-                    img="./static/img/phis.jpg"
+                    img="./static/img/phis.webp"
                 />
                 <Notebook 
-                    title="Биология"
                     onClick={() => setCurrentPanel("bio")}
-                    img="./static/img/bio.jpg"
+                    img="./static/img/bio.webp"
                 />
                 <Notebook 
-                    title="Химия"
                     onClick={() => setCurrentPanel("him")}
-                    img="./static/img/him.jpg"
+                    img="./static/img/him.webp"
                 />
-            </div>
-
-            <PanelHeader title="Рабочие" icon={<i className="fas fa-flask"></i>}/>
-            <div className="notebooks-grid">
                 <Notebook 
-                    title="Английский"
-                    onClick={() => setCurrentPanel("labs")}
-                    img="./static/img/demo.jpg"
+                    onClick={() => setCurrentPanel("eng")}
+                    img="./static/img/engwb.webp"
+                />
+                <Notebook 
+                    onClick={() => setCurrentPanel("geo")}
+                    img="./static/img/geo.webp"
                 />
             </div>
         </Panel>
@@ -51,24 +42,41 @@ function Notebooks(props) {
             id="phis"
             setCurrentPanel={setCurrentPanel}
             currentPanel={currentPanel}
-            url="https://megaresheba.ru/publ/reshebnik/anglijskij/otvety_k_english_workbook_9_klass_lapickaja/42-1-0-1202"
-            title="ААА"
+            url="https://superresheba.by/9-physics-wbook_25"
+            title="Физика"
+            scripts={true}
         />
 
         <NotebookViewer
             id="bio"
             setCurrentPanel={setCurrentPanel}
             currentPanel={currentPanel}
-            url="https://megaresheba.ru/publ/reshebnik/anglijskij/otvety_k_english_workbook_9_klass_lapickaja/42-1-0-1202"
-            title="ААА"
+            url="https://superresheba.by/9-biology-wbook_24"
+            title="Биология"
         />
 
         <NotebookViewer
             id="him"
             setCurrentPanel={setCurrentPanel}
             currentPanel={currentPanel}
+            url="https://superresheba.by/9-chemistry-wbook_147"
+            title="Химия"
+        />
+
+        <NotebookViewer
+            id="eng"
+            setCurrentPanel={setCurrentPanel}
+            currentPanel={currentPanel}
             url="https://megaresheba.ru/publ/reshebnik/anglijskij/otvety_k_english_workbook_9_klass_lapickaja/42-1-0-1202"
-            title="ААА"
+            title="Английский WB"
+        />
+
+        <NotebookViewer
+            id="geo"
+            setCurrentPanel={setCurrentPanel}
+            currentPanel={currentPanel}
+            url="https://superresheba.by/10-geography-wbook_6"
+            title="География"
         />
 
     
@@ -76,9 +84,5 @@ function Notebooks(props) {
     )
 }
 
-
-Notebooks.propTypes = {
-
-}
 
 export default Notebooks;
