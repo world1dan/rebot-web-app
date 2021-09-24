@@ -1,4 +1,4 @@
-const CACHE = "6";
+const CACHE = "122";
 
 const urlsToCache = [
   'style.css',
@@ -26,12 +26,14 @@ const urlsToCache = [
 
 
 self.addEventListener('install', function(event) {
+
     event.waitUntil(
         caches.open(CACHE).then((cache) => {
             return cache.addAll(urlsToCache);
         })
     );
 });
+
 
 
 self.addEventListener('activate', () => {

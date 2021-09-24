@@ -29,66 +29,21 @@
             <div class="ispinner-blade"></div>
             <div class="ispinner-blade"></div>
             <div class="ispinner-blade"></div>
-          </div>          
+        </div>          
     </div>
 
     <div id="root"></div>
     
-    <div id="lockscreen" data-password="">
-        <div id="icon">
-            <svg width="46" height="46" fill="var(--text)" viewbox="0 0 28 28">
-                <path d="M9.7373 22.1182H18.2627C19.4404 22.1182 20.0205 21.5381 20.0205 20.2549V13.6719C20.0205 12.5117 19.5459 11.9229 18.5615 11.8262V9.65527C18.5615 6.31543 16.3379 4.70703 14 4.70703C11.6621 4.70703 9.43848 6.31543 9.43848 9.65527V11.8525C8.52441 11.9932 7.97949 12.5732 7.97949 13.6719V20.2549C7.97949 21.5381 8.55957 22.1182 9.7373 22.1182ZM11.126 9.49707C11.126 7.44922 12.4268 6.32422 14 6.32422C15.5645 6.32422 16.874 7.44922 16.874 9.49707V11.8086L11.126 11.8174V9.49707Z"/>
-            </svg>
-        </div>
-        <div class="status">
-            <div id="indicator">
-                <div class="char"></div>
-                <div class="char"></div>
-                <div class="char"></div>
-                <div class="char"></div>
-            </div>
-            <div id="invalid-alert">Код не верный</div>
-        </div>
-        <div id="numpad">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button class="hiden"></button>
-            <button>0</button>
-            <button class="hiden"></button>
-        </div>
-    </div>
+
 
     <script>
         if (!(localStorage.theme == undefined)) {
             document.documentElement.setAttribute("theme", localStorage.theme)
         }
-
-        if (localStorage.lockCode) {
-            lockscreen.classList.add("active");
-        }
     </script>
 
 
 
-
-
-    <div class="instant-view window" max="true" side="left" id="inst1">
-        <button class="close" onclick="InstantView.close(this.parentNode)"><i class="fas fa-chevron-left"></i></button>
-        <div class="content"></div>
-    </div>
-
-    <div class="instant-view window" max="true" side="right" id="inst2">
-        <button class="close" onclick="InstantView.close(this.parentNode)"><i class="fas fa-chevron-right"></i></button>
-        <div class="content"></div>
-    </div>
-    
     <div class="alert"></div>
 
 

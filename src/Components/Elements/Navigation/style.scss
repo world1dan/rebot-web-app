@@ -1,5 +1,5 @@
 @media (min-width: 700px) {
-	body:not(.min-right, .min-left) .bottom-nav {
+	body:not(.mini-right, .mini-left) .bottom-nav {
 		height: calc(46px + env(--bottom-save-zone));
 
 		.nav-content {
@@ -20,6 +20,7 @@
 	left: 0;
 	right: 0;
 	position: fixed;
+	touch-action: none;
 	background-color: var(--NavBackground);
 	bottom: 0;
 	height: calc(50px + var(--bottom-save-zone));

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import SecuritySettings from "./SecuritySettings";
+
 import ThemeChanger from "./ThemeChanger";
 import Button from "../Elements/Panel/Button";
 import Switch from "../Elements/Panel/Switch";
@@ -13,11 +13,9 @@ import './style.scss';
 
 export default function SettingsUI(props) {
 
-    const [currentPanel, setCurrentPanel] = useState("main"); // security
-
     return (
         <>
-            <Panel currentPanel={currentPanel} id="main">
+            <Panel currentPanel={"main"} id="main">
                 <PanelHeader title="Основные"/>
 
                 <div className="settings-block">
@@ -32,28 +30,10 @@ export default function SettingsUI(props) {
                     />
 
                     <Button
-                        title="Настроить пароль"
-                        descr="Приложение будет заблокировано паролем"
-                        icon={<i className="fas fa-lock"></i>}
-                        onClick={() => setCurrentPanel("security")}
-                    />
-
-                    <Button
                         title="Выйти"
                         icon={<i className="fas fa-sign-out-alt"></i>}
                         onClick={props.logout}
                     />
-                </div>
-            </Panel>
-            <Panel currentPanel={currentPanel} id="security">
-                <PanelHeader
-                    title="Пароль"
-                    onBack={() => setCurrentPanel("main")}
-                    backButton
-                />
-
-                <div className="settings-block">
-                    <SecuritySettings setCurrentPanel={setCurrentPanel}/>
                 </div>
             </Panel>
         </>

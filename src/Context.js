@@ -18,14 +18,18 @@ export const firestore = getFirestore();
 enableIndexedDbPersistence(firestore, { forceOwnership: true });
 
 export const remoteConfig = getRemoteConfig()
-remoteConfig.settings.minimumFetchIntervalMillis = 2400000;;
+remoteConfig.settings.minimumFetchIntervalMillis = 2400000;
 
 
-const userObj = JSON.parse(localStorage.getItem("user"));
+const userJSON = localStorage.user
 
-if (!userObj) {
+
+if (!userJSON) {
     window.location = "./auth.html";
 }
+
+const userObj = JSON.parse(userJSON)
+
 
 const id = `${userObj.id}`;
 

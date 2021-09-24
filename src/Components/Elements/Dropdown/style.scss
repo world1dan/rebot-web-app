@@ -12,6 +12,15 @@
 
 
 .dropdown {
+    --x: -80%;
+    
+    &.custom {
+        --x: -68%;
+
+        .dropdown-content {
+            top: 60px !important;
+        }
+    }
 
     .menuBtn {
         height: 38px;
@@ -23,10 +32,10 @@
 
 
     .dropdown-content {
-        transform: translateX(-70%);
+        transform: translateX(var(--x));
         display: flex;
         flex-direction: column;
-        gap: 3px;
+        gap: 4px;
         z-index: 999;
         position: absolute;
         top: 36px;
@@ -39,12 +48,12 @@
 
     .dropdown-content-enter {
         opacity: 0;
-        transform: scale(0.9) translateX(-70%);
+        transform: scale(0.9) translateX(var(--x));
     }
 
     .dropdown-content-enter-active {
         opacity: 1;
-        transform: scale(1) translateX(-70%);
+        transform: scale(1) translateX(var(--x));
         transition: all 200ms;
     }
 
@@ -82,7 +91,6 @@
             background-color: var(--red2);
         }
     }
-
 
     button {
         padding: 0;

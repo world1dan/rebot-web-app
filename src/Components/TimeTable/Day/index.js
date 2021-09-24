@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { user } from '../../../Context';
 
+import HomeworkRe from '../../HomeworkRe';
 import SubjectRow from './SubjectRow';
-import './style.scss';
 
 
 const day_titles = {
@@ -19,7 +19,8 @@ const day_titles = {
 
 
 export default function Day(props) {
-    
+    const [instant, setInstant] = useState(false);
+
     const group = user.group;
     const day_data = props.day_data;
     let rows = [];
@@ -44,19 +45,32 @@ export default function Day(props) {
         const toOpen = [];
 
         for (let subj in day_data) {
-            day_data[subj].hw && toOpen.push(day_data[subj])
+
+            if (day_data[subj].groups) {
+                if (day_data[subj][group]) {
+                    let lesson = day_data[subj][group];
+                    lesson.hw && toOpen.push(lesson)
+                }
+            } else {
+                day_data[subj].hw && toOpen.push(day_data[subj]);
+            }
         }
         
         if (toOpen.length != 0) {
-            globalThis.InstantView.open(toOpen);
+            setInstant(toOpen)
         } else {
             globalThis.UI.alert("Решебники не найдены");
         }
-
     }
+
     return ( 
         <div className="UIBlock day">
-            <h1>{ day_titles[props.day_num] }</h1>
+
+
+            { instant && <HomeworkRe lessonsData={instant} handleClose={() => setInstant(false)}/> }
+
+            <h1>{ day_titles[props.day_num] + (props.afterTitle ? props.afterTitle : "")}</h1>
+            
             <button className="table-btn share" onClick={openInstant}><i className="fas fa-book fa-lg"></i></button>
             <div className="content">
                 { rows }

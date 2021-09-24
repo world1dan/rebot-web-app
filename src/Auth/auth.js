@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc } from "@firebase/firestore/lite";
+
 import "./auth.scss";
 
 initializeApp({
@@ -29,7 +30,7 @@ globalThis.onTelegramAuth = async (user) => {
 
     localStorage.setItem("user", userJSON);
 
-    window.location = "./index.html";
+    window.location = "/";
 }
 
 globalThis.group = 1;

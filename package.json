@@ -5,26 +5,35 @@
     "main": "index.js",
     "scripts": {
         "start": "rollup -c rollup.config.js -w",
+        "start2": "webpack-dev-server --config webpack.config.js",
         "build": "rollup -c rollup.config.js",
         "deploy": "firebase deploy --only hosting"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@vkontakte/icons": "^1.124.0",
+        "@babel/preset-env": "^7.15.6",
+        "@vkontakte/icons": "^1.128.1",
         "body-scroll-lock": "*",
+        "compiler": "^0.1.2",
         "firebase": "^9.0.0",
+        "framer-motion": "^4.1.17",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-edit-text": "^4.1.0",
         "react-input-autosize": "^3.0.0",
+        "react-responsive": "*",
         "react-router-dom": "^5.2.0",
+        "react-spring": "^9.2.4",
         "react-textarea-autosize": "^8.3.3",
         "react-transition-group": "^4.4.2",
         "react-use": "^17.2.4",
+        "react-zoom-pan-pinch": "^2.1.3",
+        "register-service-worker": "^1.7.2",
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "scroll-lock": "^2.1.5",
-        "swiped-events": "^1.1.4"
+        "swiped-events": "^1.1.4",
+        "webpack-visualizer-plugin": "^0.1.11"
     },
     "devDependencies": {
         "@babel/core": "^7.15.0",
@@ -34,10 +43,14 @@
         "@rollup/plugin-node-resolve": "^13.0.4",
         "@rollup/plugin-replace": "^3.0.0",
         "@rollup/plugin-strip": "^2.1.0",
+        "babel-loader": "^8.2.2",
         "babel-plugin-transform-remove-console": "^6.9.4",
+        "css-loader": "^6.3.0",
         "eslint": "^7.31.0",
         "eslint-plugin-react": "^7.24.0",
         "eslint-plugin-react-hooks": "^4.2.0",
+        "mini-css-extract-plugin": "^2.3.0",
+        "path": "^0.12.7",
         "rollup": "^2.56.3",
         "rollup-plugin-buble": "^0.19.8",
         "rollup-plugin-copy": "^3.4.0",
@@ -46,6 +59,9 @@
         "rollup-plugin-serve": "^1.1.0",
         "rollup-plugin-terser": "^7.0.2",
         "rollup-plugin-visualizer": "^5.5.2",
-        "sass": "^1.37.5"
+        "sass": "^1.37.5",
+        "sass-loader": "^12.1.0",
+        "webpack": "^5.53.0",
+        "webpack-visualizer-plugin2": "^1.0.0"
     }
 }

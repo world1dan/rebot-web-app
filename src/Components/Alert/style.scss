@@ -1,0 +1,37 @@
+.Alert {
+    position: fixed;
+    touch-action: none;
+
+    background-color: var(--background2);
+
+    height: 170px;
+    width: 320px;
+    border-radius: 11px;
+    padding: 6px;
+
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: env(safe-area-inset-bottom);
+
+    
+}
+
+
+.Alert__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+
+.Alert__buttons .AlertButton {
+    background-color: var(--background3);
+    height: 44px;
+    flex-grow: 1;
+    border-radius: 5px;
+}
+
+.Alert__content {
+    flex-grow: 1;
+}

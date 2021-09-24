@@ -12,7 +12,7 @@
 }
 
 @media (min-width: 800px) {
-    body:not(.min-rigth, .min-left) #homescreen-layout {
+    body:not(.mini-right, .mini-left) #homescreen-layout {
         display: grid;
         grid-template-columns: 1fr 1fr;
         max-width: 1024px;

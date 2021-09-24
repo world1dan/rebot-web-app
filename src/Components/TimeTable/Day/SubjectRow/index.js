@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState, memo, useRef } from 'react';
-
+import HomeworkRe from '../../../HomeworkRe';
 import './style.scss';
 import { manifestContext, database } from "../../../../Context";
 
@@ -13,6 +13,9 @@ function SubjectRow(props) {
     const manifest = useContext(manifestContext);
     const hwInput = useRef(null);
     const [homework, setHomework] = useState(props.lesson_data.hw);
+    const [instant, setInstant] = useState(false);
+
+    const hasResheba = manifest && manifest[props.lesson_data.id].url;
 
     useEffect(() => {
         setHomework(props.lesson_data.hw);
@@ -25,6 +28,7 @@ function SubjectRow(props) {
     }
     
 
+
     function saveHomework () {
         if (homework != props.lesson_data.hw) {
             updateDoc(database.timetable, {
@@ -34,13 +38,7 @@ function SubjectRow(props) {
     }  
 
     function openInstant() {
-
-        const toOpen = [{
-            id: props.lesson_data.id,
-            hw: homework
-        }]
-
-        window.InstantView.open(toOpen);
+        setInstant(true);
     }
 
     function copy() {
@@ -53,6 +51,10 @@ function SubjectRow(props) {
     const classes = props.lesson_data.test ? "flexRow highlighted" : "flexRow"; 
 
     return (
+        <>
+        
+
+
         <div className={classes}>
             <div className="rowBlock medium colored" style={style}>{title}</div>
             <div className="rowBlock mainField">
@@ -62,11 +64,15 @@ function SubjectRow(props) {
                 <RowContextMenu
                     openInstant={openInstant}
                     copy={copy}
-                    isResheba={manifest && manifest[props.lesson_data.id].url}
+                    isResheba={hasResheba}
                     homework={homework}
                 />
+
+            { hasResheba && instant && <HomeworkRe lessonsData={[props.lesson_data]} handleClose={() => setInstant(false)}/> }
+
             </div>
         </div>
+        </>
     );
     
 }

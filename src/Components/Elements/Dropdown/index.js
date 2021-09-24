@@ -1,35 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import "./style.scss"
 
 export default function Dropdown(props) {
 
-    const [isOpen, setIsOpen] = useState(false);
-    const button = useRef();
-
-    function setUnfocusListener() {
-        if (isOpen) {
-            button.current.addEventListener("blur", () => {
-                setIsOpen(false)
-            }, {once: true});
-
-            if (window.ios) {
-                button.current.addEventListener("mouseout", () => {
-                    setIsOpen(false)
-                }, {once: true});
-            }
-        }
-    }
-
+    const [open, setOpen] = useState(false);
 
     return (
-        <div className="dropdown">
-            <button ref={button} className="menuBtn" onClick={() => setIsOpen(!isOpen)}>
-                <i className="fas fa-ellipsis-v"></i>
+        <div className={"dropdown " + (props.custom ? "custom" : "")}>
+            <button 
+                className="menuBtn" 
+                onClick={() => setOpen(!open)}
+                onBlur={() => setOpen(false)}
+                onMouseOut={() => window.ios && setOpen(false)}>
+                { props.icon ? props.icon : <i className="fas fa-ellipsis-v"></i> }
             </button>
 
-            <CSSTransition in={isOpen} timeout={{ enter: 200, exit: 160 }} classNames='dropdown-content' onEnter={setUnfocusListener} unmountOnExit>
+            <CSSTransition in={open} timeout={{ enter: 200, exit: 160 }} classNames='dropdown-content' unmountOnExit>
                 <div className="dropdown-content">{props.children}</div> 
             </CSSTransition>
         </div>

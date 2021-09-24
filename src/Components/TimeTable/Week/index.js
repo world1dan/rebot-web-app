@@ -1,4 +1,4 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useState, memo } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import useFirestoreListener from '../../../Hooks/useFirestoreListener';
@@ -7,24 +7,12 @@ import { database } from '../../../Context';
 import Day from '../Day';
 import './style.scss';
 
-export default memo(function Week(props) {
-    const [ isOffline, setOffline ] = useState(false);
+export default memo(function Week() {
 
     const [ week, setWeek ] = useState(2);
 
     const fullTimetable = useFirestoreListener(database.timetable);
 
-
-    useEffect(() => {
-        window.addEventListener('online',  () => setOffline(false));
-        window.addEventListener('offline', () => setOffline(true));
-
-        return () => {
-            window.removeEventListener('online');
-            window.removeEventListener('offline');
-        }
-    }, []);
-    
 
     const title = week==1 ? "Прошлая неделя" : week==2 ? "Эта неделя" : "Следующая неделя";
     const days = [];
@@ -65,18 +53,8 @@ export default memo(function Week(props) {
                         </button>
                     }
                 </div>
-                <button className="block-style settings-btn" onClick={() => props.setSettingsOpen(true)}><i className="fas fa-cog"></i></button>
             </header>
-    
-            { isOffline &&
-                <div className="offline-alert">
-                    <div className="text">
-                        <h4>Интернет недоступен</h4>
-                        <p>Данные будут сохранены при подключении</p>
-                    </div>
-                    <i className="fas fa-exclamation-triangle"></i>
-                </div>
-            }
+
             <TransitionGroup exit={false}>
                 <CSSTransition key={week} timeout={400} classNames="week-grid">
                     <div className="week-grid">

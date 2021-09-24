@@ -32,6 +32,7 @@ export default memo(function Marks() {
             <div className="content">
                 { rows }
             </div>
+            <div className="info" style={{marginTop: 10}}>Нужно разделять запятой, справа - средний балл</div>
         </div>
     );
 });
