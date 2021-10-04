@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ReBot</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./dist/style.css">
     <link rel="stylesheet" href="static/lib/fontawesome/all.min.css">
     <link type="preload" href="static/lib/fontawesome/fa-brands-400.woff2">
     <link type="preload" href="static/lib/fontawesome/fa-regular-400.woff2">
@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" href="static/icons/apple-icon-180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#0F0F0F">
-    <script defer src="bundle.js"></script>
+    <script defer src="./dist/bundle.js"></script>
 </head>
 
 <body> 
@@ -47,7 +47,7 @@
     <div class="alert"></div>
 
 
-    <div class="template">
+    <div class="template" hidden>
         <div id="viewbox" class="viewbox" complete="false">
             <div class="viewbox-tools">
                 <button class="alt" id="alt-re" onclick="ReBot.open_alt(this.parentNode.parentNode)">Решебник 2</button>

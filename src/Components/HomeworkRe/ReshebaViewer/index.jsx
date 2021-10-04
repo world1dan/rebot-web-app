@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from "react";
 import PropTypes from 'prop-types';
 
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-
 import getSolutionImgs from "./getSolutionImgs";
 
 import "./style.css";
@@ -10,7 +8,6 @@ import "./style.css";
 const ReshebaViewer = ({ subjectInfo, startNum }) => {
 
     const [num, setNum] = useState(startNum);
-    const [zoom, setZoom] = useState(false);
 
     const imgs = useMemo(() => getSolutionImgs(subjectInfo, num), [subjectInfo, num]); 
 
@@ -19,10 +16,6 @@ const ReshebaViewer = ({ subjectInfo, startNum }) => {
         const altUrl = subjectInfo.alt_url.replace("?", subjectInfo.section && subjectInfo.title == "Физика" ? num + 2 : num);
 
         window.open(altUrl, "_blank");
-    }
-
-    const toggleZoom = () => {
-        setZoom(!zoom)
     }
 
 
@@ -34,21 +27,11 @@ const ReshebaViewer = ({ subjectInfo, startNum }) => {
                 <button className="block" onClick={() => setNum(num - 1)}><i className="fas fa-chevron-left fa-lg"></i></button>
                 <button className="num block">{ num }</button>
                 <button className="block" onClick={() => setNum(num + 1)}><i className="fas fa-chevron-right fa-lg"></i></button>
-                <button className="block" onClick={toggleZoom}><i className="fas fa-search-plus fa-lg"></i></button>
             </div>
         </div>
-        { zoom ? 
-            <TransformWrapper>
-            <TransformComponent>
-                <div className="hwr-sol-imgs">
-                    { imgs }
-                </div>
-            </TransformComponent>
-            </TransformWrapper>
-            : <div className="hwr-sol-imgs">
-                { imgs }
-            </div>
-        }
+        <div className="hwr-sol-imgs">
+            { imgs }
+        </div>
         </>
     )
 

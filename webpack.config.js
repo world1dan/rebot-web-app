@@ -24,6 +24,23 @@ module.exports = {
         use: [
             MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
         ]
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          "babel-loader",
+          {
+            loader: "react-svg-loader",
+            options: {
+              svgo: {
+                plugins: [
+                  { removeTitle: true }
+                ],
+                floatPrecision: 2
+              }
+            }
+          }
+        ]
       }
     ]
   },

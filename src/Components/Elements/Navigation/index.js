@@ -33,8 +33,8 @@ export default function Navigation(props) {
                 <NavButton 
                     title={"Неделя"}
                     icon={Icon28CalendarOutline}
-                    setActiveTab={() => props.setActiveTab(4)} 
-                    isActive={props.activeTab==4}
+                    setActiveTab={() => props.setActiveTab(5)} 
+                    isActive={props.activeTab==5}
                 />
             </div>
         </div>

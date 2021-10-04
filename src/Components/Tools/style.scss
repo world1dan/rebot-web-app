@@ -1,0 +1,45 @@
+.Tools {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, Minmax(300px, 1fr));
+    gap: 12px;
+    max-width: 1380px;
+    margin: 0 auto;
+
+    input, .field {
+        background-color: var(--background3);
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        padding: 6px;
+        color: var(--text);
+        text-indent: 4px;
+        height: 100%;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+
+    .Sqrt {
+        box-sizing: border-box;
+        height: 50px;
+        display: grid;
+        grid-template-columns: 44px 1fr 56px 1fr;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            margin: 0 auto;
+        }
+
+        div {
+            text-align: center;
+            font-size: 19px;
+            font-weight: bold;
+        }
+        
+    }
+}
+

@@ -9,7 +9,6 @@ import Resheba from './Components/Resheba';
 import Marks from './Components/Marks';
 
 
-
 export default function Main(props) {
     const [activeTab, setActiveTab] = useState(1);
 

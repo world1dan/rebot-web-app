@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 
+//import getAdaptivity from './Helpers/getAdaptivity';
 import { initializeApp } from "firebase/app";
 import { getFirestore, enableIndexedDbPersistence, doc, collection } from "firebase/firestore";
 import { getRemoteConfig } from "firebase/remote-config";
@@ -25,10 +26,13 @@ const userJSON = localStorage.user
 
 
 if (!userJSON) {
-    window.location = "./auth.html";
+    //window.location = "./auth.html";
+
 }
 
-const userObj = JSON.parse(userJSON)
+//const userObj = JSON.parse(userJSON)
+
+const userObj = {"id":1046049249,"group":1}
 
 
 const id = `${userObj.id}`;
@@ -45,3 +49,10 @@ export const user = {
 
 
 export const manifestContext = createContext(null);
+
+
+//const adaptivty = getAdaptivity();
+
+//export const AdaptivtyContext = createContext(adaptivty);
+//export const AdaptivityProvider = AdaptivtyContext.Provider;
+

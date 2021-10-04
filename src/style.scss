@@ -38,6 +38,8 @@
 	--NavBackground: #fdfeffe0;
 	--NavBtn: #868a8f;
 	--NavBtnActive: #5d4ae2;
+
+	--red2: #e4372ee0;
 }
 
 :root[theme="purple"] {
@@ -103,7 +105,7 @@
 
 @media (width: 414px) {
 	:root {
-		--bottom-save-zone: 24px;
+		--bottom-save-zone: 30px;
 	}
 }
 
@@ -180,7 +182,7 @@ body {
 	padding-top: env(safe-area-inset-top, 10px);
 }
 
-.UIBlock {
+.UIBlock, .content-card {
 	max-height: max-content;
 	transition: height 1s;
 	background-color: var(--background2);
