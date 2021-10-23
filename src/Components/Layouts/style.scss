@@ -1,0 +1,29 @@
+._VerticalLayout {
+    padding: 14px;
+
+    @media (min-width: 500px) {
+        padding: 20px;
+    }
+
+    @media (max-width: 400px) {
+        padding: 10px;
+    }
+
+    @media (max-width: 330px) {
+        padding: 0px;
+
+        >* {
+            border-radius: 0;
+        }
+    }
+
+    @media (min-width: 900px) {
+        padding: 20px 35px;
+    }
+
+
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}

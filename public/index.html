@@ -3,49 +3,30 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, viewport-fit=cover">
     <title>ReBot</title>
-    <link rel="stylesheet" href="./dist/style.css">
+
+    <link rel="manifest" href="static/manifest.json">
+    <link rel="stylesheet" href="style.css">
+    
     <link rel="stylesheet" href="static/lib/fontawesome/all.min.css">
-    <link type="preload" href="static/lib/fontawesome/fa-brands-400.woff2">
     <link type="preload" href="static/lib/fontawesome/fa-regular-400.woff2">
     <link type="preload" href="static/lib/fontawesome/fa-solid-900.woff2">
+
     <link type="preconnect" href="https://firestore.googleapis.com">
-    <link rel="manifest" href="static/manifest.json">
+
     <link rel="apple-touch-icon" href="static/icons/apple-icon-180.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#0F0F0F">
-    <script defer src="./dist/bundle.js"></script>
+    <meta name="theme-color" content="#1b1b1b">
+
+    <script defer src="bundle.js"></script>
 </head>
 
+
 <body> 
-    <div class="loading">
-        <div class="ispinner ispinner-large">
-            <div class="ispinner-blade"></div>
-            <div class="ispinner-blade"></div>
-            <div class="ispinner-blade"></div>
-            <div class="ispinner-blade"></div>
-            <div class="ispinner-blade"></div>
-            <div class="ispinner-blade"></div>
-            <div class="ispinner-blade"></div>
-            <div class="ispinner-blade"></div>
-        </div>          
-    </div>
-
     <div id="root"></div>
-    
-
-
-    <script>
-        if (!(localStorage.theme == undefined)) {
-            document.documentElement.setAttribute("theme", localStorage.theme)
-        }
-    </script>
-
-
 
     <div class="alert"></div>
-
 
     <div class="template" hidden>
         <div id="viewbox" class="viewbox" complete="false">
@@ -65,6 +46,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const theme = localStorage.getItem("theme");
+
+        if (theme) {
+            document.documentElement.setAttribute("theme", localStorage.theme)
+
+            const meta = document.querySelector('meta[name=theme-color]')
+            meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg2');
+        }
+    </script>
+
 </body>
 
 </html>

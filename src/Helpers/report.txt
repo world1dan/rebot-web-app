@@ -1,0 +1,14 @@
+import { httpsCallable } from "firebase/functions"
+import { functions } from "../Context"
+
+
+
+export default function rweport(text) {
+    try {
+        const sendReport = httpsCallable(functions, "report")
+        const user = JSON.parse(localStorage.user)
+        sendReport({ text: "👁 " + user.first_name + " " + text })
+    } catch {
+        console.log("REPORT_ERROR")
+    }
+}

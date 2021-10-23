@@ -1,0 +1,28 @@
+._EditForm {
+    width: 100%;
+    background-color: var(--bg3);
+    height: 46px;
+    padding: 10px;
+    border-radius: 9px;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    input {
+        outline: none;
+        border: none;
+        background: none;
+        font-size: 16px;
+        color: var(--text1);
+    }
+
+    .editable-field {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+
+    }
+}

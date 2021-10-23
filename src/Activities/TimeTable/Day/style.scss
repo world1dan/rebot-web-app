@@ -1,0 +1,20 @@
+.day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.day-title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.day-date {
+    font-size: 20px;
+    color: var(--text2);
+    font-weight: bold;
+}

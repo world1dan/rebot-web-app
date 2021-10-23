@@ -4,5 +4,10 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"git.enabled": false,
+		"typescript.suggest.paths": false,
+		"javascript.suggestionActions.enabled": false,
+		"typescript.suggestionActions.enabled": false
+	}
 }

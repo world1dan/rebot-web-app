@@ -1,0 +1,58 @@
+#notes {
+    #add-note {
+        background-color: var(--bg3);
+        position: absolute;
+        right: 16px;
+        top: 22px;
+        padding: 8px;
+        border-radius: 7px;
+        display: grid;
+        place-items: center;
+    }
+}
+
+
+.note {
+    position: relative;
+    min-height: 42px;
+    background-color: var(--bg3);
+    box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-right: 40px;
+    
+    &.pinned {
+
+        background-color: var(--red2);
+        transition: background 0.5s;
+
+        textarea {
+            font-weight: bold;
+        }
+    }
+
+    textarea {
+        padding: 8px;
+        padding-left: 10px;
+        background: none;
+        width: 100%;
+        outline: none;
+        border: none;
+        margin-top: 5px;
+        height: 100%;
+        min-height: 36px;
+        color: var(--text);
+        resize: none;
+        font-size: 17px;
+        user-select: all;
+        -webkit-user-select: auto;
+    }
+
+    .dropdown {
+        position: absolute !important;
+        top: 3px;
+        right: 0;
+    }
+
+}
+

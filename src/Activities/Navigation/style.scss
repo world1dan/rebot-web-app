@@ -1,0 +1,72 @@
+@media (min-width: 700px) {
+	body:not(.mini-right, .mini-left) .bottom-nav {
+		.NavButton {
+			justify-content: center;
+			flex-direction: row;
+			font-size: 15px;
+			gap: 11px;
+			vertical-align: middle;
+
+			span {
+				display: inline-block;
+			}
+		}
+		
+	}
+}
+
+.bottom-nav {
+	height: 46px;
+	box-sizing: content-box;
+	left: 0;
+	right: 0;
+	position: fixed;
+	touch-action: none;
+	background-color: var(--bg2);
+	bottom: 0;
+	padding-bottom: var(--bottom-save-zone);
+	border-top: 1px solid var(--borders);
+	z-index: 3;
+
+
+	display: flex;
+	align-items: center;
+
+    padding-right: env(safe-area-inset-right);
+    padding-left: env(safe-area-inset-left);
+
+	.NavButton {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		transition: color 0.15s;
+		align-items: center;
+		height: 100%;
+
+		color: var(--NavBtn);
+		flex-grow: 1;
+		cursor: pointer;
+
+		span {
+			display: none;
+		}
+		@keyframes navBtn {
+			0% {
+				transform: none;
+			}
+			40% {
+				transform: scale(0.94);
+			}
+			100% {
+				transform: none;
+			}
+		}
+
+		&.active {
+			color: var(--NavBtnActive);
+			animation: navBtn 0.25s;
+			transition: color 0.25s;
+		}
+	}
+}
+

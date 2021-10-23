@@ -1,18 +1,8 @@
 {
-  "auto-rename-tag.activationOnLanguage": [
-    "html",
-    "xml"
-  ],
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[javascript]": {
-    "editor.defaultFormatter": null
-  },
   "files.exclude": {
-    "workspace.code-workspace": true,
-    ".eslintrc.json": true,
-    "firestore-debug.log": true,
-    "firebase-debug.log": true,
+    ".vscode": true,
+    "node_modules": true,
     "ui-debug.log": true,
-    ".prettierrc": true
+    "firestore-debug.log": true
   }
 }

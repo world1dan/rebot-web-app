@@ -2,11 +2,18 @@
   "hosting": {
     "target": "rebot",
     "public": "build",
-    "redirects": [ {
-      "source": "/get",
-      "destination": "/start.html",
-      "type": 301
-    } ],
+    "redirects": [
+      {
+        "source": "/get",
+        "destination": "/install.html",
+        "type": 301
+      },
+      {
+        "source": "/timetable",
+        "destination": "/timetable.html",
+        "type": 301
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -19,6 +26,15 @@
     },
     "ui": {
       "enabled": true
+    },
+    "functions": {
+      "port": 5001
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5000
     }
   }
 }

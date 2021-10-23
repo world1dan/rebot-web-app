@@ -1,0 +1,16 @@
+.marks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, Minmax(300px, 1fr));
+    
+    column-gap: 12px;
+
+    row-gap: 6px;
+
+    @media (min-width: 972px) {
+        grid-template-columns: repeat(auto-fit, Minmax(450px, 1fr));
+        column-gap: 14px;
+        row-gap: 7px;
+        padding: 8px 10px;
+        padding-top: 12px;
+    }
+}

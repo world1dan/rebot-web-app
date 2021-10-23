@@ -1,0 +1,106 @@
+.Chat__Message {
+    color: var(--text1);
+    border-radius: 12px;
+
+    padding: 10px 16px;
+
+    position: relative;
+
+    margin-top: 10px;
+
+    &.with-sender-title {
+        margin-top: 36px;
+        border-radius: 0px 12px 12px 12px;
+    }
+
+    .sender {
+        position: absolute;
+        top: -18px;
+        left: 7px;
+        font-size: 10px;
+        color: var(--text2);
+    }
+
+    @keyframes messageIn {
+        from {
+            opacity: 0;
+            transform: scale(0.85);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1s);
+        }
+    }
+
+
+
+
+    .avatar {
+        background-color: red;
+        position: absolute;
+        left: -40px;
+        border-radius: 50%;
+        top: 2px;
+        width: 32px;
+        height: 32px;
+        overflow: hidden;
+
+
+        img {
+            transform: scale(1.06)
+        }
+    }
+
+    .time {
+        position: absolute;
+        top: 36%;
+        font-size: 8px;
+        color: var(--text2);
+    }
+
+
+    .message-text {
+        font-size: 16px;
+        max-width: 600px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        word-break:keep-all;
+    }
+
+    a {
+        color: var(--text);
+        font-weight: bold;
+    }
+    &.incoming {
+        margin-left: 40px;
+        margin-right: 38px;
+        background-color: var(--bg2);
+        align-self: flex-start;
+
+        .time {
+            right: -34px;
+        }
+    }
+
+    &.outcoming {
+        color: #fff;
+        margin-right: 8px;
+        margin-left: 38px;
+        background-color: var(--primary);
+        align-self: flex-end;
+
+        .time {
+            left: -34px;
+        }
+    }
+
+    &.emoji {
+        background: none;
+        padding: 0;
+        max-width: 200px;
+
+        .message-text {
+            font-size: 50px !important;
+        }
+    }
+}

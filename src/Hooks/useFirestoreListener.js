@@ -7,7 +7,7 @@ export default function useFirestoreListener(doc) {
     
     useEffect(() => {
         const unsubscribe = onSnapshot(doc, (doc) => {
-            setDocData(doc.data());
+            setDocData(doc.data())
         });
         return () => unsubscribe()
     }, [doc])

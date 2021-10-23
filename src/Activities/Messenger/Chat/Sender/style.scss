@@ -1,0 +1,91 @@
+.Chat__Sender {
+    
+    align-items: flex-end;
+    justify-content: center;
+    background-color: var(--bg2);
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    padding-right: max(12px, env(safe-area-inset-right));
+    padding-left: max(12px, env(safe-area-inset-left));
+
+    touch-action: none;
+}
+
+
+
+
+
+
+.Chat__Sender__Input {
+    max-width: 600px;
+}
+textarea {
+    user-select: all;
+    -webkit-user-select: text;
+    min-height: 40px;
+    resize: none;
+    outline: none;
+    border: none;
+
+    font-size: 16px;
+    padding: 14px;
+    padding-left: 18px;
+    color: var(--text1);
+    
+    line-height: 100%;
+    border-radius: 20px;
+    background-color: var(--bg3);
+    height: 38px;
+    flex-grow: 1;
+}
+
+
+@keyframes sendBtnIn {
+    from {
+        transform: translateX(54px);
+        opacity: 0.6;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+.Chat__Sender__SendBtn {
+    cursor: pointer;
+    animation: sendBtnIn 0.25s ease-out;
+    display: flex;
+    background: var(--primary);
+    color: var(--text1);
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    height: 40px;
+    width: 54px;
+}
+
+.Chat__Sender__MediaBtn {
+
+    input {
+        display: none;
+    }
+    touch-action: manipulation;
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    background: var(--bg3);
+    color: var(--text1);
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    height: 38px;
+    width: 54px;
+}
