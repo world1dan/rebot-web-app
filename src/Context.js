@@ -22,10 +22,10 @@ export const firestore = getFirestore()
 
 
 if (process.env.NODE_ENV == "development") {
-    connectFirestoreEmulator(firestore, "localhost", 8080)
+    //connectFirestoreEmulator(firestore, "localhost", 8080)
 }
 
-//enableIndexedDbPersistence(firestore, { forceOwnership: true })
+enableIndexedDbPersistence(firestore, { forceOwnership: true })
 
 
 
@@ -33,8 +33,6 @@ if (process.env.NODE_ENV == "development") {
 
 export const remoteConfig = getRemoteConfig()
 remoteConfig.settings.minimumFetchIntervalMillis = 2400000
-
-//export const functions = getFunctions()
 
 export const manifestContext = createContext(null)
 export const ConfigContext = createContext(null)

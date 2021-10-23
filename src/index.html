@@ -7,9 +7,9 @@
     <title>ReBot</title>
 
     <link rel="manifest" href="static/manifest.json">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="static/lib/fontawesome/all.min.css">
 
+
+    <link rel="stylesheet" href="static/lib/fontawesome/all.min.css">
     <link type="preload" href="static/lib/fontawesome/fa-regular-400.woff2">
     <link type="preload" href="static/lib/fontawesome/fa-solid-900.woff2">
 
@@ -19,35 +19,18 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#1b1b1b">
 
-    <script defer src="bundle.js"></script>
+    <style>
+        body {
+            background: #000;
+        }
+    </style>
 </head>
 
 
 <body> 
-
-    <script>
-        let theme = localStorage.theme;
-
-        if (theme) {
-
-
-            if (theme != "dark" && theme != "light") {
-                localStorage.theme = "dark"
-                theme = "dark"
-            }
-
-            document.documentElement.setAttribute("theme", localStorage.theme)
-
-            const meta = document.querySelector('meta[name=theme-color]')
-            meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg2');
-        }
-    </script>
-
     <div id="root"></div>
 
-
     <div class="alert"></div>
-
 
     <div class="template" hidden>
         <div id="viewbox" class="viewbox" complete="false">
@@ -69,8 +52,16 @@
     </div>
 
     <script>
-        //navigator.serviceWorker.register("./sw.js")
+        const theme = localStorage.getItem("theme");
+
+        if (theme) {
+            document.documentElement.setAttribute("theme", localStorage.theme)
+
+            const meta = document.querySelector('meta[name=theme-color]')
+            meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg2');
+        }
     </script>
+
 </body>
 
 </html>

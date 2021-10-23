@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 
@@ -9,6 +11,7 @@ import Login from "./Activities/Login"
 
 const isSafari = /iPad|iPhone/.test(navigator.platform) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
 globalThis.ios = isSafari
+
 
 
 

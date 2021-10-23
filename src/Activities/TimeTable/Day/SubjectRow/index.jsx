@@ -68,7 +68,7 @@ const SubjectRow = ({ lesson, path }) => {
             </div>
             <div className="rowBlock square">
                 <Dropdown>
-                    { subject?.url &&
+                    { subject?.url && homework &&
                     <ContextMenuBtn
                         onClick={openInstant}
                         title="Решение"

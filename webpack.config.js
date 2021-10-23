@@ -1,50 +1,78 @@
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const path = require("path")
+const HtmlPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 
-module.exports = {
-    entry: "./src/index.js",
-    mode: "development",
 
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /(node_modules|bower_components)/,
-                loader: "babel-loader",
-                options: { presets: ["@babel/env"] }
-            },
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader"]
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'
-                ]
-            }
-        ]
-    },
 
-    resolve: { extensions: ["*", ".js", ".jsx"] },
 
-    output: {
-        path: path.resolve(__dirname, "public/"),
-        filename: "bundle.js",
 
-    },
-    devtool: false,
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'),
+
+module.exports = (env) => {
+
+    const isProduction = env.production
+
+
+    return {
+        entry: "./src/index.js",
+        module: {
+            rules: [
+                {
+                    test: /\.(js|jsx)$/,
+                    exclude: /node_modules/,
+                    loader: "babel-loader"
+                },
+                {
+                    test: /\.(scss|css)$/,
+                    use: [
+                        MiniCssExtractPlugin.loader, "css-loader", "sass-loader"
+                    ]
+                }
+            ]
         },
-        port: 4200,
-        compress: true,
-        //liveReload: false,
-        open: false,
-        hot: false
-    },
-    
-    plugins: [new MiniCssExtractPlugin({filename: "style.css"}), new BundleAnalyzerPlugin()]
+
+        mode: "development",
+        optimization: {
+            minimize: isProduction,
+            minimizer: [new TerserPlugin({
+                minify: TerserPlugin.uglifyJsMinify
+            })]
+        },
+
+
+        resolve: { extensions: [".js", ".jsx"] },
+
+        output: {
+            filename: "bundle.js",
+            path: path.resolve(__dirname, "dist")
+        },
+
+        devtool: false,
+        devServer: {
+            static: {
+                directory: path.resolve(__dirname, "dist"),
+            },
+            port: 4200,
+            open: true,
+            hot: true
+        },
+        
+
+
+        plugins: [
+            new MiniCssExtractPlugin({ filename: "style.css" }),
+            new CopyPlugin({
+                patterns: [{
+                    from: path.resolve(__dirname, "public"),
+                    to: path.resolve(__dirname, "dist"),
+                }]
+            }),
+            new HtmlPlugin({
+                template: "./src/index.html"
+            }),
+            new CleanWebpackPlugin()
+        ]
+    }
 }

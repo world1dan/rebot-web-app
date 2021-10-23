@@ -1,7 +1,7 @@
 {
   "hosting": {
     "target": "rebot",
-    "public": "build",
+    "public": "dist",
     "redirects": [
       {
         "source": "/get",
@@ -26,15 +26,6 @@
     },
     "ui": {
       "enabled": true
-    },
-    "functions": {
-      "port": 5001
-    },
-    "database": {
-      "port": 9000
-    },
-    "hosting": {
-      "port": 5000
     }
   }
 }

@@ -3,6 +3,9 @@
     ".vscode": true,
     "node_modules": true,
     "ui-debug.log": true,
-    "firestore-debug.log": true
+    "firestore-debug.log": true,
+    "database-debug.log": true,
+    "yarn.lock": true,
+    ".babelrc": true
   }
 }
