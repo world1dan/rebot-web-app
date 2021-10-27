@@ -1,22 +1,18 @@
-import React, { useRef, useContext, useEffect } from "react"
-import ReactDOM from "react-dom"
+import React, { useRef, useContext } from "react"
+import { createPortal } from "react-dom"
 import PropTypes from "prop-types"
 import AdaptivePanel from "../../Components/AdaptivePanel"
 import Group from "./Group"
 import "./style.scss"
 import { manifestContext } from "../../Context"
-import DisableEdgeScroll from "../../Helpers/DisableEdgeScroll"
+
 
 
 const HomeworkRe = (props) => {
     const manifest = useContext(manifestContext)
     const scrollContainer = useRef(null)
 
-    useEffect(() => {
-        if (globalThis.ios) {
-            DisableEdgeScroll(scrollContainer.current)
-        }
-    }, [])
+
 
     const groups = []
 
@@ -42,7 +38,7 @@ const HomeworkRe = (props) => {
 
 
     return (
-        ReactDOM.createPortal(
+        createPortal(
             <AdaptivePanel handleClose={props.handleClose} direction="split" scrollContainer={scrollContainer}>
                 <div className="scroll-content hw-re" ref={scrollContainer}>
                     { groups }

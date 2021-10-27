@@ -1,6 +1,7 @@
 
 var initialY = null
 
+
 export default function DisableEdgeScroll (container) {
 
     const startTouch = (e) => {
@@ -11,7 +12,13 @@ export default function DisableEdgeScroll (container) {
         if (initialY === null) return
         
         const currentY = e.touches[0].clientY
+
         const diffY = initialY - currentY
+
+
+
+        if (e.target.scrollWidth != e.target.clientWidth) return
+
 
         if (diffY > 0) {
             if (container.scrollHeight - container.scrollTop <= container.clientHeight) {
@@ -28,5 +35,4 @@ export default function DisableEdgeScroll (container) {
     container.addEventListener("touchstart", startTouch, {passive: false})
     container.addEventListener("touchmove", moveTouch, {passive: false})
 } 
-
 

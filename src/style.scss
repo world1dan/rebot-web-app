@@ -61,10 +61,9 @@ body,
     height: 100%;
     overflow: hidden;
     touch-action: none;
-    overscroll-behavior: contain;
 }
 
-.Tab {
+.tab {
     @keyframes tab-in {
         from {
             opacity: 40%;

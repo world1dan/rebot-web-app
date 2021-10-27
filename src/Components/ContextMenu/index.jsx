@@ -1,14 +1,15 @@
 import React, { useState, useRef } from "react"
-
+import PropTypes from "prop-types"
 
 import "./style.scss"
 
 
-export default function Dropdown(props) {
+
+const ContextMenu = (props) => {
 
     const [open, setOpen] = useState(false)
 
-    const menu = useRef(null)
+    const menu = useRef()
 
     const handleOpen = () => {
         setOpen(true)
@@ -28,16 +29,32 @@ export default function Dropdown(props) {
 
 
     return (
-        <div className={"dropdown " + (props.custom ? "custom" : "")}>
+        <div className="context-menu">
             <button 
-                className="menuBtn" 
+                className={"context-menu-btn" + (open ? " active" : "")} 
                 onClick={handleOpen}
                 onBlur={handleClose}
-                onMouseOut={window.ios ? handleClose : () => {}}>
+                onMouseOut={window.ios ? handleClose : null}>
                 { props.icon ?? <i className="fas fa-ellipsis-v"></i> }
             </button>
 
-            { open && <div className="dropdown-content" ref={menu}>{props.children}</div> }
+            { open && 
+            <div className="menu-items-wraper">
+                <div className="menu-items" ref={menu}>
+                    {props.children}
+                </div>
+            </div> }
         </div>
     )
 }
+
+
+
+ContextMenu.propTypes = {
+    icon: PropTypes.node,
+    children: PropTypes.node
+}
+
+
+
+export default ContextMenu

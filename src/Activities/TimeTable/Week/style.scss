@@ -1,6 +1,6 @@
 .week-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, Minmax(310px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     gap: 10px;
     max-width: 1380px;
     margin: 0 auto;
@@ -11,10 +11,9 @@
     }
 
     @media (min-width: 1000px) {
-        grid-template-columns: repeat(auto-fit, Minmax(400px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     }
 }
-
 
 #week-header {
     background-color: var(--bg2);
@@ -24,12 +23,10 @@
     height: calc(var(--top-save-zone) + 56px);
     padding-top: var(--top-save-zone);
     border-bottom: var(--borders-soft) 1px solid;
-
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
-
     display: flex;
     align-items: center;
     z-index: 5;
@@ -37,10 +34,8 @@
     @media (min-width: 700px) {
         margin: 0 auto;
         position: relative;
-
-        box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
-        border-radius: 9px !important; 
-        
+        box-shadow: 0 0 0 1px var(--borders-soft) inset;
+        border-radius: 9px !important;
     }
 
     span {
@@ -54,12 +49,11 @@
     button {
         width: 60px;
 
-        &.unactive {  
+        &.unactive {
             color: var(--text2);
         }
     }
 }
-
 
 .no-timetable-alert {
     font-size: 18px;

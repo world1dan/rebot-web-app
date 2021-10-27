@@ -1,23 +1,23 @@
-import React from 'react'
-import { useRef } from 'react';
-import { useEffect } from 'react';
+import React from "react"
+import { useRef } from "react"
+import { useEffect } from "react"
 
-import Panel from '../../Components/Panel'
-import PanelHeader from '../../Components/Panel/PanelHeader'
+import Panel from "../../Components/Panel"
+import PanelHeader from "../../Components/Panel/PanelHeader"
 
 
 export default function NotebookViewer(props) {
-    const view = useRef(null);
-    const loader = useRef(null);
+    const view = useRef(null)
+    const loader = useRef(null)
     
     useEffect(() => {
         if (props.currentPanel == props.id) {
             setTimeout(() => {
-                loader.current.style.display = "none";
-                view.current.style.display = "block";
+                loader.current.style.display = "none"
+                view.current.style.display = "block"
             }, 450)
         }
-    }, [props.currentPanel, props.id]);
+    }, [props.currentPanel, props.id])
 
 
     return (

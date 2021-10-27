@@ -1,4 +1,4 @@
-const CACHE = "1"
+const CACHE = "4"
 
 
 const CacheUtilSWUpdate = [

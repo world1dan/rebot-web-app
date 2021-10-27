@@ -1,15 +1,16 @@
 import React, { useEffect, useContext, useState, memo } from "react"
 import PropTypes from "prop-types"
 
-import { manifestContext } from "../../../../Context"
+import { ConfigContext, manifestContext } from "../../../../Context"
 import { useTimetableUpdate } from "../../../../Hooks/useTimetableUpdate"
 import { showAlert } from "../../../../Helpers/showAlert"
 
 
 import EditableField from "../../../../Components/EditableField"
 import HomeworkRe from "../../../HomeworkRe"
-import Dropdown from "../../../../Components/Dropdown"
-import ContextMenuBtn from "../../../../Components/Dropdown/ContextMenuBtn"
+import LessonInfo from "./LessonInfo"
+import ContextMenu from "../../../../Components/ContextMenu"
+import ContextMenuBtn from "../../../../Components/ContextMenu/ContextMenuBtn"
 
 import "./style.scss"
 
@@ -18,10 +19,12 @@ import "./style.scss"
 
 const SubjectRow = ({ lesson, path }) => {
     const update = useTimetableUpdate()
+    const user = useContext(ConfigContext).user
     const subject = useContext(manifestContext)?.[lesson.id]
 
     const [homework, setHomework] = useState(lesson.hw)
     const [instant, setInstant] = useState(false)
+    const [info, setInfo] = useState(false)
 
     useEffect(() => {
         setHomework(lesson.hw)
@@ -36,7 +39,8 @@ const SubjectRow = ({ lesson, path }) => {
     const saveHomework = () => {
         if (homework !== lesson.hw) {
             update({
-                [path + ".hw"]: homework
+                [path + ".hw"]: homework,
+                [path + ".changedBy"]: user.first_name,
             })
         }
     }
@@ -47,6 +51,14 @@ const SubjectRow = ({ lesson, path }) => {
 
     const closeInstant = () => {
         setInstant(false)
+    }
+
+    const openInfo = () => {
+        setInfo(true)
+    }
+
+    const closeInfo = () => {
+        setInfo(false)
     }
 
     const copy = () => {
@@ -67,7 +79,7 @@ const SubjectRow = ({ lesson, path }) => {
                 <EditableField value={homework ?? ""} onChange={setHomework} onSave={saveHomework}/>
             </div>
             <div className="rowBlock square">
-                <Dropdown>
+                <ContextMenu>
                     { subject?.url && homework &&
                     <ContextMenuBtn
                         onClick={openInstant}
@@ -79,8 +91,14 @@ const SubjectRow = ({ lesson, path }) => {
                         title="Скопировать"
                         icon={ <i className="fas fa-clone"></i> }
                     />
-                </Dropdown>
+                    <ContextMenuBtn
+                        onClick={openInfo}
+                        title="Об Уроке"
+                        icon={ <i className="fas fa-info"></i> }
+                    />
+                </ContextMenu>
                 { instant && <HomeworkRe lessonsData={[lesson]} handleClose={closeInstant}/> }
+                { info && <LessonInfo lesson={lesson} subject={subject} handleClose={closeInfo}/> }
             </div>
         </div>
     )

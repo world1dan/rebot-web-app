@@ -1,10 +1,10 @@
-import React, { useLayoutEffect, useRef, useContext, useState, useEffect } from "react"
+import React, { useContext, useState } from "react"
 import PropTypes from "prop-types"
+
 
 import { useChat } from "../../../Hooks/useChat"
 import { ChatContext } from "./Context"
-
-import VScroll from "../../../Components/VScroll"
+import MessagesList from "./MessagesList"
 import Notification from "../../../Components/Notification"
 import Sender from "./Sender"
 import Message from "./Messages/Message"
@@ -16,18 +16,17 @@ import { ConfigContext } from "../../../Context"
 
 
 
-const Chat = ({ chatID }) => {
+const Chat = ({ chatID, onClose }) => {
     
+
+
     const [userModal, setUserModal] = useState(false)
     const [chatSettings, setChatSettings] = useState(false)
 
     const [notification, setNotification] = useState(null)
 
 
-    const dummy = useRef()
-
     const user = useContext(ConfigContext).user
-
 
 
 
@@ -69,14 +68,8 @@ const Chat = ({ chatID }) => {
     }
 
 
-    useLayoutEffect(() => {
-        dummy.current.scrollIntoView({ behavior: "smooth"})
-    })
 
 
-    useEffect(() => {
-        
-    }, [messages])
 
     //const [userModal, setUserModal] = useState(false)
 
@@ -90,14 +83,10 @@ const Chat = ({ chatID }) => {
         <>
             <ChatContext.Provider value={forContext}>
                 <div className="Chat">
-                    <VScroll reversed returnBtn>
-                        <div className="Chat__Messages__Wraper">
-                            { messagesComponents }
-                            <span ref={dummy}></span>
-                        </div>
-                    </VScroll>
+                    
+                    <MessagesList messages={messagesComponents}/>
 
-                    <Header chatTitle={chatInfo?.title} setChatSettings={setChatSettings} chatID={chatID}/>
+                    <Header chatTitle={chatInfo?.title} setChatSettings={setChatSettings} chatID={chatID} onClose={onClose}/>
 
                     <Sender sendText={sendText} user={user}/>
                 </div>

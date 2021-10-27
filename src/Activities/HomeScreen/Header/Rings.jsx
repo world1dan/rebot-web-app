@@ -1,6 +1,6 @@
 import React from "react"
 
-import Dropdown from "../../../Components/Dropdown"
+import ContextMenu from "../../../Components/ContextMenu"
 
 import "./style.scss"
 
@@ -28,9 +28,9 @@ const Rings = () => {
     })
 
     return (
-        <Dropdown custom icon={<i className="fas fa-bell"></i>}>
+        <ContextMenu icon={<i className="fas fa-bell"></i>}>
             { lessons }
-        </Dropdown>
+        </ContextMenu>
     )
 }
 

@@ -6,6 +6,7 @@
     "firestore-debug.log": true,
     "database-debug.log": true,
     "yarn.lock": true,
-    ".babelrc": true
+    ".babelrc": true,
+    "firebase-debug.log": true
   }
 }

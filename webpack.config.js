@@ -1,22 +1,17 @@
 const path = require("path")
 const HtmlPlugin = require("html-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const TerserPlugin = require("terser-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin")
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-
-
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
+const CopyPlugin = require("copy-webpack-plugin")
 
 
 
 module.exports = (env) => {
 
-    const isProduction = env.production
-
-
     return {
         entry: "./src/index.js",
+
         module: {
             rules: [
                 {
@@ -33,15 +28,6 @@ module.exports = (env) => {
             ]
         },
 
-        mode: "development",
-        optimization: {
-            minimize: isProduction,
-            minimizer: [new TerserPlugin({
-                minify: TerserPlugin.uglifyJsMinify
-            })]
-        },
-
-
         resolve: { extensions: [".js", ".jsx"] },
 
         output: {
@@ -49,6 +35,14 @@ module.exports = (env) => {
             path: path.resolve(__dirname, "dist")
         },
 
+        optimization: {
+            minimize: env.production,
+            minimizer: [new TerserPlugin({
+                minify: TerserPlugin.uglifyJsMinify
+            })]
+        },
+
+    
         devtool: false,
         devServer: {
             static: {
@@ -58,7 +52,6 @@ module.exports = (env) => {
             open: true,
             hot: true
         },
-        
 
 
         plugins: [

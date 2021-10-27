@@ -18,12 +18,11 @@
         border-radius: 0;
     }
 
-    button, .menuBtn {
+    button {
         min-width: 52px;
         height: 100% !important;
         background-color: var(--bg3);
         border-radius: 9px;
-
         display: flex;
         align-items: center;
         justify-content: center;
@@ -43,7 +42,6 @@
         padding-left: 14px;
     }
 }
-
 
 .rings-row {
     display: grid;
@@ -67,8 +65,6 @@
         color: var(--text1);
     }
 }
-
-
 
 body.mini-left {
     .homescreen-header {

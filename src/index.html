@@ -1,67 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, viewport-fit=cover">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, viewport-fit=cover">
-    <title>ReBot</title>
+        <title>ReBot</title>
 
-    <link rel="manifest" href="static/manifest.json">
+        <link rel="stylesheet" href="static/lib/fontawesome/all.min.css">
 
+        <link type="preload" href="static/lib/fontawesome/fa-regular-400.woff2">
+        <link type="preload" href="static/lib/fontawesome/fa-solid-900.woff2">
+        <link type="preconnect" href="https://firestore.googleapis.com">
 
-    <link rel="stylesheet" href="static/lib/fontawesome/all.min.css">
-    <link type="preload" href="static/lib/fontawesome/fa-regular-400.woff2">
-    <link type="preload" href="static/lib/fontawesome/fa-solid-900.woff2">
+        <link rel="apple-touch-icon" href="static/icons/apple-icon-180.png">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="theme-color" content="#1b1b1b">
 
-    <link type="preconnect" href="https://firestore.googleapis.com">
+        <link rel="manifest" href="static/manifest.json">
 
-    <link rel="apple-touch-icon" href="static/icons/apple-icon-180.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#1b1b1b">
+        <style>
+            body {
+                background: #000;
+            }
+        </style>
+    </head>
 
-    <style>
-        body {
-            background: #000;
-        }
-    </style>
-</head>
+    <body> 
+        <div id="root"></div>
+        <div class="alert"></div>
 
+        <script>
+            const theme = localStorage.getItem("theme");
 
-<body> 
-    <div id="root"></div>
+            if (theme) {
+                document.documentElement.setAttribute("theme", localStorage.theme)
 
-    <div class="alert"></div>
-
-    <div class="template" hidden>
-        <div id="viewbox" class="viewbox" complete="false">
-            <div class="viewbox-tools">
-                <button class="alt" id="alt-re" onclick="ReBot.open_alt(this.parentNode.parentNode)">Решебник 2</button>
-                <div class="center-section">
-                    <button id="prew" onClick="ReBot.change_num(this.parentNode, -1)"><i class="fas fa-chevron-left fa-lg"></i></button>
-                    <span class="num"></span>
-                    <button id="next" onClick="ReBot.change_num(this.parentNode, 1)"><i class="fas fa-chevron-right fa-lg"></i></button>
-                </div>
-                <button class="close" onClick="ReBot.remove(this.parentNode.parentNode)"><i class="fas fa-times fa-lg"></i></button>
-            </div>
-            <div class="viewbox-content">
-                <img width="100%" id="view" onerror="this.src='./static/img/404.webp'"/>
-                <img width="100%" id="view2" onerror="this.style.display = 'none'"/>
-                <img width="100%" id="view3" onerror="this.style.display = 'none'"/>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const theme = localStorage.getItem("theme");
-
-        if (theme) {
-            document.documentElement.setAttribute("theme", localStorage.theme)
-
-            const meta = document.querySelector('meta[name=theme-color]')
-            meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg2');
-        }
-    </script>
-
-</body>
-
+                const meta = document.querySelector('meta[name=theme-color]')
+                meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg2');
+            }
+        </script>
+    </body>
 </html>

@@ -92,7 +92,7 @@ const Week = () => {
             <div className="week-grid" ref={grid}>
                 { days.length != 0 ? 
                     days : 
-                    <div className="no-timetable-alert content-card">Расписания пока нет</div>
+                    <div className="no-timetable-alert content-card">Тут каникулы)</div>
                 }
             </div>
         </Wraper>

@@ -26,6 +26,7 @@ const AppWraper = () => {
         const id = `${userData.id}`
 
         const database = {
+            userInfo: doc(firestore, "users", id),
             timetable: doc(firestore, "timeTables", "9D"),
             marks: doc(firestore, "users", id, "userStorage", "marks"),
             notes: collection(firestore, "users", id, "notes"),
@@ -46,14 +47,14 @@ const AppWraper = () => {
             loadUser(JSON.parse(userJSON))
         } else {
             setUser("login")
-            //loadUser(JSON.parse("{\"id\":1012312346049249,\"first_name\":\"Даник\",\"username\":\"world1dan\",\"photo_url\":\"https://t.me/i/userpic/320/-wjS6LMe-1tZv-m0sojDlCBc1O5kGM5yQZdJPDAaTCY.jpg\",\"auth_date\":1633207905,\"hash\":\"4d3265e08e8afb12d3bdc45d499ab78d73a10bd6cb1d5408804b77b805e59731\",\"group\":\"1\"}"))
+            //loadUser(JSON.parse("{\"id\":2312346049249,\"first_name\":\"Даник\",\"username\":\"world1dan\",\"photo_url\":\"https://t.me/i/userpic/320/-wjS6LMe-1tZv-m0sojDlCBc1O5kGM5yQZdJPDAaTCY.jpg\",\"auth_date\":1633207905,\"hash\":\"4d3265e08e8afb12d3bdc45d499ab78d73a10bd6cb1d5408804b77b805e59731\",\"group\":\"1\"}"))
         }
     }, [])
 
     
 
     return (
-        user && database ? <App config={{database, user, IS_SAFARI: window.ios, chat: localStorage.chat }}/> : user == "login" &&
+        user && database ? <App config={{database, user, chat: localStorage.chat }}/> : user == "login" &&
 
             <Login setUser={loadUser}/>
     )

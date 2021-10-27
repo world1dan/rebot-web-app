@@ -12,6 +12,8 @@
 		"css.validate": false,
 		"less.validate": false,
 		"scss.validate": false,
-		"stylelint.validate": ["css", "scss"]
+		"stylelint.validate": ["css", "scss"],
+		"livePreview.portNumber": 4200,
+		"liveServer.settings.multiRootWorkspaceName": "rebot-web-app"
 	}
 }
