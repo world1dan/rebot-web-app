@@ -1,6 +1,6 @@
-import React, { forwardRef, useEffect, useRef } from "react"
+import React, { forwardRef, useEffect } from "react"
 import PropTypes from "prop-types"
-
+import useScrollFix from "../../Hooks/useScrollFix.js"
 import "./style.scss"
 import DisableEdgeScroll from "../../Helpers/DisableEdgeScroll"
 
@@ -9,18 +9,13 @@ import DisableEdgeScroll from "../../Helpers/DisableEdgeScroll"
 const VScroll = forwardRef(({ children, handleScrollBack, scrollBackBtn }, ref) => {
     // [returnBtnVisible, setReturnBtnVisible] = useState(returnBtn)
 
-    const scrollRef = useRef()
+    const attach = useScrollFix()
 
-    useEffect(() => {
-        if (window.ios) {
-            DisableEdgeScroll(scrollRef.current)
-        }
-    }, [])
     
 
     return (
         <div className="VScroll__Wraper">
-            <div className="VScroll" ref={ref}>
+            <div className="VScroll" ref={ref} {...attach}>
                 { children }
             </div>
             { scrollBackBtn && 

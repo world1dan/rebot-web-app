@@ -46,8 +46,8 @@ const AppWraper = () => {
         if (userJSON != null && userJSON != "null") {
             loadUser(JSON.parse(userJSON))
         } else {
-            setUser("login")
-            //loadUser(JSON.parse("{\"id\":2312346049249,\"first_name\":\"Даник\",\"username\":\"world1dan\",\"photo_url\":\"https://t.me/i/userpic/320/-wjS6LMe-1tZv-m0sojDlCBc1O5kGM5yQZdJPDAaTCY.jpg\",\"auth_date\":1633207905,\"hash\":\"4d3265e08e8afb12d3bdc45d499ab78d73a10bd6cb1d5408804b77b805e59731\",\"group\":\"1\"}"))
+            //setUser("login")
+            loadUser(JSON.parse("{\"id\":2312346049249,\"first_name\":\"Даник\",\"username\":\"world1dan\",\"photo_url\":\"https://t.me/i/userpic/320/-wjS6LMe-1tZv-m0sojDlCBc1O5kGM5yQZdJPDAaTCY.jpg\",\"auth_date\":1633207905,\"hash\":\"4d3265e08e8afb12d3bdc45d499ab78d73a10bd6cb1d5408804b77b805e59731\",\"group\":\"1\"}"))
         }
     }, [])
 
@@ -72,3 +72,7 @@ root.render(<AppWraper/>)
 if (process.env.NODE_ENV == "production" && navigator.serviceWorker) {
     navigator.serviceWorker.register("./sw.js")
 }
+
+window.addEventListener("error", (e) => {
+    alert(e.error)
+})
