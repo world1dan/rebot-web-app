@@ -20,7 +20,7 @@ const HomeScreen = (props) => {
     const timetable = useContext(TimeTableContext)
 
     let { dayNum, isWeekend } = useWeekDay()
- 
+
 
     useEffect(() => {
         const update = () => {

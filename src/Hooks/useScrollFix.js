@@ -16,9 +16,7 @@ export default function useScrollFix() {
     
         const el = e.currentTarget
 
-        if (diffY > 0 && el.scrollHeight - el.scrollTop <= el.clientHeight) {
-            e.preventDefault()
-        } else if (el.scrollTop == 0) {
+        if ((diffY > 0 && el.scrollHeight - el.scrollTop <= el.clientHeight) || el.scrollTop == 0) {
             e.preventDefault()
         }
 

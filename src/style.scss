@@ -2,6 +2,7 @@
     font-family: ui-rounded, Roboto, Ubuntu, "segoe ui", sans-serif;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
     box-sizing: border-box;
 }
 
@@ -29,6 +30,7 @@ button {
     --backdrop: rgb(0 0 0 / 45.2%);
     --inv: 0.93;
     --borders-soft: rgb(44 44 44 / 10%);
+    --borders: #19191a;
     --primary1: #5d4ae2;
     --red2: #e4372e;
     --NavBtn: #76787a;
@@ -36,6 +38,7 @@ button {
     --primary: #5d4ae2;
     --bottom-save-zone: env(safe-area-inset-bottom);
     --top-save-zone: env(safe-area-inset-top);
+    --hard-shadows: #000;
 }
 
 :root[theme="light"] {
@@ -46,11 +49,13 @@ button {
     --bg2: #ebedf0;
     --bg3: #f2f3f5;
     --bg4: #fff;
+    --borders: #f2f3f5;
     --borders-soft: rgb(227 227 227 / 20%);
     --bg2-TR: hsl(216deg 9% 89% / 80%);
     --NavBtn: #00000073;
     --NavBtnActive: #5d4ae2;
     --red2: #e4372ee0;
+    --hard-shadows: rgb(156, 156, 156);
 }
 
 html,
@@ -60,7 +65,6 @@ body,
     margin: 0;
     height: 100%;
     overflow: hidden;
-    touch-action: none;
 }
 
 .tab {

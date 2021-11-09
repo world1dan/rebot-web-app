@@ -15,7 +15,7 @@ module.exports = (env) => {
         module: {
             rules: [
                 {
-                    test: /\.(js|jsx)$/,
+                    test: /\.[jt]sx?$/,
                     exclude: /node_modules/,
                     loader: "babel-loader"
                 },
@@ -28,7 +28,15 @@ module.exports = (env) => {
             ]
         },
 
-        resolve: { extensions: [".js", ".jsx"] },
+        resolve: { 
+            extensions: [".js", ".jsx"],
+            alias: {
+                Components: path.resolve(__dirname, 'src/Components/'),
+                Activities: path.resolve(__dirname, 'src/Activities/'),
+                Hooks: path.resolve(__dirname, 'src/Hooks/'),
+                Context: path.resolve(__dirname, 'src/Context'),
+            },
+        },
 
         output: {
             filename: "bundle.js",
@@ -43,14 +51,17 @@ module.exports = (env) => {
         },
 
     
-        devtool: false,
+        devtool: 'source-map',
+
+        stats: {
+            children: false,
+        },
+
         devServer: {
             static: {
                 directory: path.resolve(__dirname, "dist"),
             },
-            port: 4200,
-            open: true,
-            hot: true
+            port: 4200
         },
 
 

@@ -38,16 +38,11 @@ const HomeworkRe = (props) => {
 
 
     return (
-        createPortal(
-            <AdaptivePanel handleClose={props.handleClose} direction="split" scrollContainer={scrollContainer}>
-                <div className="scroll-content hw-re" ref={scrollContainer}>
-                    { groups }
-                </div>
-            </AdaptivePanel>,
-
-            document.getElementById("hw-re-container")
-        )
-
+        <AdaptivePanel handleClose={props.handleClose} direction="split" scrollContainer={scrollContainer}>
+            <div className="scroll-content hw-re" ref={scrollContainer}>
+                { groups }
+            </div>
+        </AdaptivePanel>
     )
 
 }

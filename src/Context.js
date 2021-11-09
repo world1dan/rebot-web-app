@@ -1,8 +1,7 @@
 import { createContext } from "react"
 
 import { initializeApp } from "firebase/app"
-import { getFirestore, enableIndexedDbPersistence, disableNetwork } from "firebase/firestore"
-import { getRemoteConfig } from "firebase/remote-config"
+import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore"
 
 
 export const firebaseApp = initializeApp({
@@ -12,16 +11,17 @@ export const firebaseApp = initializeApp({
 })
 
 export const firestore = getFirestore()
+
+//if (process.env.NODE_ENV == "development") {
+    //disableNetwork(firestore)
+    //connectFirestoreEmulator(firestore,  "localhost", 8080)
+//}
+
+
 enableIndexedDbPersistence(firestore, { forceOwnership: true })
 
-export const remoteConfig = getRemoteConfig()
-remoteConfig.settings.minimumFetchIntervalMillis = 2400000
 
-
-export const manifestContext = createContext()
-export const ConfigContext = createContext()
-export const TimeTableContext = createContext()
-
-if (process.env.NODE_ENV == "development") {
-    disableNetwork(firestore)
-}
+export const manifestContext = createContext(null)
+export const ConfigContext = createContext(null)
+export const TimeTableContext = createContext(null)
+export const MarksContext = createContext(null)

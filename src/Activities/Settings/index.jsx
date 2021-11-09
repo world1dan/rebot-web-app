@@ -10,7 +10,6 @@ const Settings = () => {
 
 
     const [inversionState, setInversionState] = useState()
-    const [chatState, setChatState] = useState()
     const [themeState, setThemeState] = useState()
 
 
@@ -19,7 +18,6 @@ const Settings = () => {
         setThemeState(theme)
 
         const inversion = localStorage.inversion == "true" ? true : false
-        const chat = localStorage.chat == "true" ? true : false
 
         if (!inversion) {
             document.documentElement.style.setProperty("--inv", 0)
@@ -28,7 +26,6 @@ const Settings = () => {
         }
 
         setInversionState(inversion)
-        setChatState(chat)
     }, [])
 
 
@@ -56,11 +53,6 @@ const Settings = () => {
         
     }
 
-    const changeChat = (state) => {
-        localStorage.chat = state
-        location.reload()
-    }
-
 
     const logout = () => {
         localStorage.user = null
@@ -70,8 +62,6 @@ const Settings = () => {
 
     return (
         <UI
-            changeChat={changeChat}
-            chat={chatState}
             logout={logout}
             inversion={inversionState}
             theme={themeState}

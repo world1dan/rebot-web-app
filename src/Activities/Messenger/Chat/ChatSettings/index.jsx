@@ -10,6 +10,7 @@ import EditForm from "../../../../Components/Blocks/EditForm"
 import { firestore } from "../../../../Context"
 import { setDoc, doc } from "@firebase/firestore"
 import "./style.scss"
+import Caption from "../../../../Components/Typography/Caption"
 
 
 const ChatSettings = ({ handleClose, chatID, chatInfo }) => {
@@ -29,6 +30,9 @@ const ChatSettings = ({ handleClose, chatID, chatInfo }) => {
         <AdaptivePanel handleClose={() => handleClose(false)}>
             <VerticalLayout>
                 <H1 text="Настройки чата"/>
+                <Caption text="Название чата"/>
+                <EditForm onSave={changeChatTitle} defaultValue={chatInfo?.title}/>
+                <Caption text="Твоё имя"/>
                 <EditForm onSave={changeChatTitle} defaultValue={chatInfo?.title}/>
             </VerticalLayout>
         </AdaptivePanel>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, memo } from "react"
 import { ConfigContext } from "../../Context"
 //import useDocOnce from "../../Hooks/useDocOnce"
 
@@ -24,7 +24,7 @@ const Messenger = () => {
 }
 
 
-export default Messenger
+export default memo(Messenger)
 
 /*
 { activeChat ? 

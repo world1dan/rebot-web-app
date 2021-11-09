@@ -5,6 +5,7 @@ module.exports = {
         "amd": true,
         "node": true
     },
+    "ignorePatterns": ["dist/**"],
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"
@@ -27,10 +28,6 @@ module.exports = {
         "linebreak-style": [
             "error",
             "windows"
-        ],
-        "quotes": [
-            "warn",
-            "double"
         ],
         "semi": [
             "warn",

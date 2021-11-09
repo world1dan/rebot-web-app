@@ -3,8 +3,8 @@
     grid-template-columns: repeat(auto-fit, Minmax(300px, 1fr));
     
     column-gap: 12px;
-
-    row-gap: 6px;
+    margin-top: 12px;
+    row-gap: 12px;
 
     @media (min-width: 972px) {
         grid-template-columns: repeat(auto-fit, Minmax(450px, 1fr));
@@ -12,5 +12,42 @@
         row-gap: 7px;
         padding: 8px 10px;
         padding-top: 12px;
+    }
+}
+
+
+.marks {
+    color: var(--text1);
+}
+
+
+.marks-input-container {
+    max-width: 350px;
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    place-items: center;
+    justify-content: center;
+    align-items: center;
+
+    gap: 11px;
+
+    .new-mark-btn {
+        padding: 10px;
+        background-color: var(--bg4);
+        width: 65px;
+        height: 65px;
+        border-radius: 12px;
+        font-size: 23px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            filter: brightness(1.3);
+        }
     }
 }

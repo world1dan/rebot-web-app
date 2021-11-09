@@ -1,0 +1,10 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,user-scalable=no,viewport-fit=cover"><title>ReBot</title><link rel="preload" href="static/lib/fontawesome/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><link type="preload" href="static/lib/fontawesome/fa-regular-400.woff2"><link type="preload" href="static/lib/fontawesome/fa-solid-900.woff2"><link type="preconnect" href="https://firestore.googleapis.com"><link rel="apple-touch-icon" href="static/icons/apple-icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="theme-color" content="#1b1b1b"><link rel="manifest" href="static/manifest.json"><style>body {
+                background: #000;
+            }</style><script defer="defer" src="bundle.js"></script><link href="style.css" rel="stylesheet"></head><body><div id="root"></div><div class="alert"></div><script>const theme = localStorage.getItem("theme");
+
+            if (theme) {
+                document.documentElement.setAttribute("theme", localStorage.theme)
+
+                const meta = document.querySelector('meta[name=theme-color]')
+                meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg2');
+            }</script></body></html>

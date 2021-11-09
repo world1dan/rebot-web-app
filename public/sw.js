@@ -1,7 +1,4 @@
-const CACHE = "4"
-
-
-const CacheUtilSWUpdate = [
+const appFiles = [
     "style.css",
     "bundle.js",
     "/",
@@ -23,36 +20,18 @@ const CacheUtilSWUpdate = [
 ]
 
 
-const CacheUtilSoftUpdate = [
-    "style.css",
-    "bundle.js",
-    "/",
-]
-
-
 self.addEventListener("install", function(event) {
     event.waitUntil(
-        caches.keys().then((keys) => {
-            if (!keys.includes(CACHE)) {
-                caches.open(CACHE).then((cache) => {
-                    return cache.addAll(CacheUtilSWUpdate)
-                })
-            }
-            keys.map((key) => {
-                if (key != CACHE) {
-                    caches.delete(key)
-                }
-            })
-        })
+        runUpdater()
     )
 })
-
 
 
 async function cacheFirst(request) {
     const responce = await caches.match(request)
     return responce ?? fetch(request)
 }
+
 
 self.addEventListener("fetch", (event) => {
     const request = event.request
@@ -66,11 +45,22 @@ self.addEventListener("fetch", (event) => {
 
 
 
+self.addEventListener("message", async (e) => {
+    const type = e.data.type
+
+    console.info("SW: Recieved message: " + type)
+
+    if (type === "run-updater") {
+        runUpdater()
+    }
+})
 
 
 const sendMessage = async (message) => {
-    const clients = await self.clients.matchAll()
-    
+    const clients = await self.clients.matchAll({
+        includeUncontrolled: true
+    })
+
     if (clients?.[0]) {
         clients[0].postMessage(message)
     }
@@ -78,20 +68,55 @@ const sendMessage = async (message) => {
     console.info("SW: Sended message: " + message.type)
 }
 
-async function softUpdate() {
-    caches.open(CACHE).then((cache) => {
-        return cache.addAll(CacheUtilSoftUpdate).then(() => {
-            sendMessage({ type: "soft-update-complete"})
+
+
+const needUpdate = async () => {
+
+    const headers = new Headers()
+    headers.append("pragma", "no-cache")
+    headers.append("cache-control", "no-cache")
+
+    const responce = await fetch("updates.json", {
+        method: "GET",
+        headers,
+    })
+
+    const manifest = await responce.json()
+
+    const cachesKeys = await caches.keys()
+    const hasUpdate = !cachesKeys.includes(manifest.version)
+
+    return hasUpdate ? manifest.version : false
+}
+
+
+const updateCache = async (targetVersion) => {
+
+    const cachesKeys = await caches.keys()
+
+    cachesKeys.forEach((key) => {
+        if (key != targetVersion) {
+            caches.delete(key)
+        }
+    })
+
+    caches.open(targetVersion).then((cache) => {
+        return cache.addAll(appFiles).then(() => {
+            console.info(`SW: Updated to ${ targetVersion }`)
         })
     })
 }
 
-self.addEventListener("message", (e) => {
-    const type = e.data.type
 
-    console.info("SW: Recieved message: " + type)
+const runUpdater = async () => {
+    const update = await needUpdate()
+    
+    console.info(`SW: ${ update ? `Update found: ${ update }` : 'no update found'}`)
 
-    if (type === "do-soft-update") {
-        softUpdate()
+    if (update) {
+        await updateCache(update)
+        sendMessage({ type: "update-complete"})
+    } else {
+        sendMessage({ type: "no-update-found"})
     }
-})
+}

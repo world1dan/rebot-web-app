@@ -22,10 +22,10 @@ function getSplitAnimation(to) {
 }
 
 
-function AdaptivePanel(props) {
+const AdaptivePanel = (props) => {
 
-    const panel = useRef()
-    const backdrop = useRef()
+    const panel = useRef(null)
+    const backdrop = useRef(null)
 
     const canSplit = useMediaQuery({ query: "(min-width: 700px) and (orientation: landscape)" }) && props.direction == "split"
     const startTransition = useTransition(panel)
@@ -66,11 +66,20 @@ function AdaptivePanel(props) {
 
     const closePanel = () => {
 
-        startTransition(
-            { transform: "translateY(100vh) " + (splitSide == "left" ? "translateX(-50%)" : "" || splitSide == "right" ? "translateX(50%)" : "")},
-            { duration: 220, easing: "ease-in" },
-            props.handleClose
-        )
+        if (!props.direction || props.direction === "bottom" || props.direction === "split") {
+            startTransition(
+                { transform: "translateY(100vh) " + (splitSide == "left" ? "translateX(-50%)" : "" || splitSide == "right" ? "translateX(50%)" : "")},
+                { duration: 220, easing: "ease-in" },
+                props.handleClose
+            )
+        } else {
+            startTransition(
+                { transform: "translateX(100%)" },
+                { duration: 220, easing: "ease-in" },
+                props.handleClose
+            )
+        }
+
 
         backdrop.current.animate([
             { opacity: 1 },
@@ -102,7 +111,7 @@ function AdaptivePanel(props) {
             getSplitAnimation(to),
             { duration: 300, easing: "ease-out" }
         )
-        
+
         const topContainer = document.getElementById("hw-re-container")
 
         if (topContainer.childElementCount <= 2) {
@@ -121,7 +130,7 @@ function AdaptivePanel(props) {
                 ref={panel}
                 onTouchStart={startTouch}
                 onTouchMove={moveTouch}
-                className="adaptive-panel"> 
+                className={"adaptive-panel" + (props.direction == "right" ? " fullscreen-right" : " bottom")}>
 
                 <header style={{ background: canSplit ? "" : "none"}}>
                     { canSplit && splitSide != "left" && <button className="split-left" onClick={() => split("left")}>

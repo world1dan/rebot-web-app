@@ -115,7 +115,7 @@ const Now = ({ day_data, pathToDay }) => {
 
 Now.propTypes = {
     day_data: PropTypes.object.isRequired,
-    pathToDay: PropTypes.object.isRequired
+    pathToDay: PropTypes.string.isRequired
 }
 
 

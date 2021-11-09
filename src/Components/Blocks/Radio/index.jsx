@@ -20,16 +20,12 @@ const Radio = ({ children, variants, defaultState, onChange }) => {
         onChange(id)
     }
 
-
-    const buttons = []
-    
-
-    variants.forEach((variant) => {
-        buttons.push(
+    const buttons = variants.map((variant) => {
+        return (
             <RadioItem key={variant.id} selected={variant.id == selectedID} title={variant.title} onSelect={() => select(variant.id)}/>
         )
     })
-
+    
 
     return (
         <div className="_Radio">

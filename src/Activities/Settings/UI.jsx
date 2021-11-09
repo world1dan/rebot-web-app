@@ -11,7 +11,7 @@ import VerticalLayout from "../../Components/Layouts/VerticalLayout"
 import Button from "../../Components/Blocks/Button"
 import Updater from "./Updater"
 
-const UI = ({ inversion, changeInversion, theme, changeTheme, logout, chat, changeChat }) => {
+const UI = ({ inversion, changeInversion, theme, changeTheme, logout }) => {
 
 
     return (
@@ -32,14 +32,6 @@ const UI = ({ inversion, changeInversion, theme, changeTheme, logout, chat, chan
                 icon={<i className="fas fa-moon"></i>}
                 onChange={(e) => changeInversion(e.target.checked)}
                 checked={inversion}
-            />
-
-            <Switch
-                title="Чат (бета)"
-                descr="Может сломать приложение :)"
-                icon={<i className="fas fa-moon"></i>}
-                onChange={(e) => changeChat(e.target.checked)}
-                checked={chat}
             />
 
             <Button text="Выйти из аккаунта" onClick={logout}/>

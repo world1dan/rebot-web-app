@@ -1,0 +1,54 @@
+.ActionSheet {
+    will-change: transform;
+    background-color: var(--bg3);
+    position: fixed;
+    bottom: calc(8px + var(--bottom-save-zone));
+    left: 12px;
+    right: 12px;
+    border-radius: 18px;
+
+    min-height: 380px;
+
+    z-index: 999;
+    max-width: 500px;
+    margin: 12px auto;
+    animation: ActionSheet-openning 360ms cubic-bezier(.36, .66, .04, 1) forwards;
+    box-shadow: 0px 19px 38px 13px var(--hard-shadows);
+}
+
+@keyframes ActionSheet-openning {
+    from {
+        transform: translateY(calc(100% + var(--bottom-save-zone) + 30px));
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes ActionSheet-closing {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(calc(100% + var(--bottom-save-zone) + 30px));
+    }
+}
+
+.ActionSheet.closing {
+    animation: ActionSheet-closing 250ms ease-in-out forwards;
+}
+
+.ActionSheetCloseBtn {
+    height: 56px;
+    background: var(--bg4);
+    margin: 12px;
+    border-radius: 9px;
+    color: var(--text1);
+
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}

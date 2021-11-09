@@ -1,47 +1,26 @@
-import React, { useContext, memo } from "react"
+import React, { memo, useContext } from "react"
 
-import { ConfigContext, manifestContext } from "../../Context"
-import Row from "./Row"
-
-import useFirestoreListener from "../../Hooks/useFirestoreListener"
+import MarksView from "./MarksView"
 import Wraper from "../../Components/Wraper"
-
 import "./style.scss"
+import H1 from "Components/Typography/H1"
+import { MarksContext } from "../../Context"
 
 
 
 const Marks = () => {
-    const database = useContext(ConfigContext).database
-    const manifest = useContext(manifestContext)
 
-    let marks = useFirestoreListener(database.marks)
-    
-    if (marks) {
-        marks = Object.fromEntries(Object.entries(marks).sort())
-    }
+    const marks = useContext(MarksContext)
 
-    const rows = []
-
-    for (let subjID in manifest) {
-        const subject = manifest[subjID]
-        subject.id = subjID
-
-        if (subject.marks) {
-            rows.push(<Row key={subjID} subject={subject} marksDefault={marks && marks[subjID] ? marks[subjID] : ""}/>)
-        }
-    }
 
     return (
-        <Wraper>
-            <div className="content-card">
-                <header className="day-header">
-                    <div className="day-title">Оценки</div>
-                </header>
-                <div className="marks-grid">
-                    { rows }
-                </div>
-                <div className="info" style={{marginTop: 10}}>Нужно разделять запятой, справа - средний балл</div>
+        <Wraper styles={{ paddingLeft: 0, paddingRight: 0 }}>
+
+            <div className="marks">
+                <H1 text="Оценки"/>
+                <MarksView marks={marks ?? {}}/>
             </div>
+
         </Wraper>
     )
 }
@@ -49,3 +28,32 @@ const Marks = () => {
 
 
 export default memo(Marks)
+
+
+
+/*
+{ calculator && 
+                    <AdaptivePanel handleClose={() => setCalculator(false)} direction="right">
+                        <MarksCalculator marks="10, 9, 7, 4, 10" subject={{}}/>
+                    </AdaptivePanel>}
+<Radio 
+                    variants={[
+                        {
+                            id: 1,
+                            title: "1"
+                        },
+                        {
+                            id: 2,
+                            title: "2"
+                        },
+                        {
+                            id: 3,
+                            title: "3"
+                        },
+                        {
+                            id: 4,
+                            title: "4"
+                        }]}
+                    defaultState={1}
+                />
+                */

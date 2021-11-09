@@ -1,11 +1,14 @@
 {
   "files.exclude": {
-    ".vscode": true,
     "node_modules": true,
     "ui-debug.log": true,
     "firestore-debug.log": true,
     "database-debug.log": true,
     "yarn.lock": true,
     "firebase-debug.log": true
+  },
+  "search.exclude": {
+    "dist": true,
+    "**/node_modules": true
   }
 }

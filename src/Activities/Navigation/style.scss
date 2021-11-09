@@ -3,9 +3,9 @@
         .NavButton {
             justify-content: center;
             flex-direction: row;
-            font-size: 15px;
-            gap: 11px;
-            vertical-align: middle;
+            font-size: 14px;
+            gap: 10px;
+
 
             span {
                 display: inline-block;
@@ -15,17 +15,17 @@
 }
 
 .bottom-nav {
-    height: 46px;
+    height: 48px;
     box-sizing: content-box;
     left: 0;
     right: 0;
+    z-index: 99;
     position: fixed;
     touch-action: none;
     background-color: var(--bg2);
     bottom: 0;
     padding-bottom: var(--bottom-save-zone);
     border-top: 1px solid var(--borders);
-    z-index: 3;
     display: flex;
     align-items: center;
     padding-right: env(safe-area-inset-right);
@@ -52,7 +52,7 @@
             }
 
             40% {
-                transform: scale(0.94);
+                transform: scale(0.96);
             }
 
             100% {
@@ -65,5 +65,51 @@
             animation: navBtn 0.25s;
             transition: color 0.25s;
         }
+    }
+}
+
+
+
+@keyframes Navigation-StatusBar-in {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+
+
+.Navigation-StatusBar {
+    animation: Navigation-StatusBar-in 0.5s cubic-bezier(0.38, 0.7, 0.125, 1);
+
+    height: 38px;
+    padding-bottom: 2px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    position: fixed;
+    touch-action: none;
+    background-color: var(--bg2);
+    bottom: calc(48px + var(--bottom-save-zone));
+    border-top: 1px solid var(--borders);
+    display: grid;
+    align-items: center;
+    color: var(--text1);
+    grid-template-columns: 42px 1fr;
+    padding-right: env(safe-area-inset-right);
+    padding-left: env(safe-area-inset-left);
+
+    .sucsess {
+        text-align: center;
+        font-size: 14px;
+        color: #30af54ea;
+    }
+    
+    .title {
+        font-weight: 600;
+        font-size: 14px;
+
     }
 }
