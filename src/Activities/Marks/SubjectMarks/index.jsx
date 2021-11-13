@@ -59,7 +59,7 @@ const SubjectMarks = ({ subject, marks, embedded }) => {
                 { !embedded && <div className="color-indicator" style={{ backgroundColor: subject.color, boxShadow: "0px 0px 4px " + subject.color }}></div> }
 
                 <div className="main-content">
-                    { !embedded && <h5 className="subject-title">{ subject.title }</h5> }
+                    { !embedded && <h5 className="subject-title">{ subject.full_title || subject.title }</h5> }
                     <div className="marks-container">
                         { marksComponents }
 
@@ -69,7 +69,12 @@ const SubjectMarks = ({ subject, marks, embedded }) => {
                     </div>
                 </div>
 
-                { marks && average && <div className="average-mark">{average}</div> }
+                { marks && average && 
+                    <div className="average-mark" onClick={() => setCalculator(true)}>
+                        {average}
+                    </div>
+                }
+                
             </div>
 
             { addDialog &&
@@ -79,8 +84,8 @@ const SubjectMarks = ({ subject, marks, embedded }) => {
             }
 
             { calculator && 
-                <AdaptivePanel handleClose={() => setCalculator(false)} direction="right">
-                    <MarksCalculator marks="10, 9, 7, 4, 10" subject={{}}/>
+                <AdaptivePanel handleClose={() => setCalculator(false)} direction="right" headerTitle="Калькулятор">
+                    <MarksCalculator realMarks={marks}/>
                 </AdaptivePanel>
             }
         </>

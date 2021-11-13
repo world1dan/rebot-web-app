@@ -1,7 +1,7 @@
 import { createContext } from "react"
 
 import { initializeApp } from "firebase/app"
-import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore"
+import { getFirestore, enableIndexedDbPersistence, disableNetwork } from "firebase/firestore"
 
 
 export const firebaseApp = initializeApp({
@@ -13,13 +13,13 @@ export const firebaseApp = initializeApp({
 export const firestore = getFirestore()
 
 //if (process.env.NODE_ENV == "development") {
-    //disableNetwork(firestore)
+
     //connectFirestoreEmulator(firestore,  "localhost", 8080)
 //}
 
 
 enableIndexedDbPersistence(firestore, { forceOwnership: true })
-
+disableNetwork(firestore)
 
 export const manifestContext = createContext(null)
 export const ConfigContext = createContext(null)

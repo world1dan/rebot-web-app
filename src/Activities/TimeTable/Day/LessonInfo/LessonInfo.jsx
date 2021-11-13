@@ -3,9 +3,9 @@ import PropTypes from "prop-types"
 
 import AdaptivePanel from "../../../../Components/AdaptivePanel"
 import H1 from "../../../../Components/Typography/H1"
-import HSplitter from "../../../../Components/Typography/HSplitter"
+import Switch from "Components/Blocks/Switch"
 import VerticalLayout from "../../../../Components/Layouts/VerticalLayout"
-import TableList from "../../../../Components/Typography/TableList"
+
 import SubjectMarks from "Activities/Marks/SubjectMarks"
 import "./style.scss"
 import { MarksContext } from "../../../../Context"
@@ -14,6 +14,15 @@ import { MarksContext } from "../../../../Context"
 
 const LessonInfo = (props) => {
     const marks = useContext(MarksContext)?.[props.lesson.id] ?? []
+
+    const handleDangerChange = (e) => {
+
+        props.update({
+            [props.path + ".danger"]: e.target.checked
+        })
+    }
+
+    
 
 
     return (
@@ -34,6 +43,8 @@ const LessonInfo = (props) => {
                         <SubjectMarks marks={marks} subject={props.subject} embedded/>
                     </div>
                 </div>
+
+                <Switch checked={ props.lesson.danger } onChange={handleDangerChange} title="Здесь что-то страшное" icon={ <i className="fas fa-skull-crossbones"></i> } descr="Отметить, что на этом уроке к/р или что-то еще"></Switch>
 
             </VerticalLayout>
         </AdaptivePanel>

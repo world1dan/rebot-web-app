@@ -1,53 +1,103 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 
 import "./style.scss"
-
-
+import MarksInput from "../MarksInput"
+import Mark from "../SubjectMarks/Mark"
+import VerticalLayout from "Components/Layouts/VerticalLayout"
+import VScroll from "Components/VScroll"
 const MarksCalculator = (props) => {
 
+    const [addedMarks, setAddedMarks] = useState([])
 
 
-    const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    const [marks, setMarks] = useState(props.realMarks)
+    
 
 
-    const newMarkBtns = nums.map((mark) => {
+    const removeMark = (mark) => {
+
+        setAddedMarks((prew) => {
+
+            const updated = prew.filter((m) => {
+                return m.time !== mark.time
+            })
+
+            return updated
+        })
+    }
+
+
+    const removeLast = () => {
+        setAddedMarks((prew) => {
+            return prew.slice(0, -1)
+        })
+    }
+
+    const handleMarkInput = (mark) => {
+        setAddedMarks((prew) => [...prew, {
+            mark: parseInt(mark),
+            time: Date.now()
+        }])
+    }
+
+
+
+    let sum = 0
+
+
+    const marksComponents = marks.map((mark) => {
+        sum += mark.mark
+
         return (
-            <button className="new-mark-btn" key={mark}>{ mark }</button>
+            <Mark mark={mark} key={mark.time} removeMark={removeMark}/>
+        )
+    })
+
+    const addedMarksComponents = addedMarks.map((mark) => {
+        sum += mark.mark
+
+        return (
+            <Mark mark={mark} key={mark.time} removeMark={removeMark}/>
         )
     })
 
 
+    let average = sum / (marks.length + addedMarks.length)
+
+    if (!isNaN(average) && average <= 10) {
+        average = Number(average.toFixed(2))
+    } else {
+        average = null
+    }
+
+
+
+
+
+
     return (
-        <div className="MarksCalculator">
-            <h1 className="average-mark">2</h1>
-            <div className="marks-display">
-                <div className="info">Оценки, которые уже есть</div>
+        <VScroll>
+            <div className="MarksCalculator">
+                <VerticalLayout>
+                    <h1 className="average-mark">{ average }</h1>
+                    <div className="marks-display">
+                        <div className="info">Оценки, которые уже есть</div>
 
-                <div className="marks-container">
-                    <div className="mark">1</div>
-                    <div className="mark">10</div>
-                    <div className="mark">9</div>
-                    <div className="mark">3</div>
-                    <div className="mark">6</div>
-                </div>
+                        <div className="marks-container">
+                            { marksComponents }
+                        </div>
 
-                <div className="info">Добавленные оценки</div>
+                        <div className="info">Добавленные оценки</div>
 
-                <div className="marks-container added">
-                    <div className="mark">1</div>
-                    <div className="mark">10</div>
-                    <div className="mark">9</div>
-                </div>
-
-                <div className="mark">
-
-                </div>
+                        <div className="marks-container">
+                            { addedMarksComponents }
+                        </div>
+                    </div>
+                    <MarksInput handleMarkInput={handleMarkInput} onRemove={removeLast}/>
+                </VerticalLayout>
             </div>
-            <div className="marks-input-container">
-                { newMarkBtns }
-            </div>
-        </div>
+        </VScroll>
     )
 }
 

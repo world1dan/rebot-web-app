@@ -5,7 +5,7 @@ module.exports = {
         "amd": true,
         "node": true
     },
-    "ignorePatterns": ["dist/**"],
+    "ignorePatterns": ["dist/**", "**/jsconfig.json"],
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended"

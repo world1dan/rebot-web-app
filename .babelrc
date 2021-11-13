@@ -4,5 +4,8 @@
           "runtime": "automatic"
         }]
     ],
-    "comments": false
+    "comments": false,
+    "plugins": [
+      "babel-plugin-transform-react-remove-prop-types"
+    ]
 }

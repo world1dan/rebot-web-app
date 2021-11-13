@@ -1,22 +1,15 @@
 .MarksCalculator {
-    position: relative;
-
-    height: 100%;
-
-
-    align-items: center;
-    justify-content: center;
-    padding: 12px;
+    padding-bottom: 80px;
     .average-mark {
-        margin: 24px;
-        font-size: 55px;
+        margin: 30px;
+        font-size: 44px;
         text-align: center;
     }
 
     @media (min-height: 800px) {
         .average-mark {
             margin: 40px;
-            font-size: 60px;
+            font-size: 50px;
             text-align: center;
         }
     }
@@ -27,7 +20,11 @@
     
 
     .info {
-        margin-bottom: 8px;
+        margin-bottom: 14px;
+        color: var(--text2);
+        font-size: 14px;
+        font-weight: 600px;
+        text-align: center;
     }
 
 
@@ -37,33 +34,15 @@
 
     .marks-container {
         margin-bottom: 20px;
-
+        min-height: 35px;
 
         display: flex;
         flex-wrap: wrap;
         gap: 9px;
-        justify-content: center;
+        padding-left: 20px;
         align-items: center;
 
 
-
-
-        &.added {
-            .mark {
-                background-color: var(--primary);
-            }
-        }
-        .mark {
-            background-color: var(--bg4);
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 14px;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-        }
     }
 
 

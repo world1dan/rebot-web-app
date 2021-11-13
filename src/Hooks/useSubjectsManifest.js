@@ -14,7 +14,7 @@ export default function useSubjectsManifest() {
 
         const url = 'https://rebot-f643e-default-rtdb.europe-west1.firebasedatabase.app/subjects-manifest.json'
 
-        fetch(url).then(async(resp) => {
+        fetch("").then(async(resp) => {
             const data = await resp.json()
 
             if (!data?.error) {

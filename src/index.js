@@ -13,10 +13,7 @@ const isSafari = /iPad|iPhone/.test(navigator.platform) || (navigator.platform =
 globalThis.ios = isSafari
 
 
-
-
-
-const AppWraper = () => {
+function AppWraper() {
     const [user, setUser] = useState(null)
     const [database, setDatabase] = useState(null)
 

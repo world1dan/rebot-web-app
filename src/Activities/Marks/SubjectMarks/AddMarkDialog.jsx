@@ -43,7 +43,7 @@ const AddMarkDialog = (props) => {
         <div className="AddMarkDialog">
             <header className="mark-info">
                 <h5 className="title">Нажми на оценку чтобы добавить</h5>
-                <div className="subject">{ props.subjectInfo?.title }</div>
+                <div className="subject">{ props.subjectInfo?.full_title || props.subjectInfo?.title }</div>
             </header>
             <MarksInput handleMarkInput={ handleMarkInput }/>
         </div>

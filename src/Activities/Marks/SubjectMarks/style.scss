@@ -1,9 +1,16 @@
 .SubjectMarks {
-    min-height: 96px;
+    min-height: 88px;
+
+    @media (min-width: 500px) {
+        min-height: 98px;
+        grid-template-columns: 8px 1fr 82px;
+        border-radius: 3px 9px 9px 3px;
+        overflow: hidden;
+    }
 
     display: grid;
 
-    grid-template-columns: 6px 1fr 62px;
+    grid-template-columns: 7px 1fr 70px;
     background: var(--bg2);
 
 
@@ -22,14 +29,14 @@
 
         display: flex;
         flex-direction: column;
-        padding: 11px;
-        padding-left: 14px;
-        gap: 13px;
+        padding: 9px;
+        padding-left: 11px;
+        gap: 12px;
 
         .subject-title {
             margin: 0;
-            font-size: 19px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
 
             text-indent: 6px;
         }
@@ -37,42 +44,75 @@
         .marks-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+
+            gap: 6px;
+        }
+
+
+        @media (min-width: 500px) {
+            padding: 12px;
             
+
+            .subject-title {
+                font-size: 20px;
+            }
+
+            .marks-container {
+                gap: 8px;
+            }
         }
     }
 
     .average-mark {
-        font-size: 28px;
+        background: var(--bg3);
+        font-size: 19px;
         font-weight: bold;
         display: flex;
-        justify-content: left;
-        align-items: center
-        
-    }
-
-
-
-    .Mark {
-        height: 35px;
-        width: 35px;
-        border-radius: 18px;
-        background-color: var(--bg3);
-        display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
 
-        font-size: 16px;
-        font-weight: bold;
+        margin: 11px;
+        margin-right: 0;
+        margin-left: 0;
+        border-radius: 7px 0 0 7px;
+        
+        @media (min-width: 500px) {
+            font-size: 22px;
+            margin-right: 11px;
+            border-radius: 7px;
+        }
     }
+
 }
 
 
 
+.Mark {
+    height: 35px;
+    width: 35px;
+
+    @media (min-width: 500px) {
+        height: 37px;
+        width: 37px;
+        font-size: 16px;
+    }
+
+    border-radius: 18px;
+    background-color: var(--bg3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
 
 .AddMarkDialog {
     color: var(--text1);
-
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     padding: 14px;
 
     .mark-info {
@@ -88,7 +128,7 @@
 
         .subject {
             color: var(--text2);
-            font-size: 13px;
+            font-size: 14px;
             margin: 7px;
         }
         

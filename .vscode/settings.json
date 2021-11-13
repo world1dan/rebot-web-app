@@ -5,7 +5,8 @@
     "firestore-debug.log": true,
     "database-debug.log": true,
     "yarn.lock": true,
-    "firebase-debug.log": true
+    "firebase-debug.log": true,
+    "jsconfig.json": true
   },
   "search.exclude": {
     "dist": true,

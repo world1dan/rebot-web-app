@@ -14,7 +14,6 @@
     "react": "^18.0.0-alpha-f2c381131-20211004",
     "react-dom": "^18.0.0-alpha-f2c381131-20211004",
     "react-responsive": "^9.0.0-beta.4",
-    "react-stay-scrolled": "^7.3.1",
     "react-telegram-auth": "^1.0.3",
     "react-textarea-autosize": "^8.3.3",
     "react-transition-group": "^4.4.2"
@@ -23,7 +22,6 @@
     "@babel/core": "^7.15.5",
     "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
-    "babel-plugin-object-to-json-parse": "^0.2.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^9.0.1",

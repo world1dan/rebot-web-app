@@ -1,8 +1,27 @@
+
+.SubjectRow-danger-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+
+    padding: 6px;
+    border-radius: 7px 7px 0 0;
+    
+
+}
+
+
 .flexRow {
     display: flex;
     gap: 5px;
     font-size: 13px;
     font-weight: bold;
+
+    &.SubjectRow-danger {
+        .rowBlock {
+            border-radius: 0 0 5px 5px;
+        }
+    }
 
 
     .rowBlock {
@@ -14,7 +33,6 @@
         line-height: 38px;
     }
 
-
     .medium {
         width: 90px;
         flex-shrink: 0;
@@ -23,7 +41,27 @@
             color: #fff;
         }
     }
+    @keyframes prank {
+        0% {
+            transform: rotate(0) scale(0.5);
+        }
+        50% {
+            transform: rotate(360deg) scale(1.6);
+        }
+        100% {
+            transform: rotate(0) scale(0.5);
+        }
+    }
+    .prank {
+        span {
+            display: inline-block;
+            animation: prank 1s infinite;
+        }
 
+        font-size: 60px;
+        overflow: hidden;
+        
+    }
     .mainField {
 
         input:focus {

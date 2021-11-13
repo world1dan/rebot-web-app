@@ -1,15 +1,17 @@
 .marks-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, Minmax(300px, 1fr));
-    
-    column-gap: 12px;
-    margin-top: 12px;
-    row-gap: 12px;
+    row-gap: 10px;
+    grid-auto-flow: row;
 
-    @media (min-width: 972px) {
-        grid-template-columns: repeat(auto-fit, Minmax(450px, 1fr));
-        column-gap: 14px;
-        row-gap: 7px;
+    
+    @media (min-width: 750px) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(8, auto);
+        grid-auto-flow: column;
+
+        row-gap: 12px;
+        column-gap: 12px;
+
         padding: 8px 10px;
         padding-top: 12px;
     }
@@ -17,7 +19,10 @@
 
 
 .marks {
+    width: 100%;
     color: var(--text1);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 
@@ -25,7 +30,6 @@
     max-width: 350px;
     padding: 10px;
     margin: 0 auto;
-    margin-top: 30px;
     display: flex;
     flex-wrap: wrap;
     place-items: center;
@@ -45,9 +49,5 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
-        &:hover {
-            filter: brightness(1.3);
-        }
     }
 }

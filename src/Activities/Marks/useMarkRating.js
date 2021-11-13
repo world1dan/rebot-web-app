@@ -10,9 +10,9 @@ const useMarkRating = (mark) => {
     useEffect(() => {
         if (markRatingPattern === "2") {
 
-            if (mark >= 8) {
+            if (mark >= 7) {
                 setMarkStyle({ color: "#34C759" })
-            } else if (mark >= 6) {
+            } else if (mark >= 5) {
                 setMarkStyle({ color: "#FFCC00" })
             } else if (mark >= 1) {
                 setMarkStyle({ color: "#FF3B30" })
