@@ -2,53 +2,60 @@
     #add-note {
         background-color: var(--bg3);
         position: absolute;
-        right: 16px;
-        top: 22px;
-        padding: 8px;
-        border-radius: 7px;
+        right: 12px;
+        top: 14px;
+        padding: 7px;
+        border-radius: 50%;
         display: grid;
         place-items: center;
+    }
+    .day-header {
+        margin-bottom: 10px;
     }
 }
 
 .note {
     position: relative;
-    min-height: 42px;
+
     background-color: var(--bg3);
     box-shadow: 0 0 0 1px var(--borders-soft) inset;
     border-radius: 5px;
-    cursor: pointer;
-    padding-right: 40px;
+    padding-right: 32px;
 
     textarea {
         padding: 8px;
         padding-left: 10px;
-        background: none;
         width: 100%;
-        outline: none;
-        border: none;
         margin-top: 5px;
-        height: 100%;
-        min-height: 36px;
-        color: var(--text);
+        color: var(--text1);
         resize: none;
         font-size: 17px;
-        user-select: all;
-        -webkit-user-select: auto;
     }
 
     &.pinned {
         background-color: var(--red2);
-        transition: background 0.5s;
+        transition: background 0.3s;
 
         textarea {
-            font-weight: bold;
+            font-weight: 600;
+        }
+
+        ::placeholder {
+            color: #fff;
+        }
+
+        * {
+            color: #fff !important;
         }
     }
 
     .context-menu {
-        position: absolute !important;
+        position: absolute;
         top: 3px;
         right: 0;
+    }
+
+    &:last-of-type {
+        border-radius: 5px 5px 9px 9px;
     }
 }

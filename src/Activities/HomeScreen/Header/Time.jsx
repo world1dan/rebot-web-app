@@ -16,6 +16,7 @@ const Time = () => {
 
     useEffect(() => {
         const update = () => {
+            // @ts-ignore
             const string = new Date().toLocaleString("ru", options)
 
             setDate(string)

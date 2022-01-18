@@ -1,0 +1,55 @@
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    display: grid;
+    min-height: 180px;
+    padding: 10px;
+    background-color: var(--bg2);
+    animation: modal-in 0.5s cubic-bezier(0.38, 0.7, 0.125, 1) forwards;
+    touch-action: none;
+    will-change: transform;
+    row-gap: 10px;
+
+    @media (min-width: 670px) {
+        max-width: 670px;
+        margin: 0 auto;
+        border-radius: 0 0 12px 12px;
+    }
+}
+
+@keyframes modal-in {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+.inputField {
+    margin: 0;
+    padding: 0;
+    padding: 10px;
+    font-size: 18px;
+    background-color: var(--bg4);
+    border-radius: 7px;
+    resize: none;
+    user-select: auto;
+    caret-color: transparent;
+}
+
+.actionButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 7px;
+    align-items: center;
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        font-size: 13px;
+        background: var(--bg4);
+        border-radius: 7px;
+    }
+}

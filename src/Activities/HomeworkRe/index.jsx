@@ -1,10 +1,12 @@
 import React, { useRef, useContext } from "react"
-import { createPortal } from "react-dom"
 import PropTypes from "prop-types"
+
+import { manifestContext } from "../../Context"
+
 import AdaptivePanel from "../../Components/AdaptivePanel"
 import Group from "./Group"
+
 import "./style.scss"
-import { manifestContext } from "../../Context"
 
 
 
@@ -23,13 +25,12 @@ const HomeworkRe = (props) => {
         const subjectInfo = manifest[lesson.id]
 
         if (!subjectInfo.url) continue
-        
-        const homework = lesson.hw
+    
 
-        const toOpen = homework.replace(/ *\([^)]*\) */g, "").split(",").map((num) => {
-            num = num.replace(/\D/g, "")
-            return parseInt(num)
+        const toOpen = lesson.hw.replace(/ *\([^)]*\) */g, "").split(",").map((num) => {
+            return parseInt(num.replace(/\D/g, ""))
         })
+
 
         groups.push(
             <Group key={lesson.id} subjectInfo={subjectInfo} toOpen={toOpen} hwRaw={lesson.hw}></Group>
@@ -47,8 +48,11 @@ const HomeworkRe = (props) => {
 
 }
 
+
+
 HomeworkRe.propTypes = {
-    handleClose: PropTypes.func.isRequired
+    handleClose: PropTypes.func.isRequired,
+    lessonsData: PropTypes.array.isRequired
 }
 
 export default HomeworkRe

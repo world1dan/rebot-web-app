@@ -1,57 +1,57 @@
 .homescreen-header {
+    color: var(--text1);
     background-color: var(--bg2);
-    border-radius: 0 0 10px 10px;
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    height: calc(var(--top-save-zone) + 56px);
+    height: calc(var(--top-save-zone) + 52px);
     max-width: 1024px;
-    margin: 0 auto;
-    display: flex;
-    gap: 5px;
-    padding: 6px;
-    padding-top: max(var(--top-save-zone), 6px);
-    z-index: 5;
+    border-bottom: 1px solid var(--borders);
 
-    @media (max-width: 360px) {
-        border-radius: 0;
+    @media (min-width: 1024px) {
+        border-radius: 0 0 12px 12px;
     }
 
+    margin: 0 auto;
+    display: flex;
+    gap: 6px;
+
+    padding: 6px;
+    padding-top: max(var(--top-save-zone), 6px);
+    padding-left: max(env(safe-area-inset-left), 6px);
+    padding-right: max(env(safe-area-inset-right), 6px);
+
+    z-index: 5;
+
     button {
-        min-width: 52px;
+        min-width: 50px;
         height: 100% !important;
-        background-color: var(--bg3);
-        border-radius: 9px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        padding: 0;
+    }
+
+    i {
+        font-size: 21px;
     }
 
     .time {
-        background-color: var(--bg3);
-        border-radius: 9px;
         flex-grow: 1;
-        color: var(--text1);
         display: flex;
         align-items: center;
-        font-size: 16px;
-        font-weight: bold;
-        padding-left: 14px;
+        font-size: 17px;
+        font-weight: 700;
+        padding-left: 16px;
     }
 }
 
 .rings-row {
     display: grid;
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: 28px 1fr;
     align-items: center;
     justify-content: center;
     text-align: center;
     background-color: var(--bg3);
     border-radius: 5px;
-    width: 150px;
+    width: 140px;
     height: 34px;
 
     .index {

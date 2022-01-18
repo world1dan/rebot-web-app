@@ -1,0 +1,56 @@
+.MarksKeyboard {
+    color: var(--text1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+
+    .mark-info {
+        box-shadow: 0px 0px 0px 1px var(--shadows-bg4) inset;
+        background-color: var(--bg4);
+        padding: 7px;
+        border-radius: 9px;
+        padding-left: 7px;
+
+        .title {
+            font-size: 15px;
+            margin: 7px;
+        }
+
+        .subject {
+            color: var(--text2);
+            font-size: 14px;
+            margin: 7px;
+        }
+    }
+
+    .marks-input-container {
+        margin-top: 16px;
+    }
+}
+
+.marks-input-container {
+    max-width: 350px;
+    padding: 6px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    place-items: center;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    .new-mark-btn {
+        background-color: var(--bg4);
+        box-shadow: 0px 0px 0px 1px var(--shadows-bg4) inset;
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        font-size: 24px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

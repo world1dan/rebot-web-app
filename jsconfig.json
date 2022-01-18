@@ -1,7 +1,11 @@
 {
     "compilerOptions": {
-      "baseUrl": "./src",
-      "checkJs": true,
-      "jsx": "react"
-    }
+      "checkJs": false,
+      "jsx": "react",
+      "plugins": [
+        {
+          "name": "typescript-styled-plugin",
+          "validate": true
+        }
+      ]
 }

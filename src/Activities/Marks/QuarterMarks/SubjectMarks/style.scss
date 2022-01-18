@@ -1,0 +1,119 @@
+.SubjectMarks {
+    background: var(--bg2);
+    min-height: 90px;
+    box-shadow: 0px 0px 0px 1.5px var(--borders-soft) inset;
+
+    display: grid;
+    grid-template-columns: 6px 1fr 60px;
+
+    @media (min-width: 340px) {
+        border-radius: 5px;
+        padding: 5px;
+
+        .color-indicator {
+            border-radius: 2px;
+        }
+    }
+
+    @media (min-width: 500px) {
+        grid-template-columns: 6px 1fr 70px;
+        border-radius: 7px;
+        padding: 7px;
+
+        .color-indicator {
+            border-radius: 3px;
+        }
+    }
+    .newMarkBtn {
+        will-change: transform;
+    }
+    &.embedded {
+        padding: 0 !important;
+        grid-template-columns: 1fr 70px;
+        border-radius: 7px;
+        box-shadow: none;
+        .average-mark {
+            font-size: 24px;
+        }
+
+        .average-mark-tools {
+            & > * {
+                box-shadow: 0px 0px 0px 1px var(--borders-soft) inset;
+                background: var(--bg3);
+            }
+        }
+    }
+
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        padding: 6px;
+        padding-left: 11px;
+        gap: 11px;
+
+        .subject-title {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 600;
+            padding-left: 2px;
+        }
+
+        .marks-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        @media (min-width: 500px) {
+            padding: 10px;
+
+            .subject-title {
+                font-size: 19px;
+            }
+
+            .marks-container {
+                gap: 7px;
+            }
+        }
+    }
+
+    .average-mark-tools {
+        display: grid;
+        grid-template-rows: 1fr 32px;
+        gap: 4px;
+
+        & > * {
+            border-radius: 5px;
+            box-shadow: 0px 0px 0px 1.5px var(--lvl4-borders) inset;
+            background: var(--bg4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .average-mark {
+            font-size: 16px;
+            font-weight: bold;
+
+            @media (min-width: 500px) {
+                font-size: 22px;
+            }
+
+            .no-mark {
+                color: var(--text2);
+                font-size: 18px;
+            }
+        }
+
+        .mark-target {
+            font-size: 10px;
+            color: var(--text2);
+            font-weight: bold;
+
+            @media (min-width: 500px) {
+                font-size: 11px;
+            }
+        }
+    }
+}

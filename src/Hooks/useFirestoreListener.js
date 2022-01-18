@@ -1,17 +1,16 @@
-import { onSnapshot } from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
 
 
 export default function useFirestoreListener(doc) {
-    const [docData, setDocData] = useState(null);
+    const [docData, setDocData] = useState()
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(doc, (doc) => {
+        return onSnapshot(doc, (doc) => {
             setDocData(doc.data())
-        });
-        return () => unsubscribe()
+        })
     }, [doc])
 
 
-    return docData;
-  }
+    return docData
+}

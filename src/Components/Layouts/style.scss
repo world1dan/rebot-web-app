@@ -1,6 +1,8 @@
 ._VerticalLayout {
     padding: 14px;
-
+    &.noPadding {
+        padding: 0;
+    }
     @media (min-width: 500px) {
         padding: 20px;
     }
@@ -12,7 +14,7 @@
     @media (max-width: 330px) {
         padding: 0px;
 
-        >* {
+        > * {
             border-radius: 0;
         }
     }
@@ -21,7 +23,7 @@
         padding: 20px 35px;
     }
 
-
+    padding-bottom: calc(20px + var(--bottom-save-zone)) !important;
 
     display: flex;
     flex-direction: column;

@@ -21,8 +21,8 @@ const Rings = () => {
     const lessons = ringsTimetable.map((time, index) => {
         return ( 
             <div className="rings-row" key={index}>
-                <span className="index">{ index + 1 }</span>
-                <span className="content">{ time }</span>
+                <div className="index">{ index + 1 }</div>
+                <div className="content">{ time }</div>
             </div> 
         )
     })

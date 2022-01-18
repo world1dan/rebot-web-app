@@ -19,11 +19,10 @@ const Updater = () => {
             </button>
             <div className="descr">
                 <span className="title">{ updateFounded ? "Доступно обновление" : "Обновления" }</span>
-                <span className="info">{ checking ? "Проверка.." : "Последняя проверка: 18:30" }</span>
+                <span className="info">{ checking ? "Проверка.." : "" }</span>
             </div>
             { updateFounded && <button className="update-btn" onClick={() => location.reload()}>Обновить</button> }
-            { !updateFounded && <span className="version">V1.0.3</span> }
-
+            { !updateFounded && <span className="version">V1.6</span> }
         </div>
     )
 }

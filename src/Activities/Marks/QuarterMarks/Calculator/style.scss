@@ -1,0 +1,75 @@
+.MarksCalculator {
+    padding-bottom: 80px;
+    display: grid;
+    grid-template-rows: 148px 1fr 334px;
+    height: 100%;
+
+    @media (max-height: 700px) {
+        grid-template-rows: 110px 1fr 260px;
+    }
+
+    .average-mark-wraper {
+        padding: 50px;
+        position: relative;
+        margin: 0 auto;
+
+        @media (max-height: 700px) {
+            padding: 30px;
+        }
+    }
+
+    .average-mark {
+        color: var(--text1);
+        will-change: transform opacity;
+        font-weight: 700;
+        font-size: 42px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media (max-height: 400px) {
+            font-size: 36px;
+        }
+    }
+
+    .info {
+        margin-bottom: 15px;
+        color: var(--text2);
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+
+        @media (max-height: 700px) {
+            margin-bottom: 12px;
+        }
+    }
+
+    .marks-container {
+        max-height: 76px;
+        margin-bottom: 20px;
+        min-height: 35px;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        padding: 2px 14px;
+        align-items: center;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        @media (max-height: 700px) {
+            gap: 4px;
+            padding: 2px 12px;
+        }
+    }
+
+    .marks-input-wrapper {
+        padding-top: 30px;
+        border-top: 2px var(--borders) solid;
+    }
+}

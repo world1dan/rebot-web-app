@@ -1,26 +1,45 @@
-import React, { memo, useContext } from "react"
+import React, { memo, useState } from "react"
 
-import MarksView from "./MarksView"
+import QuarterMarks from "./QuarterMarks"
+import YearMarks from "./YearMarks"
+import Rating from "./Rating"
+
 import Wraper from "../../Components/Wraper"
-import "./style.scss"
-import H1 from "Components/Typography/H1"
-import { MarksContext } from "../../Context"
+import Radio from "Components/Blocks/SegmentedControl"
 
+import "./style.scss"
 
 
 const Marks = () => {
-
-    const marks = useContext(MarksContext)
-
+    const [currentTab, setCurrentTab] = useState("quarter")
 
     return (
-        <Wraper styles={{ paddingLeft: 0, paddingRight: 0 }}>
-
+        <Wraper styles={{ paddingLeft: 0, paddingRight: 0}}>
             <div className="marks">
-                <H1 text="Оценки"/>
-                <MarksView marks={marks ?? {}}/>
-            </div>
+                <header className="marks-header">
+                    <h1 className="marks-title">Оценки</h1>
+                    <div className='tab-switcher'>
+                        <Radio onChange={setCurrentTab} activeItem={currentTab} items={[
+                            {
+                                id: "quarter",
+                                title: "Четверть"
+                            },
+                            {
+                                id: "year",
+                                title: "Год"
+                            },
+                            {
+                                id: "rating",
+                                title: "Рейтинг"
+                            }
+                        ]}/>
+                    </div>
+                </header>
 
+                { currentTab == 'quarter' && <QuarterMarks key='quarter'/> }
+                { currentTab == 'year' && <YearMarks key='year'/> }
+                { currentTab == 'rating' && <Rating key='rating'/> }
+            </div>
         </Wraper>
     )
 }
@@ -28,32 +47,3 @@ const Marks = () => {
 
 
 export default memo(Marks)
-
-
-
-/*
-{ calculator && 
-                    <AdaptivePanel handleClose={() => setCalculator(false)} direction="right">
-                        <MarksCalculator marks="10, 9, 7, 4, 10" subject={{}}/>
-                    </AdaptivePanel>}
-<Radio 
-                    variants={[
-                        {
-                            id: 1,
-                            title: "1"
-                        },
-                        {
-                            id: 2,
-                            title: "2"
-                        },
-                        {
-                            id: 3,
-                            title: "3"
-                        },
-                        {
-                            id: 4,
-                            title: "4"
-                        }]}
-                    defaultState={1}
-                />
-                */

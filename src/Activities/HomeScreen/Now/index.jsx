@@ -1,123 +1,152 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useContext, useEffect, useState } from 'react'
 import PropTypes from "prop-types"
 
-import { ConfigContext } from "../../../Context"
+import { motion, AnimatePresence } from 'framer-motion'
 
-import SubjectRow from "../../TimeTable/Day/SubjectRow"
+import { manifestContext,ConfigContext, MarksContext } from '../../../Context'
+import useCurrentLessonNum from './useCurrentLessonNum'
+import { useTimetableUpdate } from '../../../Hooks/useTimetableUpdate'
+
+import Progress from './Progress'
+import LessonInfo from '../../TimeTable/Day/LessonInfo/LessonInfo'
+import HomeworkRe from '../../HomeworkRe'
+import EditableField from '../../../Components/EditableField'
+import SubjectMarks from '../../Marks/QuarterMarks/SubjectMarks'
 
 import "./style.scss"
 
 
 
-const ringsTimetable = [
-    ["8.00", "8.45"],
-    ["8.55", "9.40"],
-    ["9.55", "10.40"],
-    ["10.55", "11.40"],
-    ["11.55", "12.40"],
-    ["12.50", "13.35"],
-    ["13.55", "14.40"],
-]
+const Now = (props) => {
+    const manifest = useContext(manifestContext)
+    const marks = useContext(MarksContext)
 
-function convertTime(millis) {
-    const minutes = Math.floor(millis / 60000)
-    const seconds = ((millis % 60000) / 1000).toFixed(0)
-    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds
-}
+    const user = useContext(ConfigContext).user
 
-function getCurrent() {
-    let num = null, info = null
-    
+    const update = useTimetableUpdate()
+    const [homework, setHomework] = useState("")
 
-    ringsTimetable.forEach((range, index) => {
+    const [instant, setInstant] = useState(false)
+    const [info, setInfo] = useState(false)
 
-        const start = range[0].split(".")
-        const end = range[1].split(".")
+    const actualLesson = useCurrentLessonNum() ?? {}
 
-        const lessonStart = new Date()
-        lessonStart.setHours(start[0], start[1], 0)
+    const percent = 100 - (100 / (actualLesson.timeInterval / actualLesson.left))
 
-        const lessonEnd = new Date()
-        lessonEnd.setHours(end[0], end[1], 0)
-
-        const now = new Date()
-
-        if (lessonStart <= now && now <= lessonEnd) {
-            num = index + 1
-            info = "До конца осталось: " + convertTime(lessonEnd-now)
-
-        } else if (lessonStart >= now && !num) {
-            num = index + 1
-            info = "До начала осталось: " + convertTime(lessonStart-now)
-        }
-    })
-
-    return [num, info]
-}
+    let lesson = props.dayData[actualLesson.num] ?? {}
+    let path = `${props.pathToDay}.${actualLesson.num}`
 
 
-
-
-const Now = ({ day_data, pathToDay }) => {
-    const group = useContext(ConfigContext).user.group
-
-    const [lesson, setLesson] = useState(null)
-    const [infoTitle, setInfoTitle] = useState("")
-
-
-    function updateLesson() {
-        const [num, info] = getCurrent()
-        if (num) {
-            if (num != lesson && info != infoTitle) {
-                setLesson(num)
-                setInfoTitle(info)
-            }
+    if (lesson.groups) {
+        if (lesson[user.group]) {
+            lesson = lesson[user.group]
+            path = `${props.pathToDay}.${actualLesson.num}.${user.group}`
         } else {
-            setLesson(null)
-            setInfoTitle("")
+            lesson = null
         }
     }
+
+    const subject = manifest[lesson?.id] ?? {}
 
 
     useEffect(() => {
-        updateLesson()
-        setInterval(updateLesson, 1000)
-    }, [])
-
-    let lesson_data, path
-
-
-    if (lesson && day_data[lesson]) {
-        if (day_data[lesson].groups) {
-            if (day_data[lesson][group]) {
-                lesson_data = day_data[lesson][group]
-                path = `${pathToDay}.${lesson}.${group}`
-            } else {
-                return null
-            }
-        } else {
-            lesson_data = day_data[lesson]
-            path = `${pathToDay}.${lesson}`
+        if (lesson && lesson.hw !== homework) { 
+            setHomework(lesson.hw)
         }
+    }, [lesson])
 
-        return (
-            lesson && 
-            <div className="content-card Now">
-                <SubjectRow lesson={lesson_data} path={path}/>
-                <div className="info"> { infoTitle }</div>
-            </div>
-        )
-    } else {
-        return null
+
+    if (!actualLesson.num || !lesson || !subject.title) return null
+
+
+    const isMath = lesson.id == "alg" || lesson.id == "geom"
+
+    const saveHomework = (hw) => {
+        if (hw !== lesson.hw) {
+            update({
+                [path + ".hw"]: hw,
+                [path + ".changedBy"]: user.first_name || user.last_name || user.username || user.id,
+            })
+        }
     }
+
+    
+    return (
+        <>
+            <AnimatePresence initial={false}>
+                <motion.div 
+                    key={lesson.id}
+                    className="Now"
+                    exit={{ x: "-100%", position: "absolute" }}
+                    initial={{ x: "100%", position: "absolute" }}
+                    animate={{ x: 0, position: "static" }}>
+
+                    <div className="actual-lesson-info">
+                        
+                        <div className="left-block">
+                            <h5 className="block-title">{ actualLesson.type == "toEnd" ? "СЕЙЧАС" : "СЛЕДУЮЩИЙ УРОК"}</h5>
+                            <h3 className="subject-title">{ subject.full_title || subject.title }</h3>
+                            <div className="homework">
+                                <EditableField 
+                                    value={homework} 
+                                    onChange={setHomework} 
+                                    onSave={saveHomework}
+                                />
+                            </div>
+                        </div>
+                        
+                        <div className="progress-wraper">
+                            <Progress strokeColor={subject.color} percents={percent} timeLeft={actualLesson.left}/>
+                        </div>
+                    </div>
+
+                    <div className="tool-btns-wraper">
+                        { subject.url && lesson.hw &&
+                            <button className="tool-btn" onClick={() => setInstant(true)}>
+                                <i className="fas fa-book"></i>
+                                Решение
+                            </button> }
+                        { (subject?.url || subject.marks || isMath) &&
+                            <button className="tool-btn" onClick={() => setInfo(true)}>
+                                <i className="fas fa-info-circle"></i>
+                                Об уроке
+                            </button> }
+                    </div>
+                    
+                    { marks && 
+                        <div className="marks-wraper">
+                            <h5 className="block-title">ОЦЕНКИ</h5>
+                            <SubjectMarks 
+                                marks={marks?.[isMath ? 'math' : lesson.id] ?? []} 
+                                subject={isMath ? manifest['math'] : subject} 
+                                target={marks?.['marksTargets']?.[subject.id]}
+                                embedded
+                            />
+                        </div>
+                    }
+
+                </motion.div>
+            </AnimatePresence>
+
+            { instant && <HomeworkRe lessonsData={[lesson]} handleClose={() => setInstant(false)}/> }
+
+            { info && 
+                <LessonInfo 
+                    update={update} 
+                    path={path} 
+                    lesson={isMath ? {...lesson, id: "math"} : lesson} 
+                    subject={isMath ? manifest["math"] : subject} 
+                    handleClose={() => setInfo(false)}
+                /> }
+        </>
+    )
 }
+
 
 
 Now.propTypes = {
-    day_data: PropTypes.object.isRequired,
+    dayData: PropTypes.object.isRequired,
     pathToDay: PropTypes.string.isRequired
 }
-
-
 
 export default Now

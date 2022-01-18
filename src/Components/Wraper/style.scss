@@ -1,5 +1,13 @@
 .tab-wraper {
     margin: 0 auto;
-    padding: 10px;
-    padding-bottom: 60px;
+    padding: 8px;
+
+    padding-left: max(env(safe-area-inset-left), 8px);
+    padding-right: max(env(safe-area-inset-right), 8px);
+    
+    @media (max-width: 360px) {
+        padding: 0;
+    }
+
+    padding-bottom: 14px;
 }

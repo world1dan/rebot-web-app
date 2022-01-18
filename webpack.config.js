@@ -4,10 +4,38 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const TerserPlugin = require("terser-webpack-plugin")
 const CopyPlugin = require("copy-webpack-plugin")
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CssoWebpackPlugin = require('csso-webpack-plugin').default
+const stylis = require('stylis');
 
-
+stylis.set({ prefix: false });
 
 module.exports = (env) => {
+
+    const plugins = [
+        new MiniCssExtractPlugin({ filename: "style.css" }),
+        new CopyPlugin({
+            patterns: [{
+                from: path.resolve(__dirname, "public"),
+                to: path.resolve(__dirname, "dist"),
+            }]
+        }),
+        new HtmlPlugin({
+            template: "./src/index.html"
+        }),
+        new CleanWebpackPlugin()
+    ]
+
+
+
+
+    if (env.production) {
+        plugins.push(
+            new CssoWebpackPlugin()
+        )
+    }
+
+
 
     return {
         entry: "./src/index.js",
@@ -15,16 +43,31 @@ module.exports = (env) => {
         module: {
             rules: [
                 {
-                    test: /\.[jt]sx?$/,
-                    exclude: /node_modules/,
-                    loader: "babel-loader"
-                },
-                {
                     test: /\.(scss|css)$/,
                     use: [
-                        MiniCssExtractPlugin.loader, "css-loader", "sass-loader"
+                        MiniCssExtractPlugin.loader, 
+                        {
+                            loader: "css-loader",
+                            options: {
+                                esModule: true,
+                            },
+                        }, 
+                        "sass-loader"
                     ]
-                }
+                },
+                {
+                    test: /\.(js|jsx)?$/,
+                    exclude: /node_modules/,
+                    use: [
+                        { loader: 'babel-loader' },
+                        {
+                            loader: '@linaria/webpack-loader',
+                            options: {
+                                sourceMap: process.env.NODE_ENV !== 'production',
+                            },
+                        }
+                    ]
+                },
             ]
         },
 
@@ -33,8 +76,11 @@ module.exports = (env) => {
             alias: {
                 Components: path.resolve(__dirname, 'src/Components/'),
                 Activities: path.resolve(__dirname, 'src/Activities/'),
+                Screens: path.resolve(__dirname, 'src/Screens/'),
                 Hooks: path.resolve(__dirname, 'src/Hooks/'),
                 Context: path.resolve(__dirname, 'src/Context'),
+                Utils: path.resolve(__dirname, 'src/Utils'),
+                react: path.resolve('./node_modules/react'),
             },
         },
 
@@ -46,9 +92,16 @@ module.exports = (env) => {
         optimization: {
             minimize: env.production,
             minimizer: [new TerserPlugin({
-                minify: TerserPlugin.uglifyJsMinify
+                minify: TerserPlugin.uglifyJsMinify,
+                terserOptions: {
+                    compress: {
+                        drop_console: true,
+                        toplevel: true
+                    }
+                }
             })]
         },
+
 
     
         devtool: 'source-map',
@@ -61,22 +114,10 @@ module.exports = (env) => {
             static: {
                 directory: path.resolve(__dirname, "dist"),
             },
-            port: 4200
+            port: 4200,
+            hot: true
         },
 
-
-        plugins: [
-            new MiniCssExtractPlugin({ filename: "style.css" }),
-            new CopyPlugin({
-                patterns: [{
-                    from: path.resolve(__dirname, "public"),
-                    to: path.resolve(__dirname, "dist"),
-                }]
-            }),
-            new HtmlPlugin({
-                template: "./src/index.html"
-            }),
-            new CleanWebpackPlugin()
-        ]
+        plugins
     }
 }

@@ -5,13 +5,18 @@ import PropTypes from "prop-types"
 import "./style.scss"
 
 
-const VerticalLayout = ({ children }) => {
+const VerticalLayout = ({ children, noPadding }) => {
 
     return (
-        <div className="_VerticalLayout">
+        <div className={"_VerticalLayout" + (noPadding ? " noPadding" : "")}>
             { children }
         </div>
     )
 }
 
+
+VerticalLayout.propTypes = {
+    noPadding: PropTypes.bool,
+    children: PropTypes.node
+}
 export default VerticalLayout

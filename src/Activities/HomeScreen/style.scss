@@ -1,30 +1,26 @@
 .HomeScreen {
-    padding-top: 60px;
+    padding-top: 58px;
 }
 
 
 .side-left {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 #homescreen-layout {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 @media (min-width: 800px) {
     body:not(.mini-right, .mini-left) #homescreen-layout {
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: calc(50% - 6px) calc(50% - 6px);
         max-width: 1024px;
         margin: 0 auto;
-        gap: 10px;
-
-        .content-card {
-            max-width: 500px;
-        }
+        gap: 12px;
     }
 }

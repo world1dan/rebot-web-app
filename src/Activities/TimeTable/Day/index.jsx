@@ -3,8 +3,6 @@ import PropTypes from "prop-types"
 
 import { ConfigContext } from "../../../Context"
 
-import { showAlert } from "../../../Helpers/showAlert"
-
 import HomeworkRe from "../../HomeworkRe"
 import SubjectRow from "./SubjectRow"
 
@@ -22,17 +20,16 @@ const day_titles = {
 }
 
 
+
 const Day = ({ dayNum, week, timetable, pathToDay }) => {
 
     const [instant, setInstant] = useState(false)
-    const group = useContext(ConfigContext).user.group
+    const context = useContext(ConfigContext)
 
-
-    
+    const group = context.user.group
 
     const date = new Date()
     const weekDay = date.getDay()
-
 
     let mult = 0
 
@@ -44,9 +41,8 @@ const Day = ({ dayNum, week, timetable, pathToDay }) => {
 
     const distance = dayNum + mult - (weekDay != 0 ? weekDay : 7)
 
-
-
     date.setDate(date.getDate() + distance)
+
     const dateTitle = date.toLocaleDateString("ru-RU", { day: "numeric", month: "numeric" })
 
     const lessons = []
@@ -66,7 +62,7 @@ const Day = ({ dayNum, week, timetable, pathToDay }) => {
             path = `${pathToDay}.${lessonNum}`
         }
 
-        lessons.push(<SubjectRow key={lessonNum} path={path} lesson={lesson}/>)
+        lessons.push(<SubjectRow date={dateTitle} key={lessonNum} path={path} lesson={lesson}/>)
     }
 
 
@@ -91,7 +87,9 @@ const Day = ({ dayNum, week, timetable, pathToDay }) => {
         if (toOpen.length != 0) {
             setInstant(toOpen)
         } else {
-            showAlert("Решебники не найдены")
+            context.setStatusBar({
+                title: "Решебники не найдены"
+            })
         }
     }
 
@@ -120,8 +118,7 @@ Day.propTypes = {
     dayNum: PropTypes.number.isRequired,
     week: PropTypes.number.isRequired,
     timetable: PropTypes.object.isRequired,
-    pathToDay: PropTypes.string.isRequired,
-    afterTitle: PropTypes.string
+    pathToDay: PropTypes.string.isRequired
 }
 
 export default Day

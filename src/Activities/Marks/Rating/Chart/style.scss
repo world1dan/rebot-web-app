@@ -1,0 +1,39 @@
+.Rating__Chart__Wrapper {
+    height: 400px;
+}
+
+.Rating__Chart {
+    box-shadow: 0px 0px 0px 1.5px var(--borders-soft) inset;
+    background-color: var(--bg2);
+    overflow: hidden;
+    height: 400px;
+    width: 100%;
+    border-radius: 7px;
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+
+    .data-wraper {
+        display: flex;
+        padding: 12px;
+
+        grid-template-rows: 1fr;
+        gap: 8px;
+        align-items: flex-end;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        &::-webkit-scrollbar {
+            height: 8px;
+
+            @media (min-width: 1000px) {
+                height: 12px;
+            }
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--bg4);
+            border-radius: 20px;
+        }
+    }
+}

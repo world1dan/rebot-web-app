@@ -1,3 +1,162 @@
 .Now {
-    margin-bottom: 12px;
+    color: var(--text1);
+    background-color: var(--bg2);
+    border-radius: 13px;
+
+    @media (max-width: 360px) {
+        border-radius: 0;
+    }
+
+    padding: 8px;
+    will-change: transform;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .block-title {
+        font-size: 11px;
+        color: var(--text2);
+        margin: 6px;
+        margin-bottom: 0;
+        margin-top: 2px;
+    }
+
+    .actual-lesson-info {
+        display: flex;
+        gap: 6px;
+
+        .left-block {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: calc(100% - 120px);
+        }
+
+        .homework {
+            overflow-x: auto;
+            height: 100%;
+            background-color: var(--bg3);
+            border-radius: 7px;
+
+            &:focus-within {
+                background-color: var(--bg4);
+            }
+
+            .editable-field,
+            input {
+                display: flex;
+                align-items: center;
+                background: none;
+                padding: 0;
+                height: 100%;
+                outline: none;
+                border: none;
+                min-height: 44px;
+                color: var(--text);
+                resize: none;
+                font-size: 17px;
+                user-select: all;
+                font-weight: 600;
+                -webkit-user-select: auto;
+
+                &:focus-within {
+                    width: 100% !important;
+                }
+            }
+
+            .editable-field {
+                padding-left: 10px;
+            }
+
+            &::-webkit-scrollbar {
+                height: 6px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: var(--bg1);
+                border-radius: 10px;
+            }
+        }
+
+        .subject-title {
+            font-size: 22px;
+            margin: 5px;
+            flex-grow: 1;
+        }
+
+        .progress-wraper {
+            background-color: var(--bg3);
+            padding: 10px;
+            border-radius: 7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 114px;
+        }
+    }
+
+    .tool-btns-wraper {
+        display: flex;
+        gap: 6px;
+
+        .tool-btn {
+            display: grid;
+            grid-template-columns: 23px 1fr;
+            align-items: center;
+            padding: 12px 10px;
+            background-color: var(--bg3);
+            border-radius: 7px;
+            font-weight: 600;
+            flex-grow: 1;
+            font-size: 14px;
+
+            i {
+                font-size: 18px;
+            }
+        }
+    }
+
+    .marks-wraper {
+        position: relative;
+
+        .SubjectMarks {
+            background-color: var(--bg2);
+            min-height: auto;
+        }
+
+        .average-mark {
+            margin: 0;
+            border-radius: 7px !important;
+        }
+        .main-content {
+            padding-left: 3px;
+            padding-bottom: 3px;
+        }
+        .marks-container {
+            margin-top: 26px;
+        }
+        .block-title {
+            position: absolute;
+            top: 6px;
+        }
+    }
+}
+
+.Progress {
+    position: relative;
+
+    .countdown {
+        will-change: transform opacity;
+        font-weight: 700;
+        font-size: 14px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }

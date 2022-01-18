@@ -1,0 +1,174 @@
+.YearMarks {
+    min-height: 600px;
+    display: grid;
+    gap: 6px;
+    max-width: 580px;
+    margin: 0 auto;
+    width: 100%;
+
+    .average {
+        height: 68px;
+
+        .Mark {
+            width: auto;
+            min-width: 36px;
+            padding: 20px 6px;
+            border-radius: 7px;
+        }
+
+        .year-mark {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    @media (max-width: 600px) {
+        padding: 12px;
+        padding-top: 6px;
+    }
+
+    @media (max-width: 380px) {
+        padding: 8px;
+        padding-top: 4px;
+    }
+}
+
+.YearMarks-table-header {
+    padding: 5px;
+    background-color: var(--bg2);
+    display: grid;
+    grid-template-columns: 88px 1fr 1fr 1fr 1fr 54px;
+    gap: 12px;
+    height: 46px;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px 1.5px var(--borders-soft) inset;
+
+    div {
+        font-weight: 600;
+        font-size: 15px;
+        text-align: center;
+
+        &.subject {
+            padding-left: 26px;
+            justify-self: flex-start;
+        }
+
+        &.year {
+            border-left: 2px var(--borders) solid;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @media (min-width: 600px) {
+        grid-template-columns: 157px 1fr 1fr 1fr 1fr 90px;
+    }
+}
+
+.YearSubjectMarks {
+    box-shadow: 0px 0px 0px 1.5px var(--borders-soft) inset;
+    box-sizing: border-box;
+    background-color: var(--bg2);
+    height: 50px;
+    display: grid;
+    grid-template-columns: 4px 74px 1fr 1fr 1fr 1fr 54px;
+    gap: 10px;
+    align-items: center;
+
+    @media (min-width: 340px) {
+        border-radius: 5px;
+        padding: 5px;
+
+        .color-indicator {
+            border-radius: 2px;
+        }
+    }
+
+    .color-indicator {
+        height: 100%;
+    }
+
+    .Mark {
+        justify-self: center;
+        color: var(--text2);
+        align-self: center;
+    }
+
+    .year-mark {
+        border-left: 2px var(--borders) solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 3px;
+    }
+
+    .subject-title {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    @media (max-width: 340px) {
+        grid-template-columns: 4px 70px 1fr 1fr 1fr 1fr 50px;
+        gap: 6px;
+
+        .subject-title {
+            font-size: 14px;
+            margin-left: 4px;
+        }
+    }
+
+    @media (min-width: 600px) {
+        grid-template-columns: 7px 140px 1fr 1fr 1fr 1fr 90px;
+
+        overflow: hidden;
+
+        .subject-title {
+            font-size: 15px;
+            padding-left: 10px;
+        }
+    }
+}
+
+#rus {
+    grid-row: 4;
+}
+#rus_lit {
+    grid-row: 5;
+}
+#eng {
+    grid-row: 6;
+}
+#math {
+    grid-row: 7;
+}
+#inform {
+    grid-row: 8;
+}
+#history {
+    grid-row: 9;
+}
+#history_bel {
+    grid-row: 10;
+}
+#social {
+    grid-row: 11;
+}
+#geo {
+    grid-row: 12;
+}
+#bio {
+    grid-row: 13;
+}
+#phis {
+    grid-row: 14;
+}
+#him {
+    grid-row: 15;
+}
+#trud {
+    grid-row: 16;
+}

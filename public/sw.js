@@ -8,14 +8,12 @@ const appFiles = [
     "static/icons/manifest-icon-192.png",
     "static/lib/fontawesome/fa-solid-900.woff2",
     "static/manifest.json",
-    "static/icons/google.svg",
-    "static/icons/resheba.svg",
     "static/img/404.webp",
-    "static/img/bio.webp",
-    "static/img/engwb.webp",
-    "static/img/geo.webp",
-    "static/img/him.webp",
-    "static/img/phis.webp",
+    "static/img/bio.jpg",
+    "static/img/engwb.jpg",
+    "static/img/geo.jpg",
+    "static/img/him.jpg",
+    "static/img/phis.jpg",
     "favicon.ico"
 ]
 

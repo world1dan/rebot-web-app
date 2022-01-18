@@ -10,6 +10,10 @@
     grid-template-columns: 52px 1fr 64px;
     min-height: 50px;
 
+    &.noPadding {
+        padding: 0;
+    }
+
     a {
         font-weight: 500;
         font-size: 16px;
@@ -46,14 +50,12 @@
     }
 }
 
-
-
 .ios7-switch input {
     opacity: 0;
     position: absolute;
 }
 
-.ios7-switch input+span {
+.ios7-switch input + span {
     position: relative;
     display: inline-block;
     width: 1.65em;
@@ -62,16 +64,14 @@
     box-shadow: inset 0 0 0 0.0625em var(--bg2);
     border-radius: 0.5em;
     vertical-align: -0.15em;
-    transition: all 0.45s cubic-bezier(.17, .67, .43, .98);
+    transition: all 0.45s cubic-bezier(0.17, 0.67, 0.43, 0.98);
     cursor: pointer;
 }
 
-
-
-.ios7-switch input+span:after {
+.ios7-switch input + span:after {
     position: absolute;
     display: block;
-    content: '';
+    content: "";
     width: 0.875em;
     height: 0.875em;
     border-radius: 0.4375em;
@@ -82,16 +82,14 @@
     transition: all 0.24s ease-out;
 }
 
-
-.ios7-switch input:checked+span:after {
+.ios7-switch input:checked + span:after {
     background: #fff;
 }
 
-.ios7-switch input:checked+span {
+.ios7-switch input:checked + span {
     box-shadow: inset 0 0 0 0.73em #31d058;
 }
 
-.ios7-switch input:checked+span:after {
+.ios7-switch input:checked + span:after {
     left: 0.7125em;
 }
-

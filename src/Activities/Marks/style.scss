@@ -1,53 +1,52 @@
-.marks-grid {
-    display: grid;
-    row-gap: 10px;
-    grid-auto-flow: row;
-
-    
-    @media (min-width: 750px) {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(8, auto);
-        grid-auto-flow: column;
-
-        row-gap: 12px;
-        column-gap: 12px;
-
-        padding: 8px 10px;
-        padding-top: 12px;
-    }
-}
-
-
 .marks {
-    width: 100%;
     color: var(--text1);
     max-width: 1200px;
     margin: 0 auto;
-}
+    padding: 5px;
 
-
-.marks-input-container {
-    max-width: 350px;
-    padding: 10px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    place-items: center;
-    justify-content: center;
-    align-items: center;
-
-    gap: 11px;
-
-    .new-mark-btn {
-        padding: 10px;
-        background-color: var(--bg4);
-        width: 65px;
-        height: 65px;
-        border-radius: 12px;
-        font-size: 23px;
-        font-weight: bold;
-        display: flex;
-        justify-content: center;
+    .marks-header {
+        max-width: 740px;
+        display: grid;
+        margin: 0 auto;
+        grid-template-columns: 1fr 1fr;
+        padding: 30px 12px;
         align-items: center;
+
+        @media (max-width: 650px) {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 12px;
+            padding: 10px 12px;
+        }
+
+        @media (max-width: 380px) {
+            padding: 8px 8px;
+        }
+    }
+
+    .marks-title {
+        font-size: 34px;
+        padding-left: 14px;
+        font-weight: bold;
+        margin: 0;
+
+        @media (max-width: 600px) {
+            font-size: 26px;
+        }
+    }
+
+    @media (min-width: 750px) {
+        .marks-title {
+            padding-left: 90px;
+        }
+        .marks-header {
+            padding: 26px 0;
+        }
+    }
+
+    @media (max-width: 340px) {
+        .marks-header {
+            padding: 8px 0;
+        }
     }
 }

@@ -3,24 +3,20 @@ import PropTypes from "prop-types"
 
 import { ConfigContext, manifestContext } from "../../../../Context"
 import { useTimetableUpdate } from "../../../../Hooks/useTimetableUpdate"
-import { showAlert } from "../../../../Helpers/showAlert"
-
 
 import EditableField from "../../../../Components/EditableField"
 import HomeworkRe from "../../../HomeworkRe"
 import LessonInfo from "../LessonInfo/LessonInfo"
 import ContextMenu from "../../../../Components/ContextMenu"
 import ContextMenuBtn from "../../../../Components/ContextMenu/ContextMenuBtn"
-import AddMarkDialog from "../../../Marks/SubjectMarks/AddMarkDialog"
+import MarksKeyboard from "../../../Marks/MarksKeyboard"
 import ActionSheet from "Components/ActionSheet"
-
 
 import "./style.scss"
 
 
 
-
-const SubjectRow = ({ lesson, path }) => {
+const SubjectRow = ({ lesson, path, date }) => {
     const update = useTimetableUpdate()
     const user = useContext(ConfigContext).user
     const manifest = useContext(manifestContext)
@@ -33,10 +29,10 @@ const SubjectRow = ({ lesson, path }) => {
 
     const isMath = lesson.id === "alg" || lesson.id === "geom"
 
-
     useEffect(() => {
         setHomework(lesson.hw)
     }, [lesson.hw])
+
 
     const title = subject?.title ??  <i className="fas fa-circle-notch fa-spin"></i>
     const style = {
@@ -44,11 +40,13 @@ const SubjectRow = ({ lesson, path }) => {
     }
 
 
-    const saveHomework = () => {
-        if (homework !== lesson.hw) {
+    const saveHomework = (value) => {
+
+        if (homework !== lesson.hw || homework !== value) {
+
             update({
-                [path + ".hw"]: homework,
-                [path + ".changedBy"]: user.first_name,
+                [path + ".hw"]: value==undefined ? homework : value,
+                [path + ".changedBy"]: user.first_name || user.last_name || user.username || user.id,
             })
         }
     }
@@ -69,29 +67,22 @@ const SubjectRow = ({ lesson, path }) => {
         setInfo(false)
     }
 
-    const copy = () => {
-        try {
-            navigator.clipboard.writeText(homework).then(() => {
-                showAlert("Скопировано")
-            })
-        } catch {
-            showAlert("Ошибка")
-        }
-    } 
-    
+
+
+    const handleDangerChange = (e) => {
+
+        update({
+            [path + ".danger"]: e.target.checked
+        })
+    }
 
     return (
         <>
             { lesson.danger && <div className="SubjectRow-danger-title" style={style}>На этом уроке к/р или самостоялка</div> }
             <div className={"flexRow" + (lesson.danger ? " SubjectRow-danger" : "")}>
-                <div className="rowBlock medium colored" style={style}>{title}</div>
+                <div className="rowBlock medium" style={style}>{title}</div>
                 <div className="rowBlock mainField">
-                    { subject?.prank ?
-                        <div className="prank">
-                            <span>🤡</span>
-                            <span>🤡</span>
-                        </div> :
-                        <EditableField value={homework ?? ""} onChange={setHomework} onSave={saveHomework}/> }
+                    <EditableField date={date} value={homework ?? ""} onChange={setHomework} onSave={saveHomework} lesson={lesson} handleDangerChange={handleDangerChange}/>
                 </div>
                 <div className="rowBlock square">
                     <ContextMenu>
@@ -113,10 +104,10 @@ const SubjectRow = ({ lesson, path }) => {
                         />
                     </ContextMenu>
                     { instant && <HomeworkRe lessonsData={[lesson]} handleClose={closeInstant}/> }
-                    { info && <LessonInfo update={update} path={path} lesson={isMath ? {...lesson, id: "math"} : lesson} subject={isMath ? manifest["math"] : subject} handleClose={closeInfo}/> }
+                    { info && <LessonInfo handleDangerChange={handleDangerChange} lesson={isMath ? {...lesson, id: "math"} : lesson} subject={isMath ? manifest["math"] : subject} handleClose={closeInfo}/> }
                     { addMarkDialog &&
                         <ActionSheet onClose={() => setAddMarkDialog(false)} >
-                            <AddMarkDialog subjectInfo={isMath ? manifest["math"] : subject}/>
+                            <MarksKeyboard subjectInfo={isMath ? manifest["math"] : subject}/>
                         </ActionSheet>
                     }
                 </div>
@@ -131,7 +122,8 @@ const SubjectRow = ({ lesson, path }) => {
 SubjectRow.propTypes = {
     lesson: PropTypes.shape({
         id: PropTypes.string,
-        hw: PropTypes.string
+        hw: PropTypes.string,
+        danger: PropTypes.bool
     }).isRequired,
 
     path: PropTypes.string.isRequired

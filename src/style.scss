@@ -1,23 +1,29 @@
 * {
-    font-family: ui-rounded, Roboto, Ubuntu, "segoe ui", sans-serif;
+    box-sizing: border-box;
+    font-family: ui-rounded, Roboto, Ubuntu, 'segoe ui', sans-serif;
+    -webkit-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    -webkit-user-select: none;
-    box-sizing: border-box;
 }
 
-input {
-    user-select: all;
+input,
+textarea {
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-user-select: auto;
+    user-select: auto;
 }
 
 button {
+    margin: 0;
+    padding: 0;
     color: var(--text1);
+    font-weight: bold;
     background: none;
     border: none;
-    -webkit-user-drag: none;
-    cursor: pointer;
     outline: none;
-    font-weight: bold;
+    cursor: pointer;
 }
 
 :root {
@@ -26,60 +32,67 @@ button {
     --bg1: #0a0a0a;
     --bg2: #141414;
     --bg3: #19191a;
-    --bg4: #232324;
+    --bg4: #212122;
     --backdrop: rgb(0 0 0 / 45.2%);
-    --inv: 0.93;
+    --inv: 0.92;
     --borders-soft: rgb(44 44 44 / 10%);
     --borders: #19191a;
     --primary1: #5d4ae2;
     --red2: #e4372e;
-    --NavBtn: #76787a;
-    --NavBtnActive: #fff;
+    --tab-bar-btn: #76787a;
+    --tab-bar-btn-active: #fff;
     --primary: #5d4ae2;
     --bottom-save-zone: env(safe-area-inset-bottom);
     --top-save-zone: env(safe-area-inset-top);
-    --hard-shadows: #000;
+    --shadows-bg4: rgb(43 43 43);
+    --mark-green: #34c759;
+    --mark-yellow: #fc0;
+    --mark-red: #ff3b30;
+    --mark-green-bg: rgb(52 199 89 / 8%);
+    --mark-yellow-bg: rgb(255 204 0 / 8%);
+    --mark-red-bg: rgb(255 48 48 / 8%);
+
+    color-scheme: dark;
+
+    --lvl4-borders: rgb(43 43 43 / 20%);
 }
 
-:root[theme="light"] {
-    --text1: #2c2d2e;
-    --text13: #626264;
-    --backdrop: rgb(0 0 0 / 31.5%);
+:root[theme='light'] {
+    --text1: #242424;
+    --text2: rgb(90 90 90);
     --bg1: #e1e3e6;
     --bg2: #ebedf0;
     --bg3: #f2f3f5;
     --bg4: #fff;
-    --borders: #f2f3f5;
-    --borders-soft: rgb(227 227 227 / 20%);
-    --bg2-TR: hsl(216deg 9% 89% / 80%);
-    --NavBtn: #00000073;
-    --NavBtnActive: #5d4ae2;
+    --backdrop: rgb(0 0 0 / 18%);
+    --borders: #dadfe4;
+    --borders-soft: #e4e9eece;
+    --tab-bar-btn: #00000073;
+    --tab-bar-btn-active: #5d4ae2;
     --red2: #e4372ee0;
-    --hard-shadows: rgb(156, 156, 156);
+    --shadows-bg4: rgb(238 238 238);
+    --mark-green: #17ac3c;
+    --mark-yellow: #c49600;
+    --mark-red: #ff3d33e1;
+    --mark-green-bg: rgb(52 199 89 / 20%);
+    --mark-yellow-bg: rgb(255 204 0 / 20%);
+    --mark-red-bg: rgb(255 48 48 / 20%);
+
+    color-scheme: light;
+
+    --lvl4-borders: rgb(194 194 194 / 20%);
 }
 
 html,
 body,
 #root {
-    background-color: var(--bg1);
-    margin: 0;
     height: 100%;
+    margin: 0;
     overflow: hidden;
+    background-color: var(--bg1);
 }
 
 .tab {
-    @keyframes tab-in {
-        from {
-            opacity: 40%;
-            transform: scale(0.94);
-        }
-    }
-
-    @supports (-webkit-touch-callout: none) {
-        animation: tab-in 0.2s;
-        animation-fill-mode: forwards;
-    }
-
     height: 100%;
     padding-bottom: calc(env(safe-area-inset-bottom) + 46px);
 }
@@ -101,46 +114,36 @@ body,
 }
 
 .content-card {
+    position: relative;
+    padding: 8px;
+    color: var(--text1);
     background-color: var(--bg2);
     border-radius: 14px;
-    padding: 8px;
-    position: relative;
-    color: var(--text1);
-
-    h1 {
-        font-size: 28px;
-        font-weight: bold;
-        text-indent: 16px;
-    }
 
     .table-btn {
         position: absolute;
-        top: 7px;
-        background-color: var(--bg3);
-        padding: 10px;
-        border-radius: 7px;
+        top: 8px;
         width: 38px;
         height: 38px;
+        padding: 8px;
+        background-color: var(--bg3);
+        border-radius: 7px;
         box-shadow: 0 0 0 1px var(--borders-soft) inset;
 
         &.tool {
-            right: 7px;
+            right: 8px;
+            display: flex;
+            align-items: center;
+            justify-self: center;
+            padding-left: 11px;
+            font-size: 14px;
         }
     }
 
     .content {
+        display: flex;
         flex-direction: column;
-        display: flex;
-        gap: 7px;
-    }
-
-    .info {
-        display: flex;
-        justify-content: center;
-        align-self: center;
-        color: var(--text2);
-        padding: 6px;
-        font-size: 12px;
+        gap: 6px;
     }
 }
 

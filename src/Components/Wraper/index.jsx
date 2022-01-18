@@ -1,17 +1,15 @@
 import React from "react"
-
-
 import VScroll from "../VScroll"
 
 import "./style.scss"
 
 
-const Wraper = ({ children, styles }) => {
+const Wraper = (props) => {
 
     return (
         <VScroll>
-            <div className="tab-wraper" style={styles}>
-                { children }
+            <div className="tab-wraper" style={props.styles}>
+                { props.children }
             </div>
         </VScroll>
     )

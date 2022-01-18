@@ -1,0 +1,38 @@
+.Rating {
+    display: grid;
+    gap: 10px;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 12px;
+
+    @media (max-width: 600px) {
+        padding: 12px;
+        padding-top: 6px;
+    }
+
+    @media (max-width: 380px) {
+        padding: 8px;
+        padding-top: 4px;
+    }
+
+    .stat {
+        display: grid;
+        grid-template-columns: 1fr 70px;
+        align-items: center;
+        height: 46px;
+        padding-left: 12px;
+        background-color: var(--bg2);
+        border-radius: 5px;
+        box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
+
+        .title {
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .num {
+            font-weight: bold;
+            text-align: center;
+        }
+    }
+}

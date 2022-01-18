@@ -4,10 +4,10 @@ import PropTypes from "prop-types"
 import "./style.scss"
 
 
-const Switch = ({ title, icon, descr, checked, onChange }) => {
+const Switch = ({ title, icon, descr, checked, onChange, noPadding }) => {
 
     return (
-        <div className="_Switch">
+        <div className={"_Switch" + (noPadding ? " noPadding" : "")} >
             { icon }
             <div className="label-block">
                 <a className="title">{ title }</a>
@@ -27,7 +27,8 @@ Switch.propTypes = {
     descr: PropTypes.string,
     icon: PropTypes.element,
     checked: PropTypes.bool,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    noPadding: PropTypes.bool
 }
 
 

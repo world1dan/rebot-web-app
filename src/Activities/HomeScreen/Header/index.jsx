@@ -1,30 +1,38 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React, { useState } from "react"
 
 import Time from "./Time"
 import Rings from "./Rings"
+
+import AdaptivePanel from "Components/AdaptivePanel"
+import Settings from "Activities/Settings"
 
 import "./style.scss"
 
 
 
-const Header = (props) => {
+const Header = () => {
+    const [settingsOpen, setSettingsOpen] = useState(false)
+
     return (
+        <>
         <header className="homescreen-header">
             <Time/>
-            <button onClick={() => props.setSettingsOpen(true)}>
+            <button onClick={() => setSettingsOpen(true)}>
                 <i className="fas fa-cog"></i>
             </button>
             <Rings/>
         </header>
+
+        {settingsOpen && (
+            <AdaptivePanel handleClose={() => setSettingsOpen(false)}>
+                <Settings />
+            </AdaptivePanel>
+        )}
+        </>
     )
 }
 
 
-
-Header.propTypes = {
-    setSettingsOpen: PropTypes.func.isRequired
-}
 
 
 export default Header

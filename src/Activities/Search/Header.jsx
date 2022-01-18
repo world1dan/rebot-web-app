@@ -1,9 +1,12 @@
-import React, { useRef, useState, useEffect } from "react"
+import React, { useRef, useState, useEffect, useContext } from "react"
 import PropTypes from "prop-types"
+import Notebooks from "./Notebooks"
+import { manifestContext } from "Context"
 
 
 
 const Header = (props) => {
+    const manifest = useContext(manifestContext)
 
     const [searchMode, setSearchMode] = useState("google")
     const [searchValue, setSearchValue] = useState("")
@@ -51,7 +54,7 @@ const Header = (props) => {
     ]
 
     const buttons = modes.map((subjID) => {
-        const subject = props.manifest[subjID]
+        const subject = manifest[subjID]
 
         return (
             <button
@@ -70,8 +73,8 @@ const Header = (props) => {
 
     return (
         <header id="search-header">
-            <div className="search" style={{ borderColor: props.manifest?.[searchMode]?.color }}>
-                { !isGoogle && <div className="unit">{ props.manifest?.[searchMode].unit }</div> }
+            <div className="search" style={{ borderColor: manifest[searchMode]?.color }}>
+                { !isGoogle && <div className="unit">{ manifest[searchMode]?.unit }</div> }
 
                 <input
                     ref={inputField}
@@ -91,6 +94,8 @@ const Header = (props) => {
             <div className="wraper">
                 { buttons }
             </div>
+
+            <Notebooks/>
         </header>
     )
 }
@@ -99,8 +104,7 @@ const Header = (props) => {
 
 
 Header.propTypes = {
-    addSolution: PropTypes.func.isRequired,
-    manifest: PropTypes.object.isRequired
+    addSolution: PropTypes.func.isRequired
 }
 
 

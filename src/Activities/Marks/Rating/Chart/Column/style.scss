@@ -1,0 +1,35 @@
+.Marks__Rating__Chart_Column {
+    box-shadow: 0 0 0 2px var(--lvl4-borders) inset;
+    will-change: transform opacity;
+    padding-bottom: 12px;
+    background-color: var(--bg4);
+    border-radius: 7px;
+    width: 52px;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    align-items: center;
+    justify-content: center;
+
+    &.own {
+        background: var(--primary);
+    }
+
+    .average-mark {
+        font-weight: 700;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .username {
+        font-weight: normal;
+        font-size: 12px;
+        text-align: center;
+        display: flex;
+        height: 100%;
+        max-width: 52px;
+        justify-content: flex-end;
+        align-items: flex-end;
+        letter-spacing: -0.2px;
+    }
+}

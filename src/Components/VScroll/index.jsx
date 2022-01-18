@@ -1,24 +1,32 @@
-import React from "react"
+import React, { useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 
-import useScrollFix from "Hooks/useScrollFix"
-
 import "./style.scss"
-
-
+import fixScroll from "../../Utils/fixScroll"
 
 
 const VScroll = (props) => {
-    const bind = window.ios ? useScrollFix() : {}
+
+
+    const ref = useRef(null)
+
+
+    useEffect(() => {
+        if (window.ios && ref?.current) {
+            fixScroll(ref.current)
+        }
+    }, [])
+    
 
     return (
         <div className="VScroll__Wraper">
-            <div className="VScroll" {...bind}>
+            <div className="VScroll" ref={ref}>
                 { props.children }
             </div>
         </div>
     )
 }
+
 
 
 
@@ -28,5 +36,3 @@ VScroll.propTypes = {
 
 
 export default VScroll
-
-

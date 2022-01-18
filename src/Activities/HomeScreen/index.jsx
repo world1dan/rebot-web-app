@@ -10,16 +10,18 @@ import Now from "./Now"
 import Wraper from "../../Components/Wraper"
 import Notes from "./Notes"
 
+
 import "./style.scss"
 
 
 
-const HomeScreen = (props) => {
+const HomeScreen = () => {
 
     const [showNow, setShowNow] = useState(false)
     const timetable = useContext(TimeTableContext)
 
     let { dayNum, isWeekend } = useWeekDay()
+
 
 
     useEffect(() => {
@@ -33,40 +35,43 @@ const HomeScreen = (props) => {
     }, [])
 
 
-
-    let afterTitle = null
-
     const hours = new Date().getHours()
 
+
+    let isWeekEnded = false
+
     if (isWeekend) {
-        afterTitle = ""
         dayNum = 1
+        isWeekEnded = true
     } else if (hours > 15) {
         if (dayNum == 5) {
-            afterTitle = ""
             dayNum = 1
+            isWeekEnded = true
         } else {
-            afterTitle = ""
             dayNum += 1
         }
     }
-
+    
     return (
         <Wraper>
             <div className="HomeScreen">
-                <Header setSettingsOpen={props.setSettingsOpen}/>
-                { timetable && !isWeekend && showNow && <Now day_data={timetable[2][dayNum]} pathToDay={"2." + dayNum}/> }
+
+                <Header/>
                 <div id="homescreen-layout">
                     <div className="side-left">
+                        { timetable?.[2]?.[dayNum] && !isWeekEnded && showNow && <Now dayData={timetable[2][dayNum]} pathToDay={"2." + dayNum}/> }
                         <Notes/>
                     </div>
                     <div className="side-right">
-                        { timetable && <Day dayNum={dayNum}
-                            week={isWeekend ? 3 : 2}
-                            timetable={timetable[isWeekend ? 3 : 2][dayNum]}
-                            pathToDay={(isWeekend ? 3 : 2) + "." + dayNum} 
-                            afterTitle={afterTitle}/> }
-                    </div>
+                        { (timetable?.[2] || timetable?.[3]) && 
+                            <Day 
+                                dayNum={dayNum}
+                                week={isWeekEnded ? 3 : 2}
+                                timetable={timetable[isWeekEnded ? 3 : 2][dayNum]}
+                                pathToDay={(isWeekEnded ? 3 : 2) + "." + dayNum}
+                            />
+                        }
+                    </div> 
                 </div>
             </div>
         </Wraper>
@@ -74,8 +79,6 @@ const HomeScreen = (props) => {
 }
 
 
-HomeScreen.propTypes = {
-    setSettingsOpen: PropTypes.func.isRequired
-}
+
 
 export default memo(HomeScreen)
