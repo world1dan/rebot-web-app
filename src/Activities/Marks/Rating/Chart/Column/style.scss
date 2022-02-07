@@ -1,35 +1,35 @@
 .Marks__Rating__Chart_Column {
-    box-shadow: 0 0 0 2px var(--lvl4-borders) inset;
-    will-change: transform opacity;
-    padding-bottom: 12px;
+    align-items: center;
     background-color: var(--bg4);
     border-radius: 7px;
-    width: 52px;
-    flex-shrink: 0;
+    box-shadow: 0 0 0 2px var(--lvl4-borders) inset;
     display: grid;
+    flex-shrink: 0;
     grid-template-rows: 40px 1fr;
-    align-items: center;
     justify-content: center;
+    padding-bottom: 12px;
+    width: 52px;
+    will-change: transform opacity;
 
     &.own {
         background: var(--primary);
     }
 
     .average-mark {
-        font-weight: 700;
         font-size: 13px;
+        font-weight: 700;
         text-align: center;
     }
 
     .username {
-        font-weight: normal;
-        font-size: 12px;
-        text-align: center;
-        display: flex;
-        height: 100%;
-        max-width: 52px;
-        justify-content: flex-end;
         align-items: flex-end;
+        display: flex;
+        font-size: 12px;
+        font-weight: normal;
+        height: 100%;
+        justify-content: flex-end;
         letter-spacing: -0.2px;
+        max-width: 52px;
+        text-align: center;
     }
 }

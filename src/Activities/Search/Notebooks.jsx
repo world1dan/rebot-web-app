@@ -1,9 +1,8 @@
-import React from "react"
+import React from 'react'
 
-import NotebookItem from "./NotebookItem"
+import NotebookItem from './NotebookItem'
 
-import "./style.scss"
-
+import './style.scss'
 
 const notebooks = [
     {
@@ -33,24 +32,18 @@ const notebooks = [
     },
 ]
 
-
 const Notebooks = () => {
-
     return (
         <div className="NotebooksWrapper">
             <div className="Notebooks">
-                { notebooks.map((notebook) => {
-                    return ( 
-                        <NotebookItem
-                            notebook={notebook}
-                            key={notebook.id}
-                        /> 
+                {notebooks.map((notebook) => {
+                    return (
+                        <NotebookItem notebook={notebook} key={notebook.id} />
                     )
                 })}
             </div>
         </div>
     )
 }
-
 
 export default Notebooks

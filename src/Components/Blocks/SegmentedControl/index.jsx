@@ -10,7 +10,7 @@ import "./style.scss"
 const SegmentedControl = ({ items, activeItem, onChange }) => {
 
     return (
-        <motion.ol className={"SegmentedControl"} layout>
+        <motion.ol className="SegmentedControl" layoutScroll>
             { items.map((item) => {
                 const isActive = item.id === activeItem
 

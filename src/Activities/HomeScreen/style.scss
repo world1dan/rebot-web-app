@@ -1,26 +1,16 @@
-.HomeScreen {
-    padding-top: 58px;
-}
-
-
-.side-left {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
 #homescreen-layout {
-    display: flex;
-    flex-direction: column;
+    align-items: start;
+    display: grid;
     gap: 12px;
-}
+    margin: 0 auto;
+    max-width: 1048px;
 
-@media (min-width: 800px) {
-    body:not(.mini-right, .mini-left) #homescreen-layout {
+    @media (min-width: 740px) {
+        grid-template-columns: repeat(2, minmax(370px, 1fr)) !important;
+    }
+
+    .side-left {
         display: grid;
-        grid-template-columns: calc(50% - 6px) calc(50% - 6px);
-        max-width: 1024px;
-        margin: 0 auto;
         gap: 12px;
     }
 }

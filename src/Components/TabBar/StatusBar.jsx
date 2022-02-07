@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react"
 import PropTypes from "prop-types"
+
 import { css } from "@linaria/core"
 
 import { ConfigContext } from "../../Context"
@@ -28,6 +29,13 @@ const statusBarStyles = css`
         color: #30af54ea;
         font-size: 14px;
         text-align: center;
+    }
+
+    .error {
+        color: #30af54ea;
+        font-size: 18px;
+        text-align: center;
+        color: var(--red);
     }
 
     .title {
@@ -72,6 +80,7 @@ const StatusBar = (props) => {
     return (
         <div className={statusBarStyles} ref={ref}>
             {props.type === 'sucsess' && <i className="fas fa-check-circle sucsess"></i>}
+            {props.type === 'error' && <i className="fas fa-times error"></i>}
             <div className="title">{props.title}</div>
         </div>
     )

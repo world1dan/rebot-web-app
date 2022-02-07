@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import useLocalStorage from '../../Hooks/useLocalStorage'
 import PlusRounded from '../Icons/PlusRounded'
 
-
 const styles = css`
     display: flex;
     flex-wrap: wrap;
@@ -25,7 +24,6 @@ const styles = css`
         text-overflow: ellipsis;
         min-width: 60px;
         overflow: hidden;
-        
     }
 
     .addBtn {
@@ -33,37 +31,42 @@ const styles = css`
     }
 `
 
+let tapStartTime = null
 
-let tapStartTime =  null
-
-
-
-const Shortcuts = ({ setValue, focusOnTextarea }) => {
-    const [shortcuts, setShortcuts] = useLocalStorage('shortcuts', ['(', ')', '§', 'Упр', 'Стр', 'WB', 'треш'])
-
+const Shortcuts = ({ insertIntoTextarea, focusOnTextarea }) => {
+    const [shortcuts, setShortcuts] = useLocalStorage('shortcuts', [
+        '(',
+        ')',
+        '§',
+        'Упр',
+        'Стр',
+        'WB',
+        'треш',
+    ])
 
     const removeShortcut = (targetSymbol) => {
-        if (confirm("Удалить " + targetSymbol + "?")) {
+        if (confirm('Удалить ' + targetSymbol + '?')) {
             setTimeout(() => {
                 setShortcuts((currentShortcuts) => {
-                    return currentShortcuts.filter((symbol) => symbol !== targetSymbol)
+                    return currentShortcuts.filter(
+                        (symbol) => symbol !== targetSymbol
+                    )
                 })
             }, 30)
         }
     }
 
-
     const newShortcut = () => {
-        const shortcut = prompt("Давай давай напиши сюда 'головка шлюха жопа член'")
+        const shortcut = prompt(
+            "Давай давай напиши сюда 'головка шлюха жопа член'"
+        )
 
         if (shortcut) {
             setShortcuts((currentShortcuts) => [...currentShortcuts, shortcut])
         }
     }
 
-
     const symbols = shortcuts.map((symbol, i) => {
-
         const handleTap = () => {
             if (tapStartTime) {
                 const tapDuration = Date.now() - tapStartTime
@@ -71,7 +74,7 @@ const Shortcuts = ({ setValue, focusOnTextarea }) => {
                 if (tapDuration >= 400) {
                     removeShortcut(symbol)
                 } else {
-                    setValue((prevValue) => prevValue + symbol + ' ')
+                    insertIntoTextarea(symbol)
                 }
             }
 
@@ -81,9 +84,9 @@ const Shortcuts = ({ setValue, focusOnTextarea }) => {
         return (
             <motion.button
                 key={i}
-                className='symbol' 
+                className="symbol"
                 onClick={focusOnTextarea}
-                onPointerDown={() => tapStartTime = Date.now()}
+                onPointerDown={() => (tapStartTime = Date.now())}
                 onPointerUp={handleTap}
                 whileTap={{ scale: 0.9, filter: 'brightness(1.6)' }}
             >
@@ -92,18 +95,14 @@ const Shortcuts = ({ setValue, focusOnTextarea }) => {
         )
     })
 
-
-
     return (
         <div className={styles}>
-            { symbols }
-            <button className='symbol addBtn' onClick={newShortcut}> 
-                <PlusRounded width={20} height={20}/>
+            {symbols}
+            <button className="symbol addBtn" onClick={newShortcut}>
+                <PlusRounded width={20} height={20} />
             </button>
         </div>
     )
 }
 
-
 export default memo(Shortcuts)
-

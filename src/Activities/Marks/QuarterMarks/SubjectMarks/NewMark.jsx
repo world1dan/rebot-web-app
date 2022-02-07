@@ -1,12 +1,17 @@
-import React, { useState, memo } from 'react'
-import PropTypes from 'prop-types'
+import { useState, memo } from 'react'
+import { css } from '@linaria/core'
 
-import { AnimatePresence, motion } from "framer-motion"
-import ActionSheet from "Components/ActionSheet"
+import { motion } from 'framer-motion'
+
+import ActionSheet from 'Components/ActionSheet'
 import PlusRounded from 'Components/Icons/PlusRounded'
 import MarksKeyboard from '../../MarksKeyboard'
 
-
+const styles = css`
+    .newMarkBtn {
+        will-change: transform;
+    }
+`
 
 const NewMark = ({ addQuarterMark, subject }) => {
     const [addDialog, setAddDialog] = useState(false)
@@ -14,46 +19,33 @@ const NewMark = ({ addQuarterMark, subject }) => {
     const onSubmit = (data) => {
         setTimeout(() => {
             addQuarterMark(data)
-        }, 90)
+        }, 80)
     }
 
     const openAddDialog = () => setAddDialog(true)
     const closeAddDialog = () => setAddDialog(false)
 
-
     return (
         <>
-            <motion.div 
-                className="Mark newMarkBtn" 
+            <motion.div
+                className={'Mark ' + styles}
                 onClick={openAddDialog}
                 layout="position"
-                key={subject.id}
+                layoutScroll
             >
-                <PlusRounded width={18} height={18}/>
+                <PlusRounded width={18} height={18} />
             </motion.div>
-            <AnimatePresence>
-                { addDialog &&
-                        <ActionSheet bottomCloseBtn onClose={closeAddDialog} >
-                            <MarksKeyboard 
-                                withImportanceSwitch 
-                                onSubmit={onSubmit}
-                                title="Нажми на оценку чтобы добавить" 
-                                descr={subject.full_title ?? subject.title}
-                            />
-                        </ActionSheet>
-                }
-            </AnimatePresence>
+            {addDialog && (
+                <ActionSheet bottomCloseBtn onClose={closeAddDialog}>
+                    <MarksKeyboard
+                        onSubmit={onSubmit}
+                        title="Нажми на оценку чтобы добавить"
+                        descr={subject.full_title ?? subject.title}
+                    />
+                </ActionSheet>
+            )}
         </>
     )
 }
 
-
-
-
-NewMark.propTypes = {
-    addQuarterMark: PropTypes.func.isRequired,
-    subject: PropTypes.object.isRequired
-}
-
 export default memo(NewMark)
-

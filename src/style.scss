@@ -1,35 +1,37 @@
 * {
     box-sizing: border-box;
     font-family: ui-rounded, Roboto, Ubuntu, 'segoe ui', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
     -webkit-user-select: none;
     user-select: none;
-    -webkit-tap-highlight-color: transparent;
 }
 
 input,
 textarea {
     background: none;
-    border: none;
+    border: 0;
     outline: none;
     -webkit-user-select: auto;
     user-select: auto;
 }
 
 button {
-    margin: 0;
-    padding: 0;
-    color: var(--text1);
-    font-weight: bold;
     background: none;
-    border: none;
-    outline: none;
+    border: 0;
+    color: var(--text1);
     cursor: pointer;
+    font-weight: bold;
+    margin: 0;
+    outline: none;
+    padding: 0;
 }
 
 :root {
     --text1: #e1e3e6;
     --text2: #8e8e93;
-    --bg1: #0a0a0a;
+    --bg1: #000;
     --bg2: #141414;
     --bg3: #19191a;
     --bg4: #212122;
@@ -37,11 +39,10 @@ button {
     --inv: 0.92;
     --borders-soft: rgb(44 44 44 / 10%);
     --borders: #19191a;
-    --primary1: #5d4ae2;
     --red2: #e4372e;
     --tab-bar-btn: #76787a;
     --tab-bar-btn-active: #fff;
-    --primary: #5d4ae2;
+    --primary: #5e5be6;
     --bottom-save-zone: env(safe-area-inset-bottom);
     --top-save-zone: env(safe-area-inset-top);
     --shadows-bg4: rgb(43 43 43);
@@ -51,10 +52,15 @@ button {
     --mark-green-bg: rgb(52 199 89 / 8%);
     --mark-yellow-bg: rgb(255 204 0 / 8%);
     --mark-red-bg: rgb(255 48 48 / 8%);
+    --lvl4-borders: rgb(43 43 43 / 20%);
+    --red: #ff4539;
+    --yellow: #ffd60a;
+    --green: #2fd158;
+    --blue: #0a84ff;
+    --indigo: #5e5be6;
+    --bg2-translucent: #14141438;
 
     color-scheme: dark;
-
-    --lvl4-borders: rgb(43 43 43 / 20%);
 }
 
 :root[theme='light'] {
@@ -68,7 +74,7 @@ button {
     --borders: #dadfe4;
     --borders-soft: #e4e9eece;
     --tab-bar-btn: #00000073;
-    --tab-bar-btn-active: #5d4ae2;
+    --tab-bar-btn-active: #5855d6;
     --red2: #e4372ee0;
     --shadows-bg4: rgb(238 238 238);
     --mark-green: #17ac3c;
@@ -77,82 +83,21 @@ button {
     --mark-green-bg: rgb(52 199 89 / 20%);
     --mark-yellow-bg: rgb(255 204 0 / 20%);
     --mark-red-bg: rgb(255 48 48 / 20%);
+    --lvl4-borders: rgb(194 194 194 / 20%);
+    --red: #ff3b2f;
+    --yellow: #f7cb17;
+    --green: #34c85a;
+    --blue: #007aff;
+    --indigo: #5855d6;
 
     color-scheme: light;
-
-    --lvl4-borders: rgb(194 194 194 / 20%);
 }
 
 html,
 body,
 #root {
+    background: var(--bg1);
     height: 100%;
     margin: 0;
     overflow: hidden;
-    background-color: var(--bg1);
-}
-
-.tab {
-    height: 100%;
-    padding-bottom: calc(env(safe-area-inset-bottom) + 46px);
-}
-
-.mini-right #root {
-    padding-left: min(720px, 50vw);
-
-    .bottom-nav {
-        padding-left: min(720px, 50vw);
-    }
-}
-
-.mini-left #root {
-    padding-right: min(720px, 50vw);
-
-    .bottom-nav {
-        padding-right: min(720px, 50vw);
-    }
-}
-
-.content-card {
-    position: relative;
-    padding: 8px;
-    color: var(--text1);
-    background-color: var(--bg2);
-    border-radius: 14px;
-
-    .table-btn {
-        position: absolute;
-        top: 8px;
-        width: 38px;
-        height: 38px;
-        padding: 8px;
-        background-color: var(--bg3);
-        border-radius: 7px;
-        box-shadow: 0 0 0 1px var(--borders-soft) inset;
-
-        &.tool {
-            right: 8px;
-            display: flex;
-            align-items: center;
-            justify-self: center;
-            padding-left: 11px;
-            font-size: 14px;
-        }
-    }
-
-    .content {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
-}
-
-@media (max-width: 360px) {
-    .content-card {
-        border-radius: 0 !important;
-    }
-
-    .week-grid {
-        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)) !important;
-    }
 }

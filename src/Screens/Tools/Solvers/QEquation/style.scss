@@ -1,11 +1,11 @@
 .QEquation {
     .form {
-        display: flex;
         align-items: center;
-        gap: 5px;
-        padding: 6px;
+        display: flex;
         font-size: 24px;
         font-weight: 600;
+        gap: 5px;
+        padding: 6px;
     }
 
     .solution-info {
@@ -17,6 +17,7 @@
         .line {
             font-size: 15px;
             font-weight: 600;
+
             .secondary {
                 color: var(--text2);
             }

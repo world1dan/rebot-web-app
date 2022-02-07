@@ -1,9 +1,8 @@
-import PropTypes from "prop-types"
-import React from "react"
+import PropTypes from 'prop-types'
+import React from 'react'
 
-import { css } from "@linaria/core"
-import { motion } from "framer-motion"
-
+import { css } from '@linaria/core'
+import { motion } from 'framer-motion'
 
 const buttonStyles = css`
     display: flex;
@@ -42,12 +41,10 @@ const buttonStyles = css`
     }
 `
 
-
 const Button = ({ handleClick, active, icon, title }) => {
-
     return (
         <motion.button
-            onClick={handleClick}
+            onPointerDown={handleClick}
             whileTap={{ scale: 0.93 }}
             className={buttonStyles + (active ? ' active' : '')}
         >
@@ -57,15 +54,11 @@ const Button = ({ handleClick, active, icon, title }) => {
     )
 }
 
-
-
 Button.propTypes = {
     handleClick: PropTypes.func.isRequired,
     active: PropTypes.bool,
     icon: PropTypes.node.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
 }
-
-
 
 export default Button

@@ -1,17 +1,14 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import "./style.scss"
-
+import './style.scss'
 
 const Average = (props) => {
-
     const sumInQuarters = {}
     const countInQuarters = {}
 
     let yearMarksSum = 0
     let subjectsWithYearMark = 0
-
 
     for (let subject in props.marks) {
         const marks = props.marks[subject]
@@ -27,7 +24,7 @@ const Average = (props) => {
                 countInQuarters[i] = (countInQuarters[i] ?? 0) + 1
             }
         }
-    
+
         let average = sum / count
 
         if (average) {
@@ -36,7 +33,6 @@ const Average = (props) => {
             subjectsWithYearMark += 1
         }
     }
-
 
     const quarterMarksComponents = []
 
@@ -47,16 +43,16 @@ const Average = (props) => {
             average = Number(average.toFixed(2))
 
             quarterMarksComponents.push(
-                <div className="Mark" key={i}>{ average }</div>
+                <div className="Mark" key={i}>
+                    {average}
+                </div>
             )
         } else {
-            quarterMarksComponents.push(
-                <div key={i}></div>
-            )
+            quarterMarksComponents.push(<div key={i}></div>)
         }
     }
 
-    let globalAverage = (yearMarksSum / subjectsWithYearMark)
+    let globalAverage = yearMarksSum / subjectsWithYearMark
 
     if (!isNaN(globalAverage)) {
         globalAverage = parseInt(globalAverage.toFixed(2))
@@ -68,17 +64,14 @@ const Average = (props) => {
         <div className="YearSubjectMarks average">
             <div></div>
             <h5 className="subject-title">Средний балл</h5>
-            { quarterMarksComponents }
-            <div className="year-mark">{ globalAverage }</div>
+            {quarterMarksComponents}
+            <div className="year-mark">{globalAverage}</div>
         </div>
     )
 }
 
-
-
 Average.propTypes = {
-    marks: PropTypes.object.isRequired
+    marks: PropTypes.object.isRequired,
 }
-
 
 export default Average

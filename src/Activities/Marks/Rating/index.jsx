@@ -1,14 +1,12 @@
-import React, { useContext } from "react"
+import React, { useContext } from 'react'
 
-import { ConfigContext, manifestContext } from "../../../Context"
-import useRating from "./useRating"
+import { ConfigContext } from '../../../Context'
+import useRating from './useRating'
 
-import Chart from "./Chart"
+import Chart from './Chart'
 
-import "./style.scss"
-import useUsers from "./useUsers"
-
-
+import './style.scss'
+import useUsers from './useUsers'
 
 const Rating = () => {
     const [usersRatings, statistics] = useRating()
@@ -17,19 +15,17 @@ const Rating = () => {
 
     return (
         <div className="Rating">
-            <Chart usersRatings={usersRatings} user={user} usersInfo={users}/>
+            <Chart usersRatings={usersRatings} user={user} usersInfo={users} />
             <div className="stat">
                 <div className="title">Всего оценок у тебя</div>
-                <div className="num">{ statistics?.userMarksCounter }</div>
+                <div className="num">{statistics?.userMarksCounter}</div>
             </div>
             <div className="stat">
                 <div className="title">Всего оценок у всех</div>
-                <div className="num">{ statistics?.globalMarksCount }</div>
+                <div className="num">{statistics?.globalMarksCount}</div>
             </div>
         </div>
     )
 }
-
-
 
 export default Rating

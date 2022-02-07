@@ -1,47 +1,49 @@
 .FatalError-wraper {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
     align-items: center;
+    display: flex;
     height: 90%;
+    margin: 0 auto;
+    max-width: 600px;
 }
 
 .FatalError {
-    flex-grow: 1;
+    align-items: center;
     border-radius: 14px;
     display: grid;
-    justify-content: center;
-    align-items: center;
-    grid-template-rows: 60px 1fr;
-    padding: 12px;
+    flex-grow: 1;
     gap: 20px;
+    grid-template-rows: 60px 1fr;
+    justify-content: center;
+    padding: 12px;
 
     svg {
-        margin: 0 auto;
         color: #ed4336;
+        margin: 0 auto;
     }
 
     .descr {
         text-align: center;
+
         h1 {
             font-size: 22px;
         }
+
         p {
-            font-size: 16px;
-            max-width: 300px;
-            font-weight: 600;
             color: var(--text2);
+            font-size: 16px;
+            font-weight: 600;
+            max-width: 300px;
         }
     }
 
     .reload {
         background-color: var(--bg3);
-        box-shadow: 0px 0px 0px 1.5px var(--borders-soft) inset;
-        padding: 14px 60px;
         border-radius: 7px;
-        transition: background 0.2s;
+        box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
         font-size: 15px;
         font-weight: 600;
+        padding: 14px 60px;
+        transition: background 0.2s;
 
         &:hover {
             background-color: var(--bg4);

@@ -3,25 +3,24 @@
 }
 
 .Rating__Chart {
-    box-shadow: 0px 0px 0px 1.5px var(--borders-soft) inset;
     background-color: var(--bg2);
-    overflow: hidden;
-    height: 400px;
-    width: 100%;
     border-radius: 7px;
+    box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
     display: grid;
     grid-template-columns: 1fr;
+    height: 400px;
+    overflow: hidden;
     position: relative;
+    width: 100%;
 
     .data-wraper {
-        display: flex;
-        padding: 12px;
-
-        grid-template-rows: 1fr;
-        gap: 8px;
         align-items: flex-end;
+        display: flex;
+        gap: 8px;
+        grid-template-rows: 1fr;
         overflow-x: auto;
         overflow-y: hidden;
+        padding: 12px;
 
         &::-webkit-scrollbar {
             height: 8px;

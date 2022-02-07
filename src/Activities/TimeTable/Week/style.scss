@@ -1,14 +1,10 @@
 .week-grid {
-    will-change: transform opacity;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     gap: 10px;
-    max-width: 1380px;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     margin: 0 auto;
+    max-width: 1380px;
     padding-top: 58px;
-
-    left: 0;
-    right: 0;
 
     @media (min-width: 700px) {
         padding-top: 16px;
@@ -19,64 +15,21 @@
     }
 }
 
-.week-wrapper {
-    position: relative;
-}
-#week-header {
-    background-color: var(--bg2);
-    color: var(--text1);
-    max-width: 700px;
-    height: calc(var(--top-save-zone) + 54px);
-    padding-top: var(--top-save-zone);
-    border-bottom: 1px solid var(--borders);
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    display: flex;
-    align-items: center;
-    z-index: 5;
-
-    @media (min-width: 700px) {
-        margin: 0 auto;
-        position: static;
-        box-shadow: 0 0 0 1px var(--borders-soft) inset;
-        border-radius: 9px !important;
-    }
-
-    span {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    button {
-        width: 64px;
-        height: 100px;
-
-        &.unactive {
-            color: var(--text2);
-        }
-    }
-}
-
 .no-timetable-alert {
+    display: grid;
     font-size: 18px;
     font-weight: bold;
     height: 60px;
-    text-align: center;
-    display: grid;
-    place-items: center;
-    max-width: 500px;
-    width: 100%;
     margin: 0 auto;
     margin-top: 140px;
+    max-width: 500px;
+    place-items: center;
+    text-align: center;
+    width: 100%;
 }
 
-@media (max-width: 1000px) {
-    .week-grid .content-card:last-of-type .flexRow:nth-last-of-type(-n + 2) .menu-items-wraper {
-        transform: translateY(-110px) translateX(var(--x));
+@media (max-width: 360px) {
+    .week-grid {
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)) !important;
     }
 }

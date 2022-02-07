@@ -3,26 +3,27 @@
     flex-direction: column;
     gap: 10px;
     color: var(--text1);
-    .card {
-        background: var(--bg2);
-        padding: 9px;
-        border-radius: 13px;
-        display: flex;
 
+    .card {
+        display: flex;
+        padding: 9px;
+        background: var(--bg2);
+        border-radius: 13px;
 
         .title {
             margin: 0;
             font-size: 19px;
         }
-        
+
         .main-content {
-            flex-grow: 1;
-            padding-left: 10px;
-            padding-top: 3px;
             display: flex;
             flex-direction: column;
+            flex-grow: 1;
             gap: 4px;
+            padding-top: 3px;
+            padding-left: 10px;
         }
+
         .tool-btns-wraper {
             display: flex;
             flex-direction: column;
@@ -37,7 +38,6 @@
         }
     }
 
-
     .lesson {
         .homework {
             color: var(--text2);
@@ -45,5 +45,4 @@
             font-size: 16px;
         }
     }
-    
 }

@@ -1,60 +1,54 @@
-import React, { useState, useRef } from "react"
-import PropTypes from "prop-types"
+import { useState } from 'react'
+import PropTypes from 'prop-types'
 
-import "./style.scss"
+import MenuContent from './MenuContent'
 
+import './style.scss'
 
+const ContextMenu = ({ children, icon }) => {
+    const [menuStyles, setMenuStyles] = useState(null)
 
-const ContextMenu = (props) => {
+    const handleOpen = (event) => {
+        if (menuStyles) return
+        let x = event.clientX
+        let y = event.clientY
+        let transformOrigin = null
 
-    const [open, setOpen] = useState(false)
+        if (y + 180 > window.screen.height) {
+            y -= 100
+            transformOrigin = 'bottom right'
+        }
 
-    const menu = useRef()
-
-    const handleOpen = () => {
-        setOpen(true)
+        setMenuStyles({
+            transformOrigin,
+            top: y,
+            left: x,
+        })
     }
 
-    const handleClose = () => {
-        
-        menu.current.animate([
-            { opacity: 1 },
-            { opacity: 0 }
-        ], {
-            duration: 120,
-            fill: "both"
-        }).onfinish = () => setOpen(false)
-    }
-
-
+    const closeMenu = () => setMenuStyles(false)
 
     return (
-        <div className="context-menu">
-            <button 
-                className={"context-menu-btn" + (open ? " active" : "")} 
+        <>
+            <button
+                className={'context-menu-btn' + (menuStyles ? ' active' : '')}
                 onClick={handleOpen}
-                onBlur={handleClose}
-                onMouseOut={window.ios ? handleClose : null}>
-                { props.icon ?? <i className="fas fa-ellipsis-v"></i> }
+            >
+                {icon ?? <i className="fas fa-ellipsis-v"></i>}
             </button>
 
-            { open && 
-            <div className="menu-items-wraper">
-                <div className="menu-items" ref={menu}>
-                    {props.children}
-                </div>
-            </div> }
-        </div>
+            {menuStyles && (
+                <MenuContent menuStyles={menuStyles} closeMenu={closeMenu}>
+                    {children}
+                </MenuContent>
+            )}
+        </>
     )
 }
 
-
-
 ContextMenu.propTypes = {
     icon: PropTypes.node,
-    children: PropTypes.node
+    children: PropTypes.node,
 }
-
-
 
 export default ContextMenu

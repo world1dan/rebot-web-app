@@ -8,6 +8,7 @@ import PlusRounded from "Components/Icons/PlusRounded"
 import "./style.scss"
 import useMarksController from "../useMarksController"
 import { AnimatePresence } from "framer-motion"
+import { SubjectMarkContext } from "../QuarterMarks/SubjectMarks/SubjectMarksContext"
 
 
 
@@ -33,7 +34,7 @@ const YearSubjectMarks = ({ subject, marks }) => {
                 <Mark 
                     mark={{mark}} key={subject.id + i} 
                     subject={subject} 
-                    yearMark 
+                    isYearMark 
                     quarter={i}
                     animate
                 />
@@ -67,7 +68,9 @@ const YearSubjectMarks = ({ subject, marks }) => {
 
                 <h5 className="subject-title">{ subject.title }</h5>
                 
-                { quarterMarks }
+                <SubjectMarkContext.Provider value={{ subject }}>
+                    {quarterMarks}
+                </SubjectMarkContext.Provider>
 
                 <div className="year-mark">
                     <Mark mark={{mark: average}} unclickable/>

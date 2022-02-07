@@ -1,49 +1,38 @@
-import React, { memo, useContext, useEffect, useState } from "react"
-import PropTypes from "prop-types"
+import { memo, useContext, useState } from 'react'
 
-import { TimeTableContext } from "../../Context"
-import useWeekDay from "../../Hooks/useWeekDay"
+import { TimeTableContext } from '../../Context'
+import useWeekDay from '../../Hooks/useWeekDay'
+import useInterval from '../../Hooks/useInterval'
 
-import Day from "../TimeTable/Day"
-import Header from "./Header"
-import Now from "./Now"
-import Wraper from "../../Components/Wraper"
-import Notes from "./Notes"
+import Header from './Header'
+import Now from './Now'
+import Wraper from '../../Components/Wraper'
+import Notes from './Notes'
+import DaysCarousel from './DaysCarousel'
 
+import './style.scss'
 
-import "./style.scss"
-
-
+const shoudShowNow = () => {
+    const hours = new Date().getHours()
+    return hours >= 7 && hours != 24
+}
 
 const HomeScreen = () => {
-
-    const [showNow, setShowNow] = useState(false)
+    const [showNow, setShowNow] = useState(shoudShowNow)
     const timetable = useContext(TimeTableContext)
 
+    useInterval(() => {
+        setShowNow(shoudShowNow())
+    }, 1000)
+
     let { dayNum, isWeekend } = useWeekDay()
-
-
-
-    useEffect(() => {
-        const update = () => {
-            const hours = new Date().getHours()
-            setShowNow(hours >= 7 && hours != 24)
-        }
-
-        update()
-        setInterval(update, 1000)
-    }, [])
-
-
     const hours = new Date().getHours()
-
-
     let isWeekEnded = false
 
     if (isWeekend) {
         dayNum = 1
         isWeekEnded = true
-    } else if (hours > 15) {
+    } else if (hours >= 15) {
         if (dayNum == 5) {
             dayNum = 1
             isWeekEnded = true
@@ -51,34 +40,31 @@ const HomeScreen = () => {
             dayNum += 1
         }
     }
-    
+
     return (
         <Wraper>
-            <div className="HomeScreen">
-
-                <Header/>
-                <div id="homescreen-layout">
-                    <div className="side-left">
-                        { timetable?.[2]?.[dayNum] && !isWeekEnded && showNow && <Now dayData={timetable[2][dayNum]} pathToDay={"2." + dayNum}/> }
-                        <Notes/>
-                    </div>
-                    <div className="side-right">
-                        { (timetable?.[2] || timetable?.[3]) && 
-                            <Day 
-                                dayNum={dayNum}
-                                week={isWeekEnded ? 3 : 2}
-                                timetable={timetable[isWeekEnded ? 3 : 2][dayNum]}
-                                pathToDay={(isWeekEnded ? 3 : 2) + "." + dayNum}
-                            />
-                        }
-                    </div> 
+            <Header />
+            <div id="homescreen-layout">
+                <div className="side-left">
+                    {timetable?.[2]?.[dayNum] && !isWeekEnded && showNow && (
+                        <Now
+                            dayData={timetable[2][dayNum]}
+                            pathToDay={'2.' + dayNum}
+                        />
+                    )}
+                    <Notes />
                 </div>
+                {(timetable?.[2] || timetable?.[3]) && (
+                    <DaysCarousel
+                        timetable={timetable}
+                        dayNum={dayNum}
+                        isWeekEnded={isWeekEnded}
+                        isWeekend={isWeekend}
+                    />
+                )}
             </div>
         </Wraper>
     )
 }
-
-
-
 
 export default memo(HomeScreen)

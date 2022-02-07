@@ -1,50 +1,50 @@
 .Category {
-    * {
-        color: var(--text1);
-    }
     display: flex;
     flex-direction: column;
     gap: 3px;
+
     .Category-title {
-        font-size: 26px;
+        font-size: 23px;
         padding-left: 20px;
     }
-    .Category-content {
 
+    .Category-content {
         background: var(--bg2);
         border-radius: 9px;
         padding: 10px;
 
         .content-header {
+            color: var(--text2);
             font-size: 13px;
             font-weight: 600;
-            padding-left: 2px;
             margin-bottom: 12px;
-            color: var(--text2);
+            padding-left: 2px;
         }
     }
 }
 
 .NumInput {
-    color: var(--text1);
     background-color: var(--bg4);
-    height: 40px;
-    width: 50px;
     border-radius: 7px;
-    padding: 0;
-    text-align: center;
+    color: var(--text1);
     font-size: 16px;
     font-weight: 600;
+    height: 40px;
+    padding: 0;
+    text-align: center;
     user-select: auto !important;
+    width: 50px;
+
     &:focus {
         filter: brightness(1.2);
     }
 }
+
 .tools-descr {
     color: var(--text2);
+    font-size: 15px;
     padding: 20px;
     padding-bottom: 0;
     padding-top: 0;
-    font-size: 15px;
     width: 300px;
 }

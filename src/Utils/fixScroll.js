@@ -1,9 +1,31 @@
-var initialY = null
-
 
 export default function fixScroll(target) {
 
-    const onTouchStart = (e) => {
+    const onScroll = (e) => {
+        const element = e.currentTarget
+
+        if (element.scrollTop == 0) {
+            element.scrollTop = 1
+        } else if (element.scrollHeight - element.scrollTop == element.clientHeight) {
+            element.scrollTop = element.scrollTop - 1
+        }
+    }
+    target.scrollTop = 1
+    target.addEventListener("scroll", onScroll, { passive: true })
+}
+
+
+/*
+
+
+const onTouchStart = (e) => {
+
+        if (e.currentTarget.scrollTop == 0) {
+            e.currentTarget.scrollTop = 1
+        } else if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop <= e.currentTarget.clientHeight) {
+            e.currentTarget.scrollTop = e.currentTarget.scrollTop - 1
+        }
+    
         initialY = e.touches[0].clientY
     }
 
@@ -16,19 +38,20 @@ export default function fixScroll(target) {
         if (e.target.scrollWidth != e.target.clientWidth) return
 
         const el = e.currentTarget
-
+        if (e.currentTarget.scrollTop == 0) {
+            e.currentTarget.scrollTop = 1
+        } else if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop <= e.currentTarget.clientHeight) {
+            e.currentTarget.scrollTop = e.currentTarget.scrollTop - 1
+        }
         if (diffY > 0) {
             if (el.scrollHeight - el.scrollTop <= el.clientHeight) {
                 e.preventDefault()
             }
         } else {
             if (el.scrollTop == 0) {
-                e.preventDefault()
+                el.scrollTop = 1
             }
         }  
         initialY = null
     }
-
-    //target.addEventListener("touchmove", onTouchMove, { passive: false })
-    //target.addEventListener("touchstart", onTouchStart)
-}
+*/

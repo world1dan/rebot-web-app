@@ -1,56 +1,61 @@
-import React, { useRef, useState, useEffect, useContext } from "react"
-import PropTypes from "prop-types"
-import Notebooks from "./Notebooks"
-import { manifestContext } from "Context"
+import { useRef, useState, useEffect, useContext } from 'react'
 
+import { manifestContext } from 'Context'
 
+import Notebooks from './Notebooks'
 
-const Header = (props) => {
+const Header = ({ addSolution }) => {
     const manifest = useContext(manifestContext)
 
-    const [searchMode, setSearchMode] = useState("google")
-    const [searchValue, setSearchValue] = useState("")
+    const [searchMode, setSearchMode] = useState('google')
+    const [searchValue, setSearchValue] = useState('')
 
     const inputField = useRef()
 
-
     useEffect(() => {
-        if (searchMode !== "google") {
+        if (searchMode !== 'google') {
             inputField.current.focus()
         }
     }, [searchMode])
 
-
     const search = () => {
-        if (searchValue == "") {
-            setSearchMode("google")
+        inputField.current.blur()
+        if (searchValue == '') {
+            setSearchMode('google')
             return
         }
-    
-        if (searchMode !== "google") {
-            props.addSolution(searchMode, searchValue)
-            setSearchMode("google")
+
+        if (searchMode !== 'google') {
+            addSolution(searchMode, searchValue)
+            setSearchMode('google')
         } else {
-            window.open("https://www.google.com/search?q=" + searchValue, "_blank")
+            window.open(
+                'https://www.google.com/search?q=' + searchValue,
+                '_blank'
+            )
         }
 
-        setSearchValue("")
+        setSearchValue('')
     }
 
     const handleChange = (e) => setSearchValue(e.target.value)
 
     const handleKeyPress = (e) => {
-        if (e.key == "Enter" && searchValue !== "") {
+        if (e.key == 'Enter' && searchValue !== '') {
             search()
         }
     }
 
-    
-
     const modes = [
-        "eng", "rus", "bel", 
-        "phis", "alg", "him", 
-        "rus_lit", "geom", "bel_lit"
+        'eng',
+        'rus',
+        'bel',
+        'phis',
+        'alg',
+        'him',
+        'rus_lit',
+        'geom',
+        'bel_lit',
     ]
 
     const buttons = modes.map((subjID) => {
@@ -59,54 +64,43 @@ const Header = (props) => {
         return (
             <button
                 key={subjID}
-                style={{ background: subject.color }} 
-                onClick={() => setSearchMode(subjID)}>
-                { subject.title }
+                style={{ background: subject.color }}
+                onClick={() => setSearchMode(subjID)}
+            >
+                {subject.title}
             </button>
         )
     })
 
-
-    const isGoogle = searchMode === "google"
-
-
+    const isGoogle = searchMode === 'google'
 
     return (
         <header id="search-header">
-            <div className="search" style={{ borderColor: manifest[searchMode]?.color }}>
-                { !isGoogle && <div className="unit">{ manifest[searchMode]?.unit }</div> }
+            <div
+                className="search"
+                style={{ borderColor: manifest[searchMode]?.color }}
+            >
+                {!isGoogle && (
+                    <div className="unit">{manifest[searchMode]?.unit}</div>
+                )}
 
                 <input
+                    enterKeyHint="search"
                     ref={inputField}
                     value={searchValue}
-
                     onChange={handleChange}
-                    onBlur={search}
                     onKeyPress={handleKeyPress}
-    
-                    inputMode={ isGoogle ? "" : "decimal"}
-                    type={ isGoogle ? "text" : "numbers"} 
+                    inputMode={isGoogle ? '' : ''}
+                    type={isGoogle ? 'text' : 'number'}
                     autoComplete="off"
                 />
-    
             </div>
 
-            <div className="wraper">
-                { buttons }
-            </div>
+            <div className="wraper">{buttons}</div>
 
-            <Notebooks/>
+            <Notebooks />
         </header>
     )
 }
-
-
-
-
-Header.propTypes = {
-    addSolution: PropTypes.func.isRequired
-}
-
-
 
 export default Header

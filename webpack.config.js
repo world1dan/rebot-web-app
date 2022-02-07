@@ -1,59 +1,58 @@
-const path = require("path")
-const HtmlPlugin = require("html-webpack-plugin")
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const TerserPlugin = require("terser-webpack-plugin")
-const CopyPlugin = require("copy-webpack-plugin")
+const path = require('path')
+const HtmlPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 //const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CssoWebpackPlugin = require('csso-webpack-plugin').default
-const stylis = require('stylis');
+const stylis = require('stylis')
+const BundleAnalyzerPlugin =
+    require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
-stylis.set({ prefix: false });
+stylis.set({ prefix: false })
 
 module.exports = (env) => {
-
     const plugins = [
-        new MiniCssExtractPlugin({ filename: "style.css" }),
+        new BundleAnalyzerPlugin(),
+        new MiniCssExtractPlugin({ filename: 'style.css' }),
         new CopyPlugin({
-            patterns: [{
-                from: path.resolve(__dirname, "public"),
-                to: path.resolve(__dirname, "dist"),
-            }]
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'public'),
+                    to: path.resolve(__dirname, 'dist'),
+                },
+            ],
         }),
         new HtmlPlugin({
-            template: "./src/index.html"
+            template: './src/index.html',
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
     ]
 
-
-
-
     if (env.production) {
-        plugins.push(
-            new CssoWebpackPlugin()
-        )
+        plugins.push(new CssoWebpackPlugin())
     }
 
-
-
     return {
-        entry: "./src/index.js",
+        entry: './src/index.js',
 
         module: {
             rules: [
                 {
                     test: /\.(scss|css)$/,
                     use: [
-                        MiniCssExtractPlugin.loader, 
+                        MiniCssExtractPlugin.loader,
                         {
-                            loader: "css-loader",
+                            loader: 'css-loader',
                             options: {
                                 esModule: true,
                             },
-                        }, 
-                        "sass-loader"
-                    ]
+                        },
+                        {
+                            loader: 'sass-loader',
+                        },
+                    ],
                 },
                 {
                     test: /\.(js|jsx)?$/,
@@ -63,16 +62,17 @@ module.exports = (env) => {
                         {
                             loader: '@linaria/webpack-loader',
                             options: {
-                                sourceMap: process.env.NODE_ENV !== 'production',
+                                sourceMap:
+                                    process.env.NODE_ENV !== 'production',
                             },
-                        }
-                    ]
+                        },
+                    ],
                 },
-            ]
+            ],
         },
 
-        resolve: { 
-            extensions: [".js", ".jsx"],
+        resolve: {
+            extensions: ['.js', '.jsx'],
             alias: {
                 Components: path.resolve(__dirname, 'src/Components/'),
                 Activities: path.resolve(__dirname, 'src/Activities/'),
@@ -85,25 +85,24 @@ module.exports = (env) => {
         },
 
         output: {
-            filename: "bundle.js",
-            path: path.resolve(__dirname, "dist")
+            filename: 'bundle.js',
+            path: path.resolve(__dirname, 'dist'),
         },
 
         optimization: {
             minimize: env.production,
-            minimizer: [new TerserPlugin({
-                minify: TerserPlugin.uglifyJsMinify,
-                terserOptions: {
-                    compress: {
-                        drop_console: true,
-                        toplevel: true
-                    }
-                }
-            })]
+            minimizer: [
+                new TerserPlugin({
+                    minify: TerserPlugin.uglifyJsMinify,
+                    terserOptions: {
+                        compress: {
+                            passes: 3,
+                        },
+                    },
+                }),
+            ],
         },
 
-
-    
         devtool: 'source-map',
 
         stats: {
@@ -112,12 +111,12 @@ module.exports = (env) => {
 
         devServer: {
             static: {
-                directory: path.resolve(__dirname, "dist"),
+                directory: path.resolve(__dirname, 'dist'),
             },
             port: 4200,
-            hot: true
+            hot: true,
         },
 
-        plugins
+        plugins,
     }
 }
