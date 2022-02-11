@@ -4,16 +4,19 @@
     margin: 0 auto;
     max-width: 580px;
     min-height: 600px;
+    padding: 8px;
+    padding-top: 4px;
     width: 100%;
 
     .average {
         height: 68px;
 
         .Mark {
-            border-radius: 7px;
-            min-width: 36px;
-            padding: 20px 6px;
-            width: auto;
+            background: 0;
+            box-shadow: none;
+            color: var(--text);
+            font-size: 16px;
+            width: 40px;
         }
 
         .year-mark {
@@ -27,9 +30,8 @@
         padding-top: 6px;
     }
 
-    @media (max-width: 380px) {
-        padding: 8px;
-        padding-top: 4px;
+    @media (max-width: 350px) {
+        padding: 0;
     }
 }
 

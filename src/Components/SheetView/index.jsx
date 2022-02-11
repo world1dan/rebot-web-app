@@ -9,6 +9,7 @@ import Backdrop from '../Backdrop'
 import { AnimatePresence } from 'framer-motion'
 import CloseBtn from './CloseBtn'
 import VScroll from '../VScroll'
+import { changeThemeColor } from '../../Utils/changeThemeColor'
 const Sheet = styled(motion.div)`
     @keyframes adaptive-panel-in {
         from {
@@ -53,6 +54,8 @@ const Sheet = styled(motion.div)`
 const SheetView = ({ children, handleClose, type }) => {
     const [isVisible, setIsVisible] = useState(true)
     const ref = useRef(null)
+    const prevThemeColor = useRef()
+
     const closeSheet = () => setIsVisible(false)
 
     useEffect(() => {
@@ -62,6 +65,14 @@ const SheetView = ({ children, handleClose, type }) => {
                 easing: 'ease-in',
                 fill: 'forwards',
             })
+            if (type == 'fullHeightOnMobile') {
+                changeThemeColor(prevThemeColor.current)
+            }
+        } else if (type == 'fullHeightOnMobile') {
+            const meta = document.querySelector('meta[name=theme-color]')
+
+            prevThemeColor.current = meta.content
+            changeThemeColor('var(--bg2)')
         }
     }, [isVisible])
 

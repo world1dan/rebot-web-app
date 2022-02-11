@@ -30,8 +30,8 @@ const styles = css`
         padding-top: 6px;
     }
 
-    @media (max-width: 380px) {
-        padding: 8px;
+    @media (max-width: 360px) {
+        padding: 0;
         padding-top: 4px;
     }
 `

@@ -26,9 +26,8 @@ const styles = css`
     }
 
     @media (max-width: 360px) {
-        .content-card {
-            border-radius: 0 !important;
-        }
+        border-radius: 0;
+        padding: 6px;
     }
 
     .header {

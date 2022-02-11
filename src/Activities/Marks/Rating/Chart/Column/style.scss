@@ -8,16 +8,17 @@
     grid-template-rows: 40px 1fr;
     justify-content: center;
     padding-bottom: 12px;
-    width: 52px;
-    will-change: transform opacity;
+    width: 56px;
+    will-change: transform, opacity;
 
     &.own {
-        background: var(--primary);
+        background: var(--indigo);
+        color: #fff;
     }
 
     .average-mark {
-        font-size: 13px;
-        font-weight: 700;
+        font-size: 15px;
+        font-weight: 600;
         text-align: center;
     }
 
@@ -25,11 +26,14 @@
         align-items: flex-end;
         display: flex;
         font-size: 12px;
-        font-weight: normal;
+        font-weight: 600;
         height: 100%;
-        justify-content: flex-end;
+        justify-content: center;
         letter-spacing: -0.2px;
         max-width: 52px;
+        overflow-wrap: anywhere;
         text-align: center;
+        word-break: break-all;
+        word-wrap: break-word;
     }
 }

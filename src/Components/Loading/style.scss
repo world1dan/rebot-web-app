@@ -1,28 +1,29 @@
 .Loading {
-    background-color: var(--bg2);
-    width: 100%;
-    height: 100%;
-    
-    display: flex;
-    justify-content: center;
-    border-radius: 5px;
     align-items: center;
+    background-color: var(--bg2);
+    border-radius: 5px;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+
     .loader {
-        width: 30px;
-        height: 30px;
-        border: 3.5px solid #FFF;
+        animation: rotation 1s linear infinite;
+        border: 3.5px solid var(--text1);
         border-bottom-color: transparent;
         border-radius: 50%;
         box-sizing: border-box;
-        animation: rotation 1s linear infinite;
+        height: 30px;
+        width: 30px;
     }
-    
+
     @keyframes rotation {
         0% {
             transform: rotate(0deg);
         }
+
         100% {
             transform: rotate(360deg);
         }
-    } 
+    }
 }

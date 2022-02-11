@@ -1,17 +1,14 @@
 .SubjectMarks {
     background: var(--bg2);
+    border-radius: 5px;
     box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
     display: grid;
     grid-template-columns: 6px 1fr 60px;
     min-height: 90px;
+    padding: 5px;
 
-    @media (min-width: 340px) {
-        border-radius: 5px;
-        padding: 5px;
-
-        .color-indicator {
-            border-radius: 2px;
-        }
+    .color-indicator {
+        border-radius: 2px;
     }
 
     @media (min-width: 500px) {

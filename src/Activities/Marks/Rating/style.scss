@@ -2,32 +2,40 @@
     display: grid;
     gap: 10px;
     margin: 0 auto;
-    max-width: 760px;
-    padding: 12px;
 
-    @media (max-width: 600px) {
-        padding: 12px;
-        padding-top: 6px;
+    .block-left {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        > div {
+            width: 100%;
+        }
     }
 
-    @media (max-width: 380px) {
-        padding: 8px;
-        padding-top: 4px;
+    @media (min-width: 700px) {
+        grid-template-columns: 1fr 1fr;
     }
 
     .stat {
         align-items: center;
         background-color: var(--bg2);
-        border-radius: 5px;
+        border-radius: 9px;
         box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
         display: grid;
         grid-template-columns: 1fr 70px;
         height: 46px;
         padding-left: 12px;
 
+        @media (max-width: 360px) {
+            border-radius: 0;
+        }
+
         .title {
             color: var(--text2);
             font-size: 15px;
+            font-weight: 600;
         }
 
         .num {

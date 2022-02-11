@@ -1,26 +1,25 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { motion } from 'framer-motion'
 
-import MarksView from 'Activities/Marks/QuarterMarks/MarksView'
 import H1 from 'Components/Typography/H1'
+import MarksView from 'Activities/Marks/QuarterMarks/MarksView'
 import VerticalLayout from 'Components/Layouts/VerticalLayout'
-import './style.scss'
 import SheetView from '../../../../../Components/SheetView'
 
+import './style.scss'
+
 const variants = {
-    hidden: { opacity: 0, y: '100%' },
+    hidden: { y: '100%' },
     visible: (custom) => {
         const delay = custom.i * 0.05
         const defaultBackground = custom.getDefaultBackground()
 
         return {
-            opacity: 1,
             y: 0,
             transition: {
                 y: { delay, type: 'spring', duration: 0.6, bounce: 0 },
-                opacity: { delay, duration: 0.4 },
                 backgroundColor: {
                     duration: 1.5,
                     ontransitionend: {

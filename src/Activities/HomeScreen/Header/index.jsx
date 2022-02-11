@@ -6,11 +6,10 @@ import { ConfigContext } from '../../../Context'
 import Time from './Time'
 import Settings from 'Activities/Settings'
 import Gear from '../../../Components/Icons/Gear'
-import SquareRoot from '../../../Components/Icons/SquareRoot'
 import ContextMenu from '../../../Components/ContextMenu'
 import ContextMenuBtn from '../../../Components/ContextMenu/ContextMenuBtn'
 import DownloadSquare from '../../../Components/Icons/DownloadSquare'
-import Tools from '../../../Screens/Tools'
+import Rings from './Rings'
 import SheetView from '../../../Components/SheetView'
 
 import './style.scss'
@@ -35,15 +34,12 @@ const updateMenuStyles = css`
 
 const Header = () => {
     const [settingsOpen, setSettingsOpen] = useState(false)
-    const [toolsOpen, setToolsOpen] = useState(false)
     const updateFounded = useContext(ConfigContext)?.updateFounded
 
     return (
         <>
             <header className="homescreen-header">
-                <button onClick={() => setToolsOpen(true)}>
-                    <SquareRoot width={24} height={24} />
-                </button>
+                <Rings />
                 <Time />
 
                 {updateFounded && (
@@ -74,7 +70,6 @@ const Header = () => {
                     <Settings />
                 </SheetView>
             )}
-            {toolsOpen && <Tools handleClose={() => setToolsOpen(false)} />}
         </>
     )
 }

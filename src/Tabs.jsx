@@ -1,4 +1,4 @@
-import { useState, useMemo, memo, useEffect } from 'react'
+import { useState, useMemo, memo } from 'react'
 import { css } from '@linaria/core'
 
 import { ConfigContext } from './Context'
@@ -8,21 +8,17 @@ import HomeScreen from './Activities/HomeScreen'
 import Week from './Activities/TimeTable/Week'
 import Search from './Activities/Search'
 import Marks from './Activities/Marks'
+import { changeThemeColor } from './Utils/changeThemeColor'
 
 const tabStyles = css`
     padding-bottom: calc(env(safe-area-inset-bottom) + 46px);
     height: 100%;
 `
 
-const Tab = ({ children, isActive, keepMounted, themeColorVar }) => {
-    useEffect(() => {
-        if (isActive) {
-            const meta = document.querySelector('meta[name=theme-color]')
-            meta.content = getComputedStyle(
-                document.documentElement
-            ).getPropertyValue(themeColorVar)
-        }
-    }, [isActive])
+const Tab = ({ children, isActive, keepMounted, themeColor }) => {
+    if (isActive) {
+        changeThemeColor(themeColor)
+    }
 
     return (
         (keepMounted || isActive) && (
@@ -53,16 +49,16 @@ const Tabs = ({ config, updateFounded }) => {
                 statusBar={statusBar}
             />
 
-            <Tab isActive={activeTab == 1} themeColorVar="--bg1" keepMounted>
+            <Tab isActive={activeTab == 1} themeColor="var(--bg1)" keepMounted>
                 <HomeScreen />
             </Tab>
-            <Tab isActive={activeTab == 2} themeColorVar="--bg2" keepMounted>
+            <Tab isActive={activeTab == 2} themeColor="var(--bg2)" keepMounted>
                 <Search />
             </Tab>
-            <Tab isActive={activeTab == 3} themeColorVar="--bg1">
+            <Tab isActive={activeTab == 3} themeColor="var(--bg1)">
                 <Marks />
             </Tab>
-            <Tab isActive={activeTab == 5} themeColorVar="--bg2">
+            <Tab isActive={activeTab == 5} themeColor="var(--bg2)">
                 <Week />
             </Tab>
         </ConfigContext.Provider>

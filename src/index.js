@@ -16,7 +16,7 @@ import { doc, collection } from 'firebase/firestore'
 import { firestore } from './Context'
 import App from './App'
 import Login from './Activities/Login'
-import FatalError from './Screens/FatalError'
+import FatalError from './Activities/FatalError'
 
 const isSafari =
     /iPad|iPhone/.test(navigator.platform) ||

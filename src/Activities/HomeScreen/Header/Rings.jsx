@@ -1,36 +1,7 @@
+import { css } from '@linaria/core'
 import ContextMenu from '../../../Components/ContextMenu'
-
-import './style.scss'
-
-const ringsTimetable = [
-    '8.00 - 8.45',
-    '8.55 - 9.40',
-    '9.55 - 10.40',
-    '10.55 - 11.40',
-    '11.55 - 12.40',
-    '12.50 - 13.35',
-    '13.55 - 14.40',
-]
-
-const Rings = () => {
-    const lessons = ringsTimetable.map((time, index) => {
-        return (
-            <div className="rings-row" key={index}>
-                <div className="index">{index + 1}</div>
-                <div className="content">{time}</div>
-            </div>
-        )
-    })
-
-    return (
-        <ContextMenu icon={<i className="fas fa-bell"></i>}>
-            {lessons}
-        </ContextMenu>
-    )
-}
-
-/*
-.rings-row {
+import Ring from '../../../Components/Icons/Ring'
+const styles = css`
     align-items: center;
     background-color: var(--bg3);
     border-radius: 5px;
@@ -51,6 +22,44 @@ const Rings = () => {
         color: var(--text1);
         font-weight: 500;
     }
+`
+
+const menuStyles = css`
+    .menu-items-wraper {
+        transform: translateX(0) !important;
+        .menu-items {
+            transform-origin: left top !important;
+        }
+    }
+`
+
+const ringsTimetable = [
+    '8.00 - 8.45',
+    '8.55 - 9.40',
+    '9.55 - 10.40',
+    '10.55 - 11.40',
+    '11.55 - 12.40',
+    '12.50 - 13.35',
+    '13.55 - 14.40',
+]
+
+const Rings = () => {
+    const lessons = ringsTimetable.map((time, index) => {
+        return (
+            <div className={styles} key={index}>
+                <div className="index">{index + 1}</div>
+                <div className="content">{time}</div>
+            </div>
+        )
+    })
+
+    return (
+        <div className={menuStyles}>
+            <ContextMenu icon={<Ring width={22} height={22} />}>
+                {lessons}
+            </ContextMenu>
+        </div>
+    )
 }
-*/
+
 export default Rings

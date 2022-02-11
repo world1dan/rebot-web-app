@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useState, useEffect } from 'react'
 
 import { motion } from 'framer-motion'
 import Loading from 'Components/Loading'
@@ -33,7 +32,7 @@ const Chart = ({ usersRatings, user, usersInfo }) => {
     return (
         <div className="Rating__Chart__Wrapper">
             {loading || !usersInfo ? (
-                <Loading />
+                <Loading styles={{ backgroundColor: 'var(--bg1)' }} />
             ) : (
                 <div className="Rating__Chart">
                     <motion.div className="data-wraper">{columns}</motion.div>
@@ -42,7 +41,5 @@ const Chart = ({ usersRatings, user, usersInfo }) => {
         </div>
     )
 }
-
-Chart.propTypes = {}
 
 export default Chart

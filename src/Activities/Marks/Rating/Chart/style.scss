@@ -3,15 +3,10 @@
 }
 
 .Rating__Chart {
-    background-color: var(--bg2);
-    border-radius: 7px;
-    box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
     display: grid;
     grid-template-columns: 1fr;
     height: 400px;
     overflow: hidden;
-    position: relative;
-    width: 100%;
 
     .data-wraper {
         align-items: flex-end;
@@ -20,7 +15,7 @@
         grid-template-rows: 1fr;
         overflow-x: auto;
         overflow-y: hidden;
-        padding: 12px;
+        padding: 8px;
 
         &::-webkit-scrollbar {
             height: 8px;
