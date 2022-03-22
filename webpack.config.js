@@ -1,21 +1,21 @@
 const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CssoWebpackPlugin = require('csso-webpack-plugin').default
+const HTMLInlineCSSWebpackPlugin =
+    require('html-inline-css-webpack-plugin').default
 const stylis = require('stylis')
-const BundleAnalyzerPlugin =
-    require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 stylis.set({ prefix: false })
 
 module.exports = (env) => {
     const plugins = [
-        new BundleAnalyzerPlugin(),
-        new MiniCssExtractPlugin({ filename: 'style.css' }),
+        new MiniCssExtractPlugin({
+            filename: 'styles.css',
+        }),
         new CopyPlugin({
             patterns: [
                 {
@@ -26,12 +26,19 @@ module.exports = (env) => {
         }),
         new HtmlPlugin({
             template: './src/index.html',
+            inject: 'body',
+            scriptLoading: 'blocking',
         }),
-        new CleanWebpackPlugin(),
     ]
 
     if (env.production) {
-        plugins.push(new CssoWebpackPlugin())
+        plugins.push(
+            new CssoWebpackPlugin(),
+            new CleanWebpackPlugin(),
+            new HTMLInlineCSSWebpackPlugin()
+        )
+    } else {
+        plugins.push(new ReactRefreshWebpackPlugin())
     }
 
     return {
@@ -58,7 +65,16 @@ module.exports = (env) => {
                     test: /\.(js|jsx)?$/,
                     exclude: /node_modules/,
                     use: [
-                        { loader: 'babel-loader' },
+                        {
+                            loader: require.resolve('babel-loader'),
+                            options: {
+                                plugins: [
+                                    !env.production &&
+                                        require.resolve('react-refresh/babel'),
+                                ].filter(Boolean),
+                            },
+                        },
+
                         {
                             loader: '@linaria/webpack-loader',
                             options: {

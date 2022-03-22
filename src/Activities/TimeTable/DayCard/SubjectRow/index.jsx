@@ -1,16 +1,20 @@
-import React, { useContext, useState, memo } from 'react'
+import { useContext, useState, memo } from 'react'
 import PropTypes from 'prop-types'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faInfoCircle, faBook } from '@fortawesome/free-solid-svg-icons'
 
 import { manifestContext } from '../../../../Context'
 import PlusRounded from '../../../../Components/Icons/PlusRounded'
 import useMarksController from '../../../Marks/useMarksController'
 
 import HomeworkRe from '../../../HomeworkRe'
-import { InputModal } from '../../../../Components/InputModal'
+import InputModal from '../../../../Components/InputModal'
 import LessonInfo from '../LessonInfo'
 import ContextMenu from '../../../../Components/ContextMenu'
 import ContextMenuBtn from '../../../../Components/ContextMenu/ContextMenuBtn'
 import MarksKeyboard from '../../../Marks/MarksKeyboard'
+
 import ActionSheet from 'Components/ActionSheet'
 import Link from './Link'
 
@@ -29,9 +33,7 @@ const SubjectRow = ({ lesson, path }) => {
 
     const isMath = lesson.id === 'alg' || lesson.id === 'geom'
 
-    const title = subject?.title ?? (
-        <i className="fas fa-circle-notch fa-spin"></i>
-    )
+    const title = subject?.title
     const homework = lesson.hw ?? ''
 
     const style = {
@@ -82,7 +84,9 @@ const SubjectRow = ({ lesson, path }) => {
                             <ContextMenuBtn
                                 onClick={openInstant}
                                 title="Решение"
-                                icon={<i className="fas fa-book fa-xl"></i>}
+                                icon={
+                                    <FontAwesomeIcon icon={faBook} size="xl" />
+                                }
                             />
                         )}
                         {(subject?.marks || isMath) && (
@@ -95,7 +99,12 @@ const SubjectRow = ({ lesson, path }) => {
                         <ContextMenuBtn
                             onClick={openInfo}
                             title="Об Уроке"
-                            icon={<i className="fas fa-info-circle fa-xl"></i>}
+                            icon={
+                                <FontAwesomeIcon
+                                    icon={faInfoCircle}
+                                    size="xl"
+                                />
+                            }
                         />
                     </ContextMenu>
                     {isEditing && (
@@ -105,39 +114,30 @@ const SubjectRow = ({ lesson, path }) => {
                             lesson={lesson}
                         />
                     )}
-                    {instant && (
-                        <HomeworkRe
-                            lessonsData={[lesson]}
-                            handleClose={closeInstant}
-                        />
-                    )}
-                    {info && (
-                        <LessonInfo
-                            lesson={isMath ? { ...lesson, id: 'math' } : lesson}
-                            subject={isMath ? manifest['math'] : subject}
-                            handleClose={closeInfo}
-                            path={path}
-                        />
-                    )}
-                    {addMarkDialog && (
-                        <ActionSheet
-                            onClose={closeAddMarkDialog}
-                            bottomCloseBtn
-                        >
-                            <MarksKeyboard
-                                onSubmit={addQuarterMark}
-                                title="Новая оценка"
-                                descr={
-                                    isMath
-                                        ? manifest['math'].title
-                                        : subject.title
-                                }
-                                statusBarAlert="Оценка добавлена"
-                            />
-                        </ActionSheet>
-                    )}
                 </div>
             </div>
+
+            {instant && (
+                <HomeworkRe lessonsData={[lesson]} handleClose={closeInstant} />
+            )}
+            {info && (
+                <LessonInfo
+                    lesson={isMath ? { ...lesson, id: 'math' } : lesson}
+                    subject={isMath ? manifest['math'] : subject}
+                    handleClose={closeInfo}
+                    path={path}
+                />
+            )}
+            {addMarkDialog && (
+                <ActionSheet onClose={closeAddMarkDialog} bottomCloseBtn>
+                    <MarksKeyboard
+                        onSubmit={addQuarterMark}
+                        title="Новая оценка"
+                        descr={isMath ? manifest['math'].title : subject.title}
+                        statusBarAlert="Оценка добавлена"
+                    />
+                </ActionSheet>
+            )}
         </>
     )
 }

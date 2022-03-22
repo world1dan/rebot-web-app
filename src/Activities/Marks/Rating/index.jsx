@@ -33,11 +33,7 @@ const Rating = () => {
                 </div>
             </div>
             {users && usersRatings && (
-                <History
-                    usersRatings={usersRatings}
-                    user={user}
-                    usersInfo={users}
-                />
+                <History usersRatings={usersRatings} usersInfo={users} />
             )}
         </div>
     )

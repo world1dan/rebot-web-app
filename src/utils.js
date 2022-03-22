@@ -1,4 +1,4 @@
-export const getCorrectLessonByGroup = (group, lessonInfo) => {
+export const getCorrectLessonByGroup = (group, lessonInfo, pathToDay) => {
     let lesson, path
 
     if (lessonInfo.groups) {

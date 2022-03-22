@@ -3,13 +3,13 @@
     background-color: var(--bg4);
     border-radius: 7px;
     box-shadow: 0 0 0 2px var(--lvl4-borders) inset;
+    cursor: pointer;
     display: grid;
     flex-shrink: 0;
     grid-template-rows: 40px 1fr;
     justify-content: center;
     padding-bottom: 12px;
     width: 56px;
-    will-change: transform, opacity;
 
     &.own {
         background: var(--indigo);

@@ -1,19 +1,13 @@
 const appFiles = [
-    'style.css',
     'bundle.js',
     '/',
     'index.html',
-    'static/lib/fontawesome/all.min.css',
-    'static/lib/fontawesome/fa-regular-400.woff2',
-    'static/icons/manifest-icon-192.png',
-    'static/lib/fontawesome/fa-solid-900.woff2',
-    'static/manifest.json',
     'static/img/bio.jpg',
     'static/img/engwb.jpg',
     'static/img/geo.jpg',
     'static/img/him.jpg',
     'static/img/phis.jpg',
-    'favicon.ico',
+    'static/img/bel-izl.webp',
 ]
 
 self.addEventListener('install', function (event) {

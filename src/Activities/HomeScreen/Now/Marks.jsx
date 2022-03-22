@@ -1,5 +1,5 @@
 import { css } from '@linaria/core'
-import React, { useContext, memo } from 'react'
+import { useContext, memo } from 'react'
 
 import { MarksContext } from '../../../Context'
 import SubjectMarks from '../../Marks/QuarterMarks/SubjectMarks'
@@ -32,8 +32,6 @@ const styles = css`
 
 const Marks = ({ subject }) => {
     const marks = useContext(MarksContext)
-
-    if (marks === null) return null
 
     return (
         <div className={styles}>

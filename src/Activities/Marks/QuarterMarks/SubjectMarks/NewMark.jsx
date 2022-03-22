@@ -1,4 +1,4 @@
-import { useState, memo } from 'react'
+import { useState, memo, useEffect } from 'react'
 import { css } from '@linaria/core'
 
 import { motion } from 'framer-motion'
@@ -13,13 +13,13 @@ const styles = css`
     }
 `
 
-const NewMark = ({ addQuarterMark, subject }) => {
+const NewMark = ({ addQuarterMark, subject, layoutDependency }) => {
     const [addDialog, setAddDialog] = useState(false)
 
     const onSubmit = (data) => {
         setTimeout(() => {
             addQuarterMark(data)
-        }, 80)
+        }, 100)
     }
 
     const openAddDialog = () => setAddDialog(true)
@@ -31,7 +31,7 @@ const NewMark = ({ addQuarterMark, subject }) => {
                 className={'Mark ' + styles}
                 onClick={openAddDialog}
                 layout="position"
-                layoutScroll
+                layoutDependency={layoutDependency}
             >
                 <PlusRounded width={18} height={18} />
             </motion.div>

@@ -1,20 +1,17 @@
 import { css } from '@linaria/core'
 import ContextMenu from '../../../Components/ContextMenu'
 import Ring from '../../../Components/Icons/Ring'
+
 const styles = css`
     align-items: center;
-    background-color: var(--bg3);
-    border-radius: 5px;
     display: grid;
     grid-template-columns: 28px 1fr;
     height: 34px;
-    justify-content: center;
     text-align: center;
     width: 140px;
 
     .index {
         color: var(--text2);
-        font-size: 16px;
         font-weight: bold;
     }
 

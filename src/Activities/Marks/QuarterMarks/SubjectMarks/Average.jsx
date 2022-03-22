@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { css } from '@linaria/core'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getAverage } from 'Activities/Marks/utils'
 
 import MarksCalculator from '../Calculator'
 import SheetView from '../../../../Components/SheetView'
-
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
+import AnimatedNum from '../../AnimatedNum'
 const styles = css`
     display: grid;
     gap: 4px;
@@ -13,8 +15,9 @@ const styles = css`
 
     .average-mark,
     .mark-target {
-        display: grid;
-        place-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background: var(--bg4);
         font-weight: bold;
         border-radius: 5px;
@@ -23,6 +26,8 @@ const styles = css`
     }
 
     .average-mark {
+        position: relative;
+        overflow: hidden;
         font-size: 16px;
 
         @media (min-width: 500px) {
@@ -45,7 +50,7 @@ const styles = css`
         }
     }
 `
-const Average = ({ marks, target, openTargetDialog, readOnly }) => {
+const Averagee = ({ marks, target, openTargetDialog, readOnly }) => {
     const [calculator, setCalculator] = useState(false)
 
     const average = getAverage(marks)
@@ -67,8 +72,13 @@ const Average = ({ marks, target, openTargetDialog, readOnly }) => {
                 onClick={openCalculator}
                 style={averageMarkStyles}
             >
-                {averageToDisplay || (
-                    <i className="fa-solid fa-circle-question no-mark"></i>
+                {averageToDisplay ? (
+                    <AnimatedNum number={averageToDisplay} />
+                ) : (
+                    <FontAwesomeIcon
+                        icon={faCircleQuestion}
+                        className="no-mark"
+                    />
                 )}
             </div>
             <div
@@ -81,7 +91,7 @@ const Average = ({ marks, target, openTargetDialog, readOnly }) => {
             {calculator && (
                 <SheetView
                     handleClose={closeCalculator}
-                    type="fullHeightOnMobile"
+                    type={{ fullHeightOnMobile: true }}
                 >
                     <MarksCalculator initialMarks={marks} />
                 </SheetView>
@@ -90,4 +100,4 @@ const Average = ({ marks, target, openTargetDialog, readOnly }) => {
     )
 }
 
-export default Average
+export default Averagee

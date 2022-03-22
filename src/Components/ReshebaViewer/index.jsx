@@ -1,9 +1,14 @@
-import React, { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import getSolutionImgs from './getSolutionImgs'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './style.scss'
+import {
+    faChevronLeft,
+    faChevronRight,
+    faTimes,
+} from '@fortawesome/free-solid-svg-icons'
 
 const ReshebaViewer = ({ subjectInfo, startNum, onClose }) => {
     const [num, setNum] = useState(startNum)
@@ -32,18 +37,18 @@ const ReshebaViewer = ({ subjectInfo, startNum, onClose }) => {
                 )}
                 <div className="center-section block">
                     <button onClick={() => setNum(num - 1)}>
-                        <i className="fas fa-chevron-left fa-lg"></i>
+                        <FontAwesomeIcon icon={faChevronLeft} size="lg" />
                     </button>
 
                     <button className="num">{num}</button>
 
                     <button onClick={() => setNum(num + 1)}>
-                        <i className="fas fa-chevron-right fa-lg"></i>
+                        <FontAwesomeIcon icon={faChevronRight} size="lg" />
                     </button>
                 </div>
                 {onClose && (
                     <button className="block close-btn" onClick={onClose}>
-                        <i className="fas fa-times fa-lg"></i>
+                        <FontAwesomeIcon icon={faTimes} size="lg" />
                     </button>
                 )}
             </div>

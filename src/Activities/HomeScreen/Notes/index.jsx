@@ -1,5 +1,5 @@
 import { useContext, memo } from 'react'
-
+import { motion } from 'framer-motion'
 import { addDoc } from 'firebase/firestore'
 
 import { ConfigContext } from '../../../Context'
@@ -17,15 +17,10 @@ const Notes = () => {
 
     const notesCollection = useCollectionListener(database.notes)?.docs ?? []
 
-    const notes = notesCollection.map((doc) => {
-        return <Note docRef={doc.ref} key={doc.id} noteData={doc.data()} />
-    })
-
     const addNote = () => {
-        if (notes.length <= 20) {
+        if (notesCollection.length <= 20) {
             addDoc(database.notes, {
                 text: '',
-                isPinned: false,
             })
         } else {
             context.setStatusBar({
@@ -37,10 +32,24 @@ const Notes = () => {
 
     return (
         <Card title="Заметки">
-            <button className="table-btn" onClick={addNote}>
+            <motion.button
+                className="table-btn"
+                onClick={addNote}
+                whileTap={{ scale: 0.85, opacity: 0.6 }}
+            >
                 <AddSquare width={24} height={24} />
-            </button>
-            <div className="content">{notes}</div>
+            </motion.button>
+            <div className="content">
+                {notesCollection.map((doc) => {
+                    return (
+                        <Note
+                            docRef={doc.ref}
+                            key={doc.id}
+                            noteData={doc.data()}
+                        />
+                    )
+                })}
+            </div>
         </Card>
     )
 }

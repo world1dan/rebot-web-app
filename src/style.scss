@@ -3,7 +3,6 @@
     font-family: ui-rounded, Roboto, Ubuntu, 'segoe ui', sans-serif;
     -webkit-tap-highlight-color: transparent;
     -webkit-text-size-adjust: none;
-    text-size-adjust: none;
     -webkit-user-select: none;
     user-select: none;
 }
@@ -20,7 +19,7 @@ textarea {
 button {
     background: none;
     border: 0;
-    color: var(--text1);
+    color: inherit;
     cursor: pointer;
     font-weight: bold;
     margin: 0;
@@ -39,12 +38,8 @@ button {
     --inv: 0.92;
     --borders-soft: rgb(44 44 44 / 10%);
     --borders: #19191a;
-    --red2: #e4372e;
     --tab-bar-btn: #76787a;
     --tab-bar-btn-active: #fff;
-    --primary: #5e5be6;
-    --bottom-save-zone: env(safe-area-inset-bottom);
-    --top-save-zone: env(safe-area-inset-top);
     --shadows-bg4: rgb(43 43 43);
     --mark-green: #34c759;
     --mark-yellow: #fc0;
@@ -58,32 +53,30 @@ button {
     --green: #2fd158;
     --blue: #0a84ff;
     --indigo: #5e5be6;
-    --bg2-translucent: #14141438;
 
     color-scheme: dark;
 }
 
 :root[theme='light'] {
-    --text1: #242424;
+    --text1: #232324;
     --text2: rgb(90 90 90);
     --bg1: #e1e3e6;
-    --bg2: #ebedf0;
-    --bg3: #f2f3f5;
-    --bg4: #fff;
+    --bg2: #f9f9f9;
+    --bg3: #ebedf0;
+    --bg4: #f2f3f5;
     --backdrop: rgb(0 0 0 / 18%);
     --borders: #dadfe4;
     --borders-soft: #e4e9ee00;
-    --tab-bar-btn: #00000073;
+    --tab-bar-btn: #868686;
     --tab-bar-btn-active: #5855d6;
-    --red2: #e4372ee0;
     --shadows-bg4: rgb(238 238 238);
     --mark-green: #17ac3c;
     --mark-yellow: #c49600;
     --mark-red: #ff3d33e1;
-    --mark-green-bg: rgb(52 199 89 / 20%);
-    --mark-yellow-bg: rgb(255 204 0 / 20%);
+    --mark-green-bg: rgb(52 199 89 / 26%);
+    --mark-yellow-bg: rgb(255 204 0 / 26%);
     --mark-red-bg: rgb(255 48 48 / 20%);
-    --lvl4-borders: rgb(194 194 194 / 20%);
+    --lvl4-borders: #ebedf000;
     --red: #ff3b2f;
     --yellow: #f7cb17;
     --green: #34c85a;
@@ -96,7 +89,7 @@ button {
 html,
 body,
 #root {
-    background: var(--bg1);
+    background-color: var(--bg1);
     height: 100%;
     margin: 0;
     overflow: hidden;

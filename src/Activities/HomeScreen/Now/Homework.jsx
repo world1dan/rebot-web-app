@@ -1,12 +1,13 @@
 import { css } from '@linaria/core'
-import React, { useState, memo } from 'react'
+import { useState, memo } from 'react'
 
-import { InputModal } from '../../../Components/InputModal'
+import InputModal from '../../../Components/InputModal'
 import Link from '../../TimeTable/DayCard/SubjectRow/Link'
 
 const styles = css`
     display: flex;
     gap: 6px;
+
     .homework {
         min-height: 40px;
         max-height: 160px;
@@ -43,17 +44,15 @@ const Homework = ({ lesson, path }) => {
     const [isEditing, setIsEditing] = useState(false)
 
     return (
-        <>
-            <div className={styles}>
-                <div className="homework" onClick={() => setIsEditing(true)}>
-                    {lesson.hw}
-                </div>
-                {lesson.link && (
-                    <div className="link">
-                        <Link URL={lesson.link} />
-                    </div>
-                )}
+        <div className={styles}>
+            <div className="homework" onClick={() => setIsEditing(true)}>
+                {lesson.hw}
             </div>
+            {lesson.link && (
+                <div className="link">
+                    <Link URL={lesson.link} />
+                </div>
+            )}
             {isEditing && (
                 <InputModal
                     handleClose={() => setIsEditing(false)}
@@ -61,7 +60,7 @@ const Homework = ({ lesson, path }) => {
                     lesson={lesson}
                 />
             )}
-        </>
+        </div>
     )
 }
 

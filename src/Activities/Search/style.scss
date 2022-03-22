@@ -1,4 +1,4 @@
-#search-header {
+.search-header {
     background-color: var(--bg2);
     border-bottom: 1px solid var(--borders-soft);
     margin: 0 auto;
@@ -46,17 +46,13 @@
         }
     }
 
-    .wraper {
+    .modes {
         display: grid;
         gap: 5px;
         grid-template-columns: 1fr 1fr 1fr;
 
-        @media screen and (max-width: 320px) {
+        @media (max-width: 320px) {
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        }
-
-        button {
-            width: 100%;
         }
     }
 
@@ -114,8 +110,14 @@
 .Notebooks {
     display: grid;
     gap: 8px;
-    grid-template-columns: repeat(5, 86px);
+    grid-template-columns: repeat(6, 86px);
     overflow-x: auto;
+
+    @supports (-webkit-touch-callout: none) {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
 }
 
 .NotebooksWrapper {

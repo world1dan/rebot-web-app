@@ -1,11 +1,8 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext } from 'react'
 
-import { firestore } from "../../../Context"
-import { ConfigContext } from "../../../Context"
-import { collectionGroup, onSnapshot } from "firebase/firestore"
-
-
-
+import { firestore } from '../../../Context'
+import { ConfigContext } from '../../../Context'
+import { collectionGroup, onSnapshot } from 'firebase/firestore'
 
 const useRating = () => {
     const [usersRatings, setUsersRatings] = useState(null)
@@ -18,12 +15,14 @@ const useRating = () => {
             const data = []
 
             g.forEach((doc) => {
-                if (doc.id !== "marks_new") return
-
+                if (doc.id !== 'marks_new') return
 
                 const d = doc.data()
                 if (d) {
-                    data.push({ marks: d, userUUID: doc.ref._key.path.segments[6] })
+                    data.push({
+                        marks: d,
+                        userUUID: doc.ref._key.path.segments[6],
+                    })
                 }
             })
             let counter = 0
@@ -34,7 +33,6 @@ const useRating = () => {
             data.forEach((userMarks) => {
                 let quarterAverageSum = 0
                 let quarterSubjects = 0
-
 
                 for (let subj in userMarks.marks) {
                     try {
@@ -51,13 +49,13 @@ const useRating = () => {
                             subjMarksSum += mark.mark
                         }
 
-                        let average = subjMarksSum / userMarks.marks[subj].length
+                        let average =
+                            subjMarksSum / userMarks.marks[subj].length
 
                         if (!isNaN(average) && average <= 10) {
                             average = Number(average.toFixed(0))
                             quarterAverageSum += average
                             quarterSubjects += 1
-
                         } else {
                             average = null
                         }
@@ -66,12 +64,14 @@ const useRating = () => {
                     }
                 }
                 try {
-                    const rating = (quarterAverageSum / quarterSubjects).toFixed(2)
+                    const rating = (
+                        quarterAverageSum / quarterSubjects
+                    ).toFixed(2)
                     if (!isNaN(rating)) {
                         usersRating.push({
                             rating,
                             marks: userMarks.marks,
-                            userUUID: userMarks.userUUID
+                            userUUID: userMarks.userUUID,
                         })
                     }
                 } catch {
@@ -84,7 +84,6 @@ const useRating = () => {
             setUsersRatings(usersRating)
         })
     }, [])
-
 
     return [usersRatings, statistics]
 }

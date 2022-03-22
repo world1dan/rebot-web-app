@@ -1,7 +1,6 @@
 const { NODE_ENV } = process.env
 
 const inProduction = NODE_ENV === 'production'
-const inDevelopment = NODE_ENV === 'development'
 
 module.exports = (api) => {
     api.cache.using(() => process.env.NODE_ENV)

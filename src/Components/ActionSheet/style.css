@@ -1,14 +1,13 @@
 .ActionSheet {
     background-color: var(--bg3);
     border-radius: 18px;
-    bottom: max(10px, var(--bottom-save-zone));
+    bottom: calc(env(safe-area-inset-bottom) + 10px);
     left: 10px;
     margin: 0 auto;
     max-width: 500px;
     min-height: 300px;
     position: fixed;
     right: 10px;
-    will-change: transform;
     z-index: 999;
 }
 
@@ -31,7 +30,6 @@
     align-items: center;
     background: var(--bg4);
     border-radius: 9px;
-    color: var(--text1);
     display: flex;
     font-size: 18px;
     font-weight: bold;

@@ -1,74 +1,45 @@
 .SegmentedControl {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    box-shadow: 0px 0px 0px 1.5px var(--borders-soft) inset;
-    margin: 0;
-    padding: 3px;
-    list-style: none;
     background-color: var(--bg2);
     border-radius: 7px;
-  
-    .item {
-      will-change: trnaform opacity;
-      position: relative;
-      margin-bottom: 0;
+    box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 3px;
 
-  
-      &:after {
-        position: absolute;
-        top: 15%;
-        right: -0.5px;
-        display: block;
-        width: 1px;
-        height: 70%;
-        background-color: var(--border);
-        transition: opacity 200ms ease-out;
-        content: '';
-      }
-  
-      &:last-of-type {
-        &:after {
-          display: none;
-        }
-      }
+    .item {
+        margin-bottom: 0;
+        position: relative;
     }
 
     .button {
-      position: relative;
-      margin: 0;
-      padding: 14px 30px;
-      color: var(--text1);
-      line-height: 1;
-      background: transparent;
-      border: none;
-      width: 100%;
-      outline: none;
-    
-      &:hover,
-      &:focus {
-        cursor: pointer;
-      }
+        line-height: 1;
+        padding: 14px 30px;
+        position: relative;
+        width: 100%;
+
+        &:hover,
+        &:focus {
+            cursor: pointer;
+        }
     }
-    
+
     .label {
-      position: relative;
-      z-index: 2;
-      font-size: 12px;
+        font-size: 12px;
+        position: relative;
+        z-index: 99;
     }
-    
+
     .active {
-      will-change: transform;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-      background-color: var(--bg4);
-      border-radius: 5px;
-      box-shadow: 0px 0px 0px 1.5px var(--lvl4-borders) inset;
-      content: '';
+        background-color: var(--bg4);
+        border-radius: 5px;
+        bottom: 0;
+        box-shadow: 0 0 0 1.5px var(--lvl4-borders) inset;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 1;
     }
-  }
-  
-  
+}

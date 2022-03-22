@@ -1,68 +1,30 @@
-
-.settings-block {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-
-    .theme {
-        padding: 0 10px;
-        display: flex;
-        flex-direction: row !important;
-        justify-content: space-between;
-        align-items: center;
-        height: 80px;
-        span {
-            border-radius: 100%;
-            height: 52px;
-            width: 52px;
-            cursor: pointer;
-        }
-    }
-
-
-    .buttons {
-        display: flex;
-        flex-wrap: wrap;
-        button {
-            flex-grow: 1;
-            padding: 12px;
-            font-size: 13px;
-        }
-    }
-}
-
-
 .Updater {
-    color: var(--text1);
     background: var(--bg3);
-    padding: 10px;
-
     border-radius: 9px;
-
-    gap: 14px;
+    color: var(--text1);
     display: grid;
-
+    gap: 14px;
     grid-template-columns: 52px 1fr 110px;
+    min-height: 69px;
+    padding: 10px;
+    position: relative;
 
     @media (min-width: 500px) {
         grid-template-columns: 52px 1fr 170px;
     }
-    min-height: 69px;
-    position: relative;
 
     .check-btn {
+        align-items: center;
         background-color: var(--bg4);
         border-radius: 9px;
         display: flex;
         justify-content: center;
-        align-items: center;
 
         @keyframes check-btn-spin {
             100% {
-                transform: rotate(360deg)
+                transform: rotate(360deg);
             }
         }
-
 
         &.active {
             svg {
@@ -75,30 +37,25 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+
         .title {
-            font-weight: bold;
             font-size: 15px;
+            font-weight: bold;
         }
+
         .info {
+            color: var(--text2);
             font-size: 13px;
-            color:  var(--text2)
         }
     }
 
     .update-btn {
-        color: #fff;
-        background-color: var(--primary);
+        align-items: center;
+        background-color: var(--indigo);
         border-radius: 9px;
+        color: #fff;
         display: flex;
         font-size: 16px;
         justify-content: center;
-        align-items: center;
-    }
-    .version {
-        color: var(--text2);
-        position: absolute;
-        bottom: 12px;
-        font-size: 13px;
-        right: 15px;
     }
 }

@@ -1,4 +1,3 @@
-import React, { useEffect, useState, memo } from 'react'
 import { css } from '@linaria/core'
 import { motion } from 'framer-motion'
 
@@ -11,23 +10,19 @@ const styles = css`
     gap: 7px;
     max-width: 100%;
     overflow: hidden;
+
     .symbol {
         background: var(--bg4);
         flex-grow: 1;
         border-radius: 7px;
-        font-size: 15px;
+        font-size: 14px;
         display: flex;
         justify-content: center;
         white-space: nowrap;
         align-items: center;
-        height: 40px;
+        height: 38px;
         text-overflow: ellipsis;
-        min-width: 60px;
         overflow: hidden;
-    }
-
-    .addBtn {
-        color: var(--text2);
     }
 `
 
@@ -35,8 +30,6 @@ let tapStartTime = null
 
 const Shortcuts = ({ insertIntoTextarea, focusOnTextarea }) => {
     const [shortcuts, setShortcuts] = useLocalStorage('shortcuts', [
-        '(',
-        ')',
         '§',
         'Упр',
         'Стр',
@@ -57,9 +50,7 @@ const Shortcuts = ({ insertIntoTextarea, focusOnTextarea }) => {
     }
 
     const newShortcut = () => {
-        const shortcut = prompt(
-            "Давай давай напиши сюда 'головка шлюха жопа член'"
-        )
+        const shortcut = prompt()
 
         if (shortcut) {
             setShortcuts((currentShortcuts) => [...currentShortcuts, shortcut])
@@ -88,7 +79,7 @@ const Shortcuts = ({ insertIntoTextarea, focusOnTextarea }) => {
                 onClick={focusOnTextarea}
                 onPointerDown={() => (tapStartTime = Date.now())}
                 onPointerUp={handleTap}
-                whileTap={{ scale: 0.9, filter: 'brightness(1.6)' }}
+                whileTap={{ scale: 0.91, filter: 'brightness(1.1)' }}
             >
                 {symbol}
             </motion.button>
@@ -98,11 +89,11 @@ const Shortcuts = ({ insertIntoTextarea, focusOnTextarea }) => {
     return (
         <div className={styles}>
             {symbols}
-            <button className="symbol addBtn" onClick={newShortcut}>
+            <button className="symbol" onClick={newShortcut}>
                 <PlusRounded width={20} height={20} />
             </button>
         </div>
     )
 }
 
-export default memo(Shortcuts)
+export default Shortcuts

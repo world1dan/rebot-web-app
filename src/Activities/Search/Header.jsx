@@ -41,7 +41,7 @@ const Header = ({ addSolution }) => {
     const handleChange = (e) => setSearchValue(e.target.value)
 
     const handleKeyPress = (e) => {
-        if (e.key == 'Enter' && searchValue !== '') {
+        if (e.key == 'Enter') {
             search()
         }
     }
@@ -58,24 +58,10 @@ const Header = ({ addSolution }) => {
         'bel_lit',
     ]
 
-    const buttons = modes.map((subjID) => {
-        const subject = manifest[subjID]
-
-        return (
-            <button
-                key={subjID}
-                style={{ background: subject.color }}
-                onClick={() => setSearchMode(subjID)}
-            >
-                {subject.title}
-            </button>
-        )
-    })
-
     const isGoogle = searchMode === 'google'
 
     return (
-        <header id="search-header">
+        <header className="search-header">
             <div
                 className="search"
                 style={{ borderColor: manifest[searchMode]?.color }}
@@ -96,7 +82,21 @@ const Header = ({ addSolution }) => {
                 />
             </div>
 
-            <div className="wraper">{buttons}</div>
+            <div className="modes">
+                {modes.map((subjID) => {
+                    const subject = manifest[subjID]
+
+                    return (
+                        <button
+                            key={subjID}
+                            style={{ background: subject.color }}
+                            onClick={() => setSearchMode(subjID)}
+                        >
+                            {subject.title}
+                        </button>
+                    )
+                })}
+            </div>
 
             <Notebooks />
         </header>

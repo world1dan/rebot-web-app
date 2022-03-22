@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import { manifestContext } from '../../Context'
@@ -21,8 +21,14 @@ const HomeworkRe = (props) => {
         const toOpen = lesson.hw
             .replace(/ *\([^)]*\) */g, '')
             .split(',')
-            .map((num) => {
-                return parseInt(num.replace(/\D/g, ''))
+            .map((numString) => {
+                const num = numString
+                    .trim()
+                    .replace(/[^\d.^\s.]/g, '')
+                    .split(' ')
+                    .filter((v) => v !== '')[0]
+
+                return parseInt(num)
             })
 
         groups.push(

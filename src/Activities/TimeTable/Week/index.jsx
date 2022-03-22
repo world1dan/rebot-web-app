@@ -1,7 +1,6 @@
-import { useState, memo, useContext, useRef } from 'react'
+import { useState, useContext, useRef } from 'react'
 
 import { TimeTableContext } from '../../../Context'
-import useWeekDay from '../../../Hooks/useWeekDay'
 
 import Wraper from '../../../Components/Wraper'
 import DayCard from '../DayCard'
@@ -10,18 +9,17 @@ import Header from './Header'
 import './style.scss'
 
 const Week = () => {
-    const { isWeekend } = useWeekDay()
+    const dayNum = new Date().getDay()
+    const isWeekend = dayNum == 0 || dayNum == 6
+
     const [week, setWeek] = useState(isWeekend ? 3 : 2)
-
     const timetable = useContext(TimeTableContext)?.[week]
-
     const prevWeek = useRef(2)
 
-    const days = []
-    let day
+    const dayCards = []
 
-    for (day in timetable) {
-        days.push(
+    for (let day in timetable) {
+        dayCards.push(
             <DayCard
                 key={day}
                 dayNum={parseInt(day)}
@@ -32,12 +30,8 @@ const Week = () => {
         )
     }
 
-    const nextWeek = () => {
-        setWeek(week + 1)
-    }
-    const prewWeek = () => {
-        setWeek(week - 1)
-    }
+    const nextWeek = () => setWeek(week + 1)
+    const prewWeek = () => setWeek(week - 1)
 
     const direction = prevWeek.current < week ? 1 : -1
 
@@ -46,7 +40,6 @@ const Week = () => {
     return (
         <Wraper>
             <Header
-                key="header"
                 week={week}
                 prewWeek={prewWeek}
                 nextWeek={nextWeek}
@@ -54,14 +47,14 @@ const Week = () => {
             />
 
             <div className="week-grid">
-                {days.length != 0 ? (
-                    days
+                {dayCards.length > 0 ? (
+                    dayCards
                 ) : (
-                    <div className="no-timetable-alert">Тут каникулы)</div>
+                    <div className="no-timetable-alert">Тут ничего нет</div>
                 )}
             </div>
         </Wraper>
     )
 }
 
-export default memo(Week)
+export default Week

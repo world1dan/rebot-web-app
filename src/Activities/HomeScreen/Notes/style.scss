@@ -15,8 +15,14 @@
         width: 100%;
     }
 
+    .context-menu-btn {
+        position: absolute;
+        right: 0;
+        top: 3px;
+    }
+
     &.pinned {
-        background-color: var(--red2);
+        background-color: var(--red);
         transition: background 0.3s;
 
         textarea {
@@ -27,15 +33,13 @@
             color: #fff;
         }
 
-        * {
+        > * {
+            color: var(--text1) !important;
+        }
+
+        .context-menu-btn {
             color: #fff !important;
         }
-    }
-
-    .context-menu-btn {
-        position: absolute;
-        right: 0;
-        top: 3px;
     }
 
     &:last-of-type {

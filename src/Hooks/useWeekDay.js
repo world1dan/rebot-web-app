@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-
+import { useState } from 'react'
+import useInterval from './useInterval'
 
 const getWeekDay = () => {
     const date = new Date()
@@ -7,30 +7,23 @@ const getWeekDay = () => {
     const isWeekend = dayNum == 0 || dayNum == 6
 
     return {
-        dayNum, isWeekend
+        dayNum,
+        isWeekend,
     }
 }
 
-
 const useWeekDay = () => {
-    const [weekDay, setWeekDay] = useState(getWeekDay())
+    const [weekDay, setWeekDay] = useState(getWeekDay)
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            const day = getWeekDay()
+    useInterval(() => {
+        const day = getWeekDay()
 
-            if (day.dayNum !== weekDay.dayNum) {
-                setWeekDay(day)
-            }
-        }, 1000)
-
-        return () => clearInterval(interval)
-    }, [])
-
+        if (day.dayNum !== weekDay.dayNum) {
+            setWeekDay(day)
+        }
+    }, 1000)
 
     return weekDay
 }
-
-
 
 export default useWeekDay

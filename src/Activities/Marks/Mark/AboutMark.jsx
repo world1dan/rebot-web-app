@@ -5,15 +5,22 @@ import { SubjectMarkContext } from '../QuarterMarks/SubjectMarks/SubjectMarksCon
 
 import ActionSheet from 'Components/ActionSheet'
 import AboutMarkActions from './AboutMarkActions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 const styles = css`
     display: grid;
-    grid-template-rows: 22px 100px 1fr;
+    grid-template-rows: 22px 1fr;
     gap: 10px;
     width: 100%;
     height: 380px;
     padding: 12px;
 
+    .right-section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
     .modal-title {
         padding-left: 4px;
         color: var(--text2);
@@ -99,12 +106,14 @@ const AboutMark = ({ mark, handleClose, markStyle, quarter, isYearMark }) => {
                     <div className="mark-num" style={markStyle}>
                         {mark.mark}
                     </div>
-                    <div className="subject">
-                        {subject.full_title || subject.title}
-                    </div>
-                    <div className="time">
-                        <i className="fa-solid fa-calendar"></i>
-                        {!isYearMark ? date : `${quarter} Четверть`}
+                    <div className="right-section">
+                        <div className="subject">
+                            {subject.full_title || subject.title}
+                        </div>
+                        <div className="time">
+                            <FontAwesomeIcon icon={faCalendar} />
+                            {!isYearMark ? date : `${quarter} Четверть`}
+                        </div>
                     </div>
                 </div>
                 <AboutMarkActions

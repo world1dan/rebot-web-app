@@ -1,9 +1,10 @@
+import { useState } from 'react'
 import { css } from '@linaria/core'
 import { AnimatePresence } from 'framer-motion'
-import React, { useState } from 'react'
-import FullscreenClocks from './FullscreenClocks'
 
+import FullscreenClocks from './FullscreenClocks'
 import Progress from './Progress'
+
 const styles = css`
     align-items: center;
     background-color: var(--bg3);
@@ -18,11 +19,12 @@ const styles = css`
 const TimeLeft = ({ actualLesson, strokeColor }) => {
     const [fullscreenClocks, setFullscreenClocks] = useState(false)
 
-    const handleClick = () => setFullscreenClocks(true)
-    const handleClose = () => setFullscreenClocks(false)
+    const openFullscreen = () => setFullscreenClocks(true)
+    const closeFullscreen = () => setFullscreenClocks(false)
+
     return (
         <>
-            <div className={styles} onClick={handleClick}>
+            <div className={styles} onClick={openFullscreen}>
                 <Progress
                     actualLesson={actualLesson}
                     strokeColor={strokeColor}
@@ -32,7 +34,7 @@ const TimeLeft = ({ actualLesson, strokeColor }) => {
                 {fullscreenClocks && (
                     <FullscreenClocks
                         isOpen={fullscreenClocks}
-                        handleClose={handleClose}
+                        handleClose={closeFullscreen}
                         actualLesson={actualLesson}
                         strokeColor={strokeColor}
                     />

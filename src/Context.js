@@ -23,5 +23,6 @@ export const TimeTableContext = createContext(null)
 export const MarksContext = createContext(null)
 
 if (process.env.NODE_ENV == 'development') {
+    ///НЕ ДЕЛАЙ
     disableNetwork(firestore)
 }

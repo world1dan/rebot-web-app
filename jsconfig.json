@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
-      "checkJs": false,
-      "jsx": "react",
-      "plugins": [
-        {
-          "name": "typescript-styled-plugin",
-          "validate": true
-        }
-      ]
+        "checkJs": false,
+        "jsx": "react",
+        "plugins": [
+            {
+                "name": "typescript-styled-plugin",
+                "validate": true
+            }
+        ]
     }
 }

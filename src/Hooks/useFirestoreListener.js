@@ -1,14 +1,14 @@
 import { onSnapshot } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
 
-export default function useFirestoreListener(doc) {
+export default function useFirestoreListener(docRef) {
     const [docData, setDocData] = useState(null)
 
     useEffect(() => {
-        return onSnapshot(doc, (doc) => {
+        return onSnapshot(docRef, (doc) => {
             setDocData(doc.data())
         })
-    }, [doc])
+    }, [docRef])
 
     return docData
 }

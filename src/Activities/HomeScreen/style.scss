@@ -1,11 +1,11 @@
-#homescreen-layout {
+.homescreen-layout {
     align-items: start;
     display: grid;
     gap: 12px;
     margin: 0 auto;
     max-width: 1048px;
 
-    @media (min-width: 740px) {
+    @media (min-width: 768px) {
         grid-template-columns: repeat(2, minmax(370px, 1fr)) !important;
     }
 

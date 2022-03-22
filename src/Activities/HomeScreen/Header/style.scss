@@ -5,8 +5,7 @@
     margin: 0 auto;
     max-width: 1024px;
     /* stylelint-disable-next-line declaration-colon-newline-after */
-    padding: 10px max(env(safe-area-inset-left), 12px)
-        max(env(safe-area-inset-right), 12px) 4px;
+    padding: 6px max(env(safe-area-inset-right), 12px) 13px;
 
     @media (min-width: 1024px) {
         margin-bottom: 10px;

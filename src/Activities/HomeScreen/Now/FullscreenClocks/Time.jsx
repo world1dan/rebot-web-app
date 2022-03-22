@@ -1,35 +1,30 @@
 import { css } from '@linaria/core'
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import { motion } from 'framer-motion'
+import useInterval from '../../../../Hooks/useInterval'
+
 const styles = css`
     display: flex;
     justify-content: center;
     font-size: 30px;
     font-weight: 600;
 `
+
+const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+}
+
 const Time = () => {
     const [date, setDate] = useState('')
 
-    const options = {
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-    }
+    useInterval(() => {
+        const string = new Date().toLocaleString('ru', options)
 
-    useEffect(() => {
-        const update = () => {
-            const string = new Date().toLocaleString('ru', options)
-
-            setDate(string)
-        }
-
-        update()
-
-        const interval = setInterval(update, 1000)
-
-        return () => clearInterval(interval)
-    }, [])
+        setDate(string)
+    }, 1000)
 
     return (
         <motion.div

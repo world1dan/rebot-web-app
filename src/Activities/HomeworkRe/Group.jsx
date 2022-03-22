@@ -1,4 +1,3 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import ReshebaViewer from '../../Components/ReshebaViewer'
 import { css } from '@linaria/core'
@@ -17,6 +16,7 @@ const styles = css`
         font-size: 14px;
         font-weight: bold;
         width: 100px;
+        flex-shrink: 0;
     }
 
     .homework {

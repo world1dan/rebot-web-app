@@ -1,10 +1,10 @@
-import React from 'react'
+import { faLink, faPen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from '@linaria/core'
 
 import PlusRounded from '../Icons/PlusRounded'
 
 const styles = css`
-    cursor: pointer;
     height: 40px;
     min-width: 70px;
     background-color: var(--bg4);
@@ -14,12 +14,11 @@ const styles = css`
     align-items: center;
     padding: 0 10px;
     font-size: 17px;
-    color: var(--green);
     max-width: 180px;
-    overflow: hidden;
     gap: 10px;
+
     svg {
-        color: var(--text2);
+        color: var(--green);
     }
 
     .current-link {
@@ -33,9 +32,10 @@ const styles = css`
 const AddLink = ({ setLink, currentLink }) => {
     const addLink = () => {
         const link = prompt('Добавить ссылку', currentLink)
-        var expression =
+
+        const regex = new RegExp(
             /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi
-        var regex = new RegExp(expression)
+        )
 
         if (link == null) return
         if (link == '' || link.match(regex)) {
@@ -46,16 +46,16 @@ const AddLink = ({ setLink, currentLink }) => {
     }
 
     return (
-        <div className={styles} onClick={addLink}>
+        <button className={styles} onClick={addLink}>
             {currentLink ? (
-                <i className="fas fa-pen"></i>
+                <FontAwesomeIcon icon={faPen} />
             ) : (
                 <PlusRounded width={18} height={18} />
             )}
 
             {currentLink && <div className="current-link">{currentLink}</div>}
-            <i className="fas fa-paperclip"></i>
-        </div>
+            <FontAwesomeIcon icon={faLink} />
+        </button>
     )
 }
 

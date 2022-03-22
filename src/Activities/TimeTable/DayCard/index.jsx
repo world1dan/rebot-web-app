@@ -1,6 +1,4 @@
 import { useContext, useState } from 'react'
-import PropTypes from 'prop-types'
-
 import { ConfigContext } from '../../../Context'
 
 import Card from '../../../Components/Blocks/Card'
@@ -9,7 +7,7 @@ import SubjectRow from './SubjectRow'
 import Search from '../../../Components/Icons/Search'
 
 const DayCard = ({ dayNum, week, timetable, pathToDay }) => {
-    const [instant, setInstant] = useState(false)
+    const [homeworkRe, setHomeworkRe] = useState(false)
     const context = useContext(ConfigContext)
 
     const group = context.user.group
@@ -53,12 +51,10 @@ const DayCard = ({ dayNum, week, timetable, pathToDay }) => {
             path = `${pathToDay}.${lessonNum}`
         }
 
-        lessons.push(
-            <SubjectRow withTask key={lessonNum} lesson={lesson} path={path} />
-        )
+        lessons.push(<SubjectRow key={lessonNum} lesson={lesson} path={path} />)
     }
 
-    const openInstant = () => {
+    const openHomeworkRe = () => {
         const toOpen = []
 
         for (let lessonNum in timetable) {
@@ -74,8 +70,8 @@ const DayCard = ({ dayNum, week, timetable, pathToDay }) => {
             }
         }
 
-        if (toOpen.length != 0) {
-            setInstant(toOpen)
+        if (toOpen.length > 0) {
+            setHomeworkRe(toOpen)
         } else {
             context.setStatusBar({
                 title: 'Решебники не найдены',
@@ -85,29 +81,20 @@ const DayCard = ({ dayNum, week, timetable, pathToDay }) => {
     }
 
     return (
-        <>
-            <Card title={weekDayTitle} subTitle={dateTitle}>
-                <button className="table-btn" onClick={openInstant}>
-                    <Search width={20} height={20} />
-                </button>
+        <Card title={weekDayTitle} subTitle={dateTitle}>
+            <button className="table-btn" onClick={openHomeworkRe}>
+                <Search width={20} height={20} />
+            </button>
 
-                <div className="content">{lessons}</div>
-            </Card>
-            {instant && (
+            <div className="content">{lessons}</div>
+            {homeworkRe && (
                 <HomeworkRe
-                    lessonsData={instant}
-                    handleClose={() => setInstant(false)}
+                    lessonsData={homeworkRe}
+                    handleClose={() => setHomeworkRe(false)}
                 />
             )}
-        </>
+        </Card>
     )
-}
-
-DayCard.propTypes = {
-    dayNum: PropTypes.number.isRequired,
-    week: PropTypes.number.isRequired,
-    timetable: PropTypes.object.isRequired,
-    pathToDay: PropTypes.string.isRequired,
 }
 
 export default DayCard

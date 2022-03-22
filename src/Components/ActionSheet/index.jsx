@@ -5,6 +5,9 @@ import Backdrop from '../Backdrop'
 
 import ModalPortal from '../ModalPortal'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
+
 import './style.css'
 
 export const ActionSheetContext = createContext(null)
@@ -16,9 +19,9 @@ const swipePower = (offset, velocity) => {
 
 const ActionSheet = ({ onClose, children, bottomCloseBtn }) => {
     const [isVisible, setIsVisible] = useState(true)
-    const closeSheet = () => {
-        setIsVisible(false)
-    }
+
+    const closeSheet = () => setIsVisible(false)
+
     return (
         <ModalPortal>
             <AnimatePresence onExitComplete={onClose}>
@@ -71,7 +74,7 @@ const ActionSheet = ({ onClose, children, bottomCloseBtn }) => {
                                     className="top-close-btn"
                                     onClick={closeSheet}
                                 >
-                                    <i className="fa-solid fa-xmark"></i>
+                                    <FontAwesomeIcon icon={faXmark} />
                                 </div>
                             )}
                         </motion.div>

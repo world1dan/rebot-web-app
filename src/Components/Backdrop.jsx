@@ -1,9 +1,7 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import { css } from '@linaria/core'
 
 const styles = css`
-    will-change: opacity;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -11,7 +9,7 @@ const styles = css`
     left: 0;
     touch-action: none;
     background: var(--backdrop);
-    z-index: 50;
+    z-index: 999;
     cursor: pointer;
 `
 

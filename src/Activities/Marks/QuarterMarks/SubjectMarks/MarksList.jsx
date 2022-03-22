@@ -1,25 +1,14 @@
 import { memo } from 'react'
 
-import { SubjectMarkContext } from './SubjectMarksContext'
-
 import Mark from 'Activities/Marks/Mark'
 
-const MarksList = ({ marks, subject, readOnly }) => {
+const MarksList = ({ marks }) => {
     const marksComponents = marks.map((mark) => (
         <Mark mark={mark} key={mark.time} />
     ))
+    if (marks.length == 0) return null
 
-    return (
-        <>
-            {marksComponents.length != 0 && (
-                <SubjectMarkContext.Provider
-                    value={{ marks, subject, readOnly }}
-                >
-                    {marksComponents}
-                </SubjectMarkContext.Provider>
-            )}
-        </>
-    )
+    return marksComponents
 }
 
 export default memo(MarksList)

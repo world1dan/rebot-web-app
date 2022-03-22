@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useContext, memo } from 'react'
 import { css } from '@linaria/core'
 
+import { ConfigContext } from '../../Context'
 import Wraper from '../../Components/Wraper'
 import QuarterMarks from './QuarterMarks'
 import YearMarks from './YearMarks'
@@ -27,7 +28,7 @@ const headerStyles = css`
         padding: 10px 12px;
     }
 
-    @media (max-width: 380px) {
+    @media (max-width: 360px) {
         padding: 8px;
     }
 
@@ -57,6 +58,7 @@ const headerStyles = css`
 
 const Marks = () => {
     const [currentTab, setCurrentTab] = useState('quarter')
+    const yearMarksDoc = useContext(ConfigContext).database.yearMarks
 
     return (
         <Wraper className={wraperStyles}>
@@ -83,10 +85,10 @@ const Marks = () => {
             </header>
 
             {currentTab == 'quarter' && <QuarterMarks />}
-            {currentTab == 'year' && <YearMarks />}
+            {currentTab == 'year' && <YearMarks yearMarksDoc={yearMarksDoc} />}
             {currentTab == 'rating' && <Rating />}
         </Wraper>
     )
 }
 
-export default Marks
+export default memo(Marks)

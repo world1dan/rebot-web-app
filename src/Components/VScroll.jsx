@@ -9,6 +9,7 @@ const styles = css`
     .VScroll {
         height: 100%;
         overflow-y: auto;
+        overscroll-behavior: contain;
 
         &::-webkit-scrollbar {
             width: 0;
@@ -16,11 +17,11 @@ const styles = css`
     }
 `
 
-const VScroll = (props) => {
+const VScroll = ({ children, disableOverscrollContain }) => {
     const ref = useRef(null)
 
     useEffect(() => {
-        if (window.ios && ref?.current && !props.disableOverscrollContain) {
+        if (window.ios && !disableOverscrollContain) {
             fixScroll(ref.current)
         }
     }, [])
@@ -28,7 +29,7 @@ const VScroll = (props) => {
     return (
         <div className={styles}>
             <div className="VScroll" ref={ref}>
-                {props.children}
+                {children}
             </div>
         </div>
     )

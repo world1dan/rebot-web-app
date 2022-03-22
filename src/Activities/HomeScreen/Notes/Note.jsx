@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import PropTypes from 'prop-types'
 
 import { deleteDoc, setDoc } from 'firebase/firestore'
 
 import TextareaAutosize from 'react-textarea-autosize'
 import ContextMenu from '../../../Components/ContextMenu'
 import ContextMenuBtn from 'Components/ContextMenu/ContextMenuBtn'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbtack, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 const Note = ({ noteData, docRef }) => {
     const input = useRef(null)
@@ -55,22 +57,17 @@ const Note = ({ noteData, docRef }) => {
             <ContextMenu>
                 <ContextMenuBtn
                     onClick={updatePin}
-                    title={isPinned ? 'Открепить' : 'Закрепить'}
-                    icon={<i className="fas fa-thumbtack fa-lg"></i>}
+                    title={isPinned ? 'Не выделять' : 'Выделить'}
+                    icon={<FontAwesomeIcon icon={faThumbtack} size="lg" />}
                 />
                 <ContextMenuBtn
                     onClick={removeNote}
                     title="Удалить"
-                    icon={<i className="fas fa-trash-alt fa-lg"></i>}
+                    icon={<FontAwesomeIcon icon={faTrashAlt} size="lg" />}
                 />
             </ContextMenu>
         </div>
     )
-}
-
-Note.propTypes = {
-    noteData: PropTypes.object.isRequired,
-    docRef: PropTypes.object.isRequired,
 }
 
 export default Note

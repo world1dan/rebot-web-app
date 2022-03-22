@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 import { css } from '@linaria/core'
 
@@ -10,18 +10,18 @@ const tabBarStyles = css`
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 99;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     align-items: center;
     box-sizing: content-box;
     height: 48px;
     padding-right: env(safe-area-inset-right);
-    padding-bottom: var(--bottom-save-zone);
+    padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     background-color: var(--bg2);
     border-top: 1px solid var(--borders);
     touch-action: none;
+    z-index: 100;
 `
 
 const TabBar = ({ activeTab, setActiveTab, statusBar }) => {

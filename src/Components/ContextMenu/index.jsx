@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+
 import MenuContent from './MenuContent'
 
 import './style.scss'
 
-const ContextMenu = ({ children, icon }) => {
+const ContextMenu = ({ children, icon, stayActiveOnClick }) => {
     const [menuStyles, setMenuStyles] = useState(null)
 
     const handleOpen = (event) => {
@@ -34,11 +37,15 @@ const ContextMenu = ({ children, icon }) => {
                 className={'context-menu-btn' + (menuStyles ? ' active' : '')}
                 onClick={handleOpen}
             >
-                {icon ?? <i className="fas fa-ellipsis-v"></i>}
+                {icon ?? <FontAwesomeIcon icon={faEllipsisV} size="lg" />}
             </button>
 
             {menuStyles && (
-                <MenuContent menuStyles={menuStyles} closeMenu={closeMenu}>
+                <MenuContent
+                    menuStyles={menuStyles}
+                    closeMenu={closeMenu}
+                    stayActiveOnClick={stayActiveOnClick}
+                >
                     {children}
                 </MenuContent>
             )}

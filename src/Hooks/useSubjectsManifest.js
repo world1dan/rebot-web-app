@@ -23,10 +23,10 @@ export default function useSubjectsManifest() {
         })
     }
     useEffect(() => {
-        if (process.env.NODE_ENV === 'production') {
+        if (process.env.NODE_ENV == 'production' || !manifest) {
             updateManifestFromServer()
 
-            const interval = setInterval(updateManifestFromServer, 1200000)
+            const interval = setInterval(updateManifestFromServer, 600000)
             return () => clearInterval(interval)
         }
     }, [])

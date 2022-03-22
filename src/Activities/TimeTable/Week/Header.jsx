@@ -1,30 +1,33 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { css } from '@linaria/core'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faChevronRight,
+    faChevronLeft,
+} from '@fortawesome/free-solid-svg-icons'
+
 const styles = css`
     position: fixed;
-    top: 0;
-    z-index: 5;
+    top: -1px;
+    z-index: 1;
     right: 0;
     left: 0;
     display: flex;
     align-items: center;
-    max-width: 700px;
-    height: calc(var(--top-save-zone) + 54px);
-    padding-top: var(--top-save-zone);
-    color: var(--text1);
+    max-width: 600px;
+    height: 54px;
     background-color: var(--bg2);
     border-bottom: 1px solid var(--borders);
 
-    @media (min-width: 700px) {
-        position: static;
+    @media (min-width: 600px) {
         margin: 0 auto;
-        border-radius: 9px !important;
-        box-shadow: 0 0 0 1px var(--borders-soft) inset;
+        border-radius: 0 0 9px 9px;
+        border-left: 1px solid var(--borders);
+        border-right: 1px solid var(--borders);
     }
 
     .current-week {
-        will-change: transform opacity;
         right: 0;
         left: 0;
         text-align: center;
@@ -79,11 +82,11 @@ const Header = ({ week, prewWeek, nextWeek, direction }) => {
         <header className={styles}>
             {week > 1 ? (
                 <button onClick={prewWeek}>
-                    <i className="fas fa-chevron-left fa-2x"></i>
+                    <FontAwesomeIcon icon={faChevronLeft} size="2x" />
                 </button>
             ) : (
                 <button className="unactive">
-                    <i className="fas fa-chevron-left fa-2x"></i>
+                    <FontAwesomeIcon icon={faChevronLeft} size="2x" />
                 </button>
             )}
             <AnimatePresence custom={direction} initial={false}>
@@ -106,11 +109,11 @@ const Header = ({ week, prewWeek, nextWeek, direction }) => {
             </AnimatePresence>
             {week < 3 ? (
                 <button onClick={nextWeek}>
-                    <i className="fas fa-chevron-right fa-2x"></i>
+                    <FontAwesomeIcon icon={faChevronRight} size="2x" />
                 </button>
             ) : (
                 <button className="unactive">
-                    <i className="fas fa-chevron-right fa-2x"></i>
+                    <FontAwesomeIcon icon={faChevronRight} size="2x" />
                 </button>
             )}
         </header>

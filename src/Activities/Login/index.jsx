@@ -1,4 +1,4 @@
-import React from 'react'
+import { Component } from 'react'
 
 import { setDoc, doc } from '@firebase/firestore'
 import { firestore } from '../../Context'
@@ -9,7 +9,7 @@ import { TLoginButton, TLoginButtonSize } from 'react-telegram-auth'
 
 import './style.scss'
 
-class Login extends React.Component {
+class Login extends Component {
     constructor(props) {
         super(props)
 

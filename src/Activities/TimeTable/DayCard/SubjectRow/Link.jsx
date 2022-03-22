@@ -1,4 +1,5 @@
-import React from 'react'
+import { faExternalLinkAlt, faLink } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from '@linaria/core'
 
 import ContextMenu from '../../../../Components/ContextMenu'
@@ -45,12 +46,14 @@ const Link = ({ URL }) => {
 
     return (
         <div className={styles}>
-            <ContextMenu icon={<i className="fas fa-paperclip"></i>}>
+            <ContextMenu icon={<FontAwesomeIcon icon={faLink} />}>
                 <div className="link-preview">{URL}</div>
                 <ContextMenuBtn
                     title="Перейти"
                     onClick={openLink}
-                    icon={<i className="fas fa-external-link-alt"></i>}
+                    icon={
+                        <FontAwesomeIcon icon={faExternalLinkAlt} size="lg" />
+                    }
                 />
             </ContextMenu>
         </div>

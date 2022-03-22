@@ -1,20 +1,21 @@
 import { useCallback, useRef } from 'react'
 import useEventListener from '../../Hooks/useEventListener'
 
-const MenuContent = ({ menuStyles, children, closeMenu }) => {
+const MenuContent = ({
+    menuStyles,
+    children,
+    closeMenu,
+    stayActiveOnClick,
+}) => {
     const menu = useRef()
 
     const handleClose = useCallback((event) => {
         if (menu.current) {
-            try {
-                if (
-                    (event.type === 'pointerdown' || event.type === 'wheel') &&
-                    event.composedPath().includes(menu.current)
-                ) {
-                    return
-                }
-            } catch (e) {
-                alert(e.message)
+            if (
+                (event.type === 'pointerdown' || event.type === 'wheel') &&
+                event.composedPath().includes(menu.current)
+            ) {
+                return
             }
 
             menu.current.animate([{ opacity: 1 }, { opacity: 0 }], {
@@ -39,7 +40,7 @@ const MenuContent = ({ menuStyles, children, closeMenu }) => {
                 className="menu-items"
                 ref={menu}
                 style={menuStyles}
-                onClick={handleClose}
+                onClick={stayActiveOnClick ? null : handleClose}
             >
                 {children}
             </div>

@@ -10,7 +10,7 @@ import { styled } from '@linaria/react'
 const Block = styled(motion.div)`
     background: var(--bg2);
     border-radius: 7px;
-    height: 100px;
+    min-height: 100px;
 
     display: grid;
     padding: 6px;
@@ -36,9 +36,11 @@ const Block = styled(motion.div)`
         display: flex;
         flex-direction: column;
         gap: 6px;
+        overflow-x: auto;
         .task {
             font-weight: 600;
             font-size: 19px;
+            overflow-x: auto;
         }
         .subject {
             font-size: 16px;
@@ -73,10 +75,28 @@ const TaskBlock = ({ subject, task }) => {
 
 const Homework = ({ timetable, isWeekEnded, dayNum }) => {
     const manifest = useContext(manifestContext)
-
     const tasks = []
 
     const day = timetable[isWeekEnded ? 3 : 2][dayNum]
+
+    let mult = 0
+
+    if (isWeekEnded) {
+        mult = 7
+    }
+    const date = new Date()
+    const weekDay = date.getDay()
+    const distance = dayNum + mult - (weekDay != 0 ? dayNum : 7)
+
+    date.setDate(date.getDate() + distance)
+
+    const dateTitle = date.toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'numeric',
+    })
+    const weekDayTitle = date.toLocaleString('ru-RU', { weekday: 'long' })
+
+    console.log(dateTitle, weekDayTitle)
 
     for (let lessonNum in day) {
         const lesson = day[lessonNum]

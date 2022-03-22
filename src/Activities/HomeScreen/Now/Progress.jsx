@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { motion } from 'framer-motion'
 import { convertTime } from './utils'
 
@@ -30,50 +28,46 @@ const Progress = ({ actualLesson, size = 82, strokeColor }) => {
     }
 
     return (
-        <>
-            <div className="Progress">
-                <div className="countdown">
-                    {convertTime(actualLesson.left)}
-                </div>
-                <svg viewBox="0 0 100 100" width={size} height={size}>
-                    <circle
-                        cx="50"
-                        cy="50"
-                        r={radius}
-                        className="circle"
-                        strokeWidth={7}
-                        stroke="var(--bg2)"
-                        strokeOpacity={1}
-                        fill="transparent"
-                    />
-                </svg>
-                <svg
-                    viewBox="0 0 100 100"
-                    width={size}
-                    height={size}
-                    style={{
-                        position: 'absolute',
-                        transform: 'rotate(-90deg)',
-                        overflow: 'visible',
-                        marginLeft: -size,
-                    }}
-                >
-                    <motion.circle
-                        cx="50"
-                        cy="50"
-                        r={radius}
-                        strokeWidth={9}
-                        stroke={strokeColor}
-                        fill="transparent"
-                        strokeDashoffset={fillPercents}
-                        strokeDasharray={circumference}
-                        variants={variants}
-                        initial="hidden"
-                        animate="show"
-                    />
-                </svg>
-            </div>
-        </>
+        <div className="Progress">
+            <div className="countdown">{convertTime(actualLesson.left)}</div>
+            <svg viewBox="0 0 100 100" width={size} height={size}>
+                <circle
+                    cx="50"
+                    cy="50"
+                    r={radius}
+                    className="circle"
+                    strokeWidth={7}
+                    stroke="var(--bg2)"
+                    strokeOpacity={1}
+                    fill="transparent"
+                />
+            </svg>
+            <svg
+                viewBox="0 0 100 100"
+                width={size}
+                height={size}
+                style={{
+                    position: 'absolute',
+                    transform: 'rotate(-90deg)',
+                    overflow: 'visible',
+                    marginLeft: -size,
+                }}
+            >
+                <motion.circle
+                    cx="50"
+                    cy="50"
+                    r={radius}
+                    strokeWidth={9}
+                    stroke={strokeColor}
+                    fill="transparent"
+                    strokeDashoffset={fillPercents}
+                    strokeDasharray={circumference}
+                    variants={variants}
+                    initial="hidden"
+                    animate="show"
+                />
+            </svg>
+        </div>
     )
 }
 

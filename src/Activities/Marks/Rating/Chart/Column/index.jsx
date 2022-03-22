@@ -1,12 +1,8 @@
 import { useRef, useState } from 'react'
-import PropTypes from 'prop-types'
 
 import { motion } from 'framer-motion'
 
-import H1 from 'Components/Typography/H1'
-import MarksView from 'Activities/Marks/QuarterMarks/MarksView'
-import VerticalLayout from 'Components/Layouts/VerticalLayout'
-import SheetView from '../../../../../Components/SheetView'
+import UserMarks from './UserMarks'
 
 import './style.scss'
 
@@ -81,23 +77,15 @@ const Column = ({ user, percent, isOwn, userInfo, i }) => {
                 <div className="username">{userInfo?.first_name}</div>
             </motion.div>
             {marksPreview && (
-                <SheetView
+                <UserMarks
                     handleClose={() => setMarksPreview(false)}
-                    type="wide"
-                >
-                    <VerticalLayout>
-                        <H1 text={userInfo?.first_name} />
-                        <MarksView marks={user.marks} readOnly={!isOwn} />
-                    </VerticalLayout>
-                </SheetView>
+                    user={user}
+                    userInfo={userInfo}
+                    readOnly={!isOwn}
+                />
             )}
         </>
     )
-}
-
-Column.propTypes = {
-    user: PropTypes.object.isRequired,
-    percent: PropTypes.string.isRequired,
 }
 
 export default Column

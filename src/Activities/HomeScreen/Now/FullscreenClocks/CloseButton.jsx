@@ -1,9 +1,10 @@
 import { css } from '@linaria/core'
-import React from 'react'
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { motion } from 'framer-motion'
+
 const styles = css`
-    font-size: 28px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,7 +28,7 @@ const CloseButton = ({ handleClick }) => {
             className={styles}
             onClick={handleClick}
         >
-            <i className="fas fa-chevron-up"></i>
+            <FontAwesomeIcon icon={faChevronUp} size="2x" />
             <div className="caption">Закрыть</div>
         </motion.button>
     )

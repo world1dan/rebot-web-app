@@ -3,7 +3,7 @@
     flex-direction: column;
     gap: 14px;
     padding: 14px;
-    padding-bottom: calc(20px + var(--bottom-save-zone)) !important;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom)) !important;
 
     &.noPadding {
         padding: 0;

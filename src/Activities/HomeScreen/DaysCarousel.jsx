@@ -1,13 +1,13 @@
 import { css } from '@linaria/core'
-import React from 'react'
 
 import DayCard from '../TimeTable/DayCard'
+import Card from 'Components/Blocks/Card'
+import Loading from 'Components/Loading'
 
 const styles = css`
     width: 100%;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    overflow-y: visible;
     white-space: nowrap;
     padding-bottom: 12px;
     vertical-align: middle;
@@ -21,14 +21,24 @@ const styles = css`
         border-radius: 4px;
     }
     & > div {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
         display: inline-block;
         width: inherit;
-        scroll-snap-align: start;
-        flex-grow: 1;
     }
 `
 
+const Skeleton = () => {
+    return (
+        <Card title="">
+            <Loading styles={{ height: 367 }} />
+        </Card>
+    )
+}
+
 const DaysCarousel = ({ timetable, dayNum, isWeekEnded }) => {
+    if (!timetable) return <Skeleton />
+
     const weekNum = isWeekEnded ? 3 : 2
     const currentWeek = timetable[weekNum]
     const currentWeekPath = weekNum + '.'

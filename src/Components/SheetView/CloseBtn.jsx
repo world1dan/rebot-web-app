@@ -1,5 +1,6 @@
 import { css } from '@linaria/core'
-import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const styles = css`
     position: absolute;
@@ -14,13 +15,12 @@ const styles = css`
     color: var(--text2);
     height: 38px;
     width: 38px;
-    font-size: 19px;
 `
 
 const CloseBtn = ({ onClick }) => {
     return (
         <button className={styles} onClick={onClick}>
-            <i className="fa-solid fa-xmark"></i>
+            <FontAwesomeIcon icon={faXmark} size="lg" />
         </button>
     )
 }

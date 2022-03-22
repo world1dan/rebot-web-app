@@ -1,31 +1,15 @@
 {
-  "hosting": {
-    "target": "rebot",
-    "public": "dist",
-    "redirects": [
-      {
-        "source": "/get",
-        "destination": "/install.html",
-        "type": 301
-      },
-      {
-        "source": "/timetable",
-        "destination": "/timetable.html",
-        "type": 301
-      }
-    ],
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  },
-  "emulators": {
-    "firestore": {
-      "port": 8080
+    "hosting": {
+        "target": "rebot",
+        "public": "dist",
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     },
-    "ui": {
-      "enabled": true
+    "emulators": {
+        "firestore": {
+            "port": 8080
+        },
+        "ui": {
+            "enabled": true
+        }
     }
-  }
 }

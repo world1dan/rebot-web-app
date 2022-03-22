@@ -2,10 +2,10 @@ import { useEffect } from 'react'
 
 import { TimeTableContext, manifestContext, MarksContext } from './Context'
 
-import useServiceWorker from './Hooks/useServiceWorker'
 import useSubjectsManifest from './Hooks/useSubjectsManifest'
 import useFirestoreListener from './Hooks/useFirestoreListener'
 import analyticsEvent from 'Utils/analyticsEvent'
+import Loading from './Components/Loading'
 import Tabs from './Tabs'
 
 import './style.scss'
@@ -16,13 +16,12 @@ const App = ({ config }) => {
 
     const manifest = useSubjectsManifest()
 
-    const { updateFounded } = useServiceWorker(true, true)
-
     useEffect(() => {
         analyticsEvent({
             type: 'app-openned',
             username: config.user.first_name ?? null,
-            UUID: config.user,
+            UUID: config.user.id,
+            UA: navigator.userAgent,
         })
 
         window.addEventListener('error', (e) => {
@@ -35,19 +34,17 @@ const App = ({ config }) => {
         })
     }, [])
 
-    if (!manifest) return null
+    if (!manifest) return <Loading styles={{ height: '100vh' }} />
 
     return (
-        <>
+        <manifestContext.Provider value={manifest}>
             <div id="modals-container"></div>
-            <manifestContext.Provider value={manifest}>
-                <MarksContext.Provider value={marks}>
-                    <TimeTableContext.Provider value={timetable}>
-                        <Tabs config={config} updateFounded={updateFounded} />
-                    </TimeTableContext.Provider>
-                </MarksContext.Provider>
-            </manifestContext.Provider>
-        </>
+            <MarksContext.Provider value={marks}>
+                <TimeTableContext.Provider value={timetable}>
+                    <Tabs config={config} />
+                </TimeTableContext.Provider>
+            </MarksContext.Provider>
+        </manifestContext.Provider>
     )
 }
 

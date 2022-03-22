@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const CheckBox = ({ checked, onChange }) => {
     return (
         <label className="ios7-switch">

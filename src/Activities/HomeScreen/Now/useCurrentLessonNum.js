@@ -1,18 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import useInterval from '../../../Hooks/useInterval'
 import { getCurrentLessonNum } from './utils'
 
 export default function useCurrentLessonNum() {
     const [currentLesson, setCurrentLesson] = useState(getCurrentLessonNum)
 
-    useEffect(() => {
-        const update = () => {
-            setCurrentLesson(getCurrentLessonNum())
-        }
-
-        const interval = setInterval(update, 1000)
-
-        return () => clearInterval(interval)
-    }, [])
+    useInterval(() => {
+        setCurrentLesson(getCurrentLessonNum())
+    }, 1000)
 
     return currentLesson
 }

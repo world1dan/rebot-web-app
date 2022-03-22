@@ -3,21 +3,21 @@ module.exports = {
         browser: true,
         es2021: true,
         amd: true,
-        node: true
+        node: true,
     },
-    ignorePatterns: ['dist/**', '**/jsconfig.json'],
+    ignorePatterns: ['dist/**', 'jsconfig.json'],
     extends: ['eslint:recommended', 'plugin:react/recommended'],
     parserOptions: {
         ecmaFeatures: {
-            jsx: true
+            jsx: true,
         },
         ecmaVersion: 12,
-        sourceType: 'module'
+        sourceType: 'module',
     },
     plugins: ['react'],
     rules: {
         indent: ['none', 4],
         'linebreak-style': ['error', 'windows'],
-        semi: ['warn', 'never']
-    }
+        semi: ['warn', 'never'],
+    },
 }

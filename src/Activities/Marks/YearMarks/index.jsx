@@ -1,21 +1,22 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { ConfigContext, manifestContext } from '../../../Context'
+import { manifestContext } from '../../../Context'
 import useFirestoreListener from 'Hooks/useFirestoreListener'
 
 import YearSubjectMarks from './YearSubjectMarks'
 import Average from './Average'
 import Loading from 'Components/Loading'
 
-const YearMarks = () => {
+import './style.scss'
+
+const YearMarks = ({ yearMarksDoc, readOnly }) => {
     const manifest = useContext(manifestContext)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 250)
+        setTimeout(() => setLoading(false), 220)
     }, [])
 
-    const yearMarksDoc = useContext(ConfigContext).database.yearMarks
     const marks = useFirestoreListener(yearMarksDoc)
 
     const rows = []
@@ -28,6 +29,7 @@ const YearMarks = () => {
             rows.push(
                 <YearSubjectMarks
                     key={subjID}
+                    readOnly={readOnly}
                     subject={subject}
                     marks={marks?.[subjID] ?? {}}
                 />
@@ -42,12 +44,12 @@ const YearMarks = () => {
             ) : (
                 <>
                     <header className="YearMarks-table-header">
-                        <div className="subject">Предмет</div>
-                        <div>I</div>
-                        <div>II</div>
-                        <div>III</div>
-                        <div>IV</div>
-                        <div className="year">Год</div>
+                        <span className="subject">Предмет</span>
+                        <span>I</span>
+                        <span>II</span>
+                        <span>III</span>
+                        <span>IV</span>
+                        <span className="year">Год</span>
                     </header>
                     {rows}
 

@@ -22,7 +22,7 @@ const HomeScreen = () => {
     const timetable = useContext(TimeTableContext)
 
     useInterval(() => {
-        setShowNow(shoudShowNow())
+        setShowNow(shoudShowNow)
     }, 1000)
 
     let { dayNum, isWeekend } = useWeekDay()
@@ -44,7 +44,7 @@ const HomeScreen = () => {
     return (
         <Wraper>
             <Header />
-            <div id="homescreen-layout">
+            <div className="homescreen-layout">
                 <div className="side-left">
                     {timetable?.[2]?.[dayNum] && !isWeekEnded && showNow && (
                         <Now
@@ -54,14 +54,13 @@ const HomeScreen = () => {
                     )}
                     <Notes />
                 </div>
-                {(timetable?.[2] || timetable?.[3]) && (
-                    <DaysCarousel
-                        timetable={timetable}
-                        dayNum={dayNum}
-                        isWeekEnded={isWeekEnded}
-                        isWeekend={isWeekend}
-                    />
-                )}
+
+                <DaysCarousel
+                    timetable={timetable}
+                    dayNum={dayNum}
+                    isWeekEnded={isWeekEnded}
+                    isWeekend={isWeekend}
+                />
             </div>
         </Wraper>
     )

@@ -1,12 +1,15 @@
 import { useState, memo } from 'react'
 import PropTypes from 'prop-types'
 
+import { SubjectMarkContext } from './SubjectMarksContext'
+
 import MarksKeyboard from '../../MarksKeyboard'
 import useMarksController from '../../useMarksController'
 import ActionSheet from 'Components/ActionSheet'
 import Average from './Average'
 import MarksList from './MarksList'
 import NewMark from './NewMark'
+import CalendarView from './CalendarView'
 
 import './style.scss'
 
@@ -19,7 +22,7 @@ const SubjectMarks = ({ subject, marks, target, embedded, readOnly }) => {
     const closeTargetDialog = () => setTargetDialog(false)
 
     return (
-        <>
+        <SubjectMarkContext.Provider value={{ marks, subject, readOnly }}>
             <div className={'SubjectMarks' + (embedded ? ' embedded' : '')}>
                 {!embedded && (
                     <div
@@ -39,19 +42,16 @@ const SubjectMarks = ({ subject, marks, target, embedded, readOnly }) => {
                     )}
 
                     <div className="marks-container">
-                        <MarksList
-                            marks={marks}
-                            subject={subject}
-                            readOnly={readOnly}
-                            addQuarterMark={addQuarterMark}
-                        />
+                        <MarksList marks={marks} />
                         {!readOnly && (
                             <NewMark
                                 subject={subject}
+                                layoutDependency={marks?.length}
                                 addQuarterMark={addQuarterMark}
                             />
                         )}
                     </div>
+                    <CalendarView marks={marks} />
                 </div>
 
                 <Average
@@ -71,7 +71,7 @@ const SubjectMarks = ({ subject, marks, target, embedded, readOnly }) => {
                     />
                 </ActionSheet>
             )}
-        </>
+        </SubjectMarkContext.Provider>
     )
 }
 

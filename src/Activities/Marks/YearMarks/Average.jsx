@@ -1,8 +1,3 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-import './style.scss'
-
 const Average = (props) => {
     const sumInQuarters = {}
     const countInQuarters = {}
@@ -55,7 +50,7 @@ const Average = (props) => {
     let globalAverage = yearMarksSum / subjectsWithYearMark
 
     if (!isNaN(globalAverage)) {
-        globalAverage = parseInt(globalAverage.toFixed(2))
+        globalAverage = globalAverage.toFixed(2)
     } else {
         globalAverage = null
     }
@@ -68,10 +63,6 @@ const Average = (props) => {
             <div className="year-mark">{globalAverage}</div>
         </div>
     )
-}
-
-Average.propTypes = {
-    marks: PropTypes.object.isRequired,
 }
 
 export default Average

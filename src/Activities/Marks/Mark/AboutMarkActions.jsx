@@ -6,6 +6,12 @@ import useMarksController from '../useMarksController'
 import MarksKeyboard from '../MarksKeyboard'
 import Switch from 'Components/Blocks/Switch'
 import ActionSheet from '../../../Components/ActionSheet'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faCircleExclamation,
+    faPen,
+    faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons'
 
 const AboutMarkActions = ({ isYearMark, readOnly, mark, subject, quarter }) => {
     const { close } = useContext(ActionSheetContext)
@@ -48,7 +54,10 @@ const AboutMarkActions = ({ isYearMark, readOnly, mark, subject, quarter }) => {
                         title="Контрольная"
                         descr="Отметить как оценку по к/р"
                         icon={
-                            <i className="fa-solid fa-circle-exclamation"></i>
+                            <FontAwesomeIcon
+                                icon={faCircleExclamation}
+                                size="lg"
+                            />
                         }
                     />
                 </div>
@@ -56,11 +65,11 @@ const AboutMarkActions = ({ isYearMark, readOnly, mark, subject, quarter }) => {
             {!readOnly && (
                 <>
                     <button onClick={() => setUpdateMarkDialog(true)}>
-                        <i className="fa-solid fa-pen"></i>
+                        <FontAwesomeIcon icon={faPen} size="lg" />
                         Изменить
                     </button>
                     <button className="remove" onClick={handleRemove}>
-                        <i className="fa-solid fa-trash-can"></i>
+                        <FontAwesomeIcon icon={faTrashAlt} size="lg" />
                         Удалить
                     </button>
                 </>

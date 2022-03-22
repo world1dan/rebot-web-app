@@ -6,7 +6,7 @@
     flex-direction: column;
     gap: 6px;
     padding: 8px;
-    will-change: transform;
+    width: 100%;
 
     @media (max-width: 360px) {
         border-radius: 0;
@@ -35,28 +35,7 @@
             flex-grow: 1;
             font-size: 22px;
             margin: 5px;
-        }
-    }
-
-    .tool-btns-wraper {
-        display: flex;
-        gap: 6px;
-
-        .tool-btn {
-            align-items: center;
-            background-color: var(--bg3);
-            border-radius: 7px;
-            box-shadow: 0 0 0 0.8px var(--lvl4-borders) inset;
-            display: grid;
-            flex-grow: 1;
-            font-size: 14px;
-            font-weight: 600;
-            grid-template-columns: 23px 1fr;
-            padding: 12px 10px;
-
-            i {
-                font-size: 18px;
-            }
+            text-overflow: ellipsis;
         }
     }
 }
@@ -75,6 +54,5 @@
         position: absolute;
         right: 0;
         top: 0;
-        will-change: transform opacity;
     }
 }

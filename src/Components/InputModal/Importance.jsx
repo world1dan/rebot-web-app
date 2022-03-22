@@ -1,4 +1,5 @@
-import React from 'react'
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from '@linaria/core'
 
 import { CheckBox } from '../Blocks/Switch/Checkbox'
@@ -14,12 +15,9 @@ const styles = css`
         color: var(--text2);
     }
 
-    i {
+    .icon {
         display: flex;
-        align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
         padding: 10px;
         font-size: 18px;
         background: var(--bg4);
@@ -31,22 +29,18 @@ const styles = css`
     }
 `
 
-
 const Importance = ({ danger, handleDangerChange }) => {
-
     return (
         <div className={styles}>
-            <i className="fas fa-exclamation-circle"></i>
+            <div className="icon">
+                <FontAwesomeIcon icon={faExclamationCircle} />
+            </div>
             <span>Отметить, что на этом уроке к/р или самостоялка</span>
-            <div className='checkbox'>
-                <CheckBox
-                    checked={danger}
-                    onChange={handleDangerChange}
-                />
+            <div className="checkbox">
+                <CheckBox checked={danger} onChange={handleDangerChange} />
             </div>
         </div>
     )
 }
-
 
 export default Importance

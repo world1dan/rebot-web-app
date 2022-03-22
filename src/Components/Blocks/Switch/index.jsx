@@ -1,26 +1,22 @@
-import React from "react"
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 
-import "./style.scss"
-
+import './style.scss'
 
 const Switch = ({ title, icon, descr, checked, onChange, noPadding }) => {
-
     return (
-        <div className={"_Switch" + (noPadding ? " noPadding" : "")} >
-            { icon }
+        <div className={'_Switch' + (noPadding ? ' noPadding' : '')}>
+            <div className="icon"> {icon}</div>
             <div className="label-block">
-                <a className="title">{ title }</a>
-                <a className="descr">{ descr }</a>
+                <a className="title">{title}</a>
+                <a className="descr">{descr}</a>
             </div>
             <label className="ios7-switch">
-                <input type="checkbox" checked={ checked } onChange={onChange}/>
+                <input type="checkbox" checked={checked} onChange={onChange} />
                 <span></span>
             </label>
         </div>
     )
 }
-
 
 Switch.propTypes = {
     title: PropTypes.string.isRequired,
@@ -28,8 +24,7 @@ Switch.propTypes = {
     icon: PropTypes.element,
     checked: PropTypes.bool,
     onChange: PropTypes.func,
-    noPadding: PropTypes.bool
+    noPadding: PropTypes.bool,
 }
-
 
 export default Switch

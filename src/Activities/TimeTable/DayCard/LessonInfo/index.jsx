@@ -10,6 +10,8 @@ import SubjectMarks from 'Activities/Marks/QuarterMarks/SubjectMarks'
 import { MarksContext } from 'Context'
 import useLessonController from '../SubjectRow/useLessonController'
 import SheetView from '../../../../Components/SheetView'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons'
 
 const styles = css`
     display: flex;
@@ -36,6 +38,7 @@ const styles = css`
         font-size: 18px;
         -webkit-user-select: all;
         user-select: all;
+        word-break: break-word;
     }
 
     .last-changes-by {
@@ -92,7 +95,9 @@ const LessonInfo = ({ lesson, path, subject, handleClose }) => {
                     checked={lesson.danger}
                     onChange={handleImportanceChange}
                     title="Здесь что-то страшное"
-                    icon={<i className="fas fa-skull-crossbones"></i>}
+                    icon={
+                        <FontAwesomeIcon icon={faSkullCrossbones} size="lg" />
+                    }
                     descr="Отметить, что на этом уроке к/р или что-то еще"
                 />
             </VerticalLayout>

@@ -1,14 +1,10 @@
 .week-grid {
     display: grid;
     gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     margin: 0 auto;
     max-width: 1380px;
     padding-top: 58px;
-
-    @media (min-width: 700px) {
-        padding-top: 16px;
-    }
 
     @media (min-width: 1000px) {
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -26,10 +22,4 @@
     place-items: center;
     text-align: center;
     width: 100%;
-}
-
-@media (max-width: 360px) {
-    .week-grid {
-        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)) !important;
-    }
 }

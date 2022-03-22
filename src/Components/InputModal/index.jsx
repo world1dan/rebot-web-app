@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
-import css from './style.module.scss'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { css } from '@linaria/core'
 
 import { manifestContext } from '../../Context'
 
@@ -9,8 +9,51 @@ import Shortcuts from './Shortcuts'
 import Header from './Header'
 import Importance from './Importance'
 import useLessonController from '../../Activities/TimeTable/DayCard/SubjectRow/useLessonController'
+import Actions from './Actions'
 
-export const InputModal = ({ handleClose, lesson, path }) => {
+const styles = css`
+    animation: modal-in 0.5s cubic-bezier(0.38, 0.7, 0.125, 1) forwards;
+    background-color: var(--bg2);
+    display: grid;
+    left: 0;
+    min-height: 180px;
+    padding: 10px;
+    position: fixed;
+    right: 0;
+    row-gap: 12px;
+    top: 0;
+    touch-action: none;
+    z-index: 999;
+
+    @media (min-width: 670px) {
+        border-radius: 0 0 12px 12px;
+        margin: 0 auto;
+        max-width: 620px;
+    }
+
+    @keyframes modal-in {
+        from {
+            transform: translateY(-100%);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    .input-field {
+        background-color: var(--bg4);
+        border-radius: 7px;
+        caret-color: transparent;
+        font-size: 18px;
+        margin: 0;
+        padding: 10px;
+        resize: none;
+        user-select: auto;
+    }
+`
+
+const InputModal = ({ handleClose, lesson, path }) => {
     const manifest = useContext(manifestContext)
     const subject = manifest[lesson.id]
 
@@ -81,11 +124,16 @@ export const InputModal = ({ handleClose, lesson, path }) => {
         ]
 
         const updatedValue =
-            value.slice(0, start) +
-            (end == value.length ? ' ' + textToInsert : textToInsert) +
-            value.slice(end)
+            value.slice(0, start) + textToInsert + value.slice(end)
 
         setValue(updatedValue)
+
+        requestAnimationFrame(() => {
+            textarea.current.setSelectionRange(
+                start + textToInsert.length,
+                end + textToInsert.length
+            )
+        })
     }
 
     return (
@@ -94,14 +142,14 @@ export const InputModal = ({ handleClose, lesson, path }) => {
             ref={backdrop}
             onClick={isVisible ? closeModal : null}
         >
-            <div className={css.modal} ref={modal}>
+            <div className={styles} ref={modal}>
                 <Header subject={subject} setLink={setLink} lesson={lesson} />
 
                 <TextareaAutosize
                     ref={textarea}
                     autoFocus
                     value={value}
-                    className={css.inputField}
+                    className="input-field"
                     onChange={handleChange}
                     spellCheck="false"
                     type="number"
@@ -122,14 +170,10 @@ export const InputModal = ({ handleClose, lesson, path }) => {
                     handleDangerChange={(e) => setDanger(e.target.checked)}
                 />
 
-                <div className={css.actionButtons}>
-                    <button style={{ color: 'var(--red2)' }} onClick={clear}>
-                        Очистить
-                    </button>
-                    <button onClick={closeModal}>Отмена</button>
-                    <button onClick={save}>Сохранить</button>
-                </div>
+                <Actions clear={clear} closeModal={closeModal} save={save} />
             </div>
         </BackdropL>
     )
 }
+
+export default InputModal

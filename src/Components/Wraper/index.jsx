@@ -1,4 +1,3 @@
-import React from 'react'
 import VScroll from '../VScroll'
 
 import './style.scss'
