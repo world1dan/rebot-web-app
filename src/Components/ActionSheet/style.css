@@ -8,6 +8,7 @@
     min-height: 300px;
     position: fixed;
     right: 10px;
+    will-change: transform;
     z-index: 999;
 }
 

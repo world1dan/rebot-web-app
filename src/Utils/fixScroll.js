@@ -11,6 +11,7 @@ export default function fixScroll(target) {
             element.scrollTop = element.scrollTop - 1
         }
     }
+
     target.scrollTop = 1
     target.addEventListener('scroll', onScroll, { passive: true })
 }

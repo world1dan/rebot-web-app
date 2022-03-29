@@ -1,39 +1,41 @@
-.SegmentedControl {
+.segmented-control {
     background-color: var(--bg2);
-    border-radius: 7px;
-    box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
+    border-radius: 9px;
+
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    list-style: none;
     margin: 0;
     padding: 3px;
-
-    .item {
-        margin-bottom: 0;
-        position: relative;
-    }
 
     .button {
         line-height: 1;
         padding: 14px 30px;
         position: relative;
-        width: 100%;
 
         &:hover,
         &:focus {
             cursor: pointer;
         }
+
+        &:first-of-type {
+            transform-origin: 25% 50%;
+        }
+
+        &:last-of-type {
+            transform-origin: 75% center;
+        }
     }
 
     .label {
         font-size: 12px;
+        pointer-events: none;
         position: relative;
         z-index: 99;
     }
 
     .active {
         background-color: var(--bg4);
-        border-radius: 5px;
+        border-radius: 7px;
         bottom: 0;
         box-shadow: 0 0 0 1.5px var(--lvl4-borders) inset;
         left: 0;

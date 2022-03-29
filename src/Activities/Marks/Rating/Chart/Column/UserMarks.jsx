@@ -8,7 +8,14 @@ import { useMemo, useState } from 'react'
 import { doc } from 'firebase/firestore'
 import { firestore } from '../../../../../Context'
 import History from '../../History'
+import { css } from '@linaria/core'
 
+const styles = css`
+    > div,
+    .YearMarks {
+        padding: 0 !important;
+    }
+`
 const UserMarks = ({ handleClose, userInfo, user, readOnly }) => {
     const [currentTab, setCurrentTab] = useState('quarter')
 
@@ -52,21 +59,17 @@ const UserMarks = ({ handleClose, userInfo, user, readOnly }) => {
                         },
                     ]}
                 />
-                {currentTab == 'quarter' && (
-                    <MarksView marks={user.marks} readOnly={readOnly} />
-                )}
-                {currentTab == 'year' && (
-                    <YearMarks
-                        yearMarksDoc={yearMarksDoc}
-                        readOnly={readOnly}
-                    />
-                )}
-                {currentTab == 'history' && (
-                    <History
-                        usersRatings={usersRatings}
-                        usersInfo={usersInfo}
-                    />
-                )}
+                <div className={styles}>
+                    {currentTab == 'quarter' && (
+                        <MarksView marks={user.marks} readOnly={readOnly} />
+                    )}
+                    {currentTab == 'year' && (
+                        <YearMarks yearMarksDoc={yearMarksDoc} readOnly={readOnly} />
+                    )}
+                    {currentTab == 'history' && (
+                        <History usersRatings={usersRatings} usersInfo={usersInfo} />
+                    )}
+                </div>
             </VerticalLayout>
         </SheetView>
     )

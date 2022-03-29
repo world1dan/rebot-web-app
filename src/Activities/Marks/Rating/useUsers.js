@@ -1,13 +1,12 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext } from 'react'
 
-import { ConfigContext } from "Context"
-import { onSnapshot } from "firebase/firestore"
-
+import { ConfigContext } from '../../../Context'
+import { onSnapshot } from 'firebase/firestore'
 
 const useUsers = () => {
     const [users, setUsers] = useState()
     const usersCollection = useContext(ConfigContext).database.users
-    
+
     useEffect(() => {
         return onSnapshot(usersCollection, (snapshot) => {
             const users = {}

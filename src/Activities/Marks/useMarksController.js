@@ -1,6 +1,6 @@
 import { setDoc, arrayUnion, arrayRemove } from 'firebase/firestore'
 import { useContext } from 'react'
-import { ConfigContext } from 'Context'
+import { ConfigContext } from '../../Context'
 import { SubjectMarkContext } from './QuarterMarks/SubjectMarks/SubjectMarksContext'
 
 const useMarksController = (subject) => {

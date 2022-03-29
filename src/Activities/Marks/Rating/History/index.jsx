@@ -44,7 +44,7 @@ const History = ({ usersRatings, usersInfo }) => {
         return () => observer.disconnect()
     }, [])
 
-    const historyEvents = showAll ? everyMark : everyMark.slice(0, 40)
+    const historyEvents = showAll ? everyMark : everyMark.slice(0, 20)
 
     const historyElements = historyEvents.map((mark) => {
         return <HistoryEvent mark={mark} key={mark.time} />

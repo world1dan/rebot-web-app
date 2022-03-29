@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { MarksContext } from 'Context'
+import { MarksContext } from '../../../Context'
 
 import MarksView from './MarksView'
 

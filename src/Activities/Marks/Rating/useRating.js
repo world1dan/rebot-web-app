@@ -49,8 +49,7 @@ const useRating = () => {
                             subjMarksSum += mark.mark
                         }
 
-                        let average =
-                            subjMarksSum / userMarks.marks[subj].length
+                        let average = subjMarksSum / userMarks.marks[subj].length
 
                         if (!isNaN(average) && average <= 10) {
                             average = Number(average.toFixed(0))
@@ -64,9 +63,7 @@ const useRating = () => {
                     }
                 }
                 try {
-                    const rating = (
-                        quarterAverageSum / quarterSubjects
-                    ).toFixed(2)
+                    const rating = (quarterAverageSum / quarterSubjects).toFixed(2)
                     if (!isNaN(rating)) {
                         usersRating.push({
                             rating,

@@ -31,6 +31,7 @@ const useServiceWorker = (checkForUpdatesOnMount, periodicChecking) => {
 
     const checkForUpdates = () => {
         console.info('Checking for updates...')
+
         if (!checkForUpdatesOnMount) {
             setChecking(true)
         }

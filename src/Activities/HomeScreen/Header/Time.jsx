@@ -32,7 +32,10 @@ const Time = () => {
                 {date}
             </div>
             {calendar && (
-                <SheetView handleClose={() => setCalendar(false)}>
+                <SheetView
+                    handleClose={() => setCalendar(false)}
+                    type={{ wide: true }}
+                >
                     <VerticalLayout>
                         <H1 text="Календарь" />
                         <Calendar />

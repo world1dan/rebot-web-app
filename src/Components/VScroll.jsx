@@ -8,11 +8,15 @@ const styles = css`
 
     .VScroll {
         height: 100%;
-        overflow-y: auto;
+        overflow-y: overlay;
         overscroll-behavior: contain;
 
         &::-webkit-scrollbar {
-            width: 0;
+            width: 0px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--bg4);
+            border-radius: 8px;
         }
     }
 `

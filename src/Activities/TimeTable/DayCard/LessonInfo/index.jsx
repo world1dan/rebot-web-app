@@ -1,36 +1,40 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
+
 import { css } from '@linaria/core'
-import PropTypes from 'prop-types'
 
-import H1 from 'Components/Typography/H1'
-import Switch from 'Components/Blocks/Switch'
-import VerticalLayout from 'Components/Layouts/VerticalLayout'
+import { MarksContext } from '../../../../Context'
 
-import SubjectMarks from 'Activities/Marks/QuarterMarks/SubjectMarks'
-import { MarksContext } from 'Context'
-import useLessonController from '../SubjectRow/useLessonController'
+import VerticalLayout from '../../../../Components/Layouts/VerticalLayout'
+import SubjectMarks from '../../../../Activities/Marks/QuarterMarks/SubjectMarks'
 import SheetView from '../../../../Components/SheetView'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSkullCrossbones } from '@fortawesome/free-solid-svg-icons'
+import InputModal from '../../../../Components/InputModal'
+import SubjectName from './SubjectName'
+import Tools from './Tools'
+import Link from './Link'
+import LastChange from './LastChange'
 
 const styles = css`
     display: flex;
     flex-direction: column;
-    gap: 9px;
+    gap: 8px;
     padding: 14px;
-    padding-left: 16px;
+
     background-color: var(--bg3);
     border-radius: 9px;
     box-shadow: 0 0 0 1px var(--lvl4-borders) inset;
-
-    .title {
-        color: var(--text2);
-        font-weight: bold;
-        font-size: 16px;
-    }
+    position: relative;
 
     .marks-list {
-        margin-top: 5px;
+        --bg2: var(--bg3);
+        margin: -4px;
+
+        .main-content {
+            padding: 0;
+            padding-right: 40px;
+        }
+        .SubjectMarks {
+            min-height: 78px;
+        }
     }
 
     .homework-view {
@@ -41,75 +45,84 @@ const styles = css`
         word-break: break-word;
     }
 
-    .last-changes-by {
+    .link-wraper {
+        position: absolute;
+        right: 6px;
+        top: 6px;
+    }
+
+    .no-hw {
         color: var(--text2);
-        font-weight: 500;
-        font-size: 14px;
     }
 `
 
-const InfoBlock = ({ title, children }) => {
-    return (
-        <div className={styles}>
-            <div className="title">{title}</div>
-            {children}
-        </div>
-    )
+const InfoBlock = ({ children }) => {
+    return <div className={styles}>{children}</div>
+}
+
+const dstyles = css`
+    font-size: 14px;
+    padding-left: 14px;
+    margin-bottom: -3px;
+    color: var(--text2);
+`
+
+const Title = ({ children }) => {
+    return <div className={dstyles}>{children}</div>
 }
 
 const LessonInfo = ({ lesson, path, subject, handleClose }) => {
-    const marks = useContext(MarksContext)?.[lesson.id] ?? []
-    const { setDanger } = useLessonController(lesson, path)
+    const [isEditing, setIsEditing] = useState(false)
 
-    const handleImportanceChange = (e) => {
-        setDanger(e.target.checked)
-    }
+    const marksAll = useContext(MarksContext)
+    const marks = marksAll?.[lesson.id] ?? []
+    const markTarget = marksAll['marksTargets']?.[lesson.id]
 
     return (
         <SheetView handleClose={handleClose}>
             <VerticalLayout>
-                <H1 text={subject.full_title || subject.title} />
-
-                <InfoBlock title="Домашнее задание">
-                    <div className="homework-view">{lesson.hw}</div>
-                    {lesson.changedBy && (
-                        <div className="last-changes-by">
-                            Записал: {lesson.changedBy}
-                        </div>
-                    )}
+                <SubjectName subject={subject} />
+                <Title>Домашнее задание</Title>
+                <InfoBlock>
+                    <div className="homework-view" onClick={() => setIsEditing(true)}>
+                        {lesson.hw ?? (
+                            <span className="no-hw">Нажми чтобы записать..</span>
+                        )}
+                    </div>
+                    <LastChange lesson={lesson} />
+                    {lesson.hw && <Tools homework={lesson.hw} />}
                 </InfoBlock>
-
-                {subject.marks && (
-                    <InfoBlock title="Мои оценки">
-                        <div className="marks-list">
-                            <SubjectMarks
-                                marks={marks}
-                                subject={subject}
-                                embedded
-                            />
-                        </div>
-                    </InfoBlock>
+                {lesson.link && (
+                    <>
+                        <Title>Прикрепленная ссылка</Title>
+                        <Link url={lesson.link} />{' '}
+                    </>
                 )}
-
-                <Switch
-                    checked={lesson.danger}
-                    onChange={handleImportanceChange}
-                    title="Здесь что-то страшное"
-                    icon={
-                        <FontAwesomeIcon icon={faSkullCrossbones} size="lg" />
-                    }
-                    descr="Отметить, что на этом уроке к/р или что-то еще"
-                />
+                {subject.marks && (
+                    <>
+                        <Title>Мои оценки</Title>
+                        <InfoBlock>
+                            <div className="marks-list">
+                                <SubjectMarks
+                                    marks={marks}
+                                    subject={subject}
+                                    embedded
+                                    target={markTarget}
+                                />
+                            </div>
+                        </InfoBlock>
+                    </>
+                )}
+                {isEditing && (
+                    <InputModal
+                        handleClose={() => setIsEditing(false)}
+                        path={path}
+                        lesson={lesson}
+                    />
+                )}
             </VerticalLayout>
         </SheetView>
     )
-}
-
-LessonInfo.propTypes = {
-    lesson: PropTypes.object.isRequired,
-    handleClose: PropTypes.func.isRequired,
-    subject: PropTypes.object.isRequired,
-    path: PropTypes.string.isRequired,
 }
 
 export default LessonInfo

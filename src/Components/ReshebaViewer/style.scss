@@ -63,12 +63,14 @@
 }
 
 .hwr-sol-imgs {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     position: relative;
 
     img {
         /* stylelint-disable-next-line function-name-case */
         filter: Invert(var(--inv));
-        margin-bottom: 20px;
     }
 }
 

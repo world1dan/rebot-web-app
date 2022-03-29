@@ -1,6 +1,6 @@
 import { useState, createContext } from 'react'
 
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useMotionValue } from 'framer-motion'
 import Backdrop from '../Backdrop'
 
 import ModalPortal from '../ModalPortal'
@@ -22,16 +22,20 @@ const ActionSheet = ({ onClose, children, bottomCloseBtn }) => {
 
     const closeSheet = () => setIsVisible(false)
 
+    const y = useMotionValue(0)
+
     return (
         <ModalPortal>
             <AnimatePresence onExitComplete={onClose}>
                 {isVisible && (
-                    <Backdrop onClick={closeSheet}>
+                    <Backdrop onClick={closeSheet} y={y}>
                         <motion.div
                             className="ActionSheet"
                             drag="y"
-                            dragConstraints={{ top: 0, bottom: 0 }}
+                            dragConstraints={{ top: 0 }}
+                            dragSnapToOrigin
                             dragElastic={0.4}
+                            style={{ y }}
                             exit={{
                                 y: 'calc(100% + 50px)',
                                 transitionEnd: {
@@ -42,12 +46,12 @@ const ActionSheet = ({ onClose, children, bottomCloseBtn }) => {
                                     duration: 0.26,
                                 },
                             }}
-                            initial={{ y: 300 }}
+                            initial={{ y: 200 }}
                             animate={{ y: 0 }}
                             transition={{
-                                type: 'spring',
-                                bounce: 0,
-                                duration: 0.32,
+                                type: 'tween',
+                                ease: [0.38, 0.7, 0.125, 1],
+                                duration: 0.3,
                             }}
                             onDragEnd={(_e, { offset, velocity }) => {
                                 const swipe = swipePower(offset.y, velocity.y)

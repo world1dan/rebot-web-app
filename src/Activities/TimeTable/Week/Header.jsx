@@ -2,17 +2,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { css } from '@linaria/core'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faChevronRight,
-    faChevronLeft,
-} from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 const styles = css`
-    position: fixed;
-    top: -1px;
-    z-index: 1;
-    right: 0;
-    left: 0;
     display: flex;
     align-items: center;
     max-width: 600px;
@@ -21,6 +13,10 @@ const styles = css`
     border-bottom: 1px solid var(--borders);
 
     @media (min-width: 600px) {
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        right: 0;
         margin: 0 auto;
         border-radius: 0 0 9px 9px;
         border-left: 1px solid var(--borders);
@@ -72,11 +68,7 @@ const variants = {
 
 const Header = ({ week, prewWeek, nextWeek, direction }) => {
     const title =
-        week == 1
-            ? 'Прошлая неделя'
-            : week == 2
-            ? 'Эта неделя'
-            : 'Следующая неделя'
+        week == 1 ? 'Прошлая неделя' : week == 2 ? 'Эта неделя' : 'Следующая неделя'
 
     return (
         <header className={styles}>

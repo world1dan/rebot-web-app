@@ -12,20 +12,16 @@ import Marks from './Activities/Marks'
 import { changeThemeColor } from './Utils/changeThemeColor'
 
 const tabStyles = css`
-    padding-bottom: calc(env(safe-area-inset-bottom) + 46px);
-    height: 100%;
-
     transform-origin: top;
-
-    transition-property: transform background-color;
+    height: 100%;
+    transition-property: transform, background-color, border-radius;
     transition-duration: 0.4s;
     @media (max-width: 500px) {
         &.unfocused {
-            @supports (-webkit-touch-callout: none) {
-                border-radius: 14px;
-                background-color: var(--bg2);
-                transform: scale(0.92) translateY(8px);
-            }
+            border-radius: 16px 16px 0 0;
+            background-color: var(--bg3);
+            transform: scale(0.92) translateY(10px);
+            overflow: scroll;
         }
     }
 `
@@ -34,6 +30,7 @@ export const TabContext = createContext(null)
 
 const Tab = ({ children, isActive, keepMounted, themeColor }) => {
     const [unfocused, setUnfocused] = useState(false)
+
     const tabRef = useRef(null)
 
     const unfocusTab = () => {
@@ -45,7 +42,7 @@ const Tab = ({ children, isActive, keepMounted, themeColor }) => {
     }
 
     if (isActive) {
-        changeThemeColor(themeColor)
+        changeThemeColor(!unfocused ? themeColor : 'var(--theme-color-when-unfocused)')
     }
 
     return (

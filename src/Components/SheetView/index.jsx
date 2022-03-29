@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useContext } from 'react'
 import { styled } from '@linaria/react'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { changeThemeColor } from '../../Utils/changeThemeColor'
 
@@ -10,7 +10,7 @@ import CloseBtn from './CloseBtn'
 import VScroll from '../VScroll'
 import { TabContext } from '../../Tabs'
 
-const Sheet = styled.div`
+const Sheet = styled(motion.div)`
     position: fixed;
     right: 0;
     left: 0;
@@ -21,9 +21,8 @@ const Sheet = styled.div`
     touch-action: none;
     z-index: 999;
     overflow: hidden;
-
-    border-radius: ${(p) =>
-        'fullHeightOnMobile' in p.type ? 0 : '13px 13px 0 0'};
+    border: var(--lvl4-borders) 2px solid;
+    border-radius: ${(p) => ('fullHeightOnMobile' in p.type ? 0 : '13px 13px 0 0')};
 
     animation: adaptive-panel-in 440ms cubic-bezier(0.38, 0.7, 0.125, 1);
 

@@ -1,11 +1,9 @@
 import { useState, memo } from 'react'
-import PropTypes from 'prop-types'
-
 import { SubjectMarkContext } from './SubjectMarksContext'
 
 import MarksKeyboard from '../../MarksKeyboard'
 import useMarksController from '../../useMarksController'
-import ActionSheet from 'Components/ActionSheet'
+import ActionSheet from '../../../../Components/ActionSheet'
 import Average from './Average'
 import MarksList from './MarksList'
 import NewMark from './NewMark'
@@ -29,7 +27,7 @@ const SubjectMarks = ({ subject, marks, target, embedded, readOnly }) => {
                         className="color-indicator"
                         style={{
                             backgroundColor: subject.color,
-                            boxShadow: '0px 0px 2px ' + subject.color,
+                            boxShadow: '0px 0px 6px ' + subject.color,
                         }}
                     />
                 )}
@@ -51,7 +49,7 @@ const SubjectMarks = ({ subject, marks, target, embedded, readOnly }) => {
                             />
                         )}
                     </div>
-                    <CalendarView marks={marks} />
+                    <CalendarView marks={marks} subject={subject} />
                 </div>
 
                 <Average
@@ -73,14 +71,6 @@ const SubjectMarks = ({ subject, marks, target, embedded, readOnly }) => {
             )}
         </SubjectMarkContext.Provider>
     )
-}
-
-SubjectMarks.propTypes = {
-    subject: PropTypes.object.isRequired,
-    marks: PropTypes.array.isRequired,
-    embedded: PropTypes.bool,
-    target: PropTypes.number,
-    readOnly: PropTypes.bool,
 }
 
 export default memo(SubjectMarks, (prewProps, nextProps) => {

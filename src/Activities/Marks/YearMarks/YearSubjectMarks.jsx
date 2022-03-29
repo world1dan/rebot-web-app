@@ -1,9 +1,9 @@
 import { useState, memo } from 'react'
 
 import Mark from '../Mark'
-import ActionSheet from 'Components/ActionSheet'
+import ActionSheet from '../../../Components/ActionSheet'
 import MarksKeyboard from '../MarksKeyboard'
-import PlusRounded from 'Components/Icons/PlusRounded'
+import PlusRounded from '../../../Components/Icons/PlusRounded'
 import useMarksController from '../useMarksController'
 
 import { SubjectMarkContext } from '../QuarterMarks/SubjectMarks/SubjectMarksContext'

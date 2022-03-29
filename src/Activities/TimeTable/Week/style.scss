@@ -4,10 +4,13 @@
     grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
     margin: 0 auto;
     max-width: 1380px;
-    padding-top: 58px;
 
     @media (min-width: 1000px) {
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+
+    @media (min-width: 600px) {
+        padding-top: 50px;
     }
 }
 

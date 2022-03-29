@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useContext } from 'react'
-
-import { manifestContext } from 'Context'
+import { motion } from 'framer-motion'
+import { manifestContext } from '../../Context'
 
 import Notebooks from './Notebooks'
 
@@ -29,10 +29,7 @@ const Header = ({ addSolution }) => {
             addSolution(searchMode, searchValue)
             setSearchMode('google')
         } else {
-            window.open(
-                'https://www.google.com/search?q=' + searchValue,
-                '_blank'
-            )
+            window.open('https://www.google.com/search?q=' + searchValue, '_blank')
         }
 
         setSearchValue('')
@@ -62,13 +59,11 @@ const Header = ({ addSolution }) => {
 
     return (
         <header className="search-header">
-            <div
+            <motion.div
                 className="search"
-                style={{ borderColor: manifest[searchMode]?.color }}
+                style={{ border: `2px ${manifest[searchMode]?.color} solid` }}
             >
-                {!isGoogle && (
-                    <div className="unit">{manifest[searchMode]?.unit}</div>
-                )}
+                {!isGoogle && <div className="unit">{manifest[searchMode]?.unit}</div>}
 
                 <input
                     enterKeyHint="search"
@@ -80,20 +75,21 @@ const Header = ({ addSolution }) => {
                     type={isGoogle ? 'text' : 'number'}
                     autoComplete="off"
                 />
-            </div>
+            </motion.div>
 
             <div className="modes">
                 {modes.map((subjID) => {
                     const subject = manifest[subjID]
 
                     return (
-                        <button
+                        <motion.button
                             key={subjID}
                             style={{ background: subject.color }}
                             onClick={() => setSearchMode(subjID)}
+                            whileTap={{ scale: 0.9 }}
                         >
                             {subject.title}
-                        </button>
+                        </motion.button>
                     )
                 })}
             </div>

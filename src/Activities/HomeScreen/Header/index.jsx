@@ -3,7 +3,7 @@ import { useContext, useState, memo } from 'react'
 import { ConfigContext } from '../../../Context'
 
 import Time from './Time'
-import Settings from 'Activities/Settings'
+import Settings from '../../../Activities/Settings'
 import Gear from '../../../Components/Icons/Gear'
 import Rings from './Rings'
 import SheetView from '../../../Components/SheetView'
@@ -29,7 +29,10 @@ const Header = () => {
             </header>
 
             {settingsOpen && (
-                <SheetView handleClose={() => setSettingsOpen(false)}>
+                <SheetView
+                    handleClose={() => setSettingsOpen(false)}
+                    background="var(--bg1)"
+                >
                     <Settings />
                 </SheetView>
             )}

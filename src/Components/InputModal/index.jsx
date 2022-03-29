@@ -23,7 +23,7 @@ const styles = css`
     row-gap: 12px;
     top: 0;
     touch-action: none;
-    z-index: 999;
+    z-index: 1001;
 
     @media (min-width: 670px) {
         border-radius: 0 0 12px 12px;
@@ -64,10 +64,7 @@ const InputModal = ({ handleClose, lesson, path }) => {
     const [value, setValue] = useState(lesson.hw ?? '')
     const [isVisible, setIsVisible] = useState(true)
 
-    const { setHomework, setLink, setDanger } = useLessonController(
-        lesson,
-        path
-    )
+    const { setHomework, setLink, setDanger } = useLessonController(lesson, path)
 
     useEffect(() => {
         backdrop.current.animate([{ opacity: 0 }, { opacity: 1 }], {
@@ -98,10 +95,7 @@ const InputModal = ({ handleClose, lesson, path }) => {
     const closeModal = () => {
         if (modal.current && backdrop.current) {
             modal.current.animate(
-                [
-                    { transform: 'translateY(0)' },
-                    { transform: 'translateY(-100%)' },
-                ],
+                [{ transform: 'translateY(0)' }, { transform: 'translateY(-100%)' }],
                 {
                     duration: 500,
                     fill: 'forwards',
@@ -123,8 +117,7 @@ const InputModal = ({ handleClose, lesson, path }) => {
             textarea.current.selectionEnd,
         ]
 
-        const updatedValue =
-            value.slice(0, start) + textToInsert + value.slice(end)
+        const updatedValue = value.slice(0, start) + textToInsert + value.slice(end)
 
         setValue(updatedValue)
 
@@ -137,11 +130,7 @@ const InputModal = ({ handleClose, lesson, path }) => {
     }
 
     return (
-        <BackdropL
-            active={true}
-            ref={backdrop}
-            onClick={isVisible ? closeModal : null}
-        >
+        <BackdropL active={true} ref={backdrop} onClick={isVisible ? closeModal : null}>
             <div className={styles} ref={modal}>
                 <Header subject={subject} setLink={setLink} lesson={lesson} />
 

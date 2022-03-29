@@ -4,14 +4,10 @@ import { ActionSheetContext } from '../../../Components/ActionSheet'
 import useMarksController from '../useMarksController'
 
 import MarksKeyboard from '../MarksKeyboard'
-import Switch from 'Components/Blocks/Switch'
+import Switch from '../../../Components/Blocks/Switch'
 import ActionSheet from '../../../Components/ActionSheet'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faCircleExclamation,
-    faPen,
-    faTrashAlt,
-} from '@fortawesome/free-solid-svg-icons'
+import { faCircleExclamation, faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 const AboutMarkActions = ({ isYearMark, readOnly, mark, subject, quarter }) => {
     const { close } = useContext(ActionSheetContext)
@@ -53,12 +49,7 @@ const AboutMarkActions = ({ isYearMark, readOnly, mark, subject, quarter }) => {
                         noPadding
                         title="Контрольная"
                         descr="Отметить как оценку по к/р"
-                        icon={
-                            <FontAwesomeIcon
-                                icon={faCircleExclamation}
-                                size="lg"
-                            />
-                        }
+                        icon={<FontAwesomeIcon icon={faCircleExclamation} size="lg" />}
                     />
                 </div>
             )}
@@ -75,10 +66,7 @@ const AboutMarkActions = ({ isYearMark, readOnly, mark, subject, quarter }) => {
                 </>
             )}
             {updateMarkDialog && (
-                <ActionSheet
-                    bottomCloseBtn
-                    onClose={() => setUpdateMarkDialog(false)}
-                >
+                <ActionSheet bottomCloseBtn onClose={() => setUpdateMarkDialog(false)}>
                     <MarksKeyboard
                         onSubmit={handleChangeSubmit}
                         title={

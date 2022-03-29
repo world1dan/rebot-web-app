@@ -3,7 +3,7 @@ import { css } from '@linaria/core'
 
 import { SubjectMarkContext } from '../QuarterMarks/SubjectMarks/SubjectMarksContext'
 
-import ActionSheet from 'Components/ActionSheet'
+import ActionSheet from '../../../Components/ActionSheet'
 import AboutMarkActions from './AboutMarkActions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar } from '@fortawesome/free-solid-svg-icons'

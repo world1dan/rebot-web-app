@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useTransform } from 'framer-motion'
 import { css } from '@linaria/core'
 
 const styles = css`
@@ -13,7 +13,11 @@ const styles = css`
     cursor: pointer;
 `
 
-const Backdrop = ({ children, onClick }) => {
+const Backdrop = ({ children, onClick, y }) => {
+    const input = [0, 0, 300]
+    const output = [0, 1, 0]
+    const opacity = y ? useTransform(y, input, output) : null
+
     return (
         <>
             <motion.div
@@ -26,6 +30,7 @@ const Backdrop = ({ children, onClick }) => {
                     type: 'tween',
                     duration: 0.3,
                 }}
+                style={{ opacity }}
             />
             {children}
         </>

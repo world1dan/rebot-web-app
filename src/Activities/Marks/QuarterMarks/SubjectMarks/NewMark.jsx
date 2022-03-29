@@ -1,26 +1,12 @@
-import { useState, memo, useEffect } from 'react'
-import { css } from '@linaria/core'
-
+import { useState, memo } from 'react'
 import { motion } from 'framer-motion'
 
-import ActionSheet from 'Components/ActionSheet'
-import PlusRounded from 'Components/Icons/PlusRounded'
+import ActionSheet from '../../../../Components/ActionSheet'
+import PlusRounded from '../../../../Components/Icons/PlusRounded'
 import MarksKeyboard from '../../MarksKeyboard'
-
-const styles = css`
-    .newMarkBtn {
-        will-change: transform;
-    }
-`
 
 const NewMark = ({ addQuarterMark, subject, layoutDependency }) => {
     const [addDialog, setAddDialog] = useState(false)
-
-    const onSubmit = (data) => {
-        setTimeout(() => {
-            addQuarterMark(data)
-        }, 100)
-    }
 
     const openAddDialog = () => setAddDialog(true)
     const closeAddDialog = () => setAddDialog(false)
@@ -28,7 +14,7 @@ const NewMark = ({ addQuarterMark, subject, layoutDependency }) => {
     return (
         <>
             <motion.div
-                className={'Mark ' + styles}
+                className="Mark"
                 onClick={openAddDialog}
                 layout="position"
                 layoutDependency={layoutDependency}
@@ -38,7 +24,7 @@ const NewMark = ({ addQuarterMark, subject, layoutDependency }) => {
             {addDialog && (
                 <ActionSheet bottomCloseBtn onClose={closeAddDialog}>
                     <MarksKeyboard
-                        onSubmit={onSubmit}
+                        onSubmit={addQuarterMark}
                         title="Нажми на оценку чтобы добавить"
                         descr={subject.full_title ?? subject.title}
                     />

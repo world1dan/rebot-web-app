@@ -9,36 +9,34 @@ const SegmentedControl = ({ items, activeItem, onChange }) => {
     const layoutID = useId()
 
     return (
-        <motion.ol className="SegmentedControl" layoutScroll>
+        <motion.div className="segmented-control" layoutScroll>
             {items.map((item) => {
                 const isActive = item.id === activeItem
 
                 return (
-                    <motion.li
-                        className="item"
-                        whileTap={isActive ? { scale: 0.95 } : { opacity: 0.6 }}
+                    <motion.button
                         key={item.id}
+                        onClick={() => onChange(item.id)}
+                        className="button"
+                        whileTap={{ scale: isActive ? 0.93 : 1 }}
                     >
-                        <button
-                            onClick={() => onChange(item.id)}
-                            className="button"
-                        >
-                            {isActive && (
-                                <motion.div
-                                    layoutId={layoutID}
-                                    layoutDependency={activeItem}
-                                    className="active"
-                                    transition={{
-                                        duration: 0.25,
-                                    }}
-                                />
-                            )}
-                            <div className="label">{item.title}</div>
-                        </button>
-                    </motion.li>
+                        {isActive && (
+                            <motion.div
+                                layoutId={layoutID}
+                                layoutDependency={activeItem}
+                                className="active"
+                                transition={{
+                                    type: 'spring',
+                                    duration: 0.3,
+                                    bounce: 0,
+                                }}
+                            />
+                        )}
+                        <div className="label">{item.title}</div>
+                    </motion.button>
                 )
             })}
-        </motion.ol>
+        </motion.div>
     )
 }
 

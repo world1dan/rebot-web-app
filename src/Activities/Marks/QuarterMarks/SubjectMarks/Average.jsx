@@ -2,19 +2,21 @@ import { useState } from 'react'
 import { css } from '@linaria/core'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { getAverage } from 'Activities/Marks/utils'
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
+
+import { getAverage } from '../../utils'
 
 import MarksCalculator from '../Calculator'
 import SheetView from '../../../../Components/SheetView'
-import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 import AnimatedNum from '../../AnimatedNum'
+
 const styles = css`
     display: grid;
     gap: 4px;
     grid-template-rows: 1fr 32px;
 
-    .average-mark,
-    .mark-target {
+    .gpa,
+    .gpa-target {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -22,25 +24,23 @@ const styles = css`
         font-weight: bold;
         border-radius: 5px;
         box-shadow: 0 0 0 1.5px var(--lvl4-borders) inset;
-        cursor: pointer;
     }
 
-    .average-mark {
+    .gpa {
         position: relative;
         overflow: hidden;
-        font-size: 16px;
+        font-size: 18px;
 
         @media (min-width: 500px) {
             font-size: 22px;
         }
 
-        .no-mark {
+        .no-gpa {
             color: var(--text2);
-            font-size: 18px;
         }
     }
 
-    .mark-target {
+    .gpa-target {
         white-space: nowrap;
         color: var(--text2);
         font-size: 10px;
@@ -50,14 +50,15 @@ const styles = css`
         }
     }
 `
-const Averagee = ({ marks, target, openTargetDialog, readOnly }) => {
+
+const Average = ({ marks, target, openTargetDialog, readOnly }) => {
     const [calculator, setCalculator] = useState(false)
 
     const average = getAverage(marks)
     const averageMarkStyles = {}
 
     if (average && Math.round(average) < parseInt(target)) {
-        averageMarkStyles.border = 'var(--mark-yellow) 2px solid'
+        averageMarkStyles.border = 'var(--yellow) 1.5px solid'
     }
 
     const averageToDisplay = average ? Number(average.toFixed(2)) : null
@@ -67,26 +68,16 @@ const Averagee = ({ marks, target, openTargetDialog, readOnly }) => {
 
     return (
         <div className={styles}>
-            <div
-                className="average-mark"
-                onClick={openCalculator}
-                style={averageMarkStyles}
-            >
+            <button className="gpa" onClick={openCalculator} style={averageMarkStyles}>
                 {averageToDisplay ? (
                     <AnimatedNum number={averageToDisplay} />
                 ) : (
-                    <FontAwesomeIcon
-                        icon={faCircleQuestion}
-                        className="no-mark"
-                    />
+                    <FontAwesomeIcon icon={faCircleQuestion} className="no-gpa" />
                 )}
-            </div>
-            <div
-                className="mark-target"
-                onClick={readOnly ? undefined : openTargetDialog}
-            >
+            </button>
+            <button className="gpa-target" onClick={readOnly ? null : openTargetDialog}>
                 Цель: {target}
-            </div>
+            </button>
 
             {calculator && (
                 <SheetView
@@ -100,4 +91,4 @@ const Averagee = ({ marks, target, openTargetDialog, readOnly }) => {
     )
 }
 
-export default Averagee
+export default Average

@@ -4,10 +4,11 @@ import { TimeTableContext, manifestContext, MarksContext } from './Context'
 
 import useSubjectsManifest from './Hooks/useSubjectsManifest'
 import useFirestoreListener from './Hooks/useFirestoreListener'
-import analyticsEvent from 'Utils/analyticsEvent'
+import analyticsEvent from './Utils/analyticsEvent'
 import Loading from './Components/Loading'
 import Tabs from './Tabs'
 
+import './colors.css'
 import './style.scss'
 
 const App = ({ config }) => {

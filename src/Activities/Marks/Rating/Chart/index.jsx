@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { motion } from 'framer-motion'
-import Loading from 'Components/Loading'
+import Loading from '../../../../Components/Loading'
 import Column from './Column'
 
 import './style.scss'
@@ -10,7 +10,7 @@ const Chart = ({ usersRatings, user, usersInfo }) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => setLoading(false), 220)
+        setTimeout(() => setLoading(false), 400)
     }, [])
 
     const columns = usersRatings

@@ -8,11 +8,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     gap: 8px;
-
-    .month-title {
-        font-size: 23px;
-        text-transform: capitalize;
-    }
+    box-shadow: 0 -1px 0 var(--borders);
 `
 
 export const MonthContext = createContext(null)
@@ -33,15 +29,11 @@ const Month = ({ year, month }) => {
     const isCurrentMonth = date.getMonth() == month
 
     date.setMonth(month)
-    const monthTitle = date.toLocaleString('ru', {
-        month: 'long',
-    })
 
     return (
         <MonthContext.Provider value={{ month }}>
             <div className={styles} ref={monthRef}>
-                <h2 className="month-title">{monthTitle}</h2>
-                <MonthHeader />
+                <MonthHeader date={date} />
                 {matrix.map((weekDays, i) => {
                     return (
                         <Week

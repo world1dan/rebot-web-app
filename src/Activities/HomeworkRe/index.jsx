@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import { manifestContext } from '../../Context'
@@ -10,6 +10,14 @@ const HomeworkRe = (props) => {
     const manifest = useContext(manifestContext)
 
     const groups = []
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            console.log(props.lessonsData)
+        }, 5000)
+
+        return () => clearTimeout(timeout)
+    }, [])
 
     for (let subjectNum in props.lessonsData) {
         const lesson = props.lessonsData[subjectNum]

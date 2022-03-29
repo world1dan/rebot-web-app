@@ -18,6 +18,7 @@ const useLessonController = (lesson, path) => {
                     user.last_name ||
                     user.username ||
                     user.id,
+                [path + '.last_change']: Date.now(),
             })
         }
     }

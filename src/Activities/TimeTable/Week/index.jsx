@@ -7,6 +7,7 @@ import DayCard from '../DayCard'
 import Header from './Header'
 
 import './style.scss'
+import ScrollView from '../../../Components/ScrollView'
 
 const Week = () => {
     const dayNum = new Date().getDay()
@@ -45,14 +46,15 @@ const Week = () => {
                 nextWeek={nextWeek}
                 direction={direction}
             />
-
-            <div className="week-grid">
-                {dayCards.length > 0 ? (
-                    dayCards
-                ) : (
-                    <div className="no-timetable-alert">Тут ничего нет</div>
-                )}
-            </div>
+            <ScrollView>
+                <div className="week-grid">
+                    {dayCards.length > 0 ? (
+                        dayCards
+                    ) : (
+                        <div className="no-timetable-alert">Тут ничего нет</div>
+                    )}
+                </div>
+            </ScrollView>
         </Wraper>
     )
 }

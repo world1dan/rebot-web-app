@@ -9,6 +9,7 @@ import History from './History'
 import Chart from './Chart'
 
 import './style.scss'
+import Suspense from '../../../Components/Suspense'
 
 const Rating = () => {
     const [usersRatings, statistics] = useRating()
@@ -18,23 +19,24 @@ const Rating = () => {
     return (
         <div className="Rating">
             <div className="block-left">
-                <Chart
-                    usersRatings={usersRatings}
-                    user={user}
-                    usersInfo={users}
-                />
-                <div className="stat">
-                    <div className="title">Всего оценок у тебя</div>
-                    <div className="num">{statistics?.userMarksCounter}</div>
-                </div>
-                <div className="stat">
-                    <div className="title">Всего оценок у всех</div>
-                    <div className="num">{statistics?.globalMarksCount}</div>
-                </div>
+                <Chart usersRatings={usersRatings} user={user} usersInfo={users} />
+
+                <Suspense rowsHeight={48} rowsCount={2} delay={400}>
+                    <div className="stat">
+                        <div className="title">Всего оценок у тебя</div>
+                        <div className="num">{statistics?.userMarksCounter}</div>
+                    </div>
+                    <div className="stat">
+                        <div className="title">Всего оценок у всех</div>
+                        <div className="num">{statistics?.globalMarksCount}</div>
+                    </div>
+                </Suspense>
             </div>
-            {users && usersRatings && (
-                <History usersRatings={usersRatings} usersInfo={users} />
-            )}
+            <Suspense rowsHeight={40} rowsCount={16} delay={400}>
+                {users && usersRatings && (
+                    <History usersRatings={usersRatings} usersInfo={users} />
+                )}
+            </Suspense>
         </div>
     )
 }

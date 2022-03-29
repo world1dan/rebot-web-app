@@ -7,6 +7,7 @@ import QuarterMarks from './QuarterMarks'
 import YearMarks from './YearMarks'
 import Rating from './Rating'
 import SegmentedControl from '../../Components/Blocks/SegmentedControl'
+import ScrollView from '../../Components/ScrollView'
 
 const wraperStyles = css`
     margin: 0 auto;
@@ -56,37 +57,43 @@ const headerStyles = css`
     }
 `
 
+const scrollViewStyles = css`
+    padding-top: 0;
+`
+
 const Marks = () => {
     const [currentTab, setCurrentTab] = useState('quarter')
     const yearMarksDoc = useContext(ConfigContext).database.yearMarks
 
     return (
         <Wraper className={wraperStyles}>
-            <header className={headerStyles}>
-                <h1 className="title">Оценки</h1>
-                <SegmentedControl
-                    onChange={setCurrentTab}
-                    activeItem={currentTab}
-                    items={[
-                        {
-                            id: 'quarter',
-                            title: 'Четверть',
-                        },
-                        {
-                            id: 'year',
-                            title: 'Год',
-                        },
-                        {
-                            id: 'rating',
-                            title: 'Рейтинг',
-                        },
-                    ]}
-                />
-            </header>
+            <ScrollView className={scrollViewStyles}>
+                <header className={headerStyles}>
+                    <h1 className="title">Оценки</h1>
+                    <SegmentedControl
+                        onChange={setCurrentTab}
+                        activeItem={currentTab}
+                        items={[
+                            {
+                                id: 'quarter',
+                                title: 'Четверть',
+                            },
+                            {
+                                id: 'year',
+                                title: 'Год',
+                            },
+                            {
+                                id: 'rating',
+                                title: 'Рейтинг',
+                            },
+                        ]}
+                    />
+                </header>
 
-            {currentTab == 'quarter' && <QuarterMarks />}
-            {currentTab == 'year' && <YearMarks yearMarksDoc={yearMarksDoc} />}
-            {currentTab == 'rating' && <Rating />}
+                {currentTab == 'quarter' && <QuarterMarks />}
+                {currentTab == 'year' && <YearMarks yearMarksDoc={yearMarksDoc} />}
+                {currentTab == 'rating' && <Rating />}
+            </ScrollView>
         </Wraper>
     )
 }

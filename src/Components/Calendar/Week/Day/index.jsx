@@ -49,16 +49,17 @@ const styles = css`
 `
 
 const Day = ({ dayNum, isToday, isWeekend }) => {
-    const generateContent =
-        useContext(CalendarContext).customDayContentGenerator
+    const generateContent = useContext(CalendarContext).customDayContentGenerator
     const month = useContext(MonthContext).month
 
     if (dayNum == -1) return <div></div>
 
     if (generateContent) {
-        const content = generateContent(month, dayNum)
+        const { content, shadowColor } = generateContent(month, dayNum)
+
         return (
             <div
+                style={{ boxShadow: shadowColor ? `0 0 0 2px ${shadowColor}` : null }}
                 className={
                     styles +
                     (isToday ? ' today' : '') +
@@ -74,11 +75,7 @@ const Day = ({ dayNum, isToday, isWeekend }) => {
 
     return (
         <div
-            className={
-                styles +
-                (isToday ? ' today' : '') +
-                (isWeekend ? ' weekend' : '')
-            }
+            className={styles + (isToday ? ' today' : '') + (isWeekend ? ' weekend' : '')}
         >
             {dayNum}
         </div>

@@ -1,7 +1,7 @@
-import { onSnapshot } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
+import { onSnapshot } from 'firebase/firestore'
 
-export default function useFirestoreListener(docRef) {
+const useFirestoreListener = (docRef) => {
     const [docData, setDocData] = useState(null)
 
     useEffect(() => {
@@ -12,3 +12,5 @@ export default function useFirestoreListener(docRef) {
 
     return docData
 }
+
+export default useFirestoreListener

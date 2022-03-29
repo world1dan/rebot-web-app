@@ -11,6 +11,7 @@ import Notes from './Notes'
 import DaysCarousel from './DaysCarousel'
 
 import './style.scss'
+import ScrollView from '../../Components/ScrollView'
 
 const shoudShowNow = () => {
     const hours = new Date().getHours()
@@ -43,25 +44,27 @@ const HomeScreen = () => {
 
     return (
         <Wraper>
-            <Header />
-            <div className="homescreen-layout">
-                <div className="side-left">
-                    {timetable?.[2]?.[dayNum] && !isWeekEnded && showNow && (
-                        <Now
-                            dayData={timetable[2][dayNum]}
-                            pathToDay={'2.' + dayNum}
-                        />
-                    )}
-                    <Notes />
-                </div>
+            <ScrollView>
+                <Header />
+                <div className="homescreen-layout">
+                    <div className="side-left">
+                        {timetable?.[2]?.[dayNum] && !isWeekEnded && showNow && (
+                            <Now
+                                dayData={timetable[2][dayNum]}
+                                pathToDay={'2.' + dayNum}
+                            />
+                        )}
+                        <Notes />
+                    </div>
 
-                <DaysCarousel
-                    timetable={timetable}
-                    dayNum={dayNum}
-                    isWeekEnded={isWeekEnded}
-                    isWeekend={isWeekend}
-                />
-            </div>
+                    <DaysCarousel
+                        timetable={timetable}
+                        dayNum={dayNum}
+                        isWeekEnded={isWeekEnded}
+                        isWeekend={isWeekend}
+                    />
+                </div>
+            </ScrollView>
         </Wraper>
     )
 }

@@ -1,8 +1,8 @@
 import { css } from '@linaria/core'
 
 import DayCard from '../TimeTable/DayCard'
-import Card from 'Components/Blocks/Card'
-import Loading from 'Components/Loading'
+import Card from '../../Components/Blocks/Card'
+import Loading from '../../Components/Loading'
 
 const styles = css`
     width: 100%;

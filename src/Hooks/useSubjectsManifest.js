@@ -1,13 +1,8 @@
-import { useState, useEffect } from 'react'
+import useInterval from './useInterval'
+import useLocalStorage from './useLocalStorage'
 
-export default function useSubjectsManifest() {
-    const [manifest, setManifest] = useState(() => {
-        const cachedConfigJSON = localStorage.getItem('CACHED_MANIFEST')
-
-        if (cachedConfigJSON) {
-            return JSON.parse(cachedConfigJSON) ?? null
-        }
-    })
+const useSubjectsManifest = () => {
+    const [manifest, setManifest] = useLocalStorage('CACHED_MANIFEST')
 
     const updateManifestFromServer = () => {
         const url =
@@ -18,18 +13,17 @@ export default function useSubjectsManifest() {
 
             if (!data?.error) {
                 setManifest(data)
-                localStorage.setItem('CACHED_MANIFEST', JSON.stringify(data))
             }
         })
     }
-    useEffect(() => {
+
+    useInterval(() => {
         if (process.env.NODE_ENV == 'production' || !manifest) {
             updateManifestFromServer()
-
-            const interval = setInterval(updateManifestFromServer, 600000)
-            return () => clearInterval(interval)
         }
-    }, [])
+    }, 600000)
 
     return manifest
 }
+
+export default useSubjectsManifest

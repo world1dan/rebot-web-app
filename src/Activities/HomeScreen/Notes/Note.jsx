@@ -4,7 +4,7 @@ import { deleteDoc, setDoc } from 'firebase/firestore'
 
 import TextareaAutosize from 'react-textarea-autosize'
 import ContextMenu from '../../../Components/ContextMenu'
-import ContextMenuBtn from 'Components/ContextMenu/ContextMenuBtn'
+import ContextMenuBtn from '../../../Components/ContextMenu/ContextMenuBtn'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbtack, faTrashAlt } from '@fortawesome/free-solid-svg-icons'

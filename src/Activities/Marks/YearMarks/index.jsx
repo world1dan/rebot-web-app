@@ -1,21 +1,16 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 import { manifestContext } from '../../../Context'
-import useFirestoreListener from 'Hooks/useFirestoreListener'
+import useFirestoreListener from '../../../Hooks/useFirestoreListener'
 
 import YearSubjectMarks from './YearSubjectMarks'
 import Average from './Average'
-import Loading from 'Components/Loading'
+import Suspense from '../../../Components/Suspense'
 
 import './style.scss'
 
 const YearMarks = ({ yearMarksDoc, readOnly }) => {
     const manifest = useContext(manifestContext)
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        setTimeout(() => setLoading(false), 220)
-    }, [])
 
     const marks = useFirestoreListener(yearMarksDoc)
 
@@ -39,23 +34,19 @@ const YearMarks = ({ yearMarksDoc, readOnly }) => {
 
     return (
         <div className="YearMarks">
-            {loading ? (
-                <Loading />
-            ) : (
-                <>
-                    <header className="YearMarks-table-header">
-                        <span className="subject">Предмет</span>
-                        <span>I</span>
-                        <span>II</span>
-                        <span>III</span>
-                        <span>IV</span>
-                        <span className="year">Год</span>
-                    </header>
-                    {rows}
+            <Suspense delay={330} rowsCount={16}>
+                <header className="YearMarks-table-header">
+                    <span className="subject">Предмет</span>
+                    <span>I</span>
+                    <span>II</span>
+                    <span>III</span>
+                    <span>IV</span>
+                    <span className="year">Год</span>
+                </header>
+                {rows}
 
-                    {marks && <Average marks={marks} />}
-                </>
-            )}
+                {marks && <Average marks={marks} />}
+            </Suspense>
         </div>
     )
 }

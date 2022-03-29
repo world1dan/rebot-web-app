@@ -7,7 +7,6 @@ if (inversion && inversion == 'false') {
 
 import { firestore } from './Context'
 import { doc, collection } from 'firebase/firestore'
-
 import { Component } from 'react'
 import { createRoot } from 'react-dom/client'
 
@@ -15,9 +14,11 @@ import App from './App'
 import Login from './Activities/Login'
 import FatalError from './Activities/FatalError'
 
-globalThis.ios =
+window.ios =
     /iPad|iPhone/.test(navigator.platform) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+
+window.android = navigator.userAgent.toLowerCase().indexOf('android') > -1
 
 const getUserFromLocalStorage = () => {
     const userJSON = localStorage.getItem('user')
@@ -52,8 +53,7 @@ const UserProvider = () => {
 
     const database = user ? getDatabase(user.id.toString()) : undefined
 
-    if (!user || !database)
-        return <Login handleLogin={() => location.reload()} />
+    if (!user || !database) return <Login handleLogin={() => location.reload()} />
 
     return (
         user &&
@@ -93,7 +93,7 @@ const root = createRoot(document.getElementById('root'))
 
 root.render(
     <ErrorInterceptor>
-        <UserProvider></UserProvider>
+        <UserProvider />
     </ErrorInterceptor>
 )
 

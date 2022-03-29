@@ -15,7 +15,7 @@ import ContextMenu from '../../../../Components/ContextMenu'
 import ContextMenuBtn from '../../../../Components/ContextMenu/ContextMenuBtn'
 import MarksKeyboard from '../../../Marks/MarksKeyboard'
 
-import ActionSheet from 'Components/ActionSheet'
+import ActionSheet from '../../../../Components/ActionSheet'
 import Link from './Link'
 
 import './style.scss'
@@ -60,19 +60,11 @@ const SubjectRow = ({ lesson, path }) => {
                 </div>
             )}
 
-            <div
-                className={
-                    'flexRow' + (lesson.danger ? ' SubjectRow-danger' : '')
-                }
-            >
+            <div className={'flexRow' + (lesson.danger ? ' SubjectRow-danger' : '')}>
                 <div className="rowBlock medium" style={style}>
                     {title}
                 </div>
-                <div
-                    className={
-                        'rowBlock mainField' + (lesson.link ? ' with-link' : '')
-                    }
-                >
+                <div className={'rowBlock mainField' + (lesson.link ? ' with-link' : '')}>
                     <div className="homework" onClick={openInputModal}>
                         {homework}
                     </div>
@@ -84,9 +76,7 @@ const SubjectRow = ({ lesson, path }) => {
                             <ContextMenuBtn
                                 onClick={openInstant}
                                 title="Решение"
-                                icon={
-                                    <FontAwesomeIcon icon={faBook} size="xl" />
-                                }
+                                icon={<FontAwesomeIcon icon={faBook} size="xl" />}
                             />
                         )}
                         {(subject?.marks || isMath) && (
@@ -99,12 +89,7 @@ const SubjectRow = ({ lesson, path }) => {
                         <ContextMenuBtn
                             onClick={openInfo}
                             title="Об Уроке"
-                            icon={
-                                <FontAwesomeIcon
-                                    icon={faInfoCircle}
-                                    size="xl"
-                                />
-                            }
+                            icon={<FontAwesomeIcon icon={faInfoCircle} size="xl" />}
                         />
                     </ContextMenu>
                     {isEditing && (
@@ -117,9 +102,7 @@ const SubjectRow = ({ lesson, path }) => {
                 </div>
             </div>
 
-            {instant && (
-                <HomeworkRe lessonsData={[lesson]} handleClose={closeInstant} />
-            )}
+            {instant && <HomeworkRe lessonsData={[lesson]} handleClose={closeInstant} />}
             {info && (
                 <LessonInfo
                     lesson={isMath ? { ...lesson, id: 'math' } : lesson}

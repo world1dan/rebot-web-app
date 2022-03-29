@@ -8,6 +8,7 @@ import ReshebaViewer from '../../Components/ReshebaViewer'
 import useLocalStorage from '../../Hooks/useLocalStorage'
 
 import './style.scss'
+import ScrollView from '../../Components/ScrollView'
 
 const Search = () => {
     const manifest = useContext(manifestContext)
@@ -56,10 +57,11 @@ const Search = () => {
     ))
 
     return (
-        <Wraper styles={{ padding: 0, paddingBottom: 100 }}>
-            <Header addSolution={addSolution} />
-
-            <div className="viewers-wrapper">{viewers.reverse()}</div>
+        <Wraper>
+            <ScrollView withoutPaddings>
+                <Header addSolution={addSolution} />
+                <div className="viewers-wrapper">{viewers.reverse()}</div>
+            </ScrollView>
         </Wraper>
     )
 }

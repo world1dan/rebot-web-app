@@ -1,7 +1,7 @@
-import { onSnapshot } from 'firebase/firestore'
 import { useState, useEffect } from 'react'
+import { onSnapshot } from 'firebase/firestore'
 
-export default function useCollectionListener(collectionRef) {
+const useCollectionListener = (collectionRef) => {
     const [collection, setCollection] = useState([])
 
     useEffect(() => {
@@ -12,3 +12,5 @@ export default function useCollectionListener(collectionRef) {
 
     return collection
 }
+
+export default useCollectionListener

@@ -77,14 +77,14 @@ const Average = ({ marks }) => {
         analyzed.targetOfQuarter &&
         analyzed.averageOfQuarter < analyzed.targetOfQuarter
     ) {
-        styles.border = 'var(--mark-yellow) 2px solid'
+        styles.border = 'var(--yellow) 1.5px solid'
     }
 
     return (
         <div className={averageStyles}>
             <div className="info">
                 <span className="title">Средний балл</span>
-                <span className="sub-title">3 Четверть</span>
+                <span className="sub-title">4 Четверть</span>
             </div>
 
             <div className="average">

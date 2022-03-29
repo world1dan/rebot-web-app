@@ -7,7 +7,7 @@ import VerticalLayout from '../../Components/Layouts/VerticalLayout'
 import H1 from '../../Components/Typography/H1'
 import Switch from '../../Components/Blocks/Switch'
 import Radio from '../../Components/Blocks/SegmentedControl'
-import Updater from './Updater'
+
 import ActionBtn from './ActionBtn'
 import './style.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,7 +15,9 @@ import {
     faArrowRightFromBracket,
     faBroom,
     faCircleHalfStroke,
+    faMobileAndroid,
 } from '@fortawesome/free-solid-svg-icons'
+
 import { css } from '@linaria/core'
 import { setCorrectColorScheme } from '../../ColorScheme'
 
@@ -39,6 +41,10 @@ const Settings = () => {
         () => localStorage.getItem('theme') ?? 'auto'
     )
 
+    const [reducedAnimations, setReducedAnimations] = useState(
+        () => localStorage.getItem('reducedAnimation') == 'true' ?? false
+    )
+
     const changeInversion = (state) => {
         setInversionState(state)
         if (!state) {
@@ -54,6 +60,12 @@ const Settings = () => {
 
         localStorage.setItem('theme', theme)
         setCorrectColorScheme()
+    }
+
+    const changeReducedAnimations = (theme) => {
+        setReducedAnimations(theme)
+
+        localStorage.setItem('reducedAnimation', theme)
     }
 
     const logout = async () => {
@@ -82,7 +94,7 @@ const Settings = () => {
                     { title: 'Светлая', id: 'light' },
                 ]}
             />
-            <Updater />
+
             <Switch
                 title="Затемнять решения"
                 descr="Светлый текст на темном фоне"
@@ -90,16 +102,18 @@ const Settings = () => {
                 onChange={(e) => changeInversion(e.target.checked)}
                 checked={inversionState}
             />
+            <Switch
+                title="У сижу с картошки"
+                descr="Отключает некоторые анимации, чтобы всё работало быстрее"
+                icon={<FontAwesomeIcon icon={faMobileAndroid} />}
+                onChange={(e) => changeReducedAnimations(e.target.checked)}
+                checked={reducedAnimations}
+            />
             <div className={buttonGroupStyles}>
                 <ActionBtn
                     text="Выйти"
                     onClick={logout}
-                    icon={
-                        <FontAwesomeIcon
-                            icon={faArrowRightFromBracket}
-                            size="lg"
-                        />
-                    }
+                    icon={<FontAwesomeIcon icon={faArrowRightFromBracket} size="lg" />}
                     iconBgColor="var(--red)"
                 />
                 <ActionBtn

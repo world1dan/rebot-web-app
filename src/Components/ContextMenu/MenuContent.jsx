@@ -1,12 +1,7 @@
 import { useCallback, useRef } from 'react'
 import useEventListener from '../../Hooks/useEventListener'
 
-const MenuContent = ({
-    menuStyles,
-    children,
-    closeMenu,
-    stayActiveOnClick,
-}) => {
+const MenuContent = ({ menuStyles, children, closeMenu, stayActiveOnClick }) => {
     const menu = useRef()
 
     const handleClose = useCallback((event) => {
