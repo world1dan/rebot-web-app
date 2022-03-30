@@ -22,10 +22,7 @@ const Updater = () => {
                 <span className="info">{checking ? 'Проверка..' : ''}</span>
             </div>
             {updateFounded && (
-                <button
-                    className="update-btn"
-                    onClick={() => location.reload()}
-                >
+                <button className="update-btn" onClick={() => location.reload()}>
                     Обновить
                 </button>
             )}

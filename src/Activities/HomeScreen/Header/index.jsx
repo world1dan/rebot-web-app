@@ -29,10 +29,7 @@ const Header = () => {
             </header>
 
             {settingsOpen && (
-                <SheetView
-                    handleClose={() => setSettingsOpen(false)}
-                    background="var(--bg1)"
-                >
+                <SheetView handleClose={() => setSettingsOpen(false)}>
                     <Settings />
                 </SheetView>
             )}

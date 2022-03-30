@@ -17,8 +17,8 @@
         "@fortawesome/react-fontawesome": "^0.1.17",
         "firebase": "^9.6.10",
         "framer-motion": "^6.2.6",
-        "react": "^18.0.0-rc.3",
-        "react-dom": "^18.0.0-rc.3",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
         "react-stay-scrolled": "^7.4.0",
         "react-telegram-auth": "^1.0.3",
         "react-textarea-autosize": "^8.3.3"
@@ -32,7 +32,6 @@
         "@linaria/shaker": "^3.0.0-beta.15",
         "@linaria/stylelint": "^3.0.0-beta.15",
         "@linaria/webpack-loader": "^3.0.0-beta.16",
-        "@parcel/transformer-sass": "2.4.0",
         "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
         "babel-loader": "^8.2.4",
         "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
@@ -47,7 +46,6 @@
         "html-inline-css-webpack-plugin": "^1.11.1",
         "html-webpack-plugin": "^5.5.0",
         "mini-css-extract-plugin": "^2.5.3",
-        "parcel": "^2.4.0",
         "path": "^0.12.7",
         "prettier": "^2.6.1",
         "react-refresh": "^0.11.0",
@@ -69,11 +67,10 @@
         "webpack": "^5.68.0",
         "webpack-bundle-analyzer": "^4.5.0",
         "webpack-cli": "^4.9.2",
-        "webpack-dev-server": "^4.7.4",
-        "yarn-upgrade-all": "^0.6.1"
+        "webpack-dev-server": "^4.7.4"
     },
     "browserslist": [
         "iOS 15",
-        "Chrome > 96"
+        "Chrome > 99"
     ]
 }

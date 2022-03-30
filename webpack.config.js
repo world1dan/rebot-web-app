@@ -5,8 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const CssoWebpackPlugin = require('csso-webpack-plugin').default
-const HTMLInlineCSSWebpackPlugin =
-    require('html-inline-css-webpack-plugin').default
+const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
 const stylis = require('stylis')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 stylis.set({ prefix: false })
@@ -78,8 +77,7 @@ module.exports = (env) => {
                         {
                             loader: '@linaria/webpack-loader',
                             options: {
-                                sourceMap:
-                                    process.env.NODE_ENV !== 'production',
+                                sourceMap: process.env.NODE_ENV !== 'production',
                             },
                         },
                     ],

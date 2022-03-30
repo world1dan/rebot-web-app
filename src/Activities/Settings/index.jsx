@@ -21,6 +21,8 @@ import {
 import { css } from '@linaria/core'
 import { setCorrectColorScheme } from '../../ColorScheme'
 
+import Profile from './Profile/index.jsx'
+
 const buttonGroupStyles = css`
     display: grid;
     gap: 14px;
@@ -84,6 +86,7 @@ const Settings = () => {
     return (
         <VerticalLayout>
             <H1 text="Настройки"></H1>
+            <Profile themeTitleStyles={themeTitleStyles} />
             <div className={themeTitleStyles}>Тема интерфейса</div>
             <Radio
                 activeItem={themeState}
@@ -94,7 +97,6 @@ const Settings = () => {
                     { title: 'Светлая', id: 'light' },
                 ]}
             />
-
             <Switch
                 title="Затемнять решения"
                 descr="Светлый текст на темном фоне"

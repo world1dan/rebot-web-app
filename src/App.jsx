@@ -35,16 +35,23 @@ const App = ({ config }) => {
         })
     }, [])
 
-    if (!manifest) return <Loading styles={{ height: '100vh' }} />
+    if (!manifest)
+        return (
+            <Loading
+                styles={{
+                    height: '100vh',
+                }}
+            />
+        )
 
     return (
         <manifestContext.Provider value={manifest}>
-            <div id="modals-container"></div>
+            <div id="modals-container"> </div>{' '}
             <MarksContext.Provider value={marks}>
                 <TimeTableContext.Provider value={timetable}>
-                    <Tabs config={config} />
-                </TimeTableContext.Provider>
-            </MarksContext.Provider>
+                    <Tabs config={config} />{' '}
+                </TimeTableContext.Provider>{' '}
+            </MarksContext.Provider>{' '}
         </manifestContext.Provider>
     )
 }

@@ -32,7 +32,5 @@
    },
    "stylelint.enable": true,
    "stylelint.validate": ["css", "scss", "jsx"], 
-
-
   }
 }
