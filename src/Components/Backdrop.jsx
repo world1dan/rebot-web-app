@@ -14,8 +14,8 @@ const styles = css`
 `
 
 const Backdrop = ({ children, onClick, y }) => {
-    const input = [0, 0, 300]
-    const output = [0, 1, 0]
+    const input = [0, 0, 200]
+    const output = [1, 1, 0]
     const opacity = y ? useTransform(y, input, output) : null
 
     return (

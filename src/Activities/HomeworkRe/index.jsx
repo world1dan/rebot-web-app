@@ -1,5 +1,4 @@
-import { useContext, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
 
 import { manifestContext } from '../../Context'
 
@@ -10,14 +9,6 @@ const HomeworkRe = (props) => {
     const manifest = useContext(manifestContext)
 
     const groups = []
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            console.log(props.lessonsData)
-        }, 5000)
-
-        return () => clearTimeout(timeout)
-    }, [])
 
     for (let subjectNum in props.lessonsData) {
         const lesson = props.lessonsData[subjectNum]
@@ -50,11 +41,6 @@ const HomeworkRe = (props) => {
     }
 
     return <SheetView handleClose={props.handleClose}>{groups}</SheetView>
-}
-
-HomeworkRe.propTypes = {
-    handleClose: PropTypes.func.isRequired,
-    lessonsData: PropTypes.array.isRequired,
 }
 
 export default HomeworkRe

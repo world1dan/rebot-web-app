@@ -8,20 +8,24 @@ import ModalPortal from '../ModalPortal'
 import Backdrop from '../Backdrop'
 import CloseBtn from './CloseBtn'
 import VScroll from '../VScroll'
+
 import { TabContext } from '../../Tabs'
 
 const Sheet = styled(motion.div)`
     position: fixed;
     right: 0;
     left: 0;
+
     bottom: 0;
     top: ${(p) => ('fullHeightOnMobile' in p.type ? 0 : '62px')};
 
     background: ${(p) => p.background ?? 'var(--bg2)'};
-    touch-action: none;
+
     z-index: 999;
     overflow: hidden;
-    border: var(--lvl4-borders) 2px solid;
+
+    border: ${(p) =>
+        'fullHeightOnMobile' in p.type ? 0 : 'var(--lvl4-borders) 2px solid;'};
     border-radius: ${(p) => ('fullHeightOnMobile' in p.type ? 0 : '13px 13px 0 0')};
 
     animation: adaptive-panel-in 440ms cubic-bezier(0.38, 0.7, 0.125, 1);
@@ -62,19 +66,19 @@ const SheetView = ({ children, handleClose, type = {}, background }) => {
                 easing: 'ease-in',
                 fill: 'forwards',
             })
-            if (type == 'fullHeightOnMobile') {
+            if (type.fullHeightOnMobile) {
                 changeThemeColor(prevThemeColor.current)
-            } else {
-                focusTab()
             }
+
+            focusTab()
         } else {
-            if (type == 'fullHeightOnMobile') {
+            unfocusTab()
+
+            if (type.fullHeightOnMobile) {
                 const meta = document.querySelector('meta[name=theme-color]')
                 prevThemeColor.current = meta.content
 
-                changeThemeColor(background ?? 'var(--bg2)')
-            } else {
-                unfocusTab()
+                changeThemeColor('var(--bg1)' ?? 'var(--bg2)')
             }
         }
     }, [isVisible])
@@ -86,6 +90,7 @@ const SheetView = ({ children, handleClose, type = {}, background }) => {
                     <Backdrop onClick={closeSheet}>
                         <Sheet ref={ref} type={type} background={background}>
                             <VScroll>{children}</VScroll>
+
                             <CloseBtn onClick={closeSheet} />
                         </Sheet>
                     </Backdrop>

@@ -5,7 +5,7 @@ const styles = css`
     background: var(--bg3);
     border-radius: 7px;
     display: flex;
-    padding: 7px;
+    padding: 5px;
     overflow: hidden;
     transition: box-shadow 0.3s;
 
@@ -23,7 +23,7 @@ const styles = css`
 
     .save-button {
         background: var(--indigo);
-        padding: 10px 16px;
+        padding: 8px 16px;
         border-radius: 5px;
         font-size: 13px;
         color: #fff;
@@ -47,7 +47,7 @@ const InputField = ({ value, onChange, onSave, showSaveButton }) => {
             {showSaveButton && (
                 <motion.button
                     className="save-button"
-                    onClick={onSave}
+                    onClick={() => onSave(value)}
                     whileTap={{
                         scale: 0.94,
                         filter: 'brightness(1.3)',

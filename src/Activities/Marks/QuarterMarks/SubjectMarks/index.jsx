@@ -27,7 +27,7 @@ const SubjectMarks = ({ subject, marks, target, embedded, readOnly }) => {
                         className="color-indicator"
                         style={{
                             backgroundColor: subject.color,
-                            boxShadow: '0px 0px 6px ' + subject.color,
+                            boxShadow: '0px 0px 4px ' + subject.color,
                         }}
                     />
                 )}

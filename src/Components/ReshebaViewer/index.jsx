@@ -4,19 +4,14 @@ import PropTypes from 'prop-types'
 import getSolutionImgs from './getSolutionImgs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './style.scss'
-import {
-    faChevronLeft,
-    faChevronRight,
-    faTimes,
-} from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight, faTimes } from '@fortawesome/free-solid-svg-icons'
+import PhotoViewer from '../PhotoViewer'
 
 const ReshebaViewer = ({ subjectInfo, startNum, onClose }) => {
     const [num, setNum] = useState(startNum)
+    const [photoViewer, setPhotoViewer] = useState(false)
 
-    const imgs = useMemo(
-        () => getSolutionImgs(subjectInfo, num),
-        [subjectInfo, num]
-    )
+    const imgs = useMemo(() => getSolutionImgs(subjectInfo, num), [subjectInfo, num])
 
     const openAlt = () => {
         const altUrl = subjectInfo.alt_url.replace(
@@ -52,7 +47,15 @@ const ReshebaViewer = ({ subjectInfo, startNum, onClose }) => {
                     </button>
                 )}
             </div>
-            <div className="hwr-sol-imgs">{imgs}</div>
+            <div className="hwr-sol-imgs" onClick={() => setPhotoViewer(true)}>
+                {imgs}
+            </div>
+
+            {photoViewer && (
+                <PhotoViewer handleClose={() => setPhotoViewer(false)}>
+                    {imgs}
+                </PhotoViewer>
+            )}
         </>
     )
 }

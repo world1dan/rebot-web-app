@@ -1,12 +1,10 @@
 import { useState, createContext } from 'react'
 
 import { AnimatePresence, motion, useMotionValue } from 'framer-motion'
+
 import Backdrop from '../Backdrop'
-
 import ModalPortal from '../ModalPortal'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import Cross from '../Icons/Cross'
 
 import './style.css'
 
@@ -34,7 +32,7 @@ const ActionSheet = ({ onClose, children, bottomCloseBtn }) => {
                             drag="y"
                             dragConstraints={{ top: 0 }}
                             dragSnapToOrigin
-                            dragElastic={0.4}
+                            dragElastic={0.14}
                             style={{ y }}
                             exit={{
                                 y: 'calc(100% + 50px)',
@@ -61,25 +59,17 @@ const ActionSheet = ({ onClose, children, bottomCloseBtn }) => {
                                 }
                             }}
                         >
-                            <ActionSheetContext.Provider
-                                value={{ close: closeSheet }}
-                            >
+                            <ActionSheetContext.Provider value={{ close: closeSheet }}>
                                 {children}
                             </ActionSheetContext.Provider>
                             {bottomCloseBtn ? (
-                                <div
-                                    className="ActionSheetCloseBtn"
-                                    onClick={closeSheet}
-                                >
+                                <div className="ActionSheetCloseBtn" onClick={closeSheet}>
                                     Закрыть
                                 </div>
                             ) : (
-                                <div
-                                    className="top-close-btn"
-                                    onClick={closeSheet}
-                                >
-                                    <FontAwesomeIcon icon={faXmark} />
-                                </div>
+                                <button className="top-close-btn" onClick={closeSheet}>
+                                    <Cross width={36} height={36} />
+                                </button>
                             )}
                         </motion.div>
                     </Backdrop>

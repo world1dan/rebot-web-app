@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
 import HomeworkRe from '../../HomeworkRe'
-import LessonInfo from '../../TimeTable/DayCard/LessonInfo'
+import LessonInfo from '../../TimeTable/DayCard/Lesson/LessonInfo'
 import { css } from '@linaria/core'
 
 const styles = css`
@@ -30,10 +30,7 @@ const LessonTools = ({ subject, lesson, path, isMath, manifest }) => {
     return (
         <div className={styles}>
             {subject.url && lesson.hw && (
-                <button
-                    className="tool-btn"
-                    onClick={() => setHomeworkRe(true)}
-                >
+                <button className="tool-btn" onClick={() => setHomeworkRe(true)}>
                     <FontAwesomeIcon icon={faBook} size="lg" />
                     Решение
                 </button>

@@ -1,12 +1,13 @@
 import { css } from '@linaria/core'
 
 import AddLink from './AddLink'
+import AddPhoto from './AddPhoto'
 
 const styles = css`
     display: flex;
 
     align-items: center;
-    justify-content: space-between;
+    gap: 8px;
 
     .subject {
         display: flex;
@@ -18,6 +19,9 @@ const styles = css`
         font-size: 15px;
         border-radius: 7px;
         color: #fff;
+
+        margin-left: 0;
+        margin-right: auto;
     }
 
     @media (max-width: 360px) {
@@ -26,7 +30,7 @@ const styles = css`
     }
 `
 
-const Header = ({ subject, setLink, lesson }) => {
+const Header = ({ subject, setLink, lesson, setPhoto }) => {
     return (
         <header className={styles}>
             <div
@@ -36,6 +40,7 @@ const Header = ({ subject, setLink, lesson }) => {
                 {subject.full_title || subject.title}
             </div>
             <AddLink setLink={setLink} currentLink={lesson.link} />
+            <AddPhoto setPhoto={setPhoto} />
         </header>
     )
 }

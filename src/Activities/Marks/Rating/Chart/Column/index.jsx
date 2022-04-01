@@ -4,6 +4,9 @@ import { motion } from 'framer-motion'
 
 import UserMarks from './UserMarks'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleQuestion, faCrown } from '@fortawesome/free-solid-svg-icons'
+
 import './style.scss'
 
 const variants = {
@@ -24,10 +27,7 @@ const variants = {
                 },
             },
             backgroundColor: custom.change
-                ? [
-                      custom.change == 'decrease' ? '#ff3b30' : '#34c759',
-                      defaultBackground,
-                  ]
+                ? [custom.change == 'decrease' ? '#ff3b30' : '#34c759', defaultBackground]
                 : undefined,
         }
     },
@@ -40,9 +40,7 @@ const Column = ({ user, percent, isOwn, userInfo, i }) => {
     const [marksPreview, setMarksPreview] = useState(false)
 
     const getDefaultBackground = () => {
-        return getComputedStyle(columnRef.current).getPropertyValue(
-            'background-color'
-        )
+        return getComputedStyle(columnRef.current).getPropertyValue('background-color')
     }
 
     const motionCustom = { i, getDefaultBackground }
@@ -60,9 +58,7 @@ const Column = ({ user, percent, isOwn, userInfo, i }) => {
     return (
         <>
             <motion.div
-                className={
-                    'Marks__Rating__Chart_Column ' + (isOwn ? 'own' : '')
-                }
+                className={'Marks__Rating__Chart_Column ' + (isOwn ? 'own' : '')}
                 style={{ height: `${percent}%` }}
                 onClick={() => setMarksPreview(true)}
                 variants={variants}
@@ -73,7 +69,25 @@ const Column = ({ user, percent, isOwn, userInfo, i }) => {
                 whileTap={{ filter: 'brightness(1.5)' }}
                 ref={columnRef}
             >
-                <div className="average-mark">{user.rating}</div>
+                {i == 0 && (
+                    <div className="crown">
+                        <FontAwesomeIcon icon={faCrown} size="2x" />
+                    </div>
+                )}
+                <div className="average-mark">
+                    {user.rating ?? (
+                        <FontAwesomeIcon icon={faCircleQuestion} className="no-gpa" />
+                    )}
+                </div>
+
+                {userInfo?.photo_url && (
+                    <img
+                        className="avatar"
+                        src={userInfo?.photo_url}
+                        width="56px"
+                        height="56px"
+                    ></img>
+                )}
                 <div className="username">{userInfo?.first_name}</div>
             </motion.div>
             {marksPreview && (

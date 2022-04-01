@@ -18,6 +18,7 @@ const useRating = () => {
                 if (doc.id !== 'marks_new') return
 
                 const d = doc.data()
+
                 if (d) {
                     data.push({
                         marks: d,

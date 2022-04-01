@@ -46,12 +46,12 @@ const App = ({ config }) => {
 
     return (
         <manifestContext.Provider value={manifest}>
-            <div id="modals-container"> </div>{' '}
+            <div id="modals-container" />
             <MarksContext.Provider value={marks}>
                 <TimeTableContext.Provider value={timetable}>
-                    <Tabs config={config} />{' '}
-                </TimeTableContext.Provider>{' '}
-            </MarksContext.Provider>{' '}
+                    <Tabs config={config} />
+                </TimeTableContext.Provider>
+            </MarksContext.Provider>
         </manifestContext.Provider>
     )
 }

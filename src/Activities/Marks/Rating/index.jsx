@@ -7,9 +7,9 @@ import useUsers from './useUsers'
 
 import History from './History'
 import Chart from './Chart'
+import Suspense from '../../../Components/Suspense'
 
 import './style.scss'
-import Suspense from '../../../Components/Suspense'
 
 const Rating = () => {
     const [usersRatings, statistics] = useRating()

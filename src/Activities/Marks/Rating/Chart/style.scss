@@ -1,11 +1,11 @@
 .Rating__Chart__Wrapper {
-    height: 400px;
+    height: 410px;
 }
 
 .Rating__Chart {
     display: grid;
     grid-template-columns: 1fr;
-    height: 400px;
+    height: 410px;
     overflow: hidden;
 
     .data-wraper {
@@ -16,6 +16,7 @@
         overflow-x: auto;
         overflow-y: hidden;
         padding: 8px;
+        padding-top: 40px;
 
         &::-webkit-scrollbar {
             height: 8px;

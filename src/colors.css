@@ -26,6 +26,7 @@
     --blue: #0a84ff;
     --indigo: #5e5be6;
     --reduced-brightness: 0.7;
+    --marks-user-avatars-gradient: #0000006e;
 
     color-scheme: dark;
 }
@@ -59,6 +60,7 @@
     --blue: #007aff;
     --indigo: #5855d6;
     --reduced-brightness: 0.88;
+    --marks-user-avatars-gradient: #ffffff25;
 
     color-scheme: light;
 }

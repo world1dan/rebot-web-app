@@ -12,7 +12,7 @@ const styles = css`
     gap: 6px;
     align-items: center;
     justify-content: center;
-    border-bottom: 3px solid var(--lvl4-borders);
+    border-bottom: 2px solid var(--lvl4-borders);
     padding: 6px 8px;
 
     @media (max-width: 360px) {
@@ -38,7 +38,7 @@ const styles = css`
         font-weight: 600;
     }
 
-    &:last-of-type {
+    &:nth-last-child(2) {
         border-bottom: 0;
     }
 `
@@ -58,10 +58,7 @@ const HistoryEvent = ({ mark }) => {
     return (
         <div className={styles}>
             <Mark mark={mark} unclickable />
-            <div
-                className="color-indicator"
-                style={{ background: subject.color }}
-            />
+            <div className="color-indicator" style={{ background: subject.color }} />
             <div className="subject">{subject.title}</div>
             <div className="username">{mark.username}</div>
             <div className="date">{date}</div>

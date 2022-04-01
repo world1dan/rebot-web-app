@@ -10,6 +10,8 @@ const styles = css`
         height: 100%;
         overflow-y: overlay;
         overscroll-behavior: contain;
+        overscroll-behavior-block: contain;
+        padding-bottom: 40px;
 
         &::-webkit-scrollbar {
             width: 0px;

@@ -16,17 +16,6 @@ const styles = css`
     font-size: 17px;
     max-width: 180px;
     gap: 10px;
-
-    svg {
-        color: var(--green);
-    }
-
-    .current-link {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        font-size: 15px;
-    }
 `
 
 const AddLink = ({ setLink, currentLink }) => {
@@ -53,8 +42,7 @@ const AddLink = ({ setLink, currentLink }) => {
                 <PlusRounded width={18} height={18} />
             )}
 
-            {currentLink && <div className="current-link">{currentLink}</div>}
-            <FontAwesomeIcon icon={faLink} />
+            <FontAwesomeIcon icon={faLink} color="var(--green)" />
         </button>
     )
 }

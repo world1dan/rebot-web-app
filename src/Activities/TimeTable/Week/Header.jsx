@@ -11,6 +11,7 @@ const styles = css`
     height: 54px;
     background-color: var(--bg2);
     border-bottom: 1px solid var(--borders);
+    touch-action: none;
 
     @media (min-width: 600px) {
         position: fixed;

@@ -24,7 +24,7 @@ const getUserFromLocalStorage = () => {
     const userJSON = localStorage.getItem('user')
 
     if (process.env.NODE_ENV == 'development') {
-        return { id: 1150080354, group: 2 }
+        return { id: '1374651027', group: 2 }
     }
 
     if (!userJSON) return undefined

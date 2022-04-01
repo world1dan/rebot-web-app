@@ -13,18 +13,10 @@
 }
 
 .ActionSheet .top-close-btn {
-    align-items: center;
-    background: var(--bg4);
-    border-radius: 50%;
-    box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
     color: var(--text2);
-    display: flex;
-    height: 38px;
-    justify-content: center;
     position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 38px;
+    right: 8px;
+    top: 8px;
 }
 
 .ActionSheetCloseBtn {

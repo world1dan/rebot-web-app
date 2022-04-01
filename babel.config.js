@@ -1,6 +1,4 @@
-const {
-    NODE_ENV
-} = process.env
+const { NODE_ENV } = process.env
 
 const inProduction = NODE_ENV === 'production'
 
@@ -13,12 +11,11 @@ module.exports = (api) => {
                 '@babel/preset-react',
                 {
                     runtime: 'automatic',
+                    development: !inProduction,
                 },
             ],
             '@linaria',
         ],
-        plugins: [inProduction && 'transform-react-remove-prop-types'].filter(
-            Boolean
-        ),
+        plugins: [inProduction && 'transform-react-remove-prop-types'].filter(Boolean),
     }
 }

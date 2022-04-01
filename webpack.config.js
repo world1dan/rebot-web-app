@@ -9,6 +9,7 @@ const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').def
 const stylis = require('stylis')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 stylis.set({ prefix: false })
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = (env) => {
     const plugins = [
@@ -32,6 +33,7 @@ module.exports = (env) => {
 
     if (env.production) {
         plugins.push(
+            new BundleAnalyzerPlugin(),
             new CssoWebpackPlugin(),
             new CleanWebpackPlugin(),
             new HTMLInlineCSSWebpackPlugin()
@@ -110,6 +112,7 @@ module.exports = (env) => {
                     minify: TerserPlugin.uglifyJsMinify,
                     terserOptions: {
                         compress: {
+                            varify: false,
                             passes: 3,
                         },
                     },

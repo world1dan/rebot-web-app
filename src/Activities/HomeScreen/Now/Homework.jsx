@@ -2,7 +2,7 @@ import { css } from '@linaria/core'
 import { useState, memo } from 'react'
 
 import InputModal from '../../../Components/InputModal'
-import Link from '../../TimeTable/DayCard/SubjectRow/Link'
+import Link from '../../TimeTable/DayCard/Lesson/Link'
 
 const styles = css`
     display: flex;

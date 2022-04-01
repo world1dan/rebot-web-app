@@ -3,7 +3,7 @@ import { ConfigContext } from '../../../Context'
 
 import Card from '../../../Components/Blocks/Card'
 import HomeworkRe from '../../HomeworkRe'
-import SubjectRow from './SubjectRow'
+import Lesson from './Lesson'
 import Search from '../../../Components/Icons/Search'
 
 const DayCard = ({ dayNum, week, timetable, pathToDay }) => {
@@ -51,7 +51,7 @@ const DayCard = ({ dayNum, week, timetable, pathToDay }) => {
             path = `${pathToDay}.${lessonNum}`
         }
 
-        lessons.push(<SubjectRow key={lessonNum} lesson={lesson} path={path} />)
+        lessons.push(<Lesson key={lessonNum} lesson={lesson} path={path} />)
     }
 
     const openHomeworkRe = () => {

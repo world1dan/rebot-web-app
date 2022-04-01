@@ -15,7 +15,6 @@ import {
     faArrowRightFromBracket,
     faBroom,
     faCircleHalfStroke,
-    faMobileAndroid,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { css } from '@linaria/core'
@@ -43,10 +42,6 @@ const Settings = () => {
         () => localStorage.getItem('theme') ?? 'auto'
     )
 
-    const [reducedAnimations, setReducedAnimations] = useState(
-        () => localStorage.getItem('reducedAnimation') == 'true' ?? false
-    )
-
     const changeInversion = (state) => {
         setInversionState(state)
         if (!state) {
@@ -62,12 +57,6 @@ const Settings = () => {
 
         localStorage.setItem('theme', theme)
         setCorrectColorScheme()
-    }
-
-    const changeReducedAnimations = (theme) => {
-        setReducedAnimations(theme)
-
-        localStorage.setItem('reducedAnimation', theme)
     }
 
     const logout = async () => {
@@ -86,7 +75,9 @@ const Settings = () => {
     return (
         <VerticalLayout>
             <H1 text="Настройки"></H1>
+
             <Profile themeTitleStyles={themeTitleStyles} />
+
             <div className={themeTitleStyles}>Тема интерфейса</div>
             <Radio
                 activeItem={themeState}
@@ -103,13 +94,6 @@ const Settings = () => {
                 icon={<FontAwesomeIcon icon={faCircleHalfStroke} />}
                 onChange={(e) => changeInversion(e.target.checked)}
                 checked={inversionState}
-            />
-            <Switch
-                title="У сижу с картошки"
-                descr="Отключает некоторые анимации, чтобы всё работало быстрее"
-                icon={<FontAwesomeIcon icon={faMobileAndroid} />}
-                onChange={(e) => changeReducedAnimations(e.target.checked)}
-                checked={reducedAnimations}
             />
             <div className={buttonGroupStyles}>
                 <ActionBtn

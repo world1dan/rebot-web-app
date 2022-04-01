@@ -4,12 +4,21 @@
     border-radius: 7px;
     box-shadow: 0 0 0 2px var(--lvl4-borders) inset;
     cursor: pointer;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     flex-shrink: 0;
-    grid-template-rows: 40px 1fr;
+    gap: 4px;
+
     justify-content: center;
     padding-bottom: 12px;
+    padding-top: 12px;
     width: 56px;
+
+    .crown {
+        color: var(--yellow);
+        position: absolute;
+        top: -38px;
+    }
 
     &.own {
         background: var(--indigo);
@@ -19,7 +28,18 @@
     .average-mark {
         font-size: 15px;
         font-weight: 600;
+        height: 100%;
         text-align: center;
+    }
+
+    .avatar {
+        align-self: flex-end;
+        aspect-ratio: 1 /1;
+
+        border-radius: 50%;
+        display: block;
+        object-fit: cover;
+        padding: 4px;
     }
 
     .username {
@@ -27,10 +47,10 @@
         display: flex;
         font-size: 12px;
         font-weight: 600;
-        height: 100%;
+
         justify-content: center;
-        letter-spacing: -0.2px;
-        max-width: 52px;
+        letter-spacing: -0.3px;
+        max-width: 54px;
         overflow-wrap: anywhere;
         text-align: center;
         word-break: break-all;

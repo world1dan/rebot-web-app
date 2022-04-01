@@ -36,10 +36,6 @@ const AnimatedNum = ({ number }) => {
 
     prewNumber.current = number
 
-    if (localStorage.getItem('reducedAnimation') == 'true') {
-        return <div>{number}</div>
-    }
-
     return (
         <AnimatePresence initial={false}>
             <motion.div

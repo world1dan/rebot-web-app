@@ -39,7 +39,7 @@ const Skeleton = () => {
 const DaysCarousel = ({ timetable, dayNum, isWeekEnded }) => {
     if (!timetable) return <Skeleton />
 
-    const weekNum = isWeekEnded ? 3 : 2
+    const weekNum = isWeekEnded ? 3 : 1 // удолить
     const currentWeek = timetable[weekNum]
     const currentWeekPath = weekNum + '.'
 

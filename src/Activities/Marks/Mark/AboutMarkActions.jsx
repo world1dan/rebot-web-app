@@ -40,31 +40,35 @@ const AboutMarkActions = ({ isYearMark, readOnly, mark, subject, quarter }) => {
     }
 
     return (
-        <div className="btns">
-            {!isYearMark && !readOnly && (
-                <div className="important-mark-switch">
-                    <Switch
-                        checked={mark.imp}
-                        onChange={handleImportanceChange}
-                        noPadding
-                        title="Контрольная"
-                        descr="Отметить как оценку по к/р"
-                        icon={<FontAwesomeIcon icon={faCircleExclamation} size="lg" />}
-                    />
-                </div>
-            )}
-            {!readOnly && (
-                <>
-                    <button onClick={() => setUpdateMarkDialog(true)}>
-                        <FontAwesomeIcon icon={faPen} size="lg" />
-                        Изменить
-                    </button>
-                    <button className="remove" onClick={handleRemove}>
-                        <FontAwesomeIcon icon={faTrashAlt} size="lg" />
-                        Удалить
-                    </button>
-                </>
-            )}
+        <>
+            <div className="btns">
+                {!isYearMark && !readOnly && (
+                    <div className="important-mark-switch">
+                        <Switch
+                            checked={mark.imp}
+                            onChange={handleImportanceChange}
+                            noPadding
+                            title="Контрольная"
+                            descr="Отметить как оценку по к/р"
+                            icon={
+                                <FontAwesomeIcon icon={faCircleExclamation} size="lg" />
+                            }
+                        />
+                    </div>
+                )}
+                {!readOnly && (
+                    <>
+                        <button onClick={() => setUpdateMarkDialog(true)}>
+                            <FontAwesomeIcon icon={faPen} size="lg" />
+                            Изменить
+                        </button>
+                        <button className="remove" onClick={handleRemove}>
+                            <FontAwesomeIcon icon={faTrashAlt} size="lg" />
+                            Удалить
+                        </button>
+                    </>
+                )}
+            </div>
             {updateMarkDialog && (
                 <ActionSheet bottomCloseBtn onClose={() => setUpdateMarkDialog(false)}>
                     <MarksKeyboard
@@ -77,7 +81,7 @@ const AboutMarkActions = ({ isYearMark, readOnly, mark, subject, quarter }) => {
                     />
                 </ActionSheet>
             )}
-        </div>
+        </>
     )
 }
 

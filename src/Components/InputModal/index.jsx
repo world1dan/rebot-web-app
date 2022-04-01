@@ -8,7 +8,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import Shortcuts from './Shortcuts'
 import Header from './Header'
 import Importance from './Importance'
-import useLessonController from '../../Activities/TimeTable/DayCard/SubjectRow/useLessonController'
+import useLessonController from '../../Activities/TimeTable/DayCard/Lesson/useLessonController'
 import Actions from './Actions'
 
 const styles = css`
@@ -64,7 +64,10 @@ const InputModal = ({ handleClose, lesson, path }) => {
     const [value, setValue] = useState(lesson.hw ?? '')
     const [isVisible, setIsVisible] = useState(true)
 
-    const { setHomework, setLink, setDanger } = useLessonController(lesson, path)
+    const { setHomework, setLink, setDanger, setPhoto } = useLessonController(
+        lesson,
+        path
+    )
 
     useEffect(() => {
         backdrop.current.animate([{ opacity: 0 }, { opacity: 1 }], {
@@ -132,7 +135,12 @@ const InputModal = ({ handleClose, lesson, path }) => {
     return (
         <BackdropL active={true} ref={backdrop} onClick={isVisible ? closeModal : null}>
             <div className={styles} ref={modal}>
-                <Header subject={subject} setLink={setLink} lesson={lesson} />
+                <Header
+                    subject={subject}
+                    setLink={setLink}
+                    lesson={lesson}
+                    setPhoto={setPhoto}
+                />
 
                 <TextareaAutosize
                     ref={textarea}

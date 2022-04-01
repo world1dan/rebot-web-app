@@ -16,12 +16,13 @@ const tabStyles = css`
     height: 100%;
     transition-property: transform, background-color, border-radius;
     transition-duration: 0.4s;
-    @media (max-width: 500px) {
+
+    @media (max-width: 700px) {
         &.unfocused {
+            overflow: hidden;
             border-radius: 16px 16px 0 0;
             background-color: var(--bg3);
             transform: scale(0.92) translateY(10px);
-            overflow: scroll;
         }
     }
 `

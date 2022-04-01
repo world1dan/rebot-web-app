@@ -80,15 +80,10 @@ const styles = css`
             font-size: 16px;
             background-color: var(--bg4);
             border-radius: 9px;
-            box-shadow: 0 0 0 1px var(--lvl4-borders) inset;
-
-            i {
-                font-size: 21px;
-            }
         }
 
-        .remove i {
-            color: #ed4336;
+        .remove {
+            color: var(--red);
         }
     }
 `

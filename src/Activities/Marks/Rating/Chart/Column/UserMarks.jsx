@@ -16,6 +16,27 @@ const styles = css`
         padding: 0 !important;
     }
 `
+
+const styles2 = css`
+    padding-top: 60px;
+
+    .avatar {
+        z-index: -1;
+        position: absolute;
+        pointer-events: all;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 500px;
+
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        background-position: bottom !important;
+
+        border-radius: 13px 13px 0 0;
+    }
+`
+
 const UserMarks = ({ handleClose, userInfo, user, readOnly }) => {
     const [currentTab, setCurrentTab] = useState('quarter')
 
@@ -34,44 +55,60 @@ const UserMarks = ({ handleClose, userInfo, user, readOnly }) => {
 
     const usersRatings = [user]
     return (
-        <SheetView
-            handleClose={handleClose}
-            type={{ fullHeightOnMobile: true, wide: true }}
-            background="var(--bg1)"
-        >
-            <VerticalLayout>
-                <H1 text={userInfo?.first_name} />
-                <SegmentedControl
-                    onChange={setCurrentTab}
-                    activeItem={currentTab}
-                    items={[
-                        {
-                            id: 'quarter',
-                            title: 'Четверть',
-                        },
-                        {
-                            id: 'year',
-                            title: 'Год',
-                        },
-                        {
-                            id: 'history',
-                            title: 'История',
-                        },
-                    ]}
-                />
-                <div className={styles}>
-                    {currentTab == 'quarter' && (
-                        <MarksView marks={user.marks} readOnly={readOnly} />
-                    )}
-                    {currentTab == 'year' && (
-                        <YearMarks yearMarksDoc={yearMarksDoc} readOnly={readOnly} />
-                    )}
-                    {currentTab == 'history' && (
-                        <History usersRatings={usersRatings} usersInfo={usersInfo} />
-                    )}
+        <>
+            <SheetView
+                handleClose={handleClose}
+                type={{ fullHeightOnMobile: true, wide: true }}
+                background="var(--bg1)"
+            >
+                <div className={styles2}>
+                    <div
+                        style={{
+                            background: `linear-gradient(to bottom, var(--marks-user-avatars-gradient), var(--bg1)), url(${userInfo.photo_url})`,
+                        }}
+                        className="avatar"
+                    />
+                    <VerticalLayout>
+                        <H1 text={userInfo?.first_name} />
+                        <SegmentedControl
+                            onChange={setCurrentTab}
+                            activeItem={currentTab}
+                            items={[
+                                {
+                                    id: 'quarter',
+                                    title: 'Четверть',
+                                },
+                                {
+                                    id: 'year',
+                                    title: 'Год',
+                                },
+                                {
+                                    id: 'history',
+                                    title: 'История',
+                                },
+                            ]}
+                        />
+                        <div className={styles}>
+                            {currentTab == 'quarter' && (
+                                <MarksView marks={user.marks ?? {}} readOnly={readOnly} />
+                            )}
+                            {currentTab == 'year' && (
+                                <YearMarks
+                                    yearMarksDoc={yearMarksDoc}
+                                    readOnly={readOnly}
+                                />
+                            )}
+                            {currentTab == 'history' && (
+                                <History
+                                    usersRatings={usersRatings}
+                                    usersInfo={usersInfo}
+                                />
+                            )}
+                        </div>
+                    </VerticalLayout>
                 </div>
-            </VerticalLayout>
-        </SheetView>
+            </SheetView>
+        </>
     )
 }
 
