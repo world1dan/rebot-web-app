@@ -76,7 +76,7 @@ const Settings = () => {
         <VerticalLayout>
             <H1 text="Настройки"></H1>
 
-            <Profile themeTitleStyles={themeTitleStyles} />
+            <Profile />
 
             <div className={themeTitleStyles}>Тема интерфейса</div>
             <Radio

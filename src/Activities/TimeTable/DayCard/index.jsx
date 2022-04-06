@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, memo } from 'react'
 import { ConfigContext } from '../../../Context'
 
 import Card from '../../../Components/Blocks/Card'
@@ -97,4 +97,7 @@ const DayCard = ({ dayNum, week, timetable, pathToDay }) => {
     )
 }
 
-export default DayCard
+export default memo(
+    DayCard,
+    (prewProps, nextProps) => JSON.stringify(prewProps) == JSON.stringify(nextProps)
+)

@@ -30,7 +30,7 @@ const ActionButton = ({ onClick, className, children }) => {
             onClick={onClick}
             className={className}
             whileTap={{
-                scale: 0.91,
+                scale: 0.9,
                 filter: 'brightness(1.1)',
             }}
         >

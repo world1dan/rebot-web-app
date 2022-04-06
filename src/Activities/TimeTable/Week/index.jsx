@@ -5,9 +5,9 @@ import { TimeTableContext } from '../../../Context'
 import Wraper from '../../../Components/Wraper'
 import DayCard from '../DayCard'
 import Header from './Header'
+import ScrollView from '../../../Components/ScrollView'
 
 import './style.scss'
-import ScrollView from '../../../Components/ScrollView'
 
 const Week = () => {
     const dayNum = new Date().getDay()

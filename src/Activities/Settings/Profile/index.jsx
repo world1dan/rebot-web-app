@@ -7,25 +7,42 @@ import useUserProfile from './useUserProfile'
 
 const styles = css`
     display: grid;
-    grid-template-columns: 110px 1fr;
-
+    grid-template-columns: 120px 1fr;
+    align-items: center;
     gap: 16px;
+
+    @media (max-width: 400px) {
+        grid-template-columns: 120px 1fr;
+    }
+
+    @media (max-width: 350px) {
+        grid-template-columns: 100px 1fr;
+    }
 
     .info {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
+    }
+
+    .caption {
+        color: var(--text2);
+        font-size: 14px;
+        padding-left: 14px;
+        font-weight: 600;
     }
 `
 
-const Profile = ({ themeTitleStyles }) => {
-    const { user, changeUsername, changeAvatar } = useUserProfile()
+const Profile = () => {
+    const { user, changeUsername, changeAvatar, changeSurname } = useUserProfile()
 
     const [usernameInputValue, setUsernameInputValue] = useState('')
+    const [surnameInputValue, setSurnameInputValue] = useState('')
 
     useEffect(() => {
         if (user) {
             setUsernameInputValue(user.first_name)
+            setSurnameInputValue(user.last_name)
         }
     }, [user])
 
@@ -34,12 +51,25 @@ const Profile = ({ themeTitleStyles }) => {
             <Avatar avatarURL={user?.photo_url} changeAvatar={changeAvatar} />
 
             <div className="info">
-                <div className={themeTitleStyles}>Твое имя</div>
+                <div className="caption">Имя</div>
                 <InputField
                     value={usernameInputValue}
                     onChange={(event) => setUsernameInputValue(event.target.value)}
-                    showSaveButton={user && usernameInputValue !== user?.first_name}
+                    showSaveButton={
+                        user &&
+                        usernameInputValue &&
+                        usernameInputValue !== user?.first_name
+                    }
                     onSave={changeUsername}
+                />
+                <div className="caption">Фамилия</div>
+                <InputField
+                    value={surnameInputValue}
+                    onChange={(event) => setSurnameInputValue(event.target.value)}
+                    showSaveButton={
+                        user && surnameInputValue && surnameInputValue !== user?.last_name
+                    }
+                    onSave={changeSurname}
                 />
             </div>
         </div>

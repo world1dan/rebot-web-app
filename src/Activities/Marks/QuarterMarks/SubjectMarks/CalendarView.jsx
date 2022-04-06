@@ -50,7 +50,7 @@ const CalendarView = ({ marks, subject }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const generator = (month, day) => {
-        if (month >= 5 && month < 7) return {}
+        if (month >= 5 && month < 8) return {}
 
         const date = new Date(2022, month, day)
         const weekDay = date.getDay()

@@ -32,7 +32,7 @@ button {
     --tab-bar-height: 46px;
     --save-height: calc(100vh - var(--tab-bar-height) - env(safe-area-inset-bottom));
 
-    @media not all and (min-resolution: 0.001dpcm) {
+    @supports (height: 100svh) {
         --save-height: calc(100svh - var(--tab-bar-height) - env(safe-area-inset-bottom));
     }
 }
@@ -40,8 +40,16 @@ button {
 body,
 html,
 #root {
-    background-color: var(--bg1);
     height: 100%;
     margin: 0;
     overflow: hidden;
+}
+
+body {
+    background-color: var(--bg1);
+    transition: background 0.3s;
+
+    &.unfocused {
+        background-color: var(--theme-color-when-unfocused);
+    }
 }

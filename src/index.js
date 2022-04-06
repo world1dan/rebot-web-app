@@ -14,6 +14,8 @@ import App from './App'
 import Login from './Activities/Login'
 import FatalError from './Activities/FatalError'
 
+import analyticsEvent from './Utils/analyticsEvent'
+
 window.ios =
     /iPad|iPhone/.test(navigator.platform) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
@@ -76,9 +78,16 @@ class ErrorInterceptor extends Component {
         }
     }
 
-    componentDidCatch() {
+    componentDidCatch(error, errorInfo) {
         this.setState({
             error: true,
+        })
+        analyticsEvent({
+            type: 'FATAL_ERROR',
+            error,
+            errorInfo,
+            username: config.user.first_name ?? null,
+            UUID: config.user.id,
         })
     }
 

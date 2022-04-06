@@ -1,22 +1,23 @@
+import { useState, useRef } from 'react'
 import { css } from '@linaria/core'
 
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 
-import { useState, useRef } from 'react'
 import ModalPortal from '../ModalPortal'
 import Loading from '../Loading'
 import CloseButton from './CloseButton'
+import ToolBar from './ToolBar'
 
 const styles = css`
     position: fixed;
     height: 100vh;
 
-    @supports (-webkit-touch-callout: none) {
+    @supports (height: 100svh) {
         height: 100svh;
     }
-    backdrop-filter: blur(8px) brightness(0.4);
-    -webkit-backdrop-filter: blur(8px) brightness(0.4);
 
+    backdrop-filter: blur(8px) brightness(calc(var(--reduced-brightness) - 0.2));
+    -webkit-backdrop-filter: blur(8px) brightness(calc(var(--reduced-brightness) - 0.2));
     display: grid;
     place-items: center;
     z-index: 999;
@@ -52,11 +53,15 @@ const styles = css`
 
     .image {
         min-height: 100px;
+        max-height: 100vh;
+        object-fit: contain;
         width: 100%;
 
-        max-height: calc(100vw * 1.5);
-        object-fit: contain;
+        @supports (max-height: 100svh) {
+            max-height: 100svh;
+        }
     }
+
     .container {
         width: 100vw;
         height: 100vh;
@@ -65,7 +70,7 @@ const styles = css`
     }
 `
 
-const PhotoViewer = ({ URL, handleClose, children }) => {
+const PhotoViewer = ({ URL, handleClose, handleRemove, children }) => {
     const [show, setShow] = useState(false)
     const modal = useRef(null)
 
@@ -74,9 +79,10 @@ const PhotoViewer = ({ URL, handleClose, children }) => {
 
         modal.current.addEventListener('animationend', handleClose, { once: true })
     }
+
     return (
         <ModalPortal>
-            <TransformWrapper maxScale={3}>
+            <TransformWrapper maxScale={4}>
                 <div className={styles} ref={modal}>
                     <CloseButton onClick={closeModal} />
                     <TransformComponent
@@ -104,6 +110,7 @@ const PhotoViewer = ({ URL, handleClose, children }) => {
                             </div>
                         )}
                     </TransformComponent>
+                    <ToolBar PhotoURL={URL} handleRemove={handleRemove} />
                 </div>
             </TransformWrapper>
         </ModalPortal>

@@ -7,19 +7,21 @@ import Header from './Header'
 import ReshebaViewer from '../../Components/ReshebaViewer'
 import useLocalStorage from '../../Hooks/useLocalStorage'
 
-import './style.scss'
 import ScrollView from '../../Components/ScrollView'
+
+import './style.scss'
 
 const Search = () => {
     const manifest = useContext(manifestContext)
     const [solutions, setSolutions] = useLocalStorage('openned_solutions', [])
 
     const addSolution = (id, inputValue) => {
-        if (id === 'rus_lit' || id === 'bel_lit') {
+        if (id == 'rus_lit' || id == 'bel_lit') {
             const url = manifest[id].alt_url.replace(
                 '?',
                 inputValue.replace(/ *\([^)]*\) */g, '')
             )
+
             window.open(url, '_blank')
 
             return

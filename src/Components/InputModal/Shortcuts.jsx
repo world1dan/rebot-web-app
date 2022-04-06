@@ -1,6 +1,7 @@
 import { css } from '@linaria/core'
 import { motion } from 'framer-motion'
 
+import { memo } from 'react'
 import useLocalStorage from '../../Hooks/useLocalStorage'
 import PlusRounded from '../Icons/PlusRounded'
 
@@ -34,16 +35,13 @@ const Shortcuts = ({ insertIntoTextarea, focusOnTextarea }) => {
         'Упр',
         'Стр',
         'WB',
-        'треш',
     ])
 
     const removeShortcut = (targetSymbol) => {
         if (confirm('Удалить ' + targetSymbol + '?')) {
             setTimeout(() => {
                 setShortcuts((currentShortcuts) => {
-                    return currentShortcuts.filter(
-                        (symbol) => symbol !== targetSymbol
-                    )
+                    return currentShortcuts.filter((symbol) => symbol !== targetSymbol)
                 })
             }, 30)
         }
@@ -96,4 +94,4 @@ const Shortcuts = ({ insertIntoTextarea, focusOnTextarea }) => {
     )
 }
 
-export default Shortcuts
+export default memo(Shortcuts)

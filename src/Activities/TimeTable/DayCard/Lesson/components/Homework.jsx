@@ -1,5 +1,5 @@
 import { css } from '@linaria/core'
-import { useState } from 'react'
+import { useState, memo } from 'react'
 
 import InputModal from '../../../../../Components/InputModal'
 import AttachedLink from './AttachedLink'
@@ -16,6 +16,8 @@ const styles = css`
 
     font-size: 13px;
     font-weight: 600;
+    background-color: var(--bg3);
+    border-radius: 5px;
 
     .text-area {
         padding: 0 8px;
@@ -34,21 +36,31 @@ const styles = css`
             border-radius: 10px;
         }
     }
+
+    &.large {
+        height: 44px;
+
+        font-size: 15px;
+    }
 `
 
-const Homework = ({ lesson, path }) => {
+const Homework = ({ lesson, path, large }) => {
     const [editor, setEditior] = useState(false)
 
     return (
         <>
-            <div className={styles}>
+            <div className={styles + (large ? ' large' : '')}>
                 <div className="text-area" onClick={() => setEditior(true)}>
                     {lesson.hw}
                 </div>
 
                 {lesson.link && <AttachedLink URL={lesson.link} />}
                 {lesson.attachments?.length > 0 && (
-                    <AttachedPhoto URL={lesson.attachments[0]} />
+                    <AttachedPhoto
+                        URL={lesson.attachments[0]}
+                        lesson={lesson}
+                        path={path}
+                    />
                 )}
             </div>
             {editor && (

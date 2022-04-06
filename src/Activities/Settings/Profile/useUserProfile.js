@@ -10,21 +10,36 @@ const useUserProfile = () => {
     const userInfoDoc = useContext(ConfigContext).database.userInfo
     const user = useFirestoreListener(userInfoDoc)
 
-    const changeUsername = (newUsername) => {
-        console.log(newUsername)
+    const updateProfile = (updates) => {
         setDoc(
             userInfoDoc,
             {
-                first_name: newUsername,
+                ...updates,
             },
             { merge: true }
         )
     }
 
+    const changeUsername = (newUsername) => {
+        updateProfile({
+            first_name: newUsername,
+        })
+    }
+
+    const changeSurname = (newSurname) => {
+        updateProfile({
+            last_name: newSurname,
+        })
+    }
+
     const changeAvatar = useCallback(
         async (avatarFile) => {
+            if (avatarFile.size > 10000000) {
+                alert('Нельзя загрузить фото больше 10 мегабайт')
+                return
+            }
             const storage = getStorage()
-            const avatarRef = ref(storage, `avatars/${user.id + Date.now()}} `)
+            const avatarRef = ref(storage, `avatars/${user.id + Date.now()}`)
 
             await uploadBytes(avatarRef, avatarFile, {
                 cacheControl: 'public,max-age=864000',
@@ -43,7 +58,7 @@ const useUserProfile = () => {
         [user]
     )
 
-    return { user, changeUsername, changeAvatar }
+    return { user, changeUsername, changeSurname, changeAvatar }
 }
 
 export default useUserProfile

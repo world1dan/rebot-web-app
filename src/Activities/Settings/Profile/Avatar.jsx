@@ -1,17 +1,15 @@
-import { useId, useRef, useEffect } from 'react'
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useId } from 'react'
 import { css } from '@linaria/core'
-import useEventListener from '../../../Hooks/useEventListener'
 
 const styles = css`
     padding: 4px;
-    box-shadow: 0 0 0 3px var(--indigo);
     border-radius: 50%;
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(0);
+    margin-top: 16px;
     -webkit-backdrop-filter: blur(0);
+
     .avatar {
         display: block;
         border-radius: 50%;
@@ -36,12 +34,7 @@ const styles = css`
         font-size: 10px;
         font-weight: 500;
         color: #fff;
-
         letter-spacing: -0.3px;
-    }
-
-    .hidden-input {
-        display: none;
     }
 `
 
@@ -63,9 +56,10 @@ const Avatar = ({ avatarURL, changeAvatar }) => {
             <label className="edit-avatar" htmlFor={inputID}>
                 Изменить
             </label>
+
             <input
+                hidden
                 onChange={handleAvatarInputChange}
-                className="hidden-input"
                 id={inputID}
                 type="file"
                 accept="image/x-png,image/gif,image/jpeg"

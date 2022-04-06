@@ -3,7 +3,7 @@ import { updateDoc } from 'firebase/firestore'
 
 import { ConfigContext } from '../../../../Context'
 
-import { getStorage, uploadBytes, getDownloadURL, ref } from 'firebase/storage'
+import { getStorage, ref, deleteObject } from 'firebase/storage'
 
 const useLessonController = (lesson, path) => {
     const config = useContext(ConfigContext)
@@ -33,8 +33,12 @@ const useLessonController = (lesson, path) => {
             [path + '.link']: url,
         })
     }
-
+    /*
     const setPhoto = async (photo) => {
+        if (photo.size > 10000000) {
+            alert('Нельзя загрузить фото больше 10 мегабайт')
+            return
+        }
         const storage = getStorage()
         const photoRef = ref(storage, `lessons-attachments/${Date.now()}`)
 
@@ -48,8 +52,31 @@ const useLessonController = (lesson, path) => {
             [path + '.attachments']: [attachmentURL],
         })
     }
+*/
+    const addPhotoAttachmentURL = (photoURL) => {
+        updateDoc(timetableDoc, {
+            [path + '.attachments']: [photoURL],
+        })
+    }
 
-    return { setHomework, setDanger, setLink, setPhoto }
+    const removePhotoAttachment = (photoURL) => {
+        const storage = getStorage()
+
+        const photoRef = ref(storage, photoURL)
+
+        updateDoc(timetableDoc, {
+            [path + '.attachments']: [],
+        })
+
+        deleteObject(photoRef)
+    }
+    return {
+        setHomework,
+        setDanger,
+        setLink,
+        addPhotoAttachmentURL,
+        removePhotoAttachment,
+    }
 }
 
 export default useLessonController

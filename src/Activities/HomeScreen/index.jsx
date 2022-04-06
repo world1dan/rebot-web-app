@@ -10,8 +10,10 @@ import Wraper from '../../Components/Wraper'
 import Notes from './Notes'
 import DaysCarousel from './DaysCarousel'
 
-import './style.scss'
 import ScrollView from '../../Components/ScrollView'
+import WhatsNew from './WhatsNew'
+
+import './style.scss'
 
 const shoudShowNow = () => {
     const hours = new Date().getHours()
@@ -48,6 +50,7 @@ const HomeScreen = () => {
                 <Header />
                 <div className="homescreen-layout">
                     <div className="side-left">
+                        <WhatsNew />
                         {timetable?.[2]?.[dayNum] && !isWeekEnded && showNow && (
                             <Now
                                 dayData={timetable[2][dayNum]}

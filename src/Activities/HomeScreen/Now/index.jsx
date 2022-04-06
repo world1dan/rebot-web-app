@@ -7,7 +7,7 @@ import useCurrentLessonNum from './useCurrentLessonNum'
 
 import TimeLeft from './TimeLeft'
 import Marks from './Marks'
-import Homework from './Homework'
+import Homework from '../../TimeTable/DayCard/Lesson/components/Homework'
 import LessonTools from './LessonTools'
 
 import './style.scss'
@@ -69,7 +69,7 @@ const Now = ({ dayData, pathToDay }) => {
                             <h3 className="subject-title">
                                 {subject.full_title || subject.title}
                             </h3>
-                            <Homework path={path} lesson={lesson} />
+                            <Homework path={path} lesson={lesson} large />
                         </div>
 
                         <TimeLeft

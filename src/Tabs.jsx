@@ -16,6 +16,7 @@ const tabStyles = css`
     height: 100%;
     transition-property: transform, background-color, border-radius;
     transition-duration: 0.4s;
+    background-color: var(--bg1);
 
     @media (max-width: 700px) {
         &.unfocused {
@@ -34,16 +35,19 @@ const Tab = ({ children, isActive, keepMounted, themeColor }) => {
 
     const tabRef = useRef(null)
 
-    const unfocusTab = () => {
+    const unfocusTab = (themeColor) => {
+        changeThemeColor(themeColor ?? 'var(--theme-color-when-unfocused)')
+        document.body.classList.add('unfocused')
         setUnfocused(true)
     }
 
     const focusTab = () => {
         setUnfocused(false)
+        document.body.classList.remove('unfocused')
     }
 
-    if (isActive) {
-        changeThemeColor(!unfocused ? themeColor : 'var(--theme-color-when-unfocused)')
+    if (isActive && !unfocused) {
+        changeThemeColor(themeColor)
     }
 
     return (

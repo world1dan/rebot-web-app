@@ -1,3 +1,5 @@
+import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from '@linaria/core'
 import { analyzeQuarterMarks } from '../utils'
 
@@ -89,11 +91,15 @@ const Average = ({ marks }) => {
 
             <div className="average">
                 <div className="average-mark" style={styles}>
-                    {analyzed.averageOfQuarter?.toFixed(2)}
+                    {analyzed.averageOfQuarter?.toFixed(2) ?? (
+                        <FontAwesomeIcon
+                            icon={faCircleQuestion}
+                            className="no-gpa"
+                            color="var(--text2)"
+                        />
+                    )}
                 </div>
-                <div className="target">
-                    Цель: {analyzed.targetOfQuarter?.toFixed(2)}
-                </div>
+                <div className="target">Цель: {analyzed.targetOfQuarter?.toFixed(2)}</div>
             </div>
         </div>
     )

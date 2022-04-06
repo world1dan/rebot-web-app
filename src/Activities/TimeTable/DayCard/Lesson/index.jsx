@@ -1,7 +1,8 @@
 import { css } from '@linaria/core'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import { manifestContext } from '../../../../Context'
+
 import Homework from './components/Homework'
 import ImportantLessonAlert from './components/ImportantLessonAlert'
 import SubjectTitle from './components/SubjectTitle'

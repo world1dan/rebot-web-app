@@ -6,7 +6,7 @@ export default function useCurrentLessonNum() {
     const [currentLesson, setCurrentLesson] = useState(getCurrentLessonNum)
 
     useInterval(() => {
-        setCurrentLesson(getCurrentLessonNum())
+        setCurrentLesson(getCurrentLessonNum)
     }, 1000)
 
     return currentLesson

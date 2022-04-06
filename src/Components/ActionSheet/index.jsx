@@ -30,9 +30,9 @@ const ActionSheet = ({ onClose, children, bottomCloseBtn }) => {
                         <motion.div
                             className="ActionSheet"
                             drag="y"
-                            dragConstraints={{ top: 0 }}
+                            dragConstraints={{ top: 0, bottom: 0 }}
                             dragSnapToOrigin
-                            dragElastic={0.14}
+                            dragElastic={{ top: 0.14, bottom: 0.6 }}
                             style={{ y }}
                             exit={{
                                 y: 'calc(100% + 50px)',
@@ -49,7 +49,7 @@ const ActionSheet = ({ onClose, children, bottomCloseBtn }) => {
                             transition={{
                                 type: 'tween',
                                 ease: [0.38, 0.7, 0.125, 1],
-                                duration: 0.3,
+                                duration: 0.34,
                             }}
                             onDragEnd={(_e, { offset, velocity }) => {
                                 const swipe = swipePower(offset.y, velocity.y)

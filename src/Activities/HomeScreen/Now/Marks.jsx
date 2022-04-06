@@ -35,7 +35,7 @@ const Marks = ({ subject }) => {
 
     return (
         <div className={styles}>
-            <h5 className="block-title">ОЦЕНКИ</h5>
+            <h5 className="block-title">МОИ ОЦЕНКИ</h5>
             <SubjectMarks
                 marks={marks?.[subject.id] ?? []}
                 subject={subject}

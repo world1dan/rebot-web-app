@@ -1,9 +1,12 @@
-import { faImages } from '@fortawesome/free-solid-svg-icons'
-import { css } from '@linaria/core'
-import ContextMenu from '../../../../../Components/ContextMenu'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
+import { css } from '@linaria/core'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faImages } from '@fortawesome/free-solid-svg-icons'
+
 import PhotoViewer from '../../../../../Components/PhotoViewer'
+import useLessonController from '../useLessonController'
+
 const styles = css`
     display: flex;
     align-items: center;
@@ -17,15 +20,21 @@ const styles = css`
         color: var(--red);
     }
 `
-const AttachedPhoto = ({ URL }) => {
+const AttachedPhoto = ({ URL, lesson, path }) => {
     const [photoViewer, setPhotoViewer] = useState(false)
+
+    const { removePhotoAttachment } = useLessonController(lesson, path)
     return (
         <>
             <button className={styles} onClick={() => setPhotoViewer(true)}>
                 <FontAwesomeIcon icon={faImages} />
             </button>
             {photoViewer && (
-                <PhotoViewer URL={URL} handleClose={() => setPhotoViewer(false)} />
+                <PhotoViewer
+                    URL={URL}
+                    handleClose={() => setPhotoViewer(false)}
+                    handleRemove={removePhotoAttachment}
+                />
             )}
         </>
     )

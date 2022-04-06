@@ -5,32 +5,28 @@ import AddPhoto from './AddPhoto'
 
 const styles = css`
     display: flex;
-
+    justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
 
     .subject {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        place-items: center;
+        padding: 0 8px;
         height: 40px;
-        padding: 0 40px;
+        flex-grow: 1;
         font-weight: bold;
         font-size: 15px;
         border-radius: 7px;
         color: #fff;
-
+        max-width: 200px;
         margin-left: 0;
         margin-right: auto;
     }
-
-    @media (max-width: 360px) {
-        gap: 8px;
-        flex-wrap: wrap;
-    }
 `
 
-const Header = ({ subject, setLink, lesson, setPhoto }) => {
+const Header = ({ subject, setLink, lesson, addPhotoAttachmentURL }) => {
     return (
         <header className={styles}>
             <div
@@ -40,7 +36,7 @@ const Header = ({ subject, setLink, lesson, setPhoto }) => {
                 {subject.full_title || subject.title}
             </div>
             <AddLink setLink={setLink} currentLink={lesson.link} />
-            <AddPhoto setPhoto={setPhoto} />
+            <AddPhoto addPhotoAttachmentURL={addPhotoAttachmentURL} />
         </header>
     )
 }

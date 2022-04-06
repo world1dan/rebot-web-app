@@ -1,6 +1,4 @@
 const ANALYTICS_URL = 'https://world1dan.pythonanywhere.com/report'
-const ANALYTICS =
-    'https://rebot-f643e-default-rtdb.europe-west1.firebasedatabase.app/analytics/'
 
 export default function analyticsEvent(payload = {}) {
     if (process.env.NODE_ENV !== 'development') {

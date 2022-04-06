@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
@@ -10,6 +11,7 @@ const stylis = require('stylis')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 stylis.set({ prefix: false })
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { generate } = require('build-number-generator')
 
 module.exports = (env) => {
     const plugins = [
@@ -28,6 +30,9 @@ module.exports = (env) => {
             template: './src/index.html',
             inject: 'body',
             scriptLoading: 'blocking',
+        }),
+        new webpack.DefinePlugin({
+            VERSION: JSON.stringify(generate()),
         }),
     ]
 
@@ -132,6 +137,13 @@ module.exports = (env) => {
             },
             port: 4200,
             hot: true,
+
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+                'Access-Control-Allow-Headers':
+                    'X-Requested-With, content-type, Authorization',
+            },
         },
 
         plugins,

@@ -1,4 +1,11 @@
-import { useState, useRef, useEffect, useContext } from 'react'
+import {
+    useState,
+    useRef,
+    useEffect,
+    useContext,
+    useCallback,
+    startTransition,
+} from 'react'
 import { css } from '@linaria/core'
 
 import { manifestContext } from '../../Context'
@@ -55,7 +62,7 @@ const styles = css`
 
 const InputModal = ({ handleClose, lesson, path }) => {
     const manifest = useContext(manifestContext)
-    const subject = manifest[lesson.id]
+    const subject = manifest[lesson.id] ?? {}
 
     const backdrop = useRef(null)
     const modal = useRef(null)
@@ -64,10 +71,8 @@ const InputModal = ({ handleClose, lesson, path }) => {
     const [value, setValue] = useState(lesson.hw ?? '')
     const [isVisible, setIsVisible] = useState(true)
 
-    const { setHomework, setLink, setDanger, setPhoto } = useLessonController(
-        lesson,
-        path
-    )
+    const { setHomework, setLink, setDanger, addPhotoAttachmentURL } =
+        useLessonController(lesson, path)
 
     useEffect(() => {
         backdrop.current.animate([{ opacity: 0 }, { opacity: 1 }], {
@@ -91,9 +96,9 @@ const InputModal = ({ handleClose, lesson, path }) => {
         focusOnTextarea()
     }
 
-    const focusOnTextarea = () => {
+    const focusOnTextarea = useCallback(() => {
         textarea.current.focus()
-    }
+    }, [])
 
     const closeModal = () => {
         if (modal.current && backdrop.current) {
@@ -114,15 +119,15 @@ const InputModal = ({ handleClose, lesson, path }) => {
         setIsVisible(false)
     }
 
-    const insertIntoTextarea = (textToInsert) => {
+    const insertIntoTextarea = useCallback((textToInsert) => {
         const [start, end] = [
             textarea.current.selectionStart,
             textarea.current.selectionEnd,
         ]
 
-        const updatedValue = value.slice(0, start) + textToInsert + value.slice(end)
-
-        setValue(updatedValue)
+        setValue((value) => {
+            return value.slice(0, start) + textToInsert + value.slice(end)
+        })
 
         requestAnimationFrame(() => {
             textarea.current.setSelectionRange(
@@ -130,7 +135,7 @@ const InputModal = ({ handleClose, lesson, path }) => {
                 end + textToInsert.length
             )
         })
-    }
+    }, [])
 
     return (
         <BackdropL active={true} ref={backdrop} onClick={isVisible ? closeModal : null}>
@@ -139,7 +144,7 @@ const InputModal = ({ handleClose, lesson, path }) => {
                     subject={subject}
                     setLink={setLink}
                     lesson={lesson}
-                    setPhoto={setPhoto}
+                    addPhotoAttachmentURL={addPhotoAttachmentURL}
                 />
 
                 <TextareaAutosize
@@ -150,10 +155,10 @@ const InputModal = ({ handleClose, lesson, path }) => {
                     onChange={handleChange}
                     spellCheck="false"
                     type="number"
-                    maxRows={6}
+                    maxRows={3}
                     onFocus={(e) => {
                         setTimeout(() => {
-                            e.target.style.caretColor = subject.color
+                            e.target.style.caretColor = subject.color ?? 'var(--text)'
                         }, 380)
                     }}
                 />

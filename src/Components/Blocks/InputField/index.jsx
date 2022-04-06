@@ -19,6 +19,7 @@ const styles = css`
         padding: 8px;
         font-weight: 600;
         flex-grow: 1;
+        width: 100%;
     }
 
     .save-button {

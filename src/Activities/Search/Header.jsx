@@ -86,7 +86,7 @@ const Header = ({ addSolution }) => {
                             key={subjID}
                             style={{ background: subject.color }}
                             onClick={() => setSearchMode(subjID)}
-                            whileTap={{ scale: 0.9 }}
+                            whileTap={{ scale: 0.94 }}
                         >
                             {subject.title}
                         </motion.button>

@@ -79,7 +79,7 @@ const LessonInfo = ({ lesson, path, subject, handleClose }) => {
 
     const marksAll = useContext(MarksContext)
     const marks = marksAll?.[isMath ? 'math' : lesson.id] ?? []
-    const markTarget = marksAll['marksTargets']?.[lesson.id]
+    const markTarget = marksAll?.['marksTargets']?.[lesson.id]
 
     return (
         <SheetView handleClose={handleClose}>
@@ -88,7 +88,9 @@ const LessonInfo = ({ lesson, path, subject, handleClose }) => {
                 <Title>Домашнее задание</Title>
                 <InfoBlock>
                     <div className="homework-view" onClick={() => setIsEditing(true)}>
-                        {lesson.hw ?? (
+                        {lesson.hw ? (
+                            lesson.hw
+                        ) : (
                             <span className="no-hw">Нажми чтобы записать..</span>
                         )}
                     </div>

@@ -20,6 +20,8 @@ const styles = css`
     }
 
     .link-preview {
+        display: flex;
+        align-items: center;
         width: 200px;
         height: 40px;
         overflow-x: auto;
@@ -32,7 +34,7 @@ const styles = css`
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: var(--bg4);
+            background-color: var(--bg2);
             border-radius: 10px;
         }
     }

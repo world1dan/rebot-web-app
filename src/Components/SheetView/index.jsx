@@ -2,8 +2,6 @@ import { useRef, useState, useEffect, useContext } from 'react'
 import { styled } from '@linaria/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { changeThemeColor } from '../../Utils/changeThemeColor'
-
 import ModalPortal from '../ModalPortal'
 import Backdrop from '../Backdrop'
 import CloseBtn from './CloseBtn'
@@ -54,7 +52,7 @@ const Sheet = styled(motion.div)`
 const SheetView = ({ children, handleClose, type = {}, background }) => {
     const [isVisible, setIsVisible] = useState(true)
     const ref = useRef(null)
-    const prevThemeColor = useRef()
+
     const { focusTab, unfocusTab } = useContext(TabContext)
 
     const closeSheet = () => setIsVisible(false)
@@ -66,20 +64,10 @@ const SheetView = ({ children, handleClose, type = {}, background }) => {
                 easing: 'ease-in',
                 fill: 'forwards',
             })
-            if (type.fullHeightOnMobile) {
-                changeThemeColor(prevThemeColor.current)
-            }
 
             focusTab()
         } else {
-            unfocusTab()
-
-            if (type.fullHeightOnMobile) {
-                const meta = document.querySelector('meta[name=theme-color]')
-                prevThemeColor.current = meta.content
-
-                changeThemeColor('var(--bg1)' ?? 'var(--bg2)')
-            }
+            unfocusTab(background ?? 'var(--bg2)')
         }
     }, [isVisible])
 

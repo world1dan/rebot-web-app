@@ -9,6 +9,7 @@ import { doc } from 'firebase/firestore'
 import { firestore } from '../../../../../Context'
 import History from '../../History'
 import { css } from '@linaria/core'
+import UserInfo from './UserInfo'
 
 const styles = css`
     > div,
@@ -18,23 +19,9 @@ const styles = css`
 `
 
 const styles2 = css`
-    padding-top: 60px;
-
-    .avatar {
-        z-index: -1;
-        position: absolute;
-        pointer-events: all;
-        left: 0;
-        right: 0;
-        top: 0;
-        height: 500px;
-
-        background-size: cover !important;
-        background-repeat: no-repeat !important;
-        background-position: bottom !important;
-
-        border-radius: 13px 13px 0 0;
-    }
+    border-radius: 13px 13px 0 0;
+    overflow: hidden;
+    position: relative;
 `
 
 const UserMarks = ({ handleClose, userInfo, user, readOnly }) => {
@@ -62,14 +49,9 @@ const UserMarks = ({ handleClose, userInfo, user, readOnly }) => {
                 background="var(--bg1)"
             >
                 <div className={styles2}>
-                    <div
-                        style={{
-                            background: `linear-gradient(to bottom, var(--marks-user-avatars-gradient), var(--bg1)), url(${userInfo.photo_url})`,
-                        }}
-                        className="avatar"
-                    />
                     <VerticalLayout>
-                        <H1 text={userInfo?.first_name} />
+                        <UserInfo user={userInfo} />
+
                         <SegmentedControl
                             onChange={setCurrentTab}
                             activeItem={currentTab}

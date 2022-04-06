@@ -25,10 +25,10 @@ const App = ({ config }) => {
             UA: navigator.userAgent,
         })
 
-        window.addEventListener('error', (e) => {
+        window.addEventListener('error', (event) => {
             analyticsEvent({
                 type: 'app-error',
-                error: e.message,
+                error: `${event.type}: ${event.message}`,
                 username: config.user.first_name ?? null,
                 UUID: config.user.id,
             })

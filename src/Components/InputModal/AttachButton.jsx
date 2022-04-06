@@ -1,6 +1,8 @@
 import { css } from '@linaria/core'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { motion } from 'framer-motion'
 
 import PlusRounded from '../Icons/PlusRounded'
 
@@ -15,21 +17,25 @@ const styles = css`
     padding: 0 10px;
     font-size: 17px;
     max-width: 180px;
-    gap: 10px;
 `
 
-const AttachButton = ({ icon, attachedObjectInfo, onClick }) => {
+const AttachButton = ({ icon, isAlreadyAttached, onClick }) => {
     return (
-        <button className={styles} onClick={onClick}>
-            {attachedObjectInfo ? (
+        <motion.button
+            className={styles}
+            onClick={onClick}
+            whileTap={{
+                scale: 0.9,
+                filter: 'brightness(1.2)',
+            }}
+        >
+            {isAlreadyAttached ? (
                 <FontAwesomeIcon icon={faPen} />
             ) : (
                 <PlusRounded width={18} height={18} />
             )}
-
-            {attachedObjectInfo}
             {icon}
-        </button>
+        </motion.button>
     )
 }
 

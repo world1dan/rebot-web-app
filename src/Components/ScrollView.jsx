@@ -13,7 +13,7 @@ const styles = css`
     width: 100%;
 
     @media (max-width: 360px) {
-        padding: 0 8px;
+        padding: 14px 0;
     }
 
     &.withoutPaddings {

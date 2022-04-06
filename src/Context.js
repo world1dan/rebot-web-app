@@ -1,5 +1,4 @@
 import { createContext } from 'react'
-import { connectStorageEmulator, getStorage } from 'firebase/storage'
 
 import { initializeApp } from 'firebase/app'
 import {
@@ -7,6 +6,8 @@ import {
     disableNetwork,
     enableIndexedDbPersistence,
 } from 'firebase/firestore'
+
+import { getStorage, connectStorageEmulator } from 'firebase/storage'
 
 export const firebaseApp = initializeApp({
     apiKey: 'AIzaSyAkNpqlq9hU_cDu1_4wQIBNNc9OJd4LT1g',
@@ -19,9 +20,6 @@ export const firestore = getFirestore()
 
 enableIndexedDbPersistence(firestore, { forceOwnership: true })
 
-export const storage = getStorage()
-
-//connectStorageEmulator(storage, 'localhost', 9199)
 export const manifestContext = createContext(null)
 export const ConfigContext = createContext(null)
 export const TimeTableContext = createContext(null)
@@ -29,4 +27,7 @@ export const MarksContext = createContext(null)
 
 if (process.env.NODE_ENV == 'development') {
     disableNetwork(firestore)
+
+    const storage = getStorage()
+    connectStorageEmulator(storage, 'localhost', 9199)
 }
