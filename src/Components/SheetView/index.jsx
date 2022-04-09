@@ -67,7 +67,11 @@ const SheetView = ({ children, handleClose, type = {}, background }) => {
 
             focusTab()
         } else {
-            unfocusTab(background ?? 'var(--bg2)')
+            if (type.fullHeightOnMobile) {
+                unfocusTab(background ?? 'var(--bg1)')
+            } else {
+                unfocusTab()
+            }
         }
     }, [isVisible])
 

@@ -47,9 +47,9 @@ html,
 
 body {
     background-color: var(--bg1);
-    transition: background 0.3s;
 
     &.unfocused {
         background-color: var(--theme-color-when-unfocused);
+        transition: background 0.3s;
     }
 }
