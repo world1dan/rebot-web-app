@@ -14,10 +14,13 @@ module.exports = {
         ecmaVersion: 12,
         sourceType: 'module',
     },
+
     plugins: ['react'],
     rules: {
-        indent: ['none', 4],
+        indent: 1,
         'linebreak-style': ['error', 'windows'],
         semi: ['warn', 'never'],
+        'react/react-in-jsx-scope': 'off',
+        'react/prop-types': 'off',
     },
 }

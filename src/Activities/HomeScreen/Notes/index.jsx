@@ -4,7 +4,7 @@ import { addDoc } from 'firebase/firestore'
 
 import { ConfigContext } from '../../../Context'
 
-import useCollectionListener from '../../../Hooks/useCollectionListener'
+import useCollectionListener from '../../../Hooks/Firebase/useCollectionListener'
 import Card from '../../../Components/Blocks/Card'
 import Note from './Note'
 import AddSquare from '../../../Components/Icons/AddSquare'
@@ -41,13 +41,7 @@ const Notes = () => {
             </motion.button>
             <div className="content">
                 {notesCollection.map((doc) => {
-                    return (
-                        <Note
-                            docRef={doc.ref}
-                            key={doc.id}
-                            noteData={doc.data()}
-                        />
-                    )
+                    return <Note docRef={doc.ref} key={doc.id} noteData={doc.data()} />
                 })}
             </div>
         </Card>

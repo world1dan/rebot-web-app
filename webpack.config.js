@@ -33,6 +33,9 @@ module.exports = (env) => {
         }),
         new webpack.DefinePlugin({
             VERSION: JSON.stringify(generate()),
+            'process.env.NODE_ENV': JSON.stringify(
+                env.production ? 'production' : 'development'
+            ),
         }),
     ]
 
@@ -68,23 +71,14 @@ module.exports = (env) => {
                     ],
                 },
                 {
-                    test: /\.(js|jsx)?$/,
+                    test: /\.(js|jsx|ts|tsx)?$/,
                     exclude: /node_modules/,
                     use: [
-                        {
-                            loader: require.resolve('babel-loader'),
-                            options: {
-                                plugins: [
-                                    !env.production &&
-                                        require.resolve('react-refresh/babel'),
-                                ].filter(Boolean),
-                            },
-                        },
-
+                        'babel-loader',
                         {
                             loader: '@linaria/webpack-loader',
                             options: {
-                                sourceMap: process.env.NODE_ENV !== 'production',
+                                sourceMap: false,
                             },
                         },
                     ],
@@ -93,16 +87,7 @@ module.exports = (env) => {
         },
 
         resolve: {
-            extensions: ['.js', '.jsx'],
-            alias: {
-                Components: path.resolve(__dirname, 'src/Components/'),
-                Activities: path.resolve(__dirname, 'src/Activities/'),
-                Screens: path.resolve(__dirname, 'src/Screens/'),
-                Hooks: path.resolve(__dirname, 'src/Hooks/'),
-                Context: path.resolve(__dirname, 'src/Context'),
-                Utils: path.resolve(__dirname, 'src/Utils'),
-                react: path.resolve('./node_modules/react'),
-            },
+            extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
 
         output: {
@@ -127,23 +112,12 @@ module.exports = (env) => {
 
         devtool: 'source-map',
 
-        stats: {
-            children: false,
-        },
-
         devServer: {
             static: {
                 directory: path.resolve(__dirname, 'dist'),
             },
             port: 4200,
             hot: true,
-
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-                'Access-Control-Allow-Headers':
-                    'X-Requested-With, content-type, Authorization',
-            },
         },
 
         plugins,

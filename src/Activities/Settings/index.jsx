@@ -86,6 +86,8 @@ const Settings = () => {
                     { title: 'Авто', id: 'auto' },
                     { title: 'Темная', id: 'dark' },
                     { title: 'Светлая', id: 'light' },
+                    { title: 'Зеленая', id: 'green' },
+                    { title: 'Синяя', id: 'blue' },
                 ]}
             />
             <Switch

@@ -7,8 +7,10 @@ import ToolButton from './ToolButton'
 
 const styles = css`
     background: var(--bg2-translucent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(6px);
+
+    backdrop-filter: var(--ultra-thin-material);
+    -webkit-backdrop-filter: var(--ultra-thin-material);
+
     border-top: 1px var(--borders) solid;
     box-sizing: border-box;
 

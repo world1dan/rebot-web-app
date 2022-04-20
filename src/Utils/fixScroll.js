@@ -1,13 +1,10 @@
 export default function fixScroll(target) {
-    const onScroll = (e) => {
-        const element = e.currentTarget
+    const onScroll = (event) => {
+        const element = event.currentTarget
 
         if (element.scrollTop == 0) {
             element.scrollTop = 1
-        } else if (
-            element.scrollHeight - element.scrollTop ==
-            element.clientHeight
-        ) {
+        } else if (element.scrollHeight - element.scrollTop == element.clientHeight) {
             element.scrollTop = element.scrollTop - 1
         }
     }

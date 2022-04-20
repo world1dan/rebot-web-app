@@ -29,6 +29,7 @@ const styles = css`
     .username,
     .subject {
         font-size: 14px;
+        overflow: auto;
     }
 
     .date {

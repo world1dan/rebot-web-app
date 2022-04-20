@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { css } from '@linaria/core'
 import fixScroll from '../Utils/fixScroll'
+import getPlatform from '../Utils/getPlatform'
 
 const styles = css`
     overflow-y: overlay;
@@ -33,7 +34,9 @@ const ScrollView = ({ children, className, withoutPaddings }) => {
     const ref = useRef(null)
 
     useEffect(() => {
-        if (window.ios) {
+        const platform = getPlatform()
+
+        if (platform == 'ios') {
             fixScroll(ref.current)
         }
     }, [])

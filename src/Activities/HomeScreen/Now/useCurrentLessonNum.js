@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import useInterval from '../../../Hooks/useInterval'
+import useInterval from '../../../Hooks/useInterval.ts'
 import { getCurrentLessonNum } from './utils'
 
 export default function useCurrentLessonNum() {

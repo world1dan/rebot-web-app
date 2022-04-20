@@ -4,7 +4,7 @@ import { setDoc } from 'firebase/firestore'
 import { getStorage, ref, getDownloadURL, uploadBytes } from 'firebase/storage'
 
 import { ConfigContext } from '../../../Context'
-import useFirestoreListener from '../../../Hooks/useFirestoreListener'
+import useFirestoreListener from '../../../Hooks/Firebase/useDocumentListener'
 
 const useUserProfile = () => {
     const userInfoDoc = useContext(ConfigContext).database.userInfo

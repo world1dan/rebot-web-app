@@ -4,7 +4,7 @@ import { css } from '@linaria/core'
 import { getStorage, ref } from 'firebase/storage'
 
 import { useId, useRef } from 'react'
-import useFirebaseStorage from '../../Hooks/useFirebaseStorage'
+import useFirebaseStorage from '../../Hooks/Firebase/useFirebaseStorage'
 
 import AttachButton from './AttachButton'
 

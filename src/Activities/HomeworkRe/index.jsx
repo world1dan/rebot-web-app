@@ -27,7 +27,7 @@ const HomeworkRe = (props) => {
                     .split(' ')
                     .filter((v) => v !== '')[0]
 
-                return parseInt(num)
+                return parseInt(num.includes('.') ? num.split('.')[1] : num)
             })
 
         groups.push(

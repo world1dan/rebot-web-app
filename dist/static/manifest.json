@@ -6,7 +6,6 @@
     "start_url": "/",
     "name": "Дневник",
     "short_name": "Дневник",
-    "description": "Дневник",
     "icons": [
         {
             "src": "icons/manifest-icon-192.maskable.png",

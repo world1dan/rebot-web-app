@@ -2,6 +2,7 @@ import { useRef, useEffect } from 'react'
 import { css } from '@linaria/core'
 
 import fixScroll from '../Utils/fixScroll'
+import getPlatform from '../Utils/getPlatform'
 
 const styles = css`
     height: 100%;
@@ -23,11 +24,13 @@ const styles = css`
     }
 `
 
-const VScroll = ({ children, disableOverscrollContain }) => {
+const VScroll = ({ children }) => {
     const ref = useRef(null)
 
     useEffect(() => {
-        if (window.ios && !disableOverscrollContain) {
+        const platform = getPlatform()
+
+        if (platform == 'ios') {
             fixScroll(ref.current)
         }
     }, [])

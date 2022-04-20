@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import useInterval from './useInterval'
+import useInterval from './useInterval.ts'
 
 const getWeekDay = () => {
-    const date = new Date()
-    const dayNum = date.getDay()
+    const dayNum = new Date().getDay()
     const isWeekend = dayNum == 0 || dayNum == 6
 
     return {

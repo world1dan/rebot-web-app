@@ -2,7 +2,7 @@ import { css } from '@linaria/core'
 import { useState } from 'react'
 
 import { motion } from 'framer-motion'
-import useInterval from '../../../../Hooks/useInterval'
+import useInterval from '../../../../Hooks/useInterval.ts'
 
 const styles = css`
     display: flex;

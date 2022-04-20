@@ -2,7 +2,7 @@ import { memo, useContext, useState } from 'react'
 
 import { TimeTableContext } from '../../Context'
 import useWeekDay from '../../Hooks/useWeekDay'
-import useInterval from '../../Hooks/useInterval'
+import useInterval from '../../Hooks/useInterval.ts'
 
 import Header from './Header'
 import Now from './Now'
@@ -11,7 +11,6 @@ import Notes from './Notes'
 import DaysCarousel from './DaysCarousel'
 
 import ScrollView from '../../Components/ScrollView'
-import WhatsNew from './WhatsNew'
 
 import './style.scss'
 
@@ -50,7 +49,6 @@ const HomeScreen = () => {
                 <Header />
                 <div className="homescreen-layout">
                     <div className="side-left">
-                        <WhatsNew />
                         {timetable?.[2]?.[dayNum] && !isWeekEnded && showNow && (
                             <Now
                                 dayData={timetable[2][dayNum]}

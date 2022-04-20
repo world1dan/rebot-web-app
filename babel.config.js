@@ -7,6 +7,7 @@ module.exports = (api) => {
 
     return {
         presets: [
+            '@babel/typescript',
             [
                 '@babel/preset-react',
                 {
@@ -16,6 +17,9 @@ module.exports = (api) => {
             ],
             '@linaria',
         ],
-        plugins: [inProduction && 'transform-react-remove-prop-types'].filter(Boolean),
+        plugins: [
+            inProduction && 'transform-react-remove-prop-types',
+            !inProduction && 'react-refresh/babel',
+        ].filter(Boolean),
     }
 }

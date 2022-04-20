@@ -10,6 +10,7 @@ import Week from './Activities/TimeTable/Week'
 import Search from './Activities/Search'
 import Marks from './Activities/Marks'
 import { changeThemeColor } from './Utils/changeThemeColor'
+import getPlatform from './Utils/getPlatform'
 
 const tabStyles = css`
     transform-origin: top;
@@ -76,6 +77,7 @@ const Tabs = ({ config }) => {
             ...config,
             setStatusBar,
             updateFounded,
+            platform: getPlatform(),
         }
     }, [config, updateFounded])
 

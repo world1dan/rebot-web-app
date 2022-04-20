@@ -1,0 +1,74 @@
+.FatalError-wapper {
+    align-items: center;
+    display: flex;
+    height: 90%;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.FatalError {
+    @keyframes fatal-error-in {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    align-items: center;
+
+    animation: fatal-error-in 0.3s;
+    border-radius: 14px;
+    display: grid;
+    flex-grow: 1;
+    gap: 20px;
+    grid-template-rows: 60px 1fr;
+    justify-content: center;
+    padding: 12px;
+
+    svg {
+        color: #ed4336;
+        margin: 0 auto;
+    }
+
+    .descr {
+        text-align: center;
+
+        h1 {
+            font-size: 22px;
+        }
+
+        p {
+            color: var(--text2);
+            font-size: 16px;
+            font-weight: 600;
+            max-width: 300px;
+        }
+    }
+
+    .error-description {
+        background-color: var(--bg3);
+        border-radius: 7px;
+        color: var(--text2);
+        font-size: 15px;
+        max-height: 200px;
+        max-width: 300px;
+        overflow: auto;
+        padding: 10px;
+        -webkit-user-select: text;
+        user-select: text;
+    }
+
+    .reload {
+        background-color: var(--indigo);
+        border-radius: 7px;
+        box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        padding: 14px 60px;
+    }
+}

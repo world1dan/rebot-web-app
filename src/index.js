@@ -7,20 +7,13 @@ if (inversion && inversion == 'false') {
 
 import { firestore } from './Context'
 import { doc, collection } from 'firebase/firestore'
-import { Component } from 'react'
+
 import { createRoot } from 'react-dom/client'
 
+import analyticsEvent from './Utils/analyticsEvent'
+import ErrorBoundary from './Components/ErrorBoundary'
 import App from './App'
 import Login from './Activities/Login'
-import FatalError from './Activities/FatalError'
-
-import analyticsEvent from './Utils/analyticsEvent'
-
-window.ios =
-    /iPad|iPhone/.test(navigator.platform) ||
-    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-
-window.android = navigator.userAgent.toLowerCase().indexOf('android') > -1
 
 const getUserFromLocalStorage = () => {
     const userJSON = localStorage.getItem('user')
@@ -57,54 +50,35 @@ const UserProvider = () => {
 
     if (!user || !database) return <Login handleLogin={() => location.reload()} />
 
+    const handleError = (error, errorInfo) => {
+        const errorString = error.toString() + errorInfo.componentStack
+
+        analyticsEvent({
+            type: 'app-error',
+            error: errorString,
+            username: user.first_name ?? null,
+            UUID: user.id,
+        })
+    }
+
     return (
         user &&
         database && (
-            <App
-                config={{
-                    database,
-                    user,
-                }}
-            />
+            <ErrorBoundary onError={handleError}>
+                <App
+                    config={{
+                        database,
+                        user,
+                    }}
+                />
+            </ErrorBoundary>
         )
     )
 }
 
-class ErrorInterceptor extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            error: false,
-        }
-    }
-
-    componentDidCatch(error, errorInfo) {
-        this.setState({
-            error: true,
-        })
-        analyticsEvent({
-            type: 'FATAL_ERROR',
-            error,
-            errorInfo,
-            username: config.user.first_name ?? null,
-            UUID: config.user.id,
-        })
-    }
-
-    render() {
-        if (this.state.error) return <FatalError />
-
-        return this.props.children
-    }
-}
-
 const root = createRoot(document.getElementById('root'))
 
-root.render(
-    <ErrorInterceptor>
-        <UserProvider />
-    </ErrorInterceptor>
-)
+root.render(<UserProvider />)
 
 if (process.env.NODE_ENV == 'production' && navigator.serviceWorker) {
     navigator.serviceWorker.register('./sw.js')

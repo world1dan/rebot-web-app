@@ -1,18 +1,15 @@
 import { css } from '@linaria/core'
 
 const styles = css`
+    background: var(--bg4);
+    border-radius: 7px;
     display: grid;
     gap: 2px;
     grid-template-columns: 35px 1fr;
-    height: 46px;
-    box-shadow: 0 1.5px 0 0 var(--borders);
-    &:last-of-type {
-        box-shadow: none;
-    }
-    padding: 6px;
+    height: 42px;
+    padding: 4px;
     place-items: center;
-    min-width: 174px;
-
+    min-width: 164px;
     span {
         font-size: 14px;
         font-weight: 600;
@@ -20,13 +17,11 @@ const styles = css`
         text-align: left;
         width: 100%;
     }
-
     &:hover {
         filter: brightness(1.35);
         transition: filter 240ms;
     }
 `
-
 const ContextMenuBtn = ({ onClick, title, icon }) => {
     return (
         <button className={styles} onClick={onClick}>

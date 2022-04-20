@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { TimeTableContext, manifestContext, MarksContext } from './Context'
 
 import useSubjectsManifest from './Hooks/useSubjectsManifest'
-import useFirestoreListener from './Hooks/useFirestoreListener'
+import useDocumentListener from './Hooks/Firebase/useDocumentListener'
 import analyticsEvent from './Utils/analyticsEvent'
 import Loading from './Components/Loading'
 import Tabs from './Tabs'
@@ -12,8 +12,8 @@ import './colors.css'
 import './style.scss'
 
 const App = ({ config }) => {
-    const timetable = useFirestoreListener(config.database.timetable)
-    const marks = useFirestoreListener(config.database.marks)
+    const timetable = useDocumentListener(config.database.timetable)
+    const marks = useDocumentListener(config.database.marks)
 
     const manifest = useSubjectsManifest()
 
@@ -23,15 +23,6 @@ const App = ({ config }) => {
             username: config.user.first_name ?? null,
             UUID: config.user.id,
             UA: navigator.userAgent,
-        })
-
-        window.addEventListener('error', (event) => {
-            analyticsEvent({
-                type: 'app-error',
-                error: `${event.type}: ${event.message}`,
-                username: config.user.first_name ?? null,
-                UUID: config.user.id,
-            })
         })
     }, [])
 
