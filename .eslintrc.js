@@ -5,22 +5,33 @@ module.exports = {
         amd: true,
         node: true,
     },
-    ignorePatterns: ['dist/**', 'jsconfig.json'],
-    extends: ['eslint:recommended', 'plugin:react/recommended'],
+    root: true,
+    ignorePatterns: ['dist/**', 'tsconfig.json', '.eslintrc.js'],
+    parser: '@typescript-eslint/parser',
+
+    extends: [
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:react/jsx-runtime',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+    ],
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
         },
         ecmaVersion: 12,
         sourceType: 'module',
+        tsconfigRootDir: __dirname,
+        project: ['./tsconfig.json'],
     },
 
-    plugins: ['react'],
+    plugins: ['@typescript-eslint', 'prettier'],
     rules: {
-        indent: 1,
+        indent: ['error', 4, { SwitchCase: 1 }],
         'linebreak-style': ['error', 'windows'],
         semi: ['warn', 'never'],
-        'react/react-in-jsx-scope': 'off',
         'react/prop-types': 'off',
+        'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
     },
 }

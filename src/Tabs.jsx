@@ -2,14 +2,14 @@ import { useState, useMemo, createContext, useRef } from 'react'
 import { css } from '@linaria/core'
 
 import { ConfigContext } from './Context'
-
-import useServiceWorker from './Hooks/useServiceWorker'
-import TabBar from './Components/TabBar'
-import HomeScreen from './Activities/HomeScreen'
-import Week from './Activities/TimeTable/Week'
-import Search from './Activities/Search'
-import Marks from './Activities/Marks'
 import { changeThemeColor } from './Utils/changeThemeColor'
+
+import HomeScreen from './Activities/HomeScreen'
+import Marks from './Activities/Marks'
+import Search from './Activities/Search'
+import Week from './Activities/TimeTable/Week'
+import TabBar from './Components/TabBar'
+import useServiceWorker from './Hooks/useServiceWorker'
 import getPlatform from './Utils/getPlatform'
 
 const tabStyles = css`

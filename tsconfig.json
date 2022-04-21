@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "outDir": "build",
+        "module": "esnext",
+        "target": "esnext",
+        "lib": ["dom", "ES2021"],
+        "sourceMap": true,
+        "allowJs": true,
+        "jsx": "react-jsx",
+        "declaration": true,
+        "moduleResolution": "node",
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "resolveJsonModule": true,
+        "noEmit": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "build", "rollup.config.js"],
+    "plugins": [
+        {
+            "name": "typescript-styled-plugin",
+            "validate": true
+        }
+    ]
+}

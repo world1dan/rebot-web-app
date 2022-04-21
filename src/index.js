@@ -1,3 +1,10 @@
+import './Beta/index'
+
+/*
+
+
+
+
 import './ColorScheme'
 const inversion = localStorage.getItem('inversion')
 
@@ -83,3 +90,4 @@ root.render(<UserProvider />)
 if (process.env.NODE_ENV == 'production' && navigator.serviceWorker) {
     navigator.serviceWorker.register('./sw.js')
 }
+*/

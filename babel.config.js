@@ -7,7 +7,7 @@ module.exports = (api) => {
 
     return {
         presets: [
-            '@babel/typescript',
+            '@babel/preset-typescript',
             [
                 '@babel/preset-react',
                 {

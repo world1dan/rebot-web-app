@@ -11,14 +11,11 @@ module.exports = {
         indentation: 4,
         'max-nesting-depth': 4,
         'function-parentheses-space-inside': 'never',
+        'selector-no-qualifying-type': false,
         'property-no-vendor-prefix': [
             true,
             {
-                ignoreProperties: [
-                    'user-select',
-                    'backdrop-filter',
-                    'text-size-adjust',
-                ],
+                ignoreProperties: ['user-select', 'backdrop-filter', 'text-size-adjust'],
             },
         ],
     },
