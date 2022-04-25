@@ -22,7 +22,7 @@
         "noEmit": true
     },
     "include": ["src"],
-    "exclude": ["node_modules", "build", "rollup.config.js"],
+    "exclude": ["node_modules", "dist", "webpack.config.js"],
     "plugins": [
         {
             "name": "typescript-styled-plugin",

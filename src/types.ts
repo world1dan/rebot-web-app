@@ -5,7 +5,7 @@ export interface ISubject {
     url?: string
     alt_url?: string
     color: CSSStyleDeclaration['background']
-    marks?: Boolean
+    marks?: boolean
 }
 
 export interface ISubjectsManifest {

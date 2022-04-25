@@ -1,20 +1,13 @@
 .homescreen-header {
     align-items: center;
     display: flex;
-    gap: 22px;
+
     margin: 0 auto;
     max-width: 1024px;
     /* stylelint-disable-next-line declaration-colon-newline-after */
-    padding: 6px max(env(safe-area-inset-right), 12px) 13px;
+    padding: 6px max(env(safe-area-inset-right), 12px) 16px;
 
     @media (min-width: 1024px) {
         margin-bottom: 10px;
-    }
-
-    .time {
-        flex-grow: 1;
-        font-size: 15px;
-        font-weight: 700;
-        text-align: center;
     }
 }

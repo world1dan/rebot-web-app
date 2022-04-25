@@ -6,7 +6,7 @@ const styles = css`
     color: var(--text1);
     background-color: var(--bg2);
     border-radius: 14px;
-
+    border: 1.5px var(--borders) solid;
     .table-btn {
         padding: 7px;
         position: absolute;

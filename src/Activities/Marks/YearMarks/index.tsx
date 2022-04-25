@@ -20,7 +20,7 @@ const YearMarks: FC<IYearMarksProps> = ({ yearMarksDoc, readOnly }) => {
 
     const marks = useFirestoreListener(yearMarksDoc)
 
-    const rows: ReactNode[] = [2]
+    const rows: ReactNode[] = []
 
     for (let subjID in manifest) {
         const subject = manifest[subjID]

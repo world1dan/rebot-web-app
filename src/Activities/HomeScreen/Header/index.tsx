@@ -2,7 +2,7 @@ import { useContext, useState, memo } from 'react'
 
 import { ConfigContext } from '../../../Context'
 
-import Time from './Time'
+import CurrentDay from './CurrentDay'
 import Settings from '../../Settings'
 import Gear from '../../../Components/Icons/Gear'
 import Rings from './Rings'
@@ -19,7 +19,7 @@ const Header = () => {
         <>
             <header className="homescreen-header">
                 <Rings />
-                <Time />
+                <CurrentDay />
 
                 {updateFounded && <NewUpdateAlert />}
 

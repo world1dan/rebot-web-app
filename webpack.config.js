@@ -5,18 +5,24 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const CssoWebpackPlugin = require('csso-webpack-plugin').default
 const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
-const stylis = require('stylis')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
-stylis.set({ prefix: false })
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const { generate } = require('build-number-generator')
 
-module.exports = (env) => {
+const stylis = require('stylis')
+stylis.set({ prefix: false })
+
+const getPlugins = (isProduction) => {
     const plugins = [
-        new MiniCssExtractPlugin({
-            filename: 'styles.css',
+        new webpack.ProgressPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(
+                isProduction ? 'production' : 'development'
+            ),
+        }),
+        new HtmlPlugin({
+            template: './src/index.html',
+            inject: 'body',
+            scriptLoading: 'blocking',
         }),
         new CopyPlugin({
             patterns: [
@@ -26,62 +32,48 @@ module.exports = (env) => {
                 },
             ],
         }),
-        new HtmlPlugin({
-            template: './src/index.html',
-            inject: 'body',
-            scriptLoading: 'blocking',
-        }),
-        new webpack.DefinePlugin({
-            VERSION: JSON.stringify(generate()),
-            'process.env.NODE_ENV': JSON.stringify(
-                env.production ? 'production' : 'development'
-            ),
+        new MiniCssExtractPlugin({
+            filename: 'styles.css',
         }),
     ]
 
-    if (env.production) {
-        plugins.push(
-            new BundleAnalyzerPlugin(),
-            new CssoWebpackPlugin(),
-            new CleanWebpackPlugin(),
-            new HTMLInlineCSSWebpackPlugin()
-        )
+    if (isProduction) {
+        plugins.push(new CleanWebpackPlugin(), new HTMLInlineCSSWebpackPlugin())
     } else {
         plugins.push(new ReactRefreshWebpackPlugin())
     }
 
+    return plugins
+}
+
+module.exports = (env) => {
+    const isProduction = env.production === true
+
     return {
         entry: './src/index.js',
+        output: {
+            filename: 'bundle.js',
+            path: path.resolve(__dirname, 'dist'),
+        },
+
+        plugins: getPlugins(isProduction),
 
         module: {
             rules: [
                 {
-                    test: /\.(scss|css)$/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                esModule: true,
-                            },
-                        },
-                        {
-                            loader: 'sass-loader',
-                        },
-                    ],
-                },
-                {
                     test: /\.(js|jsx|ts|tsx)?$/,
                     exclude: /node_modules/,
-                    use: [
-                        'babel-loader',
-                        {
-                            loader: '@linaria/webpack-loader',
-                            options: {
-                                sourceMap: false,
-                            },
-                        },
-                    ],
+                    use: ['babel-loader', '@linaria/webpack-loader'],
+                },
+                {
+                    test: /\.(scss|css)$/,
+                    exclude: /node_modules/,
+                    use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                },
+                {
+                    test: /\.svg$/,
+                    exclude: /node_modules/,
+                    use: ['svg-url-loader', 'svgo-loader'],
                 },
             ],
         },
@@ -90,13 +82,8 @@ module.exports = (env) => {
             extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
 
-        output: {
-            filename: 'bundle.js',
-            path: path.resolve(__dirname, 'dist'),
-        },
-
         optimization: {
-            minimize: env.production,
+            minimize: isProduction,
             minimizer: [
                 new TerserPlugin({
                     minify: TerserPlugin.uglifyJsMinify,
@@ -110,16 +97,13 @@ module.exports = (env) => {
             ],
         },
 
-        devtool: 'source-map',
+        devtool: false,
 
         devServer: {
+            port: 4200,
             static: {
                 directory: path.resolve(__dirname, 'dist'),
             },
-            port: 4200,
-            hot: true,
         },
-
-        plugins,
     }
 }

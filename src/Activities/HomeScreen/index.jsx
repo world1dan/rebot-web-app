@@ -37,6 +37,7 @@ const HomeScreen = () => {
     } else if (hours >= 15) {
         if (dayNum == 5) {
             dayNum = 1
+
             isWeekEnded = true
         } else {
             dayNum += 1

@@ -6,7 +6,13 @@ module.exports = {
         node: true,
     },
     root: true,
-    ignorePatterns: ['dist/**', 'tsconfig.json', '.eslintrc.js'],
+    ignorePatterns: [
+        'dist/**',
+        'tsconfig.json',
+        '.eslintrc.js',
+        'webpack.config.js',
+        'babel.config.js',
+    ],
     parser: '@typescript-eslint/parser',
 
     extends: [
