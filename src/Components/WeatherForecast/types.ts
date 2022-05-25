@@ -1,10 +1,27 @@
-export interface Weather {
+export interface IWeatherForecast {
     cod: string
     message: number
     cnt: number
     list: WeatherCondition[]
     city: City
 }
+
+export interface ICurrentWeather {
+    coord: Coord
+    weather: WeatherEntity[]
+    base: string
+    main: Main
+    visibility: number
+    wind: Wind
+    clouds: Clouds
+    dt: number
+    sys: Sys
+    timezone: number
+    id: number
+    name: string
+    cod: number
+}
+
 export interface WeatherCondition {
     dt: number
     main: Main

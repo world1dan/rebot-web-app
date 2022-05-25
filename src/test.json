@@ -1,0 +1,695 @@
+{
+    "3": {
+        "2": {
+            "4": {
+                "2": {
+                    "id": "inform"
+                },
+                "3": {
+                    "id": "eng"
+                },
+                "groups": true,
+                "1": {
+                    "id": "eng"
+                }
+            },
+            "1": {
+                "id": "alg"
+            },
+            "3": {
+                "id": "fizra"
+            },
+            "7": {
+                "groups": true,
+                "2": {
+                    "id": "eng"
+                }
+            },
+            "6": {
+                "changedBy": "Даник",
+                "id": "phis",
+                "last_change": 1652434737967,
+                "danger": true,
+                "hw": "Лабораторная, Упр 29(2,3)"
+            },
+            "2": {
+                "changedBy": "Akir",
+                "last_change": 1652421532231,
+                "hw": "",
+                "danger": true,
+                "id": "him"
+            },
+            "5": {
+                "hw": "§27-30 обобщение ",
+                "id": "history_bel",
+                "last_change": 1652430032501,
+                "changedBy": "Даник"
+            }
+        },
+        "4": {
+            "4": {
+                "id": "rus"
+            },
+            "5": {
+                "changedBy": "Даник",
+                "hw": "Вариант 6(7,10), 8(5,10), 10(5,7)",
+                "id": "geom",
+                "last_change": 1652425379558
+            },
+            "3": {
+                "last_change": 1652340688389,
+                "id": "social",
+                "hw": "тетрадку можно ",
+                "changedBy": "Даник"
+            },
+            "1": {
+                "last_change": 1652344842754,
+                "changedBy": "Даник",
+                "hw": "Повесть Пожар В.Распутина прочитать ",
+                "id": "rus_lit"
+            },
+            "6": {
+                "id": "trud"
+            },
+            "2": {
+                "hw": "",
+                "changedBy": "Даник",
+                "last_change": 1652344992702,
+                "id": "geo"
+            }
+        },
+        "1": {
+            "3": {
+                "id": "history",
+                "last_change": 1652466218758,
+                "changedBy": "Даник",
+                "hw": "Таблица 4 страны (или нет)"
+            },
+            "4": {
+                "hw": "Вариант 6 сборника (1,4,5,6 и 8,9)",
+                "last_change": 1652458117107,
+                "id": "alg",
+                "changedBy": "Даник"
+            },
+            "7": {
+                "1": {
+                    "hw": "P103 ex 1a",
+                    "last_change": 1652458170106,
+                    "id": "eng",
+                    "changedBy": "Даник"
+                },
+                "groups": true
+            },
+            "2": {
+                "groups": true,
+                "3": {
+                    "id": "eng"
+                },
+                "1": {
+                    "id": "inform"
+                },
+                "2": {
+                    "changedBy": 939049807,
+                    "last_change": 1652258272167,
+                    "id": "eng",
+                    "hw": "Стр258 ez 1c"
+                }
+            },
+            "1": {
+                "id": "fizra",
+                "hw": "Пусть это суббота ",
+                "last_change": 1652458078470,
+                "changedBy": "Даник"
+            },
+            "5": {
+                "id": "bel",
+                "hw": "Ничего кажется ",
+                "changedBy": "Даник",
+                "last_change": 1652458128280
+            },
+            "6": {
+                "last_change": 1652466179365,
+                "hw": "Сочинение писать будем \"Таямницы балльных ялин\" или не будем ",
+                "changedBy": "Даник",
+                "id": "bel_lit"
+            }
+        },
+        "5": {
+            "7": {
+                "1": {
+                    "id": "class"
+                },
+                "3": {
+                    "id": "eng"
+                },
+                "2": {
+                    "id": "class"
+                },
+                "groups": true
+            },
+            "6": {
+                "id": "fizra"
+            },
+            "1": {
+                "id": "bel_lit"
+            },
+            "5": {
+                "id": "phis"
+            },
+            "4": {
+                "hw": "§39-46 обобщение,  таблица имён",
+                "last_change": 1652430052077,
+                "danger": true,
+                "id": "history",
+                "changedBy": "Даник"
+            },
+            "2": {
+                "id": "bio"
+            },
+            "3": {
+                "id": "geom"
+            }
+        },
+        "3": {
+            "2": {
+                "id": "rus"
+            },
+            "4": {
+                "groups": true,
+                "1": {
+                    "id": "eng"
+                },
+                "3": {
+                    "id": "inform"
+                },
+                "2": {
+                    "id": "eng"
+                }
+            },
+            "6": {
+                "danger": false,
+                "changedBy": "Даник",
+                "id": "him",
+                "hw": "",
+                "last_change": 1652162291250
+            },
+            "3": {
+                "id": "bel"
+            },
+            "1": {
+                "id": "alg"
+            },
+            "5": {
+                "id": "bio",
+                "last_change": 1652421543741,
+                "changedBy": "Akir",
+                "hw": "",
+                "danger": true
+            }
+        }
+    },
+    "2": {
+        "3": {
+            "3": {
+                "changedBy": "Даник",
+                "id": "bel",
+                "last_change": 1651846122661,
+                "hw": "256"
+            },
+            "5": {
+                "hw": "§47",
+                "changedBy": "Даник",
+                "id": "bio",
+                "last_change": 1651846114952
+            },
+            "2": {
+                "hw": "358, 357(2) на выбор, Повторить Гласные после шипящих и ц ",
+                "id": "rus",
+                "last_change": 1651739791534,
+                "changedBy": "Даник"
+            },
+            "6": {
+                "changedBy": "Даник",
+                "id": "him",
+                "last_change": 1652183654390,
+                "hw": ""
+            },
+            "4": {
+                "3": {
+                    "id": "inform"
+                },
+                "2": {
+                    "id": "eng"
+                },
+                "groups": true,
+                "1": {
+                    "hw": "WB p100 ex 2",
+                    "last_change": 1652172009985,
+                    "id": "eng",
+                    "changedBy": "Даник"
+                }
+            },
+            "1": {
+                "id": "alg"
+            }
+        },
+        "1": {
+            "3": {
+                "id": "history",
+                "hw": "🤥",
+                "changedBy": "Даник",
+                "last_change": 1651845905419
+            },
+            "5": {
+                "id": "bel"
+            },
+            "1": {
+                "id": "fizra"
+            },
+            "6": {
+                "changedBy": "Даник",
+                "last_change": 1651845908342,
+                "hw": "",
+                "id": "bel_lit",
+                "link": ""
+            },
+            "4": {
+                "id": "alg"
+            },
+            "2": {
+                "3": {
+                    "id": "eng"
+                },
+                "groups": true,
+                "2": {
+                    "id": "eng"
+                },
+                "1": {
+                    "id": "inform"
+                }
+            },
+            "7": {
+                "1": {
+                    "changedBy": "Даник",
+                    "last_change": 1651845978248,
+                    "id": "eng",
+                    "hw": ""
+                },
+                "groups": true
+            }
+        },
+        "4": {
+            "6": {
+                "id": "trud",
+                "changedBy": "Даник",
+                "hw": "",
+                "last_change": 1652269612810
+            },
+            "1": {
+                "link": "http://rushist.com/index.php/rus-literature/2993-shukshin-obida-polnyj-tekst",
+                "hw": "Наизусть кто не рассказывал, Рассказ Обида В.Шукшина  прочитать, чтение по ролям ",
+                "id": "rus_lit",
+                "last_change": 1652249165987,
+                "changedBy": "Даник"
+            },
+            "4": {
+                "danger": true,
+                "hw": "Диктант ",
+                "last_change": 1652249111843,
+                "changedBy": "Даник",
+                "id": "rus"
+            },
+            "2": {
+                "changedBy": "Даник",
+                "hw": "§48 тест и практическая",
+                "id": "geo",
+                "last_change": 1651846147569,
+                "danger": true
+            },
+            "3": {
+                "last_change": 1652197417542,
+                "hw": "проекты, тетрадку можно, сочинения кто не рассказывал ",
+                "attachments": [
+                    "https://firebasestorage.googleapis.com/v0/b/rebot-f643e.appspot.com/o/lessons-attachments%2F1652289416677?alt=media&token=9808fc8e-7d74-4571-9536-febefc480adc"
+                ],
+                "id": "social",
+                "changedBy": "Даник"
+            },
+            "5": {
+                "changedBy": "Даник",
+                "id": "geom",
+                "hw": "",
+                "last_change": 1652458109193
+            }
+        },
+        "5": {
+            "5": {
+                "last_change": 1652179007330,
+                "id": "phis",
+                "changedBy": "Даник",
+                "hw": "упр 27(3)"
+            },
+            "7": {
+                "1": {
+                    "hw": "ИГРА \"не убери чужое говно\"",
+                    "last_change": 1652434798935,
+                    "changedBy": "Даник",
+                    "id": "class"
+                },
+                "groups": true,
+                "3": {
+                    "hw": "Стр 251-252(3 а, 3 б)",
+                    "changedBy": "Артём",
+                    "id": "eng",
+                    "last_change": 1652171946089
+                },
+                "2": {
+                    "id": "class"
+                }
+            },
+            "2": {
+                "hw": "§48",
+                "changedBy": "Даник",
+                "id": "bio",
+                "last_change": 1651846180566
+            },
+            "3": {
+                "changedBy": "Даник",
+                "id": "geom",
+                "hw": "не ну это трэш ",
+                "last_change": 1652425095085
+            },
+            "6": {
+                "changedBy": "Даник",
+                "id": "fizra",
+                "hw": "БАРАНОВИИЧИ БАНАНОВИЧИ БЕЛАРУССКОЕ ГОВНОООООООООООООООООО",
+                "last_change": 1652434676128
+            },
+            "4": {
+                "hw": "§43",
+                "last_change": 1652415037304,
+                "id": "history",
+                "changedBy": "Даник"
+            },
+            "1": {
+                "link": "https://knihi.com/Uladzimir_Karatkievic/Dzikaje_palavannie_karala_Stacha.html",
+                "hw": "Читать до конца Дзикае паляванне Караля стаха тест вроде",
+                "changedBy": "Даник",
+                "last_change": 1652346271574,
+                "id": "bel_lit",
+                "danger": true
+            }
+        },
+        "2": {
+            "7": {
+                "groups": true,
+                "2": {
+                    "id": "eng"
+                }
+            },
+            "1": {
+                "attachments": [
+                    "https://firebasestorage.googleapis.com/v0/b/rebot-f643e.appspot.com/o/lessons-attachments%2F1651823004567?alt=media&token=508f71e5-f5dc-464d-bf55-e3cb382eea66"
+                ],
+                "link": "https://t.me/matemexam9rb/14",
+                "changedBy": "Даник",
+                "id": "alg",
+                "last_change": 1651846335520,
+                "hw": "1 Вариант сборника решить, (решение по ссылке)"
+            },
+            "6": {
+                "changedBy": "Даник",
+                "last_change": 1652178932582,
+                "id": "phis",
+                "hw": "вы хламьё 😭"
+            },
+            "4": {
+                "groups": true,
+                "3": {
+                    "id": "eng"
+                },
+                "1": {
+                    "hw": "SB p250 ex 6ab , WB p99 ex 3",
+                    "id": "eng",
+                    "last_change": 1651845984540,
+                    "changedBy": "Даник"
+                },
+                "2": {
+                    "id": "inform"
+                }
+            },
+            "3": {
+                "hw": "рулетик это хорошо но зацените огород 😎",
+                "id": "fizra",
+                "last_change": 1652032744867,
+                "changedBy": "Даник",
+                "attachments": [
+                    "https://firebasestorage.googleapis.com/v0/b/rebot-f643e.appspot.com/o/lessons-attachments%2F1652032721283?alt=media&token=a681ca29-69eb-4066-8ff4-2b76a4dbec96"
+                ]
+            },
+            "5": {
+                "id": "history_bel",
+                "hw": "§29 тетрадку можно ",
+                "changedBy": "Даник",
+                "last_change": 1651846040732
+            },
+            "2": {
+                "changedBy": "Даник",
+                "hw": "§50 наверное ",
+                "id": "him",
+                "last_change": 1652033441394
+            }
+        }
+    },
+    "1": {
+        "2": {
+            "6": {
+                "id": "phis"
+            },
+            "4": {
+                "3": {
+                    "id": "eng"
+                },
+                "2": {
+                    "id": "inform"
+                },
+                "groups": true,
+                "1": {
+                    "id": "eng"
+                }
+            },
+            "5": {
+                "hw": "",
+                "id": "history_bel",
+                "last_change": 1651332666934,
+                "changedBy": "Даник"
+            },
+            "3": {
+                "changedBy": "Даник",
+                "last_change": 1651332708262,
+                "hw": "😬",
+                "id": "fizra"
+            },
+            "7": {
+                "groups": true,
+                "2": {
+                    "id": "eng"
+                }
+            },
+            "2": {
+                "id": "him"
+            },
+            "1": {
+                "id": "alg"
+            }
+        },
+        "1": {
+            "7": {
+                "1": {
+                    "hw": "",
+                    "changedBy": "Даник",
+                    "id": "eng",
+                    "last_change": 1651332677970
+                },
+                "groups": true
+            },
+            "4": {
+                "id": "alg"
+            },
+            "6": {
+                "hw": "",
+                "id": "bel_lit",
+                "changedBy": "Даник",
+                "last_change": 1651332672900
+            },
+            "1": {
+                "id": "fizra"
+            },
+            "2": {
+                "groups": true,
+                "1": {
+                    "id": "inform"
+                },
+                "3": {
+                    "id": "eng"
+                },
+                "2": {
+                    "id": "eng"
+                }
+            },
+            "5": {
+                "hw": "",
+                "changedBy": "Даник",
+                "last_change": 1651332671047,
+                "id": "bel"
+            },
+            "3": {
+                "hw": "😶‍🌫️",
+                "id": "history",
+                "last_change": 1651332700682,
+                "changedBy": "Даник"
+            }
+        },
+        "4": {
+            "2": {
+                "changedBy": "НИКТО",
+                "last_change": 1651126587217,
+                "hw": "§47",
+                "id": "geo"
+            },
+            "5": {
+                "changedBy": "Полина",
+                "danger": true,
+                "id": "geom",
+                "hw": "Будет кр",
+                "last_change": 1651220982629
+            },
+            "1": {
+                "id": "rus_lit",
+                "last_change": 1651124727924,
+                "hw": "А зори здесь тихие главы 8-14 прочитать ",
+                "changedBy": "Даник"
+            },
+            "4": {
+                "hw": "Ответить на вопросы на стр 208, Повторить правописание частить не ни",
+                "id": "rus",
+                "changedBy": "Даник",
+                "last_change": 1651646257022
+            },
+            "3": {
+                "changedBy": "Полина",
+                "last_change": 1651220962098,
+                "hw": "обобщение, §18-22, можно тетрадь ",
+                "danger": true,
+                "id": "social"
+            },
+            "6": {
+                "hw": "😱😱😱😲",
+                "changedBy": "Даник",
+                "attachments": [
+                    "https://firebasestorage.googleapis.com/v0/b/rebot-f643e.appspot.com/o/lessons-attachments%2F1651676865711?alt=media&token=a97f6918-8163-4e9c-90cd-4069dec21937"
+                ],
+                "last_change": 1651676904750,
+                "id": "trud"
+            }
+        },
+        "5": {
+            "4": {
+                "hw": "§42",
+                "id": "history",
+                "changedBy": "Даник",
+                "last_change": 1651220307836
+            },
+            "2": {
+                "id": "bio",
+                "changedBy": "Даник",
+                "last_change": 1651736361908,
+                "hw": "§46"
+            },
+            "6": {
+                "last_change": 1651845725423,
+                "hw": "",
+                "id": "fizra",
+                "changedBy": "Даник"
+            },
+            "5": {
+                "id": "phis"
+            },
+            "1": {
+                "hw": "До 10 части читать ",
+                "last_change": 1651241689875,
+                "id": "bel_lit",
+                "link": "https://knihi.com/Uladzimir_Karatkievic/Dzikaje_palavannie_karala_",
+                "changedBy": "Даник"
+            },
+            "7": {
+                "groups": true,
+                "3": {
+                    "id": "eng"
+                }
+            },
+            "3": {
+                "hw": "Ничего, взять сборники ",
+                "id": "geom",
+                "last_change": 1651748961272,
+                "changedBy": "Даник"
+            }
+        },
+        "3": {
+            "1": {
+                "last_change": 1651494990265,
+                "hw": "Подготовка к кр по геометрии  😍🖕",
+                "id": "alg",
+                "changedBy": "Даник",
+                "attachments": [
+                    "https://firebasestorage.googleapis.com/v0/b/rebot-f643e.appspot.com/o/lessons-attachments%2F1651560111961?alt=media&token=dccb5421-48d0-4855-8580-85cfbeaca602"
+                ]
+            },
+            "2": {
+                "id": "rus",
+                "last_change": 1651132838894,
+                "changedBy": "Даник",
+                "hw": "Ст 229-231 выучить словарные слова будет диктант (25 слов треш) ",
+                "danger": true
+            },
+            "6": {
+                "hw": "§50(3,4,5,7)",
+                "danger": true,
+                "last_change": 1651054571682,
+                "id": "him",
+                "changedBy": "Даник"
+            },
+            "5": {
+                "danger": true,
+                "id": "bio",
+                "attachments": [
+                    "https://firebasestorage.googleapis.com/v0/b/rebot-f643e.appspot.com/o/lessons-attachments%2F1651651596511?alt=media&token=d046aaa5-ad04-42fb-867b-ae78b13136c0"
+                ],
+                "last_change": 1651575285003,
+                "changedBy": "Даник",
+                "hw": "§40-45 повторить (тест), демонстрационный опыт доделать "
+            },
+            "4": {
+                "1": {
+                    "hw": "WB P92 ex 3b ",
+                    "id": "eng",
+                    "last_change": 1651241671958,
+                    "changedBy": "Даник"
+                },
+                "2": {
+                    "id": "eng"
+                },
+                "3": {
+                    "id": "inform"
+                },
+                "groups": true
+            },
+            "3": {
+                "last_change": 1651221057587,
+                "hw": "Выписать 20 слов из сборника ",
+                "id": "bel",
+                "changedBy": "Полина"
+            }
+        }
+    }
+}

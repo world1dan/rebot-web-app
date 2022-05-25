@@ -1,8 +1,8 @@
 module.exports = {
+    fix: false,
     extends: [
         'stylelint-config-recommended',
         'stylelint-config-sass-guidelines',
-        '@linaria/stylelint',
     ],
     customSyntax: 'postcss',
     plugins: ['stylelint-order', 'stylelint-scss'],
@@ -10,12 +10,23 @@ module.exports = {
         'string-quotes': 'single',
         indentation: 4,
         'max-nesting-depth': 4,
-        'function-parentheses-space-inside': 'never',
-        'selector-no-qualifying-type': false,
+        'selector-no-qualifying-type': [
+            true,
+            {
+                ignore: ['attribute', 'class', 'id'],
+            },
+        ],
+        'selector-max-id': 2,
+        'function-parentheses-space-inside': 'never-single-line',
+
         'property-no-vendor-prefix': [
             true,
             {
-                ignoreProperties: ['user-select', 'backdrop-filter', 'text-size-adjust'],
+                ignoreProperties: [
+                    'user-select',
+                    'backdrop-filter',
+                    'text-size-adjust',
+                ],
             },
         ],
     },

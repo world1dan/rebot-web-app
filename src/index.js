@@ -1,5 +1,3 @@
-//import './Beta/index'
-
 import './ColorScheme'
 const inversion = localStorage.getItem('inversion')
 
@@ -50,7 +48,8 @@ const UserProvider = () => {
 
     const database = user ? getDatabase(user.id.toString()) : undefined
 
-    if (!user || !database) return <Login handleLogin={() => location.reload()} />
+    if (!user || !database)
+        return <Login handleLogin={() => location.reload()} />
 
     const handleError = (error, errorInfo) => {
         const errorString = error.toString() + errorInfo.componentStack

@@ -10,6 +10,7 @@ const styles = css`
     padding: 4px;
     place-items: center;
     min-width: 164px;
+
     span {
         font-size: 14px;
         font-weight: 600;
@@ -17,6 +18,7 @@ const styles = css`
         text-align: left;
         width: 100%;
     }
+
     &:hover {
         filter: brightness(1.35);
         transition: filter 240ms;

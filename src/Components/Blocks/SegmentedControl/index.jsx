@@ -1,5 +1,4 @@
 import { useId, memo } from 'react'
-import PropTypes from 'prop-types'
 
 import { motion } from 'framer-motion'
 
@@ -38,12 +37,6 @@ const SegmentedControl = ({ items, activeItem, onChange }) => {
             })}
         </motion.div>
     )
-}
-
-SegmentedControl.propTypes = {
-    items: PropTypes.array.isRequired,
-    onChange: PropTypes.func.isRequired,
-    activeItem: PropTypes.string.isRequired,
 }
 
 export default memo(SegmentedControl)

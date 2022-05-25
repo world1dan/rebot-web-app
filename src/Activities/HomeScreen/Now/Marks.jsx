@@ -33,6 +33,8 @@ const styles = css`
 const Marks = ({ subject }) => {
     const marks = useContext(MarksContext)
 
+    if (marks === null) return null
+
     return (
         <div className={styles}>
             <h5 className="block-title">МОИ ОЦЕНКИ</h5>

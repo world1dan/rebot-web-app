@@ -7,7 +7,7 @@ import useCurrentLessonNum from './useCurrentLessonNum'
 
 import TimeLeft from './TimeLeft'
 import Marks from './Marks'
-import Homework from '../../TimeTable/DayCard/Lesson/components/Homework'
+import Homework from '../../TimeTable/DayCard/Lesson/Homework'
 import LessonTools from './LessonTools'
 
 import './style.scss'

@@ -1,5 +1,4 @@
 import { useRef } from 'react'
-import PropTypes from 'prop-types'
 
 import { AnimatePresence, motion } from 'framer-motion'
 
@@ -15,9 +14,7 @@ const variants = {
         position: 'static',
         color: [
             markDelta == 'decrease' ? '#ff3b30' : '#34c759',
-            getComputedStyle(document.documentElement)
-                .getPropertyValue('--text1')
-                .trim(),
+            getComputedStyle(document.documentElement).getPropertyValue('--text1').trim(),
         ],
         transition: {
             color: {
@@ -31,8 +28,7 @@ const variants = {
 const Average = ({ averageMark }) => {
     const prewAverage = useRef(null)
 
-    const markDelta =
-        prewAverage.current > averageMark ? 'decrease' : 'increase'
+    const markDelta = prewAverage.current > averageMark ? 'decrease' : 'increase'
 
     prewAverage.current = averageMark
 
@@ -53,10 +49,6 @@ const Average = ({ averageMark }) => {
             </AnimatePresence>
         </div>
     )
-}
-
-Average.propTypes = {
-    averageMark: PropTypes.number,
 }
 
 export default Average

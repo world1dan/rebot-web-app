@@ -11,23 +11,20 @@ export enum WeatherConditionsCardDateType {
 const styles = css`
     width: 70px;
     background: var(--bg4);
-    flex-shrink: 0;
-    border-radius: 5px;
+    border-radius: 7px;
     display: flex;
     flex-direction: column;
+    gap: 2px;
     align-items: center;
-    padding: 10px;
+    padding: 8px;
     box-shadow: 0 0 0 1.5px var(--lvl4-borders) inset;
 
     .temperature {
         font-size: 17px;
-        text-align: center;
         font-weight: 600;
     }
     .time {
         color: var(--text2);
-        text-align: center;
-
         font-size: 13px;
     }
 `
@@ -48,7 +45,7 @@ const WeatherСonditionsCard: FC<IWeatherСonditionsCardProps> = ({
     const hour = date.toLocaleTimeString('ru-RU', { hour: 'numeric', minute: 'numeric' })
     return (
         <div className={styles}>
-            <WeatherIcon width="38" />
+            <WeatherIcon width="54" />
             <div className="temperature">{weather.main.temp.toFixed(0)}°</div>
             <div className="time">{dateType == 'hour' ? hour : day}</div>
         </div>

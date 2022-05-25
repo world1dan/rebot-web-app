@@ -1,13 +1,11 @@
 {
+    "include": ["src/**/*", "public/sw.js"],
     "compilerOptions": {
-        "outDir": "build",
-        "module": "esnext",
-        "target": "esnext",
+        "target": "ES2021",
         "lib": ["dom", "ES2021"],
-        "sourceMap": true,
         "allowJs": true,
+        "checkJs": false,
         "jsx": "react-jsx",
-        "declaration": true,
         "moduleResolution": "node",
         "forceConsistentCasingInFileNames": true,
         "noImplicitReturns": true,
@@ -21,8 +19,6 @@
         "resolveJsonModule": true,
         "noEmit": true
     },
-    "include": ["src"],
-    "exclude": ["node_modules", "dist", "webpack.config.js"],
     "plugins": [
         {
             "name": "typescript-styled-plugin",

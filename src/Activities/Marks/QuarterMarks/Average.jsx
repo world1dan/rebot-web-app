@@ -53,7 +53,7 @@ const averageStyles = css`
             font-weight: bold;
             background: var(--bg4);
             border-radius: 5px;
-            box-shadow: 0px 0px 0px 1.5px var(--lvl4 - borders) inset;
+            box-shadow: 0px 0px 0px 1.5px var(--lvl4-borders) inset;
             display: grid;
             place-items: center;
         }

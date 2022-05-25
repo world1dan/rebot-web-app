@@ -7,17 +7,9 @@ import useUserProfile from './useUserProfile'
 
 const styles = css`
     display: grid;
-    grid-template-columns: 120px 1fr;
+    grid-template-rows: 120px 1fr;
     align-items: center;
     gap: 16px;
-
-    @media (max-width: 400px) {
-        grid-template-columns: 120px 1fr;
-    }
-
-    @media (max-width: 350px) {
-        grid-template-columns: 100px 1fr;
-    }
 
     .info {
         display: flex;
@@ -34,7 +26,8 @@ const styles = css`
 `
 
 const Profile = () => {
-    const { user, changeUsername, changeAvatar, changeSurname } = useUserProfile()
+    const { user, changeUsername, changeAvatar, changeSurname } =
+        useUserProfile()
 
     const [usernameInputValue, setUsernameInputValue] = useState('')
     const [surnameInputValue, setSurnameInputValue] = useState('')
@@ -54,7 +47,9 @@ const Profile = () => {
                 <div className="caption">Имя</div>
                 <InputField
                     value={usernameInputValue}
-                    onChange={(event) => setUsernameInputValue(event.target.value)}
+                    onChange={(event) =>
+                        setUsernameInputValue(event.target.value)
+                    }
                     showSaveButton={
                         user &&
                         usernameInputValue &&
@@ -65,9 +60,13 @@ const Profile = () => {
                 <div className="caption">Фамилия</div>
                 <InputField
                     value={surnameInputValue}
-                    onChange={(event) => setSurnameInputValue(event.target.value)}
+                    onChange={(event) =>
+                        setSurnameInputValue(event.target.value)
+                    }
                     showSaveButton={
-                        user && surnameInputValue && surnameInputValue !== user?.last_name
+                        user &&
+                        surnameInputValue &&
+                        surnameInputValue !== user?.last_name
                     }
                     onSave={changeSurname}
                 />

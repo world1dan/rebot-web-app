@@ -65,7 +65,7 @@ const styles = css`
 
     .btns {
         display: grid;
-        grid-template-rows: 54px 54px;
+        grid-template-rows: 52px 52px;
         gap: 8px;
         align-self: flex-end;
 
@@ -73,7 +73,7 @@ const styles = css`
             display: grid;
             grid-template-columns: 20px 1fr;
             align-items: center;
-            height: 54px;
+            height: 52px;
             margin: 0;
             padding: 0;
             padding: 0 18px;

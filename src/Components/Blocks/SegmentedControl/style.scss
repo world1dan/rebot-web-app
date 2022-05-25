@@ -1,21 +1,16 @@
 .segmented-control {
-    background-color: var(--bg2);
+    background-color: var(--segmented-control-bg);
     border-radius: 9px;
-
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     margin: 0;
     padding: 3px;
 
     .button {
-        line-height: 1;
-        padding: 14px 30px;
-        position: relative;
+        cursor: pointer;
 
-        &:hover,
-        &:focus {
-            cursor: pointer;
-        }
+        padding: 12px 20px;
+        position: relative;
 
         &:first-of-type {
             transform-origin: 25% 50%;
@@ -34,10 +29,11 @@
     }
 
     .active {
-        background-color: var(--bg4);
+        background-color: var(--segmented-control-active-bg);
         border-radius: 7px;
         bottom: 0;
         box-shadow: 0 0 0 1.5px var(--lvl4-borders) inset;
+
         left: 0;
         position: absolute;
         right: 0;

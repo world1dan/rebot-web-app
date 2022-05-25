@@ -8,5 +8,9 @@ export function sortMarks(sortingType, marks) {
             return marks.sort((a, b) => b.mark - a.mark)
         case 'user':
             return marks.sort((a, b) => a.username.localeCompare(b.username))
+        default:
+            return marks
+                .filter((mark) => mark.subjID == sortingType)
+                .sort((a, b) => b.time - a.time)
     }
 }

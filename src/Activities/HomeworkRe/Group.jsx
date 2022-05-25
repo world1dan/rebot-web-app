@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import ReshebaViewer from '../../Components/ReshebaViewer'
 import { css } from '@linaria/core'
 
@@ -40,13 +39,7 @@ const styles = css`
 const Group = ({ subjectInfo, toOpen, hwRaw }) => {
     const viewers = toOpen.map((num, key) => {
         if (num) {
-            return (
-                <ReshebaViewer
-                    key={key}
-                    subjectInfo={subjectInfo}
-                    startNum={num}
-                />
-            )
+            return <ReshebaViewer key={key} subject={subjectInfo} startNum={num} />
         }
     })
 
@@ -66,12 +59,6 @@ const Group = ({ subjectInfo, toOpen, hwRaw }) => {
             {viewers}
         </>
     )
-}
-
-Group.propTypes = {
-    subjectInfo: PropTypes.object.isRequired,
-    toOpen: PropTypes.array.isRequired,
-    hwRaw: PropTypes.string,
 }
 
 export default Group

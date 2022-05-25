@@ -5,7 +5,7 @@
     --bg2: #141414;
     --bg2-translucent: #1414148a;
     --bg4-translucent: #2121229f;
-    --bg3: #1c1c1e;
+    --bg3: hsl(var(--hue-base), 3%, 12%);
     --bg4: #212122;
     --backdrop: rgb(0 0 0 / 45.2%);
     --borders: #19191a;
@@ -28,6 +28,12 @@
     --indigo: #5e5be6;
     --reduced-brightness: 0.7;
 
+    --switch-indicator-background-color: #fff;
+    --switch-background-color: var(--bg4);
+
+    --hue-base: 240;
+    --segmented-control-bg: #141414;
+    --segmented-control-active-bg: #212122;
     color-scheme: dark;
 }
 
@@ -62,6 +68,10 @@
     --indigo: #5855d6;
     --reduced-brightness: 0.88;
 
+    --hue-base: 240;
+    --segmented-control-bg: hsl(240, 3%, 92%);
+    --segmented-control-active-bg: hsl(240, 3%, 100%);
+
     color-scheme: light;
 }
 
@@ -80,6 +90,11 @@
     --tab-bar-btn-active: #fff;
     --ultra-thin-material: saturate(180%) blur(20px);
     --theme-color-when-unfocused: #000;
+
+    --hue-base: 240;
+    --segmented-control-bg: hsl(var(--hue-base), 20%, 18%);
+    --segmented-control-active-bg: hsl(var(--hue-base), 20%, 26%);
+
     color-scheme: dark;
 }
 
@@ -93,12 +108,12 @@
     --bg3: #264d4a;
     --bg4: #30534a;
     --backdrop: rgb(0 0 0 / 45.2%);
-    --borders: #102b28;
+    --borders: #0f312db7;
     --tab-bar-btn: #5a8f81;
     --tab-bar-btn-active: #fff;
     --ultra-thin-material: saturate(180%) blur(20px);
     --theme-color-when-unfocused: #000;
-    --shadows-bg4: rgb(43 43 43);
+    --shadows-bg4: #0f312db7;
     --mark-green: #34c759;
     --mark-yellow: #fc0;
     --mark-red: #ff3b30;
@@ -113,5 +128,46 @@
     --indigo: #5e5be6;
     --reduced-brightness: 0.7;
 
+    --hue-base: 170;
+    --segmented-control-bg: hsl(var(--hue-base), 40%, 18%);
+    --segmented-control-active-bg: hsl(var(--hue-base), 22%, 28%);
+
     color-scheme: dark;
+}
+
+:root[theme='sand'] {
+    --text1: #232324;
+    --text2: rgb(90 90 90);
+    --bg1: #ece9d8;
+    --bg2: #fffcf5;
+    --bg2-translucent: #ffffffc0;
+    --bg3: #f7f5e9;
+    --bg4: #f5f2eb;
+    --backdrop: rgb(0 0 0 / 18%);
+    --borders: #dadfe4;
+    --borders-soft: #e4e9ee00;
+    --tab-bar-btn: #868686;
+    --tab-bar-btn-active: #5855d6;
+
+    --theme-color-when-unfocused: #000;
+
+    --shadows-bg4: rgb(238 238 238);
+    --mark-green: #17ac3c;
+    --mark-yellow: #c49600;
+    --mark-red: #ff3d33e1;
+    --mark-green-bg: rgb(52 199 89 / 26%);
+    --mark-yellow-bg: rgb(255 204 0 / 26%);
+    --mark-red-bg: rgb(255 48 48 / 20%);
+    --lvl4-borders: #ebedf000;
+    --red: #ff3b2f;
+    --yellow: #f7cb17;
+    --green: #34c85a;
+    --blue: #007aff;
+    --indigo: #5855d6;
+    --reduced-brightness: 0.88;
+
+    --segmented-control-bg: #fffcf5;
+    --segmented-control-active-bg: #f5f2eb;
+
+    color-scheme: light;
 }

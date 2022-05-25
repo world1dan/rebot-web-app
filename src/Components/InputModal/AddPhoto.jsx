@@ -76,7 +76,13 @@ const AddPhoto = ({ addPhotoAttachmentURL }) => {
     return (
         <>
             <AttachButton
-                icon={<FontAwesomeIcon icon={faImages} color="var(--red)" size="lg" />}
+                icon={
+                    <FontAwesomeIcon
+                        icon={faImages}
+                        color="var(--red)"
+                        size="lg"
+                    />
+                }
                 onClick={handleAttachButtonClick}
             />
             <input

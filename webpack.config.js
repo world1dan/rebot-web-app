@@ -5,9 +5,12 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
+const HTMLInlineCSSWebpackPlugin =
+    require('html-inline-css-webpack-plugin').default
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
-
+const BundleAnalyzerPlugin =
+    require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const Dotenv = require('dotenv-webpack')
 const stylis = require('stylis')
 stylis.set({ prefix: false })
 
@@ -35,10 +38,18 @@ const getPlugins = (isProduction) => {
         new MiniCssExtractPlugin({
             filename: 'styles.css',
         }),
+        new Dotenv({
+            path: './.env', // Path to .env file (this is the default)
+            safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
+        }),
     ]
 
     if (isProduction) {
-        plugins.push(new CleanWebpackPlugin(), new HTMLInlineCSSWebpackPlugin())
+        plugins.push(
+            new CleanWebpackPlugin(),
+            new HTMLInlineCSSWebpackPlugin(),
+            new BundleAnalyzerPlugin()
+        )
     } else {
         plugins.push(new ReactRefreshWebpackPlugin())
     }
@@ -68,7 +79,11 @@ module.exports = (env) => {
                 {
                     test: /\.(scss|css)$/,
                     exclude: /node_modules/,
-                    use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+                    use: [
+                        MiniCssExtractPlugin.loader,
+                        'css-loader',
+                        'sass-loader',
+                    ],
                 },
                 {
                     test: /\.svg$/,
@@ -90,7 +105,7 @@ module.exports = (env) => {
                     terserOptions: {
                         compress: {
                             varify: false,
-                            passes: 3,
+                            passes: 2,
                         },
                     },
                 }),

@@ -4,38 +4,50 @@ import { motion } from 'framer-motion'
 import AddSquare from '../../../Components/Icons/AddSquare'
 import { css } from '@linaria/core'
 
-import NoteIcon from '../../../Components/Icons/Note.svg'
+import ContextMenu from '../../../Components/ContextMenu'
+import ContextMenuBtn from '../../../Components/ContextMenu/ContextMenuBtn'
+
+import Note from '../../../Components/Icons/Note'
+import CheckCircle from '../../../Components/Icons/CheckCircle'
 
 const styles = css`
-    position: absolute;
-    top: 10px;
-    right: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    .note-type-select {
-        background: var(--bg2);
-        border: 0;
-        font-size: 16px;
-    }
+    padding: 0;
+    margin-top: -3px !important;
+    margin-right: -3px !important;
 `
 
 export interface Props {
-    addNote: () => void
+    createNote: () => void
+    createTask: () => void
 }
 
-const AddNote: FC<Props> = ({ addNote }) => {
+const AddNote: FC<Props> = ({ createNote, createTask }) => {
     return (
-        <div className={styles}>
-            <select className="note-type-select">
-                <option value="">Текст</option>
-                <option value="">Задача</option>
-            </select>
-            <NoteIcon></NoteIcon>
-            <motion.button onClick={addNote} whileTap={{ scale: 0.85, opacity: 0.6 }}>
-                <AddSquare width={24} height={24} />
-            </motion.button>
+        <div className={'table-btn ' + styles}>
+            <ContextMenu
+                stayActiveOnClick={false}
+                icon={
+                    <motion.div
+                        className={styles}
+                        whileTap={{
+                            scale: 0.9,
+                        }}
+                    >
+                        <AddSquare width={24} height={24} />
+                    </motion.div>
+                }
+            >
+                <ContextMenuBtn
+                    title="Текст"
+                    onClick={createNote}
+                    icon={<Note width={26} />}
+                />
+                <ContextMenuBtn
+                    title="Задача"
+                    onClick={createTask}
+                    icon={<CheckCircle width={19} />}
+                />
+            </ContextMenu>
         </div>
     )
 }

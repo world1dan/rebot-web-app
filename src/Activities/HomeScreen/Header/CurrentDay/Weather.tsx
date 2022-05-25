@@ -1,13 +1,18 @@
-import { memo } from 'react'
-import useWeather from '../../../../Components/WeatherForecast/useWeather'
-import CurrentWeatherIndicator from '../../../../Components/WeatherForecast/Components/CurrentWeatherIndicator'
+import { FC, memo } from 'react'
 
-const Weather = ({ onClick }) => {
-    const weather = useWeather({
+import CurrentWeatherIndicator from '../../../../Components/WeatherForecast/Components/CurrentWeatherIndicator'
+import useCurrentWeather from '../../../../Components/WeatherForecast/useCurrentWeather'
+
+export interface IWeatherProps {
+    onClick: () => void
+}
+
+const Weather: FC<IWeatherProps> = ({ onClick }) => {
+    const [weather] = useCurrentWeather({
         lat: 53.82318602691756,
         lon: 27.524197005322044,
-        weatherCacheKey: 'weather-forecast-cache',
     })
+
     return (
         <CurrentWeatherIndicator
             iconSize={44}

@@ -1,5 +1,4 @@
 import { useRef, useState, useLayoutEffect } from 'react'
-import PropTypes from 'prop-types'
 
 import useStayScrolled from 'react-stay-scrolled'
 import { AnimatePresence } from 'framer-motion'
@@ -90,17 +89,10 @@ const Calculator = ({ initialMarks }) => {
                 </div>
             </div>
             <div className="marks-input-wrapper">
-                <MarksInput
-                    handleMarkInput={handleMarkInput}
-                    onRemove={removeLast}
-                />
+                <MarksInput handleMarkInput={handleMarkInput} onRemove={removeLast} />
             </div>
         </div>
     )
-}
-
-Calculator.propTypes = {
-    initialMarks: PropTypes.array.isRequired,
 }
 
 export default Calculator

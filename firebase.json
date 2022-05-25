@@ -2,7 +2,13 @@
     "hosting": {
         "target": "rebot",
         "public": "dist",
-        "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/src/**"],
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**",
+            "**/src/**",
+            "**/public/**"
+        ],
         "headers": [
             {
                 "source": "**/*.@(jpg|jpeg|gif|png)",
@@ -15,19 +21,18 @@
             }
         ]
     },
+    "storage": {
+        "rules": "storage-rules"
+    },
     "emulators": {
         "ui": {
             "enabled": true
         },
         "storage": {
-            "port": 9199,
-            "rules": "storage.rules"
+            "port": 9199
         },
         "hosting": {
             "port": 5000
         }
-    },
-    "storage": {
-        "rules": "storage.rules"
     }
 }

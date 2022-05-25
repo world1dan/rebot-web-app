@@ -13,6 +13,7 @@ const styles = css`
     justify-content: center;
     align-items: center;
     z-index: 99;
+    cursor: pointer;
 `
 
 const CurrentDay = () => {

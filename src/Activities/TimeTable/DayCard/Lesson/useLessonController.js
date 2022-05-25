@@ -63,7 +63,9 @@ const useLessonController = (lesson, path) => {
         const storage = getStorage()
 
         const photoRef = ref(storage, photoURL)
-
+        console.log({
+            [path + '.attachments']: [],
+        })
         updateDoc(timetableDoc, {
             [path + '.attachments']: [],
         })

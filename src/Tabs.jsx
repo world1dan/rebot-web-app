@@ -85,20 +85,20 @@ const Tabs = ({ config }) => {
         <ConfigContext.Provider value={configContextValue}>
             <TabBar
                 activeTab={activeTab}
-                setActiveTab={setActiveTab}
+                onTabChange={setActiveTab}
                 statusBar={statusBar}
             />
 
             <Tab isActive={activeTab == 1} themeColor="var(--bg1)" keepMounted>
                 <HomeScreen />
             </Tab>
-            <Tab isActive={activeTab == 2} themeColor="var(--bg2)" keepMounted>
+            <Tab isActive={activeTab == 2} themeColor="var(--bg2)">
                 <Search />
             </Tab>
             <Tab isActive={activeTab == 3} themeColor="var(--bg1)">
                 <Marks />
             </Tab>
-            <Tab isActive={activeTab == 5} themeColor="var(--bg2)">
+            <Tab isActive={activeTab == 4} themeColor="var(--bg2)">
                 <Week />
             </Tab>
         </ConfigContext.Provider>

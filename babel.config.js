@@ -12,14 +12,10 @@ module.exports = (api) => {
                 '@babel/preset-react',
                 {
                     runtime: 'automatic',
-                    development: !inProduction,
                 },
             ],
             '@linaria',
         ],
-        plugins: [
-            inProduction && 'transform-react-remove-prop-types',
-            !inProduction && 'react-refresh/babel',
-        ].filter(Boolean),
+        plugins: [!inProduction && 'react-refresh/babel'].filter(Boolean),
     }
 }

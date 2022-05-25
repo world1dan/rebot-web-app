@@ -2,7 +2,6 @@ module.exports = {
     env: {
         browser: true,
         es2021: true,
-        amd: true,
         node: true,
     },
     root: true,
@@ -38,6 +37,9 @@ module.exports = {
         'linebreak-style': ['error', 'windows'],
         semi: ['warn', 'never'],
         'react/prop-types': 'off',
-        'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+        'react/function-component-definition': [
+            2,
+            { namedComponents: 'arrow-function' },
+        ],
     },
 }

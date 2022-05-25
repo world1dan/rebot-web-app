@@ -9,10 +9,6 @@ const styles = css`
     background-color: var(--bg2);
     border-radius: 9px;
     box-shadow: 0 0 0 1.5px var(--borders-soft) inset;
-
-    @media (max-width: 360px) {
-        border-radius: 0;
-    }
 `
 
 const History = ({ usersRatings, usersInfo }) => {
@@ -50,7 +46,12 @@ const History = ({ usersRatings, usersInfo }) => {
     const historyEvents = showAll ? everyMark : everyMark.slice(0, 20)
 
     const historyElements = historyEvents.map((mark) => {
-        return <HistoryEvent mark={mark} key={mark.time + mark.mark + mark.username} />
+        return (
+            <HistoryEvent
+                mark={mark}
+                key={mark.time + mark.mark + mark.username}
+            />
+        )
     })
 
     return (

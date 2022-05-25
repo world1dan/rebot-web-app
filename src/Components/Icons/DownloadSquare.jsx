@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types'
-
 const DownloadSquare = (props) => {
     return (
         <svg
@@ -15,11 +13,6 @@ const DownloadSquare = (props) => {
             />
         </svg>
     )
-}
-
-DownloadSquare.propTypes = {
-    width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
 }
 
 export default DownloadSquare

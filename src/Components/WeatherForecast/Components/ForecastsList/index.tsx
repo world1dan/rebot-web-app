@@ -23,9 +23,11 @@ const styles = css`
     }
 
     .title {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
-        padding: 14px;
+
+        padding: 13px;
+        padding-bottom: 10px;
     }
 `
 

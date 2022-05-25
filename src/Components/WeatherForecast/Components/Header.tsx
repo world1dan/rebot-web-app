@@ -1,7 +1,10 @@
 import { css } from '@linaria/core'
 import { FC } from 'react'
 
+import { motion } from 'framer-motion'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons'
 import { City } from '../types'
 
@@ -29,17 +32,20 @@ const styles = css`
 
 export interface IHeaderProps {
     city: City
+    updateWeather: () => void
 }
 
-const Header: FC<IHeaderProps> = ({ city }) => {
+const Header: FC<IHeaderProps> = ({ city, updateWeather }) => {
     return (
-        <div className={styles}>
-            <div className="title">Погода</div>
-            <div className="location">
-                {city.name}
-                <FontAwesomeIcon icon={faLocationArrow} />
+        <>
+            <button>
+                <FontAwesomeIcon icon={faArrowRotateRight} />
+            </button>
+            <div className={styles}>
+                <div className="title">Погода</div>
+                <div className="location">{city.name}</div>
             </div>
-        </div>
+        </>
     )
 }
 

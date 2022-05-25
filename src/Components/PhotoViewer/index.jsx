@@ -70,7 +70,7 @@ const styles = css`
     }
 `
 
-const PhotoViewer = ({ URL, handleClose, handleRemove, children }) => {
+const PhotoViewer = ({ URL, handleClose, handleRemove, children = null }) => {
     const [show, setShow] = useState(false)
     const modal = useRef(null)
 

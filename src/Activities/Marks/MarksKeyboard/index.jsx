@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react'
-import PropTypes from 'prop-types'
 
 import { ConfigContext } from '../../../Context'
 
@@ -34,14 +33,6 @@ const MarksKeyboard = (props) => {
             <MarksInput handleMarkInput={handleSubmit} />
         </div>
     )
-}
-
-MarksKeyboard.propTypes = {
-    onSubmit: PropTypes.func,
-    title: PropTypes.string.isRequired,
-    descr: PropTypes.string,
-    statusBarAlert: PropTypes.string,
-    withImportanceSwitch: PropTypes.bool,
 }
 
 export default MarksKeyboard

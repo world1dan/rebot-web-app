@@ -7,6 +7,8 @@ const styles = css`
     background-color: var(--bg2);
     border-radius: 14px;
     border: 1.5px var(--borders) solid;
+    overflow: hidden;
+
     .table-btn {
         padding: 7px;
         position: absolute;

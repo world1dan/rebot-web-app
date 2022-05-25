@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types'
-
 import './style.scss'
 
 const Switch = ({ title, icon, descr, checked, onChange, noPadding }) => {
@@ -16,15 +14,6 @@ const Switch = ({ title, icon, descr, checked, onChange, noPadding }) => {
             </label>
         </div>
     )
-}
-
-Switch.propTypes = {
-    title: PropTypes.string.isRequired,
-    descr: PropTypes.string,
-    icon: PropTypes.element,
-    checked: PropTypes.bool,
-    onChange: PropTypes.func,
-    noPadding: PropTypes.bool,
 }
 
 export default Switch

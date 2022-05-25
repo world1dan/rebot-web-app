@@ -93,20 +93,6 @@
     }
 }
 
-.Notebook {
-    background: var(--bg4);
-    border-radius: 5px;
-
-    padding: 6px;
-    width: 86px;
-
-    img {
-        border-radius: 3px;
-        height: 110px;
-        width: 100%;
-    }
-}
-
 .Notebooks {
     display: grid;
     gap: 8px;

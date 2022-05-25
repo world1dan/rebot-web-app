@@ -9,8 +9,13 @@ const styles = css`
     backdrop-filter: blur(0);
     margin-top: 16px;
     -webkit-backdrop-filter: blur(0);
+    max-width: 140px;
+    margin: 0 auto;
+    display: grid;
+    place-items: center;
 
     .avatar {
+        width: 120px;
         display: block;
         border-radius: 50%;
         object-fit: cover;

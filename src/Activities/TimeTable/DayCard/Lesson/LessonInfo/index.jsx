@@ -10,7 +10,8 @@ import SheetView from '../../../../../Components/SheetView'
 import InputModal from '../../../../../Components/InputModal'
 import SubjectName from './SubjectName'
 import Tools from './Tools'
-import Link from './Link'
+import AttachedPhoto from './AttachedPhoto'
+import Link from './AttachedLink'
 import LastChange from './LastChange'
 
 const styles = css`
@@ -88,7 +89,7 @@ const LessonInfo = ({ lesson, path, subject, handleClose }) => {
                 <Title>Домашнее задание</Title>
                 <InfoBlock>
                     <div className="homework-view" onClick={() => setIsEditing(true)}>
-                        {lesson.hw ? (
+                        {lesson.hw && lesson.hw !== '' ? (
                             lesson.hw
                         ) : (
                             <span className="no-hw">Нажми чтобы записать..</span>
@@ -99,8 +100,18 @@ const LessonInfo = ({ lesson, path, subject, handleClose }) => {
                 </InfoBlock>
                 {lesson.link && (
                     <>
-                        <Title>Прикрепленная ссылка</Title>
-                        <Link url={lesson.link} />{' '}
+                        <Title>Ссылка</Title>
+                        <Link URL={lesson.link} />
+                    </>
+                )}
+                {lesson.attachments && lesson.attachments.length > 0 && (
+                    <>
+                        <Title>Фото</Title>
+                        <AttachedPhoto
+                            URL={lesson.attachments[0]}
+                            lesson={lesson}
+                            path={path}
+                        />
                     </>
                 )}
                 {(subject.marks || isMath) && (

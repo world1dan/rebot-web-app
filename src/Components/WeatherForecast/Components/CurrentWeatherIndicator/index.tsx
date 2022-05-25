@@ -4,7 +4,7 @@ import { css } from '@linaria/core'
 
 import { getAnimatedWeatherIcon, getStaticWeatherIcon } from '../../Utils/getWeatherIcon'
 
-import { Weather } from '../../types'
+import { ICurrentWeather } from '../../types'
 
 const styles = css`
     display: flex;
@@ -20,7 +20,7 @@ export interface ICurrentWeatherIndicatorProps {
     fontSize: number
     onClick?: () => void
     animate?: boolean
-    weather: Weather
+    weather: ICurrentWeather
 }
 
 const CurrentWeatherIndicator: FC<ICurrentWeatherIndicatorProps> = ({
@@ -30,9 +30,12 @@ const CurrentWeatherIndicator: FC<ICurrentWeatherIndicatorProps> = ({
     animate,
     weather,
 }) => {
-    if (!weather?.list) return null
+    if (!weather) return null
 
-    const weatherIconID = weather.list[0].weather[0].icon
+    const weatherIconID = weather?.weather[0].icon
+
+    if (!weatherIconID) return null
+
     const Icon = animate
         ? getAnimatedWeatherIcon(weatherIconID)
         : getStaticWeatherIcon(weatherIconID)
@@ -45,7 +48,7 @@ const CurrentWeatherIndicator: FC<ICurrentWeatherIndicatorProps> = ({
                 fontSize,
             }}
         >
-            {weather.list[0].main.temp.toFixed(0) + '°'}
+            {weather.main.temp.toFixed(0) + '°'}
             <Icon width={iconSize} />
         </div>
     )

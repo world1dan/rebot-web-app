@@ -21,9 +21,10 @@ const styles = css`
         border-radius: 4px;
     }
     & > div {
+        height: 100%;
         scroll-snap-align: start;
         scroll-snap-stop: always;
-        display: inline-block;
+        display: inline-grid;
         width: inherit;
     }
 `

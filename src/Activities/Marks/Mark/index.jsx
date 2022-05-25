@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'
 
 import { motion } from 'framer-motion'
 
@@ -76,13 +75,6 @@ const Mark = ({
             )}
         </>
     )
-}
-
-Mark.propTypes = {
-    mark: PropTypes.object.isRequired,
-    unclickable: PropTypes.bool,
-    customClickHandler: PropTypes.func,
-    animate: PropTypes.bool,
 }
 
 export default Mark

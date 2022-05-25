@@ -6,7 +6,6 @@ import CurrentDay from './CurrentDay'
 import Settings from '../../Settings'
 import Gear from '../../../Components/Icons/Gear'
 import Rings from './Rings'
-import SheetView from '../../../Components/SheetView'
 import NewUpdateAlert from './NewUpdateAlert'
 
 import './style.scss'
@@ -29,9 +28,7 @@ const Header = () => {
             </header>
 
             {settingsOpen && (
-                <SheetView handleClose={() => setSettingsOpen(false)}>
-                    <Settings />
-                </SheetView>
+                <Settings handleClose={() => setSettingsOpen(false)} />
             )}
         </>
     )

@@ -1,19 +1,21 @@
 import { css } from '@linaria/core'
 import { FC } from 'react'
 import ActionSheet from '../ActionSheet'
-import useWeather from './useWeather'
+
 import Header from './Components/Header'
-import WeatherForDay from './Components/WeatherForDay'
+import CurrentWeather from './Components/CurrentWeather'
 import { WeatherConditionsCardDateType } from './Components/WeatherСonditionsCard'
 
 import ForecastsList from './Components/ForecastsList'
+
+import useCurrentWeather from './useCurrentWeather'
+import useWeatherForecast from './useWeatherForecast'
 
 export interface IWeatherForecastProps {
     handleClose: () => void
 }
 
 const styles = css`
-    height: 500px;
     padding: 12px;
 
     .descr {
@@ -25,27 +27,34 @@ const styles = css`
     }
 `
 
-const WeatherForecast: FC<IWeatherForecastProps> = ({ handleClose }) => {
-    const weather = useWeather({
-        lat: 53.82318602691756,
-        lon: 27.524197005322044,
-        weatherCacheKey: 'weather-forecast-cache',
-    })
+const coords = {
+    lat: 53.82318602691756,
+    lon: 27.524197005322044,
+}
 
-    if (!weather) return null
+const WeatherForecast: FC<IWeatherForecastProps> = ({ handleClose }) => {
+    const [currentWeather, fetchCurrentWeather] = useCurrentWeather(coords)
+    const [weatherForecast, fetchWeatherForecast] = useWeatherForecast(coords)
+
+    if (!currentWeather || !weatherForecast) return null
+
+    const updateWeather = () => {
+        fetchCurrentWeather()
+        fetchWeatherForecast()
+    }
 
     return (
         <ActionSheet onClose={handleClose} bottomCloseBtn={false}>
             <div className={styles}>
-                <Header city={weather.city} />
-                <WeatherForDay
-                    weather={weather}
-                    sunrise={weather.city.sunrise}
-                    sunset={weather.city.sunset}
+                <Header city={weatherForecast.city} updateWeather={updateWeather} />
+                <CurrentWeather
+                    weather={currentWeather}
+                    sunrise={weatherForecast.city.sunrise}
+                    sunset={weatherForecast.city.sunset}
                 />
-                <div className="descr">{weather.list[0].weather[0].description}</div>
+                <div className="descr">{currentWeather.weather[0].description}</div>
                 <ForecastsList
-                    forecast={weather.list.filter((element) => {
+                    forecast={weatherForecast.list.filter((element) => {
                         const day = new Date(element.dt * 1000).getDate()
                         const currentDay = new Date().getDate()
 
@@ -55,7 +64,7 @@ const WeatherForecast: FC<IWeatherForecastProps> = ({ handleClose }) => {
                     title="Сегодня / Завтра"
                 />
                 <ForecastsList
-                    forecast={weather.list.filter((element) => {
+                    forecast={weatherForecast.list.filter((element) => {
                         return element.dt_txt.includes('12:00:00')
                     })}
                     cardsDateType={WeatherConditionsCardDateType.DAY}
